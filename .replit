@@ -1,12 +1,13 @@
-modules = ["python-3.11"]
+modules = ["python-3.11", "web", "nodejs-20", "bash"]
+run = "python app.py"
 
 [nix]
 channel = "stable-24_05"
-packages = ["SDL2", "SDL2_image", "SDL2_mixer", "SDL2_ttf", "cairo", "ffmpeg-full", "fontconfig", "freetype", "ghostscript", "glibcLocales", "gobject-introspection", "gtk3", "libGL", "libGLU", "libjpeg", "libpng", "libxcrypt", "pkg-config", "portaudio", "portmidi", "qhull", "tcl", "tk", "xsimd"]
+packages = ["SDL2", "SDL2_image", "SDL2_mixer", "SDL2_ttf", "awsebcli", "cacert", "cairo", "cargo", "espeak-ng", "ffmpeg-full", "fontconfig", "freetype", "gdb", "ghostscript", "gitFull", "glibcLocales", "gobject-introspection", "gtk3", "libGL", "libGLU", "libffi", "libiconv", "libjpeg", "libpng", "libtool", "libxcrypt", "openssl", "perl", "pkg-config", "portaudio", "portmidi", "qhull", "rustc", "tcl", "tk", "which", "xsimd", "zeromq"]
 
 [deployment]
 deploymentTarget = "autoscale"
-run = ["gunicorn", "--bind", "0.0.0.0:5000", "main:app"]
+run = ["sh", "-c", "python app.py"]
 
 [workflows]
 runButton = "Project"
