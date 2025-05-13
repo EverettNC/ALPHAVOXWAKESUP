@@ -1,0 +1,61 @@
+{
+  "title": "AlphaVox Knowledge Base",
+  "version": "1.0.0",
+  "created_at": "2025-04-01T00:00:00.000000",
+  "updated_at": "2025-05-01T00:00:00.000000",
+  "description": "Core knowledge base for AlphaVox communication system",
+  "categories": [
+    {
+      "name": "Communication Fundamentals",
+      "topics": ["Nonverbal Communication", "Eye Contact", "Symbol-Based Communication", "Voice Modulation"]
+    },
+    {
+      "name": "Emotional Intelligence",
+      "topics": ["Emotional Expression", "Social Cues"]
+    },
+    {
+      "name": "Technology & Tools",
+      "topics": ["Assistive Technology", "Digital Communication"]
+    },
+    {
+      "name": "Advanced Techniques",
+      "topics": ["Adaptive Communication", "Communication Barriers"]
+    }
+  ],
+  "learning_paths": [
+    {
+      "name": "Beginner Communication",
+      "description": "Essential communication skills for beginners",
+      "topics": ["Nonverbal Communication", "Eye Contact"]
+    },
+    {
+      "name": "Intermediate Communication",
+      "description": "Build on basic skills with more advanced techniques",
+      "topics": ["Symbol-Based Communication", "Emotional Expression", "Communication Barriers"]
+    },
+    {
+      "name": "Technology Integration",
+      "description": "Learn to leverage technology for enhanced communication",
+      "topics": ["Assistive Technology", "Digital Communication"]
+    },
+    {
+      "name": "Advanced Communication",
+      "description": "Master complex communication scenarios",
+      "topics": ["Social Cues", "Adaptive Communication", "Voice Modulation"]
+    }
+  ],
+  "skill_levels": {
+    "beginner": {
+      "description": "Fundamental concepts for those new to alternative communication",
+      "topics": ["Nonverbal Communication", "Eye Contact"]
+    },
+    "intermediate": {
+      "description": "Topics for those with basic communication skills looking to expand",
+      "topics": ["Symbol-Based Communication", "Emotional Expression", "Assistive Technology", "Voice Modulation", "Communication Barriers", "Digital Communication"]
+    },
+    "advanced": {
+      "description": "Complex topics for experienced communicators",
+      "topics": ["Social Cues", "Adaptive Communication"]
+    }
+  }
+}

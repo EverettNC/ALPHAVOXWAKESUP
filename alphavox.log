@@ -1,0 +1,642 @@
+ * Tip: There are .env files present. Install python-dotenv to use them.
+Starting AlphaVox system...
+ * Serving Flask app 'simple_alphavox'
+ * Debug mode: on
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://172.31.128.50:8080
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+ * Tip: There are .env files present. Install python-dotenv to use them.
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 130-386-459
+2025-05-03 23:24:35,721 - __main__ - INFO - Starting AlphaVox System...
+2025-05-03 23:24:36,028 - learning_engine - INFO - Loaded 5 topics
+2025-05-03 23:24:36,029 - learning_engine - INFO - Loaded 5 facts
+2025-05-03 23:24:36,029 - learning_engine - INFO - Loaded knowledge base with 3 entries
+2025-05-03 23:24:36,029 - learning_engine - INFO - Loaded knowledge graph with 5 nodes and 0 links
+2025-05-03 23:24:36,029 - learning_engine - INFO - Loaded learning log with 0 entries
+2025-05-03 23:24:36,030 - learning_engine - INFO - Loaded crawler status
+2025-05-03 23:24:36,030 - learning_engine - INFO - Learning Engine initialized successfully
+2025-05-03 23:24:36,035 - learning_engine - INFO - Loaded 5 topics
+2025-05-03 23:24:36,036 - learning_engine - INFO - Loaded 5 facts
+2025-05-03 23:24:36,036 - learning_engine - INFO - Loaded knowledge base with 3 entries
+2025-05-03 23:24:36,036 - learning_engine - INFO - Loaded knowledge graph with 5 nodes and 0 links
+2025-05-03 23:24:36,036 - learning_engine - INFO - Loaded learning log with 0 entries
+2025-05-03 23:24:36,036 - learning_engine - INFO - Loaded crawler status
+2025-05-03 23:24:36,036 - learning_engine - INFO - Learning Engine initialized successfully
+2025-05-03 23:26:47,546 - __main__ - INFO - Starting AlphaVox System...
+2025-05-03 23:26:47,793 - learning_engine - INFO - Loaded 5 topics
+2025-05-03 23:26:47,793 - learning_engine - INFO - Loaded 5 facts
+2025-05-03 23:26:47,793 - learning_engine - INFO - Loaded knowledge base with 3 entries
+2025-05-03 23:26:47,793 - learning_engine - INFO - Loaded knowledge graph with 5 nodes and 0 links
+2025-05-03 23:26:47,794 - learning_engine - INFO - Loaded learning log with 0 entries
+2025-05-03 23:26:47,794 - learning_engine - INFO - Loaded crawler status
+2025-05-03 23:26:47,794 - learning_engine - INFO - Learning Engine initialized successfully
+2025-05-03 23:26:47,800 - learning_engine - INFO - Loaded 5 topics
+2025-05-03 23:26:47,800 - learning_engine - INFO - Loaded 5 facts
+2025-05-03 23:26:47,800 - learning_engine - INFO - Loaded knowledge base with 3 entries
+2025-05-03 23:26:47,800 - learning_engine - INFO - Loaded knowledge graph with 5 nodes and 0 links
+2025-05-03 23:26:47,801 - learning_engine - INFO - Loaded learning log with 0 entries
+2025-05-03 23:26:47,801 - learning_engine - INFO - Loaded crawler status
+2025-05-03 23:26:47,801 - learning_engine - INFO - Learning Engine initialized successfully
+2025-05-03 23:32:05,105 - __main__ - INFO - Starting AlphaVox System...
+2025-05-03 23:32:05,290 - learning_engine - INFO - Loaded 5 topics
+2025-05-03 23:32:05,290 - learning_engine - INFO - Loaded 5 facts
+2025-05-03 23:32:05,291 - learning_engine - INFO - Loaded knowledge base with 3 entries
+2025-05-03 23:32:05,291 - learning_engine - INFO - Loaded knowledge graph with 5 nodes and 0 links
+2025-05-03 23:32:05,291 - learning_engine - INFO - Loaded learning log with 0 entries
+2025-05-03 23:32:05,291 - learning_engine - INFO - Loaded crawler status
+2025-05-03 23:32:05,291 - learning_engine - INFO - Learning Engine initialized successfully
+2025-05-03 23:32:05,297 - learning_engine - INFO - Loaded 5 topics
+2025-05-03 23:32:05,297 - learning_engine - INFO - Loaded 5 facts
+2025-05-03 23:32:05,297 - learning_engine - INFO - Loaded knowledge base with 3 entries
+2025-05-03 23:32:05,297 - learning_engine - INFO - Loaded knowledge graph with 5 nodes and 0 links
+2025-05-03 23:32:05,297 - learning_engine - INFO - Loaded learning log with 0 entries
+2025-05-03 23:32:05,297 - learning_engine - INFO - Loaded crawler status
+2025-05-03 23:32:05,297 - learning_engine - INFO - Learning Engine initialized successfully
+2025-05-03 23:32:48,214 - __main__ - INFO - Starting AlphaVox System...
+2025-05-03 23:32:48,538 - learning_engine - INFO - Loaded 5 topics
+2025-05-03 23:32:48,538 - learning_engine - INFO - Loaded 5 facts
+2025-05-03 23:32:48,539 - learning_engine - INFO - Loaded knowledge base with 3 entries
+2025-05-03 23:32:48,539 - learning_engine - INFO - Loaded knowledge graph with 5 nodes and 0 links
+2025-05-03 23:32:48,539 - learning_engine - INFO - Loaded learning log with 0 entries
+2025-05-03 23:32:48,539 - learning_engine - INFO - Loaded crawler status
+2025-05-03 23:32:48,539 - learning_engine - INFO - Learning Engine initialized successfully
+2025-05-03 23:32:48,548 - learning_engine - INFO - Loaded 5 topics
+2025-05-03 23:32:48,549 - learning_engine - INFO - Loaded 5 facts
+2025-05-03 23:32:48,549 - learning_engine - INFO - Loaded knowledge base with 3 entries
+2025-05-03 23:32:48,549 - learning_engine - INFO - Loaded knowledge graph with 5 nodes and 0 links
+2025-05-03 23:32:48,549 - learning_engine - INFO - Loaded learning log with 0 entries
+2025-05-03 23:32:48,550 - learning_engine - INFO - Loaded crawler status
+2025-05-03 23:32:48,550 - learning_engine - INFO - Learning Engine initialized successfully
+2025-05-05 03:41:43,159 - __main__ - INFO - Starting AlphaVox service initialization in background
+2025-05-05 03:41:55,117 - __main__ - INFO - Starting AlphaVox service initialization in background
+2025-05-05 03:41:55,118 - __main__ - INFO - Attempting to start on port 8080
+2025-05-05 03:41:55,267 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://172.31.128.64:8080
+2025-05-05 03:41:55,267 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-05 03:41:55,272 - werkzeug - INFO -  * Restarting with stat
+2025-05-05 03:41:55,549 - eye_tracking_service - WARNING - Real eye tracking not available: cannot import name 'RealEyeTracking' from 'real_eye_tracking' (/home/runner/workspace/real_eye_tracking.py)
+2025-05-05 03:41:55,549 - eye_tracking_service - INFO - Using simulated eye tracking
+2025-05-05 03:41:55,550 - __main__ - INFO - Eye tracking service initialized
+2025-05-05 03:41:55,870 - __main__ - INFO - Starting AlphaVox service initialization in background
+2025-05-05 03:41:55,871 - __main__ - INFO - Attempting to start on port 8080
+2025-05-05 03:41:56,106 - werkzeug - WARNING -  * Debugger is active!
+2025-05-05 03:41:56,188 - werkzeug - INFO -  * Debugger PIN: 678-281-929
+2025-05-05 03:41:56,224 - sound_recognition_service - WARNING - Real sound recognition not available: cannot import name 'RealSpeechRecognition' from 'real_speech_recognition' (/home/runner/workspace/real_speech_recognition.py)
+2025-05-05 03:41:56,227 - sound_recognition_service - INFO - Using simulated sound recognition
+2025-05-05 03:41:56,228 - __main__ - INFO - Sound recognition service initialized
+2025-05-05 03:41:56,233 - __main__ - WARNING - Error initializing learning journey: cannot import name 'get_learning_journey_service' from 'learning_journey' (/home/runner/workspace/learning_journey.py)
+2025-05-05 03:41:56,239 - nonverbal_engine - INFO - Successfully imported NonverbalEngine from nonverbal_bull
+2025-05-05 03:41:56,240 - nonverbal_bull - INFO - Initializing NonverbalEngine with self-learning capabilities
+2025-05-05 03:41:56,240 - nonverbal_bull - INFO - NonverbalEngine initialized with self-modification capabilities
+2025-05-05 03:41:56,241 - __main__ - INFO - Nonverbal engine initialized
+2025-05-05 03:41:56,244 - conversation_engine - INFO - Using advanced NLP mode
+2025-05-05 03:41:56,244 - root - WARNING - Perplexity API not available: No module named 'perplexity'
+2025-05-05 03:41:56,250 - conversation_engine - INFO - Conversation engine initialized
+2025-05-05 03:41:56,250 - __main__ - INFO - Conversation engine initialized
+2025-05-05 03:41:56,251 - __main__ - INFO - AlphaVox services initialization completed successfully
+2025-05-05 03:41:56,413 - eye_tracking_service - WARNING - Real eye tracking not available: cannot import name 'RealEyeTracking' from 'real_eye_tracking' (/home/runner/workspace/real_eye_tracking.py)
+2025-05-05 03:41:56,414 - eye_tracking_service - INFO - Using simulated eye tracking
+2025-05-05 03:41:56,414 - __main__ - INFO - Eye tracking service initialized
+2025-05-05 03:41:56,820 - werkzeug - INFO - 172.31.128.64 - - [05/May/2025 03:41:56] "[35m[1mGET / HTTP/1.1[0m" 500 -
+2025-05-05 03:41:57,069 - sound_recognition_service - WARNING - Real sound recognition not available: cannot import name 'RealSpeechRecognition' from 'real_speech_recognition' (/home/runner/workspace/real_speech_recognition.py)
+2025-05-05 03:41:57,071 - sound_recognition_service - INFO - Using simulated sound recognition
+2025-05-05 03:41:57,072 - __main__ - INFO - Sound recognition service initialized
+2025-05-05 03:41:57,078 - __main__ - WARNING - Error initializing learning journey: cannot import name 'get_learning_journey_service' from 'learning_journey' (/home/runner/workspace/learning_journey.py)
+2025-05-05 03:41:57,085 - nonverbal_engine - INFO - Successfully imported NonverbalEngine from nonverbal_bull
+2025-05-05 03:41:57,087 - nonverbal_bull - INFO - Initializing NonverbalEngine with self-learning capabilities
+2025-05-05 03:41:57,091 - nonverbal_bull - INFO - NonverbalEngine initialized with self-modification capabilities
+2025-05-05 03:41:57,092 - __main__ - INFO - Nonverbal engine initialized
+2025-05-05 03:41:57,096 - conversation_engine - INFO - Using advanced NLP mode
+2025-05-05 03:41:57,101 - root - WARNING - Perplexity API not available: No module named 'perplexity'
+2025-05-05 03:41:57,104 - conversation_engine - INFO - Conversation engine initialized
+2025-05-05 03:41:57,106 - __main__ - INFO - Conversation engine initialized
+2025-05-05 03:41:57,106 - __main__ - INFO - AlphaVox services initialization completed successfully
+2025-05-05 03:41:57,288 - werkzeug - INFO - 172.31.128.64 - - [05/May/2025 03:41:57] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-05 03:41:57,334 - werkzeug - INFO - 172.31.128.64 - - [05/May/2025 03:41:57] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-05 03:42:27,001 - __main__ - INFO - Starting AlphaVox service initialization in background
+2025-05-05 03:42:27,001 - __main__ - INFO - Attempting to start on port 8080
+2025-05-05 03:42:27,154 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://172.31.128.64:8080
+2025-05-05 03:42:27,154 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-05 03:42:27,165 - werkzeug - INFO -  * Restarting with stat
+2025-05-05 03:42:27,364 - eye_tracking_service - WARNING - Real eye tracking not available: cannot import name 'RealEyeTracking' from 'real_eye_tracking' (/home/runner/workspace/real_eye_tracking.py)
+2025-05-05 03:42:27,365 - eye_tracking_service - INFO - Using simulated eye tracking
+2025-05-05 03:42:27,365 - __main__ - INFO - Eye tracking service initialized
+2025-05-05 03:42:27,756 - __main__ - INFO - Starting AlphaVox service initialization in background
+2025-05-05 03:42:27,757 - __main__ - INFO - Attempting to start on port 8080
+2025-05-05 03:42:27,889 - werkzeug - WARNING -  * Debugger is active!
+2025-05-05 03:42:27,971 - werkzeug - INFO -  * Debugger PIN: 724-934-093
+2025-05-05 03:42:28,111 - sound_recognition_service - WARNING - Real sound recognition not available: cannot import name 'RealSpeechRecognition' from 'real_speech_recognition' (/home/runner/workspace/real_speech_recognition.py)
+2025-05-05 03:42:28,111 - sound_recognition_service - INFO - Using simulated sound recognition
+2025-05-05 03:42:28,112 - __main__ - INFO - Sound recognition service initialized
+2025-05-05 03:42:28,114 - __main__ - WARNING - Error initializing learning journey: cannot import name 'get_learning_journey_service' from 'learning_journey' (/home/runner/workspace/learning_journey.py)
+2025-05-05 03:42:28,118 - nonverbal_engine - INFO - Successfully imported NonverbalEngine from nonverbal_bull
+2025-05-05 03:42:28,118 - nonverbal_bull - INFO - Initializing NonverbalEngine with self-learning capabilities
+2025-05-05 03:42:28,119 - nonverbal_bull - INFO - NonverbalEngine initialized with self-modification capabilities
+2025-05-05 03:42:28,120 - __main__ - INFO - Nonverbal engine initialized
+2025-05-05 03:42:28,123 - conversation_engine - INFO - Using advanced NLP mode
+2025-05-05 03:42:28,125 - root - WARNING - Perplexity API not available: No module named 'perplexity'
+2025-05-05 03:42:28,127 - conversation_engine - INFO - Conversation engine initialized
+2025-05-05 03:42:28,127 - __main__ - INFO - Conversation engine initialized
+2025-05-05 03:42:28,128 - __main__ - INFO - AlphaVox services initialization completed successfully
+2025-05-05 03:42:28,252 - eye_tracking_service - WARNING - Real eye tracking not available: cannot import name 'RealEyeTracking' from 'real_eye_tracking' (/home/runner/workspace/real_eye_tracking.py)
+2025-05-05 03:42:28,253 - eye_tracking_service - INFO - Using simulated eye tracking
+2025-05-05 03:42:28,254 - __main__ - INFO - Eye tracking service initialized
+2025-05-05 03:42:28,602 - werkzeug - INFO - 172.31.128.64 - - [05/May/2025 03:42:28] "GET / HTTP/1.1" 200 -
+2025-05-05 03:42:29,021 - sound_recognition_service - WARNING - Real sound recognition not available: cannot import name 'RealSpeechRecognition' from 'real_speech_recognition' (/home/runner/workspace/real_speech_recognition.py)
+2025-05-05 03:42:29,022 - sound_recognition_service - INFO - Using simulated sound recognition
+2025-05-05 03:42:29,022 - __main__ - INFO - Sound recognition service initialized
+2025-05-05 03:42:29,029 - __main__ - WARNING - Error initializing learning journey: cannot import name 'get_learning_journey_service' from 'learning_journey' (/home/runner/workspace/learning_journey.py)
+2025-05-05 03:42:29,037 - nonverbal_engine - INFO - Successfully imported NonverbalEngine from nonverbal_bull
+2025-05-05 03:42:29,038 - nonverbal_bull - INFO - Initializing NonverbalEngine with self-learning capabilities
+2025-05-05 03:42:29,047 - nonverbal_bull - INFO - NonverbalEngine initialized with self-modification capabilities
+2025-05-05 03:42:29,050 - __main__ - INFO - Nonverbal engine initialized
+2025-05-05 03:42:29,062 - conversation_engine - INFO - Using advanced NLP mode
+2025-05-05 03:42:29,066 - root - WARNING - Perplexity API not available: No module named 'perplexity'
+2025-05-05 03:42:29,068 - conversation_engine - INFO - Conversation engine initialized
+2025-05-05 03:42:29,068 - __main__ - INFO - Conversation engine initialized
+2025-05-05 03:42:29,068 - __main__ - INFO - AlphaVox services initialization completed successfully
+2025-05-05 03:42:32,037 - werkzeug - INFO - 172.31.128.64 - - [05/May/2025 03:42:32] "GET /api/status HTTP/1.1" 200 -
+2025-05-05 03:45:43,682 - __main__ - INFO - AlphaVox launcher initializing...
+2025-05-05 03:45:43,682 - __main__ - INFO - Database URL configured: postgresql...
+2025-05-05 03:45:43,682 - __main__ - INFO - OPENAI_API_KEY is set
+2025-05-05 03:45:43,682 - __main__ - INFO - ANTHROPIC_API_KEY is set
+2025-05-05 03:45:43,682 - __main__ - INFO - Starting AlphaVox System...
+2025-05-05 03:46:17,102 - root - INFO - Connecting to database: neondb_owner:npg_IxHh7rq0jAcT@[hidden]
+2025-05-05 03:46:18,187 - __main__ - INFO - Successfully imported app from app_init
+2025-05-05 03:46:18,199 - __main__ - INFO - Starting AlphaVox service initialization in background
+2025-05-05 03:46:18,200 - __main__ - INFO - 🚀 Starting AlphaVox on http://0.0.0.0:8080
+2025-05-05 03:46:18,201 - __main__ - INFO - AlphaVox services initialization completed successfully
+2025-05-05 03:46:18,275 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://172.31.128.64:8080
+2025-05-05 03:46:18,275 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-05 03:46:18,280 - werkzeug - INFO -  * Restarting with stat
+2025-05-05 03:46:19,285 - root - INFO - Connecting to database: neondb_owner:npg_IxHh7rq0jAcT@[hidden]
+2025-05-05 03:46:20,271 - __main__ - INFO - Successfully imported app from app_init
+2025-05-05 03:46:20,274 - __main__ - INFO - Starting AlphaVox service initialization in background
+2025-05-05 03:46:20,274 - __main__ - INFO - 🚀 Starting AlphaVox on http://0.0.0.0:8080
+2025-05-05 03:46:20,275 - __main__ - INFO - AlphaVox services initialization completed successfully
+2025-05-05 03:46:20,334 - werkzeug - WARNING -  * Debugger is active!
+2025-05-05 03:46:20,357 - werkzeug - INFO -  * Debugger PIN: 106-793-734
+2025-05-05 03:51:34,644 - __main__ - INFO - Starting AlphaVox service initialization in background
+2025-05-05 03:51:34,644 - __main__ - INFO - Attempting to start on port 8080
+2025-05-05 03:51:34,881 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://172.31.128.64:8080
+2025-05-05 03:51:34,882 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-05 03:51:34,889 - werkzeug - INFO -  * Restarting with stat
+2025-05-05 03:51:35,176 - eye_tracking_service - WARNING - Real eye tracking not available: cannot import name 'RealEyeTracking' from 'real_eye_tracking' (/home/runner/workspace/real_eye_tracking.py)
+2025-05-05 03:51:35,181 - eye_tracking_service - INFO - Using simulated eye tracking
+2025-05-05 03:51:35,183 - __main__ - INFO - Eye tracking service initialized
+2025-05-05 03:51:35,928 - __main__ - INFO - Starting AlphaVox service initialization in background
+2025-05-05 03:51:35,928 - __main__ - INFO - Attempting to start on port 8080
+2025-05-05 03:51:36,113 - werkzeug - WARNING -  * Debugger is active!
+2025-05-05 03:51:36,154 - werkzeug - INFO -  * Debugger PIN: 207-563-633
+2025-05-05 03:51:36,199 - sound_recognition_service - WARNING - Real sound recognition not available: cannot import name 'RealSpeechRecognition' from 'real_speech_recognition' (/home/runner/workspace/real_speech_recognition.py)
+2025-05-05 03:51:36,202 - sound_recognition_service - INFO - Using simulated sound recognition
+2025-05-05 03:51:36,204 - __main__ - INFO - Sound recognition service initialized
+2025-05-05 03:51:36,208 - __main__ - WARNING - Error initializing learning journey: cannot import name 'get_learning_journey_service' from 'learning_journey' (/home/runner/workspace/learning_journey.py)
+2025-05-05 03:51:36,233 - nonverbal_engine - INFO - Successfully imported NonverbalEngine from nonverbal_bull
+2025-05-05 03:51:36,241 - nonverbal_bull - INFO - Initializing NonverbalEngine with self-learning capabilities
+2025-05-05 03:51:36,258 - nonverbal_bull - INFO - NonverbalEngine initialized with self-modification capabilities
+2025-05-05 03:51:36,258 - __main__ - INFO - Nonverbal engine initialized
+2025-05-05 03:51:36,261 - conversation_engine - INFO - Using advanced NLP mode
+2025-05-05 03:51:36,263 - root - WARNING - Perplexity API not available: No module named 'perplexity'
+2025-05-05 03:51:36,271 - conversation_engine - INFO - Conversation engine initialized
+2025-05-05 03:51:36,271 - __main__ - INFO - Conversation engine initialized
+2025-05-05 03:51:36,271 - __main__ - INFO - AlphaVox services initialization completed successfully
+2025-05-05 03:51:36,556 - eye_tracking_service - WARNING - Real eye tracking not available: cannot import name 'RealEyeTracking' from 'real_eye_tracking' (/home/runner/workspace/real_eye_tracking.py)
+2025-05-05 03:51:36,558 - eye_tracking_service - INFO - Using simulated eye tracking
+2025-05-05 03:51:36,561 - __main__ - INFO - Eye tracking service initialized
+2025-05-05 03:51:37,391 - sound_recognition_service - WARNING - Real sound recognition not available: cannot import name 'RealSpeechRecognition' from 'real_speech_recognition' (/home/runner/workspace/real_speech_recognition.py)
+2025-05-05 03:51:37,392 - sound_recognition_service - INFO - Using simulated sound recognition
+2025-05-05 03:51:37,393 - __main__ - INFO - Sound recognition service initialized
+2025-05-05 03:51:37,394 - __main__ - WARNING - Error initializing learning journey: cannot import name 'get_learning_journey_service' from 'learning_journey' (/home/runner/workspace/learning_journey.py)
+2025-05-05 03:51:37,396 - nonverbal_engine - INFO - Successfully imported NonverbalEngine from nonverbal_bull
+2025-05-05 03:51:37,397 - nonverbal_bull - INFO - Initializing NonverbalEngine with self-learning capabilities
+2025-05-05 03:51:37,398 - nonverbal_bull - INFO - NonverbalEngine initialized with self-modification capabilities
+2025-05-05 03:51:37,398 - __main__ - INFO - Nonverbal engine initialized
+2025-05-05 03:51:37,402 - conversation_engine - INFO - Using advanced NLP mode
+2025-05-05 03:51:37,404 - root - WARNING - Perplexity API not available: No module named 'perplexity'
+2025-05-05 03:51:37,405 - conversation_engine - INFO - Conversation engine initialized
+2025-05-05 03:51:37,406 - __main__ - INFO - Conversation engine initialized
+2025-05-05 03:51:37,422 - __main__ - INFO - AlphaVox services initialization completed successfully
+2025-05-05 03:52:00,119 - __main__ - INFO - Starting AlphaVox service initialization in background
+2025-05-05 03:52:00,119 - __main__ - INFO - Attempting to start on port 8080
+2025-05-05 03:52:00,269 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://172.31.128.64:8080
+2025-05-05 03:52:00,271 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-05 03:52:00,276 - werkzeug - INFO -  * Restarting with stat
+2025-05-05 03:52:00,668 - eye_tracking_service - WARNING - Real eye tracking not available: cannot import name 'RealEyeTracking' from 'real_eye_tracking' (/home/runner/workspace/real_eye_tracking.py)
+2025-05-05 03:52:00,670 - eye_tracking_service - INFO - Using simulated eye tracking
+2025-05-05 03:52:00,671 - __main__ - INFO - Eye tracking service initialized
+2025-05-05 03:52:01,169 - __main__ - INFO - Starting AlphaVox service initialization in background
+2025-05-05 03:52:01,169 - __main__ - INFO - Attempting to start on port 8080
+2025-05-05 03:52:01,384 - werkzeug - WARNING -  * Debugger is active!
+2025-05-05 03:52:01,425 - werkzeug - INFO -  * Debugger PIN: 121-334-798
+2025-05-05 03:52:01,707 - eye_tracking_service - WARNING - Real eye tracking not available: cannot import name 'RealEyeTracking' from 'real_eye_tracking' (/home/runner/workspace/real_eye_tracking.py)
+2025-05-05 03:52:01,708 - eye_tracking_service - INFO - Using simulated eye tracking
+2025-05-05 03:52:01,710 - __main__ - INFO - Eye tracking service initialized
+2025-05-05 03:52:02,359 - sound_recognition_service - WARNING - Real sound recognition not available: cannot import name 'RealSpeechRecognition' from 'real_speech_recognition' (/home/runner/workspace/real_speech_recognition.py)
+2025-05-05 03:52:02,361 - sound_recognition_service - INFO - Using simulated sound recognition
+2025-05-05 03:52:02,361 - __main__ - INFO - Sound recognition service initialized
+2025-05-05 03:52:02,369 - __main__ - WARNING - Error initializing learning journey: cannot import name 'get_learning_journey_service' from 'learning_journey' (/home/runner/workspace/learning_journey.py)
+2025-05-05 03:52:02,391 - nonverbal_engine - INFO - Successfully imported NonverbalEngine from nonverbal_bull
+2025-05-05 03:52:02,391 - nonverbal_bull - INFO - Initializing NonverbalEngine with self-learning capabilities
+2025-05-05 03:52:02,397 - nonverbal_bull - INFO - NonverbalEngine initialized with self-modification capabilities
+2025-05-05 03:52:02,398 - __main__ - INFO - Nonverbal engine initialized
+2025-05-05 03:52:02,399 - conversation_engine - INFO - Using advanced NLP mode
+2025-05-05 03:52:02,400 - root - WARNING - Perplexity API not available: No module named 'perplexity'
+2025-05-05 03:52:02,401 - conversation_engine - INFO - Conversation engine initialized
+2025-05-05 03:52:02,401 - __main__ - INFO - Conversation engine initialized
+2025-05-05 03:52:02,402 - __main__ - INFO - AlphaVox services initialization completed successfully
+2025-05-05 03:52:02,554 - sound_recognition_service - WARNING - Real sound recognition not available: cannot import name 'RealSpeechRecognition' from 'real_speech_recognition' (/home/runner/workspace/real_speech_recognition.py)
+2025-05-05 03:52:02,554 - sound_recognition_service - INFO - Using simulated sound recognition
+2025-05-05 03:52:02,554 - __main__ - INFO - Sound recognition service initialized
+2025-05-05 03:52:02,558 - __main__ - WARNING - Error initializing learning journey: cannot import name 'get_learning_journey_service' from 'learning_journey' (/home/runner/workspace/learning_journey.py)
+2025-05-05 03:52:02,561 - nonverbal_engine - INFO - Successfully imported NonverbalEngine from nonverbal_bull
+2025-05-05 03:52:02,562 - nonverbal_bull - INFO - Initializing NonverbalEngine with self-learning capabilities
+2025-05-05 03:52:02,563 - nonverbal_bull - INFO - NonverbalEngine initialized with self-modification capabilities
+2025-05-05 03:52:02,563 - __main__ - INFO - Nonverbal engine initialized
+2025-05-05 03:52:02,565 - conversation_engine - INFO - Using advanced NLP mode
+2025-05-05 03:52:02,566 - root - WARNING - Perplexity API not available: No module named 'perplexity'
+2025-05-05 03:52:02,567 - conversation_engine - INFO - Conversation engine initialized
+2025-05-05 03:52:02,568 - __main__ - INFO - Conversation engine initialized
+2025-05-05 03:52:02,568 - __main__ - INFO - AlphaVox services initialization completed successfully
+2025-05-05 03:52:29,782 - root - INFO - Connecting to database: neondb_owner:npg_IxHh7rq0jAcT@[hidden]
+2025-05-05 03:52:30,822 - __main__ - INFO - Successfully imported app from app_init
+2025-05-05 03:52:30,823 - __main__ - INFO - Starting AlphaVox service initialization in background
+2025-05-05 03:52:30,823 - __main__ - INFO - AlphaVox services initialization completed successfully
+2025-05-05 03:52:30,823 - __main__ - INFO - 🚀 Starting AlphaVox on http://0.0.0.0:8080
+2025-05-05 03:52:30,898 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://172.31.128.64:8080
+2025-05-05 03:52:30,898 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-05 03:52:30,899 - werkzeug - INFO -  * Restarting with stat
+2025-05-05 03:52:31,598 - root - INFO - Connecting to database: neondb_owner:npg_IxHh7rq0jAcT@[hidden]
+2025-05-05 03:52:32,487 - __main__ - INFO - Successfully imported app from app_init
+2025-05-05 03:52:32,489 - __main__ - INFO - Starting AlphaVox service initialization in background
+2025-05-05 03:52:32,489 - __main__ - INFO - 🚀 Starting AlphaVox on http://0.0.0.0:8080
+2025-05-05 03:52:32,489 - __main__ - INFO - AlphaVox services initialization completed successfully
+2025-05-05 03:52:32,545 - werkzeug - WARNING -  * Debugger is active!
+2025-05-05 03:52:32,553 - werkzeug - INFO -  * Debugger PIN: 655-859-991
+2025-05-05 03:52:37,018 - werkzeug - INFO -  * Detected change in '/home/runner/workspace/alphavox_server.py', reloading
+2025-05-05 03:52:37,117 - werkzeug - INFO -  * Restarting with stat
+2025-05-05 03:52:37,764 - root - INFO - Connecting to database: neondb_owner:npg_IxHh7rq0jAcT@[hidden]
+2025-05-05 03:52:38,628 - __main__ - INFO - Successfully imported app from app_init
+2025-05-05 03:52:38,629 - __main__ - INFO - Starting AlphaVox service initialization in background
+2025-05-05 03:52:38,630 - __main__ - INFO - AlphaVox services initialization completed successfully
+2025-05-05 03:52:38,630 - __main__ - INFO - 🚀 Starting AlphaVox on http://0.0.0.0:8080
+2025-05-05 03:52:38,666 - werkzeug - WARNING -  * Debugger is active!
+2025-05-05 03:52:38,671 - werkzeug - INFO -  * Debugger PIN: 572-600-407
+2025-05-05 03:55:29,253 - root - INFO - Connecting to database: neondb_owner:npg_IxHh7rq0jAcT@[hidden]
+2025-05-05 03:55:32,584 - __main__ - INFO - Successfully imported app from app_init
+2025-05-05 03:55:32,584 - __main__ - INFO - Starting AlphaVox service initialization in background
+2025-05-05 03:55:32,584 - __main__ - INFO - 🚀 Starting AlphaVox on http://0.0.0.0:8080
+2025-05-05 03:55:32,585 - __main__ - INFO - AlphaVox services initialization completed successfully
+2025-05-05 03:55:32,620 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://172.31.128.64:8080
+2025-05-05 03:55:32,621 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-05-05 03:55:32,621 - werkzeug - INFO -  * Restarting with stat
+2025-05-05 03:55:33,045 - root - INFO - Connecting to database: neondb_owner:npg_IxHh7rq0jAcT@[hidden]
+2025-05-05 03:55:33,915 - __main__ - INFO - Successfully imported app from app_init
+2025-05-05 03:55:33,915 - __main__ - INFO - Starting AlphaVox service initialization in background
+2025-05-05 03:55:33,916 - __main__ - INFO - AlphaVox services initialization completed successfully
+2025-05-05 03:55:33,916 - __main__ - INFO - 🚀 Starting AlphaVox on http://0.0.0.0:8080
+2025-05-05 03:55:33,942 - werkzeug - WARNING -  * Debugger is active!
+2025-05-05 03:55:33,945 - werkzeug - INFO -  * Debugger PIN: 132-625-710
+2025-05-05 03:57:05,515 - werkzeug - INFO -  * Detected change in '/home/runner/workspace/app_simple.py', reloading
+2025-05-05 03:57:05,624 - werkzeug - INFO -  * Restarting with stat
+2025-05-05 03:57:06,121 - root - INFO - Connecting to database: neondb_owner:npg_IxHh7rq0jAcT@[hidden]
+2025-05-05 03:57:07,034 - __main__ - INFO - Successfully imported app from app_init
+2025-05-05 03:57:07,034 - __main__ - INFO - Starting AlphaVox service initialization in background
+2025-05-05 03:57:07,034 - __main__ - INFO - 🚀 Starting AlphaVox on http://0.0.0.0:8080
+2025-05-05 03:57:07,034 - __main__ - INFO - AlphaVox services initialization completed successfully
+2025-05-05 03:57:07,065 - werkzeug - WARNING -  * Debugger is active!
+2025-05-05 03:57:07,072 - werkzeug - INFO -  * Debugger PIN: 847-048-920
+2025-05-05 03:57:51,866 - werkzeug - INFO -  * Detected change in '/home/runner/workspace/app_simple.py', reloading
+2025-05-05 03:57:51,935 - werkzeug - INFO -  * Restarting with stat
+2025-05-05 03:57:52,371 - root - INFO - Connecting to database: neondb_owner:npg_IxHh7rq0jAcT@[hidden]
+2025-05-05 03:57:53,251 - __main__ - INFO - Successfully imported app from app_init
+2025-05-05 03:57:53,253 - __main__ - INFO - Starting AlphaVox service initialization in background
+2025-05-05 03:57:53,253 - __main__ - INFO - 🚀 Starting AlphaVox on http://0.0.0.0:8080
+2025-05-05 03:57:53,253 - __main__ - INFO - AlphaVox services initialization completed successfully
+2025-05-05 03:57:53,276 - werkzeug - WARNING -  * Debugger is active!
+2025-05-05 03:57:53,280 - werkzeug - INFO -  * Debugger PIN: 798-043-223
+[2025-05-09 02:19:42] [INFO] [root] - Default logging configuration applied
+[2025-05-09 02:19:42] [INFO] [adaptive_conversation] - Conversation Complexity Engine initialized
+[2025-05-09 02:19:42] [INFO] [routes.learning_routes] - Learning routes registered
+[2025-05-09 02:19:42] [INFO] [routes.health_routes] - Health routes registered
+[2025-05-09 02:19:42] [INFO] [main] - AlphaVox application initialized
+[2025-05-09 02:19:48] [INFO] [root] - Default logging configuration applied
+[2025-05-09 02:19:48] [INFO] [adaptive_conversation] - Conversation Complexity Engine initialized
+[2025-05-09 02:19:48] [INFO] [routes.learning_routes] - Learning routes registered
+[2025-05-09 02:19:48] [INFO] [routes.health_routes] - Health routes registered
+[2025-05-09 02:19:48] [INFO] [main] - AlphaVox application initialized
+[2025-05-09 02:19:48] [INFO] [main] - Test route accessed
+[2025-05-09 02:20:01] [INFO] [root] - Default logging configuration applied
+[2025-05-09 02:20:01] [INFO] [adaptive_conversation] - Conversation Complexity Engine initialized
+[2025-05-09 02:20:01] [INFO] [routes.learning_routes] - Learning routes registered
+[2025-05-09 02:20:01] [INFO] [routes.health_routes] - Health routes registered
+[2025-05-09 02:20:01] [INFO] [main] - AlphaVox application initialized
+[2025-05-09 02:23:00] [INFO] [root] - Default logging configuration applied
+[2025-05-09 02:23:00] [INFO] [adaptive_conversation] - Conversation Complexity Engine initialized
+[2025-05-09 02:23:00] [INFO] [routes.learning_routes] - Learning routes registered
+[2025-05-09 02:23:00] [INFO] [routes.health_routes] - Health routes registered
+[2025-05-09 02:23:00] [INFO] [main] - AlphaVox application initialized
+[2025-05-09 02:26:24] [INFO] [root] - Default logging configuration applied
+[2025-05-09 02:26:24] [INFO] [adaptive_conversation] - Conversation Complexity Engine initialized
+[2025-05-09 02:26:24] [INFO] [routes.learning_routes] - Learning routes registered
+[2025-05-09 02:26:24] [INFO] [routes.health_routes] - Health routes registered
+[2025-05-09 02:26:24] [INFO] [main] - AlphaVox application initialized
+[2025-05-09 02:30:55] [INFO] [root] - Default logging configuration applied
+[2025-05-09 02:30:55] [INFO] [adaptive_conversation] - Conversation Complexity Engine initialized
+[2025-05-09 02:30:55] [INFO] [routes.learning_routes] - Learning routes registered
+[2025-05-09 02:30:55] [INFO] [routes.health_routes] - Health routes registered
+[2025-05-09 02:30:55] [INFO] [main] - AlphaVox application initialized
+[2025-05-09 02:33:52] [INFO] [root] - Default logging configuration applied
+[2025-05-09 02:33:52] [INFO] [adaptive_conversation] - Conversation Complexity Engine initialized
+[2025-05-09 02:33:52] [INFO] [routes.learning_routes] - Learning routes registered
+[2025-05-09 02:33:52] [INFO] [routes.health_routes] - Health routes registered
+[2025-05-09 02:33:52] [INFO] [main] - AlphaVox application initialized
+[2025-05-09 02:34:27] [INFO] [root] - Default logging configuration applied
+[2025-05-09 02:34:27] [INFO] [adaptive_conversation] - Conversation Complexity Engine initialized
+[2025-05-09 02:41:52] [INFO] [root] - Default logging configuration applied
+[2025-05-09 02:41:52] [INFO] [adaptive_conversation] - Conversation Complexity Engine initialized
+[2025-05-09 02:42:06] [INFO] [root] - Default logging configuration applied
+[2025-05-09 02:42:06] [INFO] [adaptive_conversation] - Conversation Complexity Engine initialized
+[2025-05-09 02:42:06] [INFO] [routes.adaptive_conversation_routes] - Adaptive conversation routes registered
+[2025-05-09 02:42:06] [INFO] [routes.learning_routes] - Learning routes registered
+[2025-05-09 02:42:06] [INFO] [routes.health_routes] - Health routes registered
+[2025-05-09 02:42:06] [INFO] [main] - AlphaVox application initialized
+[2025-05-09 02:42:22] [INFO] [root] - Default logging configuration applied
+[2025-05-09 02:42:22] [INFO] [adaptive_conversation] - Conversation Complexity Engine initialized
+[2025-05-09 02:42:22] [INFO] [routes.adaptive_conversation_routes] - Adaptive conversation routes registered
+[2025-05-09 02:42:22] [INFO] [routes.learning_routes] - Learning routes registered
+[2025-05-09 02:42:22] [INFO] [routes.health_routes] - Health routes registered
+[2025-05-09 02:42:22] [INFO] [main] - AlphaVox application initialized
+[2025-05-09 02:42:39] [ERROR] [routes.health_routes] - Database health check failed: The current Flask app is not registered with this 'SQLAlchemy' instance. Did you forget to call 'init_app', or did you create multiple 'SQLAlchemy' instances?
+[2025-05-09 02:42:53] [INFO] [root] - Default logging configuration applied
+[2025-05-09 02:42:53] [INFO] [adaptive_conversation] - Conversation Complexity Engine initialized
+[2025-05-09 02:42:53] [INFO] [routes.adaptive_conversation_routes] - Adaptive conversation routes registered
+[2025-05-09 02:42:53] [INFO] [routes.learning_routes] - Learning routes registered
+[2025-05-09 02:42:53] [INFO] [routes.health_routes] - Health routes registered
+[2025-05-09 02:42:53] [INFO] [main] - AlphaVox application initialized
+[2025-05-09 02:42:59] [INFO] [root] - Default logging configuration applied
+[2025-05-09 02:42:59] [INFO] [adaptive_conversation] - Conversation Complexity Engine initialized
+[2025-05-09 02:42:59] [INFO] [routes.adaptive_conversation_routes] - Adaptive conversation routes registered
+[2025-05-09 02:42:59] [INFO] [routes.learning_routes] - Learning routes registered
+[2025-05-09 02:42:59] [INFO] [routes.health_routes] - Health routes registered
+[2025-05-09 02:42:59] [INFO] [main] - AlphaVox application initialized
+[2025-05-09 02:43:10] [ERROR] [app_init] - Exception on /learning/ [GET]
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/routes/learning_routes.py", line 19, in learning_hub
+    return render_template('learning/hub.html', title="Learning Hub")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/runner/workspace/templates/learning/hub.html", line 1, in top-level template code
+    {% extends "layout.html" %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/templates/layout.html", line 133, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/templates/learning/hub.html", line 94, in block 'content'
+    {% for topic in topics[:3] %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'topics' is undefined
+[2025-05-09 02:43:30] [INFO] [root] - Default logging configuration applied
+[2025-05-09 02:43:30] [INFO] [adaptive_conversation] - Conversation Complexity Engine initialized
+[2025-05-09 02:43:30] [INFO] [routes.adaptive_conversation_routes] - Adaptive conversation routes registered
+[2025-05-09 02:43:30] [INFO] [routes.learning_routes] - Learning routes registered
+[2025-05-09 02:43:30] [INFO] [routes.health_routes] - Health routes registered
+[2025-05-09 02:43:30] [INFO] [main] - AlphaVox application initialized
+[2025-05-09 02:43:38] [INFO] [root] - Default logging configuration applied
+[2025-05-09 02:43:38] [INFO] [adaptive_conversation] - Conversation Complexity Engine initialized
+[2025-05-09 02:43:38] [INFO] [routes.adaptive_conversation_routes] - Adaptive conversation routes registered
+[2025-05-09 02:43:38] [INFO] [routes.learning_routes] - Learning routes registered
+[2025-05-09 02:43:38] [INFO] [routes.health_routes] - Health routes registered
+[2025-05-09 02:43:38] [INFO] [main] - AlphaVox application initialized
+[2025-05-09 02:43:47] [INFO] [root] - Default logging configuration applied
+[2025-05-09 02:43:47] [INFO] [adaptive_conversation] - Conversation Complexity Engine initialized
+[2025-05-09 02:43:47] [INFO] [routes.adaptive_conversation_routes] - Adaptive conversation routes registered
+[2025-05-09 02:43:47] [INFO] [routes.learning_routes] - Learning routes registered
+[2025-05-09 02:43:47] [INFO] [routes.health_routes] - Health routes registered
+[2025-05-09 02:43:47] [INFO] [main] - AlphaVox application initialized
+[2025-05-09 02:43:59] [INFO] [learning_journey] - LearningJourney initialized
+[2025-05-09 02:44:04] [ERROR] [app_init] - Exception on /color-scheme/ [GET]
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/routes/color_scheme_routes.py", line 120, in color_scheme_home
+    return render_template('color_scheme/home.html', title="Color Scheme")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 1087, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 1016, in get_template
+    return self._load_template(name, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 975, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: color_scheme/home.html
+[2025-05-09 02:45:48] [INFO] [root] - Default logging configuration applied
+[2025-05-09 02:45:48] [INFO] [adaptive_conversation] - Conversation Complexity Engine initialized
+[2025-05-09 02:45:48] [INFO] [routes.adaptive_conversation_routes] - Adaptive conversation routes registered
+[2025-05-09 02:45:48] [INFO] [routes.learning_routes] - Learning routes registered
+[2025-05-09 02:45:48] [INFO] [routes.health_routes] - Health routes registered
+[2025-05-09 02:45:48] [INFO] [main] - AlphaVox application initialized
+[2025-05-09 02:45:57] [INFO] [root] - Default logging configuration applied
+[2025-05-09 02:45:57] [INFO] [adaptive_conversation] - Conversation Complexity Engine initialized
+[2025-05-09 02:45:57] [INFO] [routes.adaptive_conversation_routes] - Adaptive conversation routes registered
+[2025-05-09 02:45:57] [INFO] [routes.learning_routes] - Learning routes registered
+[2025-05-09 02:45:57] [INFO] [routes.health_routes] - Health routes registered
+[2025-05-09 02:45:57] [INFO] [main] - AlphaVox application initialized
+[2025-05-09 02:45:57] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InvalidTextRepresentation) invalid input syntax for type integer: "default_user"
+LINE 3: WHERE user_preference.user_id = 'default_user' AND user_pref...
+                                        ^
+
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
+FROM user_preference 
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+ LIMIT %(param_1)s]
+[parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+[2025-05-09 02:45:57] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
+FROM user_preference 
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+ LIMIT %(param_1)s]
+[parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+[2025-05-09 02:45:57] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
+FROM user_preference 
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+ LIMIT %(param_1)s]
+[parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+[2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
+FROM user_preference 
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+ LIMIT %(param_1)s]
+[parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+[2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
+FROM user_preference 
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+ LIMIT %(param_1)s]
+[parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+[2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
+FROM user_preference 
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+ LIMIT %(param_1)s]
+[parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+[2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
+FROM user_preference 
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+ LIMIT %(param_1)s]
+[parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+[2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
+FROM user_preference 
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+ LIMIT %(param_1)s]
+[parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+[2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
+FROM user_preference 
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+ LIMIT %(param_1)s]
+[parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+[2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
+FROM user_preference 
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+ LIMIT %(param_1)s]
+[parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+[2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
+FROM user_preference 
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+ LIMIT %(param_1)s]
+[parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+[2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
+FROM user_preference 
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+ LIMIT %(param_1)s]
+[parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+[2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
+FROM user_preference 
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+ LIMIT %(param_1)s]
+[parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+[2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
+FROM user_preference 
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+ LIMIT %(param_1)s]
+[parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+[2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
+FROM user_preference 
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+ LIMIT %(param_1)s]
+[parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/2j85)
+[2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
+FROM user_preference 
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+ LIMIT %(param_1)s]
+[parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/2j85)

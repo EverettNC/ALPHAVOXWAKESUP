@@ -1,0 +1,138 @@
+{
+  "1": {
+    "scheme": {
+      "name": "Custom Blue",
+      "description": "Personalized blue theme with medium contrast and medium brightness",
+      "primary": "#3182ce",
+      "secondary": "#3136ce",
+      "background": "#000000",
+      "surface": "#0a0a0a",
+      "text": "#ffffff",
+      "accent": "#ce7d31",
+      "primary_rgb": "49, 130, 206",
+      "secondary_rgb": "49, 54, 206",
+      "background_rgb": "0, 0, 0",
+      "surface_rgb": "10, 10, 10",
+      "text_rgb": "255, 255, 255",
+      "accent_rgb": "206, 125, 49"
+    },
+    "preferences": {
+      "color_preference": "blue",
+      "contrast": "medium",
+      "brightness": "medium",
+      "accessibility_needs": [
+        "colorblind"
+      ],
+      "emotion": "neutral"
+    },
+    "history": [
+      {
+        "name": "Custom Blue",
+        "description": "Personalized blue theme with medium contrast and dark brightness",
+        "primary": "#3182ce",
+        "secondary": "#3136ce",
+        "background": "#101010",
+        "surface": "#1b1b1b",
+        "text": "#ffffff",
+        "accent": "#ce7d31",
+        "primary_rgb": "49, 130, 206",
+        "secondary_rgb": "49, 54, 206",
+        "background_rgb": "16, 16, 16",
+        "surface_rgb": "27, 27, 27",
+        "text_rgb": "255, 255, 255",
+        "accent_rgb": "206, 125, 49"
+      },
+      {
+        "name": "Custom Blue",
+        "description": "Personalized blue theme with medium contrast and dark brightness",
+        "primary": "#3182ce",
+        "secondary": "#3136ce",
+        "background": "#000000",
+        "surface": "#090909",
+        "text": "#ffffff",
+        "accent": "#ce7d31",
+        "primary_rgb": "49, 130, 206",
+        "secondary_rgb": "49, 54, 206",
+        "background_rgb": "0, 0, 0",
+        "surface_rgb": "9, 9, 9",
+        "text_rgb": "255, 255, 255",
+        "accent_rgb": "206, 125, 49"
+      },
+      {
+        "name": "Custom Green",
+        "description": "Personalized green theme with medium contrast and medium brightness",
+        "primary": "#38a169",
+        "secondary": "#38a19b",
+        "background": "#000000",
+        "surface": "#0a0a0a",
+        "text": "#ffffff",
+        "accent": "#a13870",
+        "primary_rgb": "56, 161, 105",
+        "secondary_rgb": "56, 161, 155",
+        "background_rgb": "0, 0, 0",
+        "surface_rgb": "10, 10, 10",
+        "text_rgb": "255, 255, 255",
+        "accent_rgb": "161, 56, 112"
+      }
+    ]
+  },
+  "1": {
+    "scheme": {
+      "name": "Custom Blue",
+      "description": "Personalized blue theme with medium contrast and dark brightness",
+      "primary": "#3182ce",
+      "secondary": "#3136ce",
+      "background": "#101010",
+      "surface": "#1b1b1b",
+      "text": "#ffffff",
+      "accent": "#ce7d31",
+      "primary_rgb": "49, 130, 206",
+      "secondary_rgb": "49, 54, 206",
+      "background_rgb": "16, 16, 16",
+      "surface_rgb": "27, 27, 27",
+      "text_rgb": "255, 255, 255",
+      "accent_rgb": "206, 125, 49"
+    },
+    "preferences": {
+      "color_preference": "blue",
+      "contrast": "medium",
+      "brightness": "dark",
+      "accessibility_needs": [],
+      "emotion": "neutral"
+    },
+    "history": [
+      {
+        "name": "Custom Green",
+        "description": "Personalized green theme with medium contrast and dark brightness",
+        "primary": "#38a169",
+        "secondary": "#38a19b",
+        "background": "#101010",
+        "surface": "#1b1b1b",
+        "text": "#ffffff",
+        "accent": "#a13870",
+        "primary_rgb": "56, 161, 105",
+        "secondary_rgb": "56, 161, 155",
+        "background_rgb": "16, 16, 16",
+        "surface_rgb": "27, 27, 27",
+        "text_rgb": "255, 255, 255",
+        "accent_rgb": "161, 56, 112"
+      },
+      {
+        "name": "Custom Red",
+        "description": "Personalized red theme with medium contrast and dark brightness",
+        "primary": "#e53e3e",
+        "secondary": "#e58e3d",
+        "background": "#101010",
+        "surface": "#1b1b1b",
+        "text": "#ffffff",
+        "accent": "#3de5e5",
+        "primary_rgb": "229, 62, 62",
+        "secondary_rgb": "229, 142, 61",
+        "background_rgb": "16, 16, 16",
+        "surface_rgb": "27, 27, 27",
+        "text_rgb": "255, 255, 255",
+        "accent_rgb": "61, 229, 229"
+      }
+    ]
+  }
+}

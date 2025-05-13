@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "name": "Nonverbal Communication",
+    "description": "The basics of nonverbal communication, including gestures, facial expressions, and body language.",
+    "difficulty": "beginner",
+    "prerequisites": []
+  },
+  {
+    "id": 2,
+    "name": "Eye Contact",
+    "description": "Understanding the importance of eye contact in communication and social interaction.",
+    "difficulty": "beginner",
+    "prerequisites": ["Nonverbal Communication"]
+  },
+  {
+    "id": 3,
+    "name": "Symbol-Based Communication",
+    "description": "Using symbols and visual aids to communicate effectively when verbal communication is challenging.",
+    "difficulty": "intermediate",
+    "prerequisites": ["Nonverbal Communication"]
+  },
+  {
+    "id": 4,
+    "name": "Emotional Expression",
+    "description": "Recognizing and expressing emotions through facial expressions, tone, and body language.",
+    "difficulty": "intermediate",
+    "prerequisites": ["Nonverbal Communication", "Eye Contact"]
+  },
+  {
+    "id": 5,
+    "name": "Social Cues",
+    "description": "Understanding and responding to social cues in conversation and interaction.",
+    "difficulty": "advanced",
+    "prerequisites": ["Nonverbal Communication", "Emotional Expression"]
+  },
+  {
+    "id": 6,
+    "name": "Adaptive Communication",
+    "description": "Techniques for adapting communication strategies based on context and audience.",
+    "difficulty": "advanced",
+    "prerequisites": ["Nonverbal Communication", "Symbol-Based Communication", "Emotional Expression"]
+  },
+  {
+    "id": 7,
+    "name": "Assistive Technology",
+    "description": "Overview of assistive technology tools and apps that can aid communication.",
+    "difficulty": "intermediate",
+    "prerequisites": []
+  },
+  {
+    "id": 8,
+    "name": "Voice Modulation",
+    "description": "Techniques for controlling and adapting voice tone, pitch, and speed for effective communication.",
+    "difficulty": "intermediate",
+    "prerequisites": []
+  },
+  {
+    "id": 9,
+    "name": "Communication Barriers",
+    "description": "Understanding and overcoming common barriers to effective communication.",
+    "difficulty": "intermediate",
+    "prerequisites": ["Nonverbal Communication"]
+  },
+  {
+    "id": 10,
+    "name": "Digital Communication",
+    "description": "Using digital tools and platforms for enhanced communication capabilities.",
+    "difficulty": "intermediate",
+    "prerequisites": ["Assistive Technology"]
+  }
+]

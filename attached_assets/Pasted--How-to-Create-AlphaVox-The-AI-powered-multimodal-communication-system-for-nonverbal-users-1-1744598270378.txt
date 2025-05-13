@@ -1,0 +1,153 @@
+🚀 How to Create AlphaVox
+The AI-powered, multimodal communication system for nonverbal users.
+
+🧩 1. System Overview
+AlphaVox is a full-stack, multimodal AI system designed to:
+
+Interpret gesture, eye, and vocalization input.
+
+Classify and respond to nonverbal communication in real-time.
+
+Support dynamic text-to-speech feedback using emotional context.
+
+Adapt over time to user preferences, behaviors, and modalities.
+
+Run on both local (offline) and cloud environments.
+
+🛠️ 2. Core Tech Stack
+Layer	Tech
+Backend	Flask (Python 3.11)
+Database	SQLite (dev) → PostgreSQL (Azure live)
+AI Models	LSTM, RandomForest, SpaCy NLP, MediaPipe, custom classifiers
+TTS	gTTS (Google Text-to-Speech), Azure AI Speech
+Frontend	HTML5, JS (Jinja templates)
+Deployment	Azure App Service / Docker container
+Optional	Azure AI Foundry + ACR for fine-tuned voice agents
+📦 3. Folder Structure
+bash
+Copy
+Edit
+alphavox/
+├── app.py
+├── nonverbal_engine.py
+├── templates/
+│   ├── index.html
+│   └── home.html
+├── static/
+│   └── style.css
+├── data/
+│   └── user_interactions.json
+├── alphavox.db
+├── requirements.txt
+├── Dockerfile
+├── .env
+⚙️ 4. Required Features (Modules)
+✅ AICore
+NLP + multimodal intent processor.
+
+Handles gesture, gaze, and sound.
+
+Learns from history (user memory in JSON or DB).
+
+Adjusts confidence dynamically over time.
+
+✅ NonverbalEngine
+Classifies gestures and eye movement with RandomForest or LSTM.
+
+Combines MediaPipe and custom trained models.
+
+Returns { intent, expression, message, confidence }.
+
+✅ EyeTrackingService (Simulated or real camera feed)
+Reads head direction, gaze position.
+
+Hooks into video feed with OpenCV.
+
+✅ SoundRecognitionService
+Detects vocal patterns (e.g., "hum", "click", distress tone).
+
+Converts into intent input for AI.
+
+✅ TTS + Emotion
+Uses gTTS for basic, Azure TTS for fine-tuned multilingual voices.
+
+Adjusts pitch/tempo for emotional scoring.
+
+Saves to temporary file → played with Pygame.
+
+✅ UI/UX
+Web interface using Flask templates.
+
+Voice playback and button interactions.
+
+Eye-tracking, gesture overlays, feedback bubbles.
+
+🧪 5. Flask API Routes
+Route	Purpose
+/	Index form
+/start	Starts session & AI thread
+/home	Main dashboard
+/process-input	Accepts text, returns AI response
+/speak/<gesture>	Simulates speech on gesture
+/video_feed	Streams simulated eye-tracking feed
+/start-ai, /stop-ai	Controls AI runtime
+🔐 6. Data Model (SQLite/PostgreSQL)
+User: ID, name
+
+UserInteraction: text, intent, confidence, timestamp
+
+UserPreference: type, value, is_active
+
+🧱 7. Build & Run Locally
+bash
+Copy
+Edit
+# Setup
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+# Run locally
+python3 app.py
+☁️ 8. Deploy to Azure
+Build Docker container with port 80 exposed
+
+Push to Azure Container Registry (ACR)
+
+Deploy to Azure App Service using GitHub Actions or az webapp config container
+
+bash
+Copy
+Edit
+CMD gunicorn --bind 0.0.0.0:$PORT app:app
+🧠 9. Agent Voices
+Use Azure AI Foundry
+
+Select Andrew, Ari, Jenny, Davis
+
+Let user select voice in the UI
+
+Future: personalized voice cloning
+
+🔄 10. Offline Mode Support
+SQLite, local gTTS
+
+Edge device compatible (Raspberry Pi, laptop)
+
+Logs saved in /data for syncing later
+
+📈 11. Expansion Goals
+Add live emotion detection (OpenFace + sentiment)
+
+Integrate fine-tuned Azure Whisper for voice intent
+
+Build caregiver portal for session review
+
+Add Bluetooth control for prosthetics/smart devices
+
+💡 Summary
+AlphaVox is a patent-pending, modular, AI-powered communication system. Built with neurodivergent and nonverbal individuals in mind, it captures gesture, sound, and gaze — then converts them into meaningful, spoken interaction. It adapts, it remembers, and it empowers.
+
+You now have the full blueprint.
+Let’s build.
+

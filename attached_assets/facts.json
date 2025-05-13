@@ -1,0 +1,107 @@
+{
+  "fact_1": {
+    "id": "fact_1",
+    "topic": "Nonverbal Communication",
+    "content": "Over 70% of our communication is nonverbal, including body language, facial expressions, and gestures.",
+    "source": "AlphaVox Knowledge Base",
+    "created_at": "2025-04-01T12:00:00.000000"
+  },
+  "fact_2": {
+    "id": "fact_2",
+    "topic": "Eye Contact",
+    "content": "Appropriate eye contact typically lasts 3-5 seconds in Western cultures before a brief break is needed.",
+    "source": "Journal of Nonverbal Communication",
+    "created_at": "2025-04-02T14:30:00.000000"
+  },
+  "fact_3": {
+    "id": "fact_3",
+    "topic": "Symbol-Based Communication",
+    "content": "Picture Exchange Communication System (PECS) uses visual symbols to develop communication skills and has been effective for individuals with autism.",
+    "source": "American Academy of Pediatrics",
+    "created_at": "2025-04-03T09:15:00.000000"
+  },
+  "fact_4": {
+    "id": "fact_4",
+    "topic": "Emotional Expression",
+    "content": "There are six universally recognized facial expressions: happiness, sadness, fear, disgust, anger, and surprise.",
+    "source": "Paul Ekman's Research",
+    "created_at": "2025-04-04T11:45:00.000000"
+  },
+  "fact_5": {
+    "id": "fact_5",
+    "topic": "Social Cues",
+    "content": "The ability to recognize social cues develops gradually throughout childhood and continues to improve into adolescence.",
+    "source": "Developmental Psychology",
+    "created_at": "2025-04-05T16:20:00.000000"
+  },
+  "fact_6": {
+    "id": "fact_6",
+    "topic": "Adaptive Communication",
+    "content": "Successful adaptive communication involves recognizing the needs of your conversation partner and adjusting your communication style accordingly.",
+    "source": "AlphaVox Knowledge Base",
+    "created_at": "2025-04-06T10:10:00.000000"
+  },
+  "fact_7": {
+    "id": "fact_7",
+    "topic": "Assistive Technology",
+    "content": "Speech-generating devices (SGDs) can help individuals with complex communication needs express themselves effectively.",
+    "source": "American Speech-Language-Hearing Association",
+    "created_at": "2025-04-07T13:25:00.000000"
+  },
+  "fact_8": {
+    "id": "fact_8",
+    "topic": "Voice Modulation",
+    "content": "Prosody, the rhythm, stress, and intonation of speech, helps convey meaning and emotion beyond the actual words used.",
+    "source": "Journal of Speech and Language",
+    "created_at": "2025-04-08T08:45:00.000000"
+  },
+  "fact_9": {
+    "id": "fact_9",
+    "topic": "Communication Barriers",
+    "content": "Environmental factors like noise, poor lighting, or distractions can significantly impact communication effectiveness.",
+    "source": "AlphaVox Knowledge Base",
+    "created_at": "2025-04-09T15:30:00.000000"
+  },
+  "fact_10": {
+    "id": "fact_10",
+    "topic": "Digital Communication",
+    "content": "Augmentative and alternative communication (AAC) apps on tablets can provide individuals with customizable communication options that grow with their needs.",
+    "source": "Assistive Technology Journal",
+    "created_at": "2025-04-10T11:00:00.000000"
+  },
+  "fact_11": {
+    "id": "fact_11",
+    "topic": "Nonverbal Communication",
+    "content": "Proxemics, the study of personal space, classifies distances as intimate (0-18 inches), personal (18 inches-4 feet), social (4-12 feet), and public (12+ feet).",
+    "source": "Edward T. Hall's Research",
+    "created_at": "2025-04-11T09:20:00.000000"
+  },
+  "fact_12": {
+    "id": "fact_12",
+    "topic": "Eye Contact",
+    "content": "Maintaining eye contact while speaking indicates confidence, while avoiding eye contact may suggest discomfort or dishonesty in Western cultures.",
+    "source": "AlphaVox Knowledge Base",
+    "created_at": "2025-04-12T14:15:00.000000"
+  },
+  "fact_13": {
+    "id": "fact_13",
+    "topic": "Symbol-Based Communication",
+    "content": "Blissymbols is a semantic graphical language that uses simple symbols to represent concepts rather than words, allowing for complex communication without written language.",
+    "source": "Augmentative Communication Institute",
+    "created_at": "2025-04-13T16:45:00.000000"
+  },
+  "fact_14": {
+    "id": "fact_14",
+    "topic": "Voice Modulation",
+    "content": "Paralanguage refers to how something is said rather than what is said, including tone, pitch, volume, and speed of speech.",
+    "source": "Journal of Communication Studies",
+    "created_at": "2025-04-14T10:30:00.000000"
+  },
+  "fact_15": {
+    "id": "fact_15",
+    "topic": "Digital Communication",
+    "content": "Eye-tracking technology allows individuals with limited motor control to communicate by selecting screen elements using only their eye movements.",
+    "source": "AlphaVox Knowledge Base",
+    "created_at": "2025-04-15T13:00:00.000000"
+  }
+}

@@ -1,0 +1,41 @@
+{
+    "1": {
+        "id": "1",
+        "name": "Sample User",
+        "age": 12,
+        "created_at": 1745064376.3335152,
+        "preferences": {
+            "eye_tracking": {
+                "dwell_threshold": 1.0
+            },
+            "speech": {
+                "rate": "medium",
+                "voice": "calming"
+            },
+            "interface": {
+                "theme": "light",
+                "symbol_size": "medium"
+            }
+        },
+        "communication_style": {
+            "preferred_symbols": [
+                "food",
+                "drink",
+                "help",
+                "yes",
+                "no"
+            ],
+            "primary_mode": "symbols"
+        },
+        "progress": {
+            "sessions": 5,
+            "total_interactions": 120,
+            "recent_symbols": [
+                "food",
+                "help",
+                "yes"
+            ],
+            "favorite_symbol": "help"
+        }
+    }
+}

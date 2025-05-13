@@ -1,0 +1,177 @@
+{
+  "nodes": [
+    {
+      "id": "Nonverbal Communication",
+      "type": "topic",
+      "label": "Nonverbal Communication"
+    },
+    {
+      "id": "Eye Contact",
+      "type": "topic",
+      "label": "Eye Contact"
+    },
+    {
+      "id": "Symbol-Based Communication",
+      "type": "topic",
+      "label": "Symbol-Based Communication"
+    },
+    {
+      "id": "Emotional Expression",
+      "type": "topic",
+      "label": "Emotional Expression"
+    },
+    {
+      "id": "Social Cues",
+      "type": "topic",
+      "label": "Social Cues"
+    },
+    {
+      "id": "Adaptive Communication",
+      "type": "topic",
+      "label": "Adaptive Communication"
+    },
+    {
+      "id": "Assistive Technology",
+      "type": "topic",
+      "label": "Assistive Technology"
+    },
+    {
+      "id": "Voice Modulation",
+      "type": "topic",
+      "label": "Voice Modulation"
+    },
+    {
+      "id": "Communication Barriers",
+      "type": "topic",
+      "label": "Communication Barriers"
+    },
+    {
+      "id": "Digital Communication",
+      "type": "topic",
+      "label": "Digital Communication"
+    },
+    {
+      "id": "fact_1",
+      "type": "fact",
+      "label": "Over 70% of our communication is..."
+    },
+    {
+      "id": "fact_2",
+      "type": "fact",
+      "label": "Appropriate eye contact typically..."
+    },
+    {
+      "id": "fact_3",
+      "type": "fact",
+      "label": "Picture Exchange Communication Sy..."
+    },
+    {
+      "id": "fact_4",
+      "type": "fact",
+      "label": "There are six universally recogni..."
+    },
+    {
+      "id": "fact_5",
+      "type": "fact",
+      "label": "The ability to recognize social c..."
+    }
+  ],
+  "edges": [
+    {
+      "id": "Eye Contact_Nonverbal Communication",
+      "source": "Eye Contact",
+      "target": "Nonverbal Communication",
+      "type": "prerequisite"
+    },
+    {
+      "id": "Symbol-Based Communication_Nonverbal Communication",
+      "source": "Symbol-Based Communication",
+      "target": "Nonverbal Communication",
+      "type": "prerequisite"
+    },
+    {
+      "id": "Emotional Expression_Nonverbal Communication",
+      "source": "Emotional Expression",
+      "target": "Nonverbal Communication",
+      "type": "prerequisite"
+    },
+    {
+      "id": "Emotional Expression_Eye Contact",
+      "source": "Emotional Expression",
+      "target": "Eye Contact",
+      "type": "prerequisite"
+    },
+    {
+      "id": "Social Cues_Nonverbal Communication",
+      "source": "Social Cues",
+      "target": "Nonverbal Communication",
+      "type": "prerequisite"
+    },
+    {
+      "id": "Social Cues_Emotional Expression",
+      "source": "Social Cues",
+      "target": "Emotional Expression",
+      "type": "prerequisite"
+    },
+    {
+      "id": "Adaptive Communication_Nonverbal Communication",
+      "source": "Adaptive Communication",
+      "target": "Nonverbal Communication",
+      "type": "prerequisite"
+    },
+    {
+      "id": "Adaptive Communication_Symbol-Based Communication",
+      "source": "Adaptive Communication",
+      "target": "Symbol-Based Communication",
+      "type": "prerequisite"
+    },
+    {
+      "id": "Adaptive Communication_Emotional Expression",
+      "source": "Adaptive Communication",
+      "target": "Emotional Expression",
+      "type": "prerequisite"
+    },
+    {
+      "id": "Communication Barriers_Nonverbal Communication",
+      "source": "Communication Barriers",
+      "target": "Nonverbal Communication",
+      "type": "prerequisite"
+    },
+    {
+      "id": "Digital Communication_Assistive Technology",
+      "source": "Digital Communication",
+      "target": "Assistive Technology",
+      "type": "prerequisite"
+    },
+    {
+      "id": "fact_1_Nonverbal Communication",
+      "source": "fact_1",
+      "target": "Nonverbal Communication",
+      "type": "belongs_to"
+    },
+    {
+      "id": "fact_2_Eye Contact",
+      "source": "fact_2",
+      "target": "Eye Contact",
+      "type": "belongs_to"
+    },
+    {
+      "id": "fact_3_Symbol-Based Communication",
+      "source": "fact_3",
+      "target": "Symbol-Based Communication",
+      "type": "belongs_to"
+    },
+    {
+      "id": "fact_4_Emotional Expression",
+      "source": "fact_4",
+      "target": "Emotional Expression",
+      "type": "belongs_to"
+    },
+    {
+      "id": "fact_5_Social Cues",
+      "source": "fact_5",
+      "target": "Social Cues",
+      "type": "belongs_to"
+    }
+  ]
+}

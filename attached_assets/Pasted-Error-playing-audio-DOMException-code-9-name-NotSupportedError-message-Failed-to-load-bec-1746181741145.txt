@@ -1,0 +1,39 @@
+Error playing audio: 
+DOMException {code: 9, name: "NotSupportedError", message: "Failed to load because no supported source was found.", INDEX_SIZE_ERR: 1, DOMSTRING_SIZE_ERR: 2, …}
+
+Playing audio from: /home/runner/workspace/static/audio/a794d9a4b581eab4e3bcb3bc8b5fd1a8.mp3
+Error playing audio: 
+Event {isTrusted: true}
+
+Error playing audio: 
+DOMException {code: 9, name: "NotSupportedError", message: "Failed to load because no supported source was found.", INDEX_SIZE_ERR: 1, DOMSTRING_SIZE_ERR: 2, …}
+
+Playing audio from: /home/runner/workspace/static/audio/94c38163e94f73ef326c07a19c3a1588.mp3
+Error playing audio: 
+DOMException {code: 20, name: "AbortError", message: "The play() request was interrupted because the media was removed from the document.…", INDEX_SIZE_ERR: 1, DOMSTRING_SIZE_ERR: 2, …}
+
+Error playing audio: 
+Event {isTrusted: true}
+
+Error playing audio: 
+Event {isTrusted: true}
+
+Error playing audio: 
+DOMException {code: 9, name: "NotSupportedError", message: "The element has no supported sources.", INDEX_SIZE_ERR: 1, DOMSTRING_SIZE_ERR: 2, …}
+
+Playing audio from: /home/runner/workspace/static/audio/2a445a16e4087acdc76ded645e3b740a.mp3
+Error playing audio: 
+DOMException {code: 20, name: "AbortError", message: "The play() request was interrupted because the media was removed from the document.…", INDEX_SIZE_ERR: 1, DOMSTRING_SIZE_ERR: 2, …}
+
+Error playing audio: 
+Event {isTrusted: true}
+
+at t.value (https://29944590-114b-4bf2-b0c3-7ea38cc82629-00-3947qroany0v3.riker.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:17465)
+at new t (https://29944590-114b-4bf2-b0c3-7ea38cc82629-00-3947qroany0v3.riker.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:12630)
+at t.value (https://29944590-114b-4bf2-b0c3-7ea38cc82629-00-3947qroany0v3.riker.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:32766)
+at https://29944590-114b-4bf2-b0c3-7ea38cc82629-00-3947qroany0v3.riker.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:34400
+Error playing audio: 
+Event {isTrusted: true}
+
+Error playing audio: 
+DOMException {code: 9, name: "NotSupportedError", message: "The element has no supported sources.", INDEX_SIZE_ERR: 1, DOMSTRING_SIZE_ERR: 2, …}
