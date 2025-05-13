@@ -760,3 +760,92 @@ Traceback (most recent call last):
   File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/werkzeug/routing/map.py", line 924, in build
     raise BuildError(endpoint, values, method, self)
 werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'color_scheme.color_preferences'. Did you mean 'color_scheme.color_scheme_home' instead?
+[2025-05-13 22:31:21] [INFO] [root] - Default logging configuration applied
+[2025-05-13 22:31:21] [INFO] [adaptive_conversation] - Conversation Complexity Engine initialized
+[2025-05-13 22:31:21] [INFO] [routes.adaptive_conversation_routes] - Adaptive conversation routes registered
+[2025-05-13 22:31:21] [INFO] [routes.learning_routes] - Learning routes registered
+[2025-05-13 22:31:21] [INFO] [routes.health_routes] - Health routes registered
+[2025-05-13 22:31:21] [INFO] [main] - AlphaVox application initialized
+[2025-05-13 22:32:01] [INFO] [nonverbal_engine] - Initializing NonverbalEngine with self-learning capabilities
+[2025-05-13 22:32:01] [INFO] [nonverbal_engine] - NonverbalEngine initialized with self-modification capabilities
+[2025-05-13 22:32:01] [INFO] [real_eye_tracking] - Real eye tracking service initialized
+[2025-05-13 22:32:01] [INFO] [root] - Using real eye tracking service
+[2025-05-13 22:32:01] [WARNING] [root] - Real speech recognition not available: No module named 'sounddevice', using simulated service
+[2025-05-13 22:32:01] [INFO] [sound_recognition_service] - Initializing SoundRecognitionService
+[2025-05-13 22:32:01] [INFO] [sound_recognition_service] - Using simulated sound recognition
+[2025-05-13 22:32:01] [INFO] [sound_recognition_service] - SoundRecognitionService initialized
+[2025-05-13 22:32:01] [INFO] [behavior_capture] - Initialized behavior capture processors
+[2025-05-13 22:32:01] [INFO] [root] - Behavior capture system initialized
+[2025-05-13 22:32:01] [INFO] [root] - Initialized AI self-learning and self-modification capabilities
+[2025-05-13 22:32:01] [INFO] [nonverbal_engine] - Initializing NonverbalEngine with self-learning capabilities
+[2025-05-13 22:32:01] [INFO] [nonverbal_engine] - NonverbalEngine initialized with self-modification capabilities
+[2025-05-13 22:32:01] [INFO] [conversation_engine] - Conversation engine initialized
+[2025-05-13 22:32:01] [INFO] [input_analyzer] - Input analyzer initialized
+[2025-05-13 22:32:01] [INFO] [behavioral_interpreter] - Behavioral interpreter initialized
+[2025-05-13 22:32:01] [INFO] [interpreter] - Interpreter initialized
+[2025-05-13 22:32:01] [INFO] [root] - Advanced AI interpreter initialized
+[2025-05-13 22:32:01] [INFO] [root] - All advanced AI components initialized
+[2025-05-13 22:32:01] [INFO] [modules.knowledge_integration] - Knowledge engine loaded
+[2025-05-13 22:32:01] [INFO] [modules.knowledge_integration] - Loaded 15 facts from knowledge base
+[2025-05-13 22:32:01] [INFO] [modules.knowledge_integration] - Loaded 10 topics from knowledge base
+[2025-05-13 22:32:01] [INFO] [modules.knowledge_integration] - Loaded knowledge graph with 2 nodes
+[2025-05-13 22:32:01] [INFO] [modules.knowledge_integration] - Knowledge Integration initialized
+[2025-05-13 22:32:01] [INFO] [root] - Knowledge integration initialized
+[2025-05-13 22:32:01] [WARNING] [modules.speech_integration] - Real speech recognition engine not available
+[2025-05-13 22:32:01] [INFO] [attached_assets.enhanced_speech_recognition] - Initializing EnhancedSpeechRecognition
+[2025-05-13 22:32:01] [INFO] [sound_recognition_service] - Initializing SoundRecognitionService
+[2025-05-13 22:32:01] [INFO] [sound_recognition_service] - Using simulated sound recognition
+[2025-05-13 22:32:01] [INFO] [sound_recognition_service] - SoundRecognitionService initialized
+[2025-05-13 22:32:01] [INFO] [attached_assets.enhanced_speech_recognition] - Sound recognition service loaded
+[2025-05-13 22:32:01] [INFO] [attached_assets.enhanced_speech_recognition] - EnhancedSpeechRecognition initialized
+[2025-05-13 22:32:01] [INFO] [modules.speech_integration] - Enhanced speech recognition loaded
+[2025-05-13 22:32:01] [INFO] [modules.speech_integration] - Speech Integration initialized
+[2025-05-13 22:32:01] [INFO] [root] - Speech integration initialized
+[2025-05-13 22:32:01] [WARNING] [attached_assets.caregiver_interface] - Eye tracking service not available
+[2025-05-13 22:32:01] [WARNING] [attached_assets.caregiver_interface] - Learning analytics not available
+[2025-05-13 22:32:01] [WARNING] [attached_assets.caregiver_interface] - Nonverbal expertise not available
+[2025-05-13 22:32:01] [INFO] [attached_assets.caregiver_interface] - Loaded 1 user profiles
+[2025-05-13 22:32:01] [INFO] [attached_assets.caregiver_interface] - Loaded communication history for 1 users
+[2025-05-13 22:32:01] [INFO] [attached_assets.caregiver_interface] - Caregiver Interface initialized
+[2025-05-13 22:32:01] [INFO] [modules.caregiver_dashboard] - Caregiver Interface loaded successfully
+[2025-05-13 22:32:01] [INFO] [modules.caregiver_dashboard] - Caregiver Dashboard module initialized
+[2025-05-13 22:32:01] [INFO] [root] - Caregiver dashboard initialized
+[2025-05-13 22:32:01] [WARNING] [root] - Real speech recognition not available
+[2025-05-13 22:32:01] [WARNING] [root] - Using simulated speech recognition
+[2025-05-13 22:32:01] [INFO] [root] - Audio processor initialized with real speech: False
+[2025-05-13 22:32:01] [INFO] [root] - Audio processor initialized
+[2025-05-13 22:32:01] [INFO] [attached_assets.engine_temporal] - Language map loaded successfully
+[2025-05-13 22:32:01] [WARNING] [attached_assets.engine_temporal] - LSTM model directory not found at lstm_models
+[2025-05-13 22:32:01] [INFO] [attached_assets.engine_temporal] - TemporalNonverbalEngine initialized successfully
+[2025-05-13 22:32:01] [INFO] [root] - Temporal nonverbal engine initialized
+[2025-05-13 22:32:01] [ERROR] [attached_assets.conversation_integration] - Failed to load required components: cannot import name 'alphavox' from 'alphavox' (unknown location)
+[2025-05-13 22:32:01] [WARNING] [attached_assets.conversation_integration] - Some functionality may be limited
+[2025-05-13 22:32:01] [INFO] [attached_assets.conversation_integration] - Conversation Integration initialized for user: default_user
+[2025-05-13 22:32:01] [INFO] [root] - Conversation integration initialized
+[2025-05-13 22:32:01] [ERROR] [root] - Error initializing integration modules: The setup method 'route' can no longer be called on the application. It has already handled its first request, any changes will not be applied consistently.
+Make sure all imports, decorators, functions, etc. needed to set up the application are done before running it.
+[2025-05-13 22:32:01] [ERROR] [root] - Traceback (most recent call last):
+  File "/home/runner/workspace/app.py", line 200, in init_services
+    register_caregiver_routes(app)
+  File "/home/runner/workspace/modules/caregiver_dashboard.py", line 180, in register_caregiver_routes
+    @app.route('/caregiver')
+     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/sansio/scaffold.py", line 46, in wrapper_func
+    self._check_setup_finished(f_name)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/sansio/app.py", line 415, in _check_setup_finished
+    raise AssertionError(
+AssertionError: The setup method 'route' can no longer be called on the application. It has already handled its first request, any changes will not be applied consistently.
+Make sure all imports, decorators, functions, etc. needed to set up the application are done before running it.
+
+[2025-05-13 22:32:34] [INFO] [root] - Default logging configuration applied
+[2025-05-13 22:32:34] [INFO] [adaptive_conversation] - Conversation Complexity Engine initialized
+[2025-05-13 22:32:34] [INFO] [routes.adaptive_conversation_routes] - Adaptive conversation routes registered
+[2025-05-13 22:32:34] [INFO] [routes.learning_routes] - Learning routes registered
+[2025-05-13 22:32:34] [INFO] [routes.health_routes] - Health routes registered
+[2025-05-13 22:32:34] [INFO] [main] - AlphaVox application initialized
+[2025-05-13 22:32:34] [INFO] [root] - Using voice: US Male (us_male)
+[2025-05-13 22:32:34] [INFO] [root] - Generated speech with advanced TTS: 2e565dc8de98e0705a86dd0c1641289b.mp3
+[2025-05-13 22:32:34] [INFO] [root] - Speaking greeting: Good evening! Welcome back, Ev...
+[2025-05-13 22:32:35] [INFO] [root] - Using voice: US Male (us_male)
+[2025-05-13 22:32:35] [INFO] [root] - Generated speech with advanced TTS: 2e565dc8de98e0705a86dd0c1641289b.mp3
+[2025-05-13 22:32:35] [INFO] [root] - Speaking greeting: Good evening! Welcome back, Ev...

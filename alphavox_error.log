@@ -262,3 +262,19 @@ Traceback (most recent call last):
   File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/werkzeug/routing/map.py", line 924, in build
     raise BuildError(endpoint, values, method, self)
 werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'color_scheme.color_preferences'. Did you mean 'color_scheme.color_scheme_home' instead?
+[2025-05-13 22:32:01] [ERROR] [attached_assets.conversation_integration] - Failed to load required components: cannot import name 'alphavox' from 'alphavox' (unknown location)
+[2025-05-13 22:32:01] [ERROR] [root] - Error initializing integration modules: The setup method 'route' can no longer be called on the application. It has already handled its first request, any changes will not be applied consistently.
+Make sure all imports, decorators, functions, etc. needed to set up the application are done before running it.
+[2025-05-13 22:32:01] [ERROR] [root] - Traceback (most recent call last):
+  File "/home/runner/workspace/app.py", line 200, in init_services
+    register_caregiver_routes(app)
+  File "/home/runner/workspace/modules/caregiver_dashboard.py", line 180, in register_caregiver_routes
+    @app.route('/caregiver')
+     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/sansio/scaffold.py", line 46, in wrapper_func
+    self._check_setup_finished(f_name)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/sansio/app.py", line 415, in _check_setup_finished
+    raise AssertionError(
+AssertionError: The setup method 'route' can no longer be called on the application. It has already handled its first request, any changes will not be applied consistently.
+Make sure all imports, decorators, functions, etc. needed to set up the application are done before running it.
+
