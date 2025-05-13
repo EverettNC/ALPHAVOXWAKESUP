@@ -2093,3 +2093,9 @@ werkzeug.exceptions.BadRequest: 400 Bad Request: The browser (or proxy) sent a r
 [2025-05-13 23:49:28] [INFO] [routes.learning_routes] - Learning routes registered
 [2025-05-13 23:49:28] [INFO] [routes.health_routes] - Health routes registered
 [2025-05-13 23:49:28] [INFO] [main] - AlphaVox application initialized
+[2025-05-13 23:50:27] [INFO] [root] - Default logging configuration applied
+[2025-05-13 23:50:27] [INFO] [adaptive_conversation] - Conversation Complexity Engine initialized
+[2025-05-13 23:50:27] [INFO] [routes.adaptive_conversation_routes] - Adaptive conversation routes registered
+[2025-05-13 23:50:27] [INFO] [routes.learning_routes] - Learning routes registered
+[2025-05-13 23:50:27] [INFO] [routes.health_routes] - Health routes registered
+[2025-05-13 23:50:27] [INFO] [main] - AlphaVox application initialized
