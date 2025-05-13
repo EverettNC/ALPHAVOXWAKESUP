@@ -1,6 +1,10 @@
 __pycache__/
 *.pyc
+*.pyo
 *.db
-alphavox-env/
 .env
+*.sqlite3
+alphavox-env/
+.vscode/
+.DS_Store
 
