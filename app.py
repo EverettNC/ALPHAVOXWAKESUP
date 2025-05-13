@@ -43,7 +43,13 @@ except ImportError as e:
 logging.basicConfig(level=logging.DEBUG)
 
 # Initialize pygame for audio
-pygame.mixer.init()
+try:
+    # Try to initialize the audio mixer
+    pygame.mixer.init()
+    logging.info("Pygame mixer initialized for audio")
+except pygame.error:
+    # Handle the absence of an audio device
+    logging.warning("No audio device available. Audio not initialized.")
 
 # Global variables
 ai_running = False
