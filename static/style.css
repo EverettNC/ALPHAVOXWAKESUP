@@ -108,17 +108,29 @@ body {
     margin-bottom: 2rem;
 }
 
+/* Improve contrast for initialization button */
+.btn.neural-btn {
+    background-color: #004080;
+    color: #fff;
+    border: 2px solid #004080;
+}
+
+.btn.neural-btn:hover {
+    background-color: #0056b3;
+    border: 2px solid #0056b3;
+}
+
 /* Media queries */
 @media (min-width: 768px) {
     .main-interface {
         flex-direction: row;
         align-items: flex-start;
     }
-    
+
     .video-container {
         flex: 1;
     }
-    
+
     .controls-container {
         flex: 1;
     }
