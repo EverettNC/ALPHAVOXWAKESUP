@@ -36,11 +36,14 @@ body {
     padding: 2rem;
     border-radius: 10px;
     text-align: center;
+    background-color: #222; /* Ensure the background is dark for light text */
+    color: #fff; /* Light text for better visibility */
 }
 
 .welcome-title {
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
+    color: #fff; /* Ensure title is visible and readable */
 }
 
 .welcome-subtitle {
