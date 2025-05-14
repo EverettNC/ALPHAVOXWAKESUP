@@ -10,7 +10,7 @@ including detection of:
 - Body posture changes
 - Hand gestures and movements
 
-It uses web.py for enhanced browser webcam access and OpenCV for real-time
+#It uses web.py for enhanced browser webcam access and OpenCV for real-time
 computer vision processing.
 """
 
@@ -24,7 +24,6 @@ import threading
 import base64
 from datetime import datetime
 from collections import deque
-import web
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)

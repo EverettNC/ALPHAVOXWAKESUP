@@ -36,7 +36,9 @@ from eye_tracking_service import EyeTrackingService
 from sound_recognition_service import SoundRecognitionService
 from learning_analytics import LearningAnalytics
 from behavior_capture import get_behavior_capture
-from routes.color_scheme_routes import get_current_scheme
+from color_scheme_routes import color_scheme_bp
+
+app.register_blueprint(color_scheme_bp)
 
 # Advanced AI modules (import with error handling)
 try:
@@ -76,7 +78,14 @@ behavior_capture = None
 os.makedirs("data", exist_ok=True)
 INTERACTIONS_FILE = "data/user_interactions.json"
 
+
 # Make functions available to templates
+# Define or import the get_current_scheme function
+def get_current_scheme():
+    # Example implementation (replace with actual logic)
+    return "default_scheme"
+
+
 app.jinja_env.globals.update(get_current_scheme=get_current_scheme)
 
 
