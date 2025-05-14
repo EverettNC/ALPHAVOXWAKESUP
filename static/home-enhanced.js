@@ -1,5 +1,5 @@
 // AlphaVox Home Page Enhanced JS
-// This script adds modern cyber UI elements and self-learning visualization 
+// This script adds modern cyber UI elements and self-learning visualization
 // to the AlphaVox home page
 
 // Global state
@@ -38,28 +38,28 @@ const optimizationAreas = [
 document.addEventListener('DOMContentLoaded', function() {
     // Setup UI elements
     setupCyberUI();
-    
+
     // Initialize form handlers
     initFormHandlers();
-    
+
     // Initialize gesture buttons
     initGestureButtons();
-    
+
     // Initialize AI assistant buttons
     initAIControls();
-    
+
     // Initialize voice conversation
     initVoiceConversation();
-    
+
     // Add self-learning panel
     addSelfLearningPanel();
-    
+
     // Add voice profile selector
     addVoiceProfileSelector();
-    
+
     // Add message history display
     addMessageHistoryPanel();
-    
+
     // Start animation loop
     requestAnimationFrame(animationLoop);
 });
@@ -69,22 +69,22 @@ function setupCyberUI() {
     const gridOverlay = document.createElement('div');
     gridOverlay.className = 'cyber-grid-overlay';
     document.body.appendChild(gridOverlay);
-    
+
     // Add glow effects to cards
     document.querySelectorAll('.card').forEach(card => {
         card.classList.add('cyber-card');
-        
+
         // Add corner accents
         const corners = document.createElement('div');
         corners.className = 'card-corners';
         card.appendChild(corners);
     });
-    
+
     // Add pulse effect to buttons
     document.querySelectorAll('.btn-primary').forEach(btn => {
         btn.classList.add('cyber-btn');
     });
-    
+
     // Update styles for the container
     const container = document.querySelector('.container');
     if (container) {
@@ -100,10 +100,10 @@ function initFormHandlers() {
     if (inputForm) {
         inputForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             const inputText = document.getElementById('input_text').value.trim();
             if (!inputText) return;
-            
+
             processTextInput(inputText);
             document.getElementById('input_text').value = '';
         });
@@ -128,7 +128,7 @@ function initAIControls() {
             startAI();
         });
     }
-    
+
     // Stop AI button
     const stopAIBtn = document.getElementById('stop-ai');
     if (stopAIBtn) {
@@ -149,7 +149,7 @@ function processTextInput(text) {
             </div>
         </div>
     `;
-    
+
     // Call the API
     fetch('/process-input', {
         method: 'POST',
@@ -165,15 +165,15 @@ function processTextInput(text) {
         // Add to message history
         addToMessageHistory('user', text);
         addToMessageHistory('alphavox', data.message);
-        
+
         // Update UI with response
         displayResponse(data);
-        
+
         // Play audio if available
         if (data.speech_url) {
             playAudio(data.speech_url);
         }
-        
+
         // Simulate self-learning
         updateSelfLearningStatus(`Processing text input: "${text}"`, true);
     })
@@ -198,7 +198,7 @@ function processGesture(gesture) {
             </div>
         </div>
     `;
-    
+
     // Call the API
     fetch(`/speak/${gesture}`, {
         method: 'POST'
@@ -208,15 +208,15 @@ function processGesture(gesture) {
         // Add to message history
         addToMessageHistory('gesture', `<i class="fas fa-hand-paper me-2"></i> ${gesture}`);
         addToMessageHistory('alphavox', data.message);
-        
+
         // Update UI with response
         displayResponse(data);
-        
+
         // Play audio if available
         if (data.speech_url) {
             playAudio(data.speech_url);
         }
-        
+
         // Simulate self-learning
         updateSelfLearningStatus(`Processing gesture: "${gesture}"`, true);
     })
@@ -232,11 +232,11 @@ function processGesture(gesture) {
 
 function displayResponse(data) {
     const responseContainer = document.getElementById('response-container');
-    
+
     // Determine alert type based on expression
     let alertClass = 'alert-info';
     let icon = 'fas fa-comment';
-    
+
     switch (data.expression) {
         case 'positive':
             alertClass = 'alert-success';
@@ -255,7 +255,7 @@ function displayResponse(data) {
             icon = 'fas fa-question-circle';
             break;
     }
-    
+
     // Format the response
     responseContainer.innerHTML = `
         <div class="alert ${alertClass} cyber-response">
@@ -281,10 +281,10 @@ function initVoiceConversation() {
     if (toggleVoiceBtn) {
         toggleVoiceBtn.addEventListener('click', toggleVoiceInput);
     }
-    
+
     // Play welcome greeting with male voice when page loads
     playWelcomeGreeting();
-    
+
     // Initialize speech recognition if available
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -292,18 +292,18 @@ function initVoiceConversation() {
         speechRecognition.continuous = false;
         speechRecognition.interimResults = false;
         speechRecognition.lang = 'en-US';
-        
+
         // Configure speech recognition events
         speechRecognition.onstart = function() {
             updateVoiceStatus('listening');
             isListening = true;
-            
+
             // Start visualizing
             const visualizer = document.getElementById('voice-visualization');
             if (visualizer) {
                 visualizer.classList.add('voice-active');
             }
-            
+
             // Update button text
             const toggleBtn = document.getElementById('toggle-voice-btn');
             if (toggleBtn) {
@@ -313,7 +313,7 @@ function initVoiceConversation() {
                 toggleBtn.querySelector('i').classList.remove('fa-microphone');
                 toggleBtn.querySelector('i').classList.add('fa-microphone-slash');
             }
-            
+
             // Auto-stop after 10 seconds if no speech detected
             clearTimeout(recognitionTimeout);
             recognitionTimeout = setTimeout(() => {
@@ -323,31 +323,31 @@ function initVoiceConversation() {
                 }
             }, 10000);
         };
-        
+
         speechRecognition.onresult = function(event) {
             clearTimeout(recognitionTimeout);
             const transcript = event.results[0][0].transcript;
             const confidence = event.results[0][0].confidence;
-            
+
             updateVoiceStatus('processing');
-            
+
             // Update self-learning display
             updateSelfLearningStatus(`Processing voice input: "${transcript}"`, true);
-            
+
             // Process the voice input
             processTextInput(transcript);
-            
+
             // Stop listening after processing
             stopVoiceInput();
         };
-        
+
         speechRecognition.onerror = function(event) {
             console.error('Speech recognition error:', event.error);
             updateVoiceStatus('error');
             updateSelfLearningStatus(`Voice recognition error: ${event.error}`, false);
             stopVoiceInput();
         };
-        
+
         speechRecognition.onend = function() {
             if (isListening) {
                 stopVoiceInput();
@@ -364,7 +364,7 @@ function initVoiceConversation() {
                 </div>
             `;
         }
-        
+
         updateSelfLearningStatus('Voice recognition not supported', false);
     }
 }
@@ -381,11 +381,11 @@ function playWelcomeGreeting() {
     // Get the username from the greeting element
     const userGreeting = document.getElementById('user-greeting');
     const username = userGreeting ? userGreeting.getAttribute('data-username') : 'User';
-    
+
     // Create a custom greeting with the user's name
     const timeOfDay = getTimeOfDay();
     const greeting = `${timeOfDay}! Welcome back, ${username}. I'm ready to help you communicate.`;
-    
+
     // Call the greeting API to speak with male voice
     fetch('/speak/greeting', {
         method: 'POST',
@@ -416,11 +416,11 @@ function getTimeOfDay() {
 
 function startVoiceInput() {
     if (!speechRecognition) return;
-    
+
     try {
         // Play a start tone
         playBeepSound('start');
-        
+
         // Start after a slight delay to give audio time to play
         setTimeout(() => {
             speechRecognition.start();
@@ -434,20 +434,20 @@ function startVoiceInput() {
 
 function stopVoiceInput() {
     if (!speechRecognition) return;
-    
+
     try {
         speechRecognition.stop();
         isListening = false;
-        
+
         // Play a stop tone
         playBeepSound('stop');
-        
+
         // Stop visualizing
         const visualizer = document.getElementById('voice-visualization');
         if (visualizer) {
             visualizer.classList.remove('voice-active');
         }
-        
+
         // Update button text
         const toggleBtn = document.getElementById('toggle-voice-btn');
         if (toggleBtn) {
@@ -457,7 +457,7 @@ function stopVoiceInput() {
             toggleBtn.querySelector('i').classList.add('fa-microphone');
             toggleBtn.querySelector('i').classList.remove('fa-microphone-slash');
         }
-        
+
         // Reset status
         updateVoiceStatus('ready');
     } catch (error) {
@@ -468,12 +468,12 @@ function stopVoiceInput() {
 function updateVoiceStatus(status) {
     const statusDot = document.querySelector('.status-dot');
     const statusText = document.querySelector('.status-text');
-    
+
     if (!statusDot || !statusText) return;
-    
+
     // Remove all status classes
     statusDot.classList.remove('listening', 'processing', 'speaking');
-    
+
     switch (status) {
         case 'listening':
             statusDot.classList.add('listening');
@@ -498,7 +498,7 @@ function updateVoiceStatus(status) {
 function processVoiceInput(text) {
     // First, add the voice input to the message history
     addToMessageHistory('user', `<i class="fas fa-microphone me-2"></i> ${text}`);
-    
+
     // Then process it like a text input
     processTextInput(text);
 }
@@ -507,11 +507,11 @@ function startAI() {
     // Update AI status
     const aiStatus = document.getElementById('ai-status');
     aiStatus.innerHTML = `<span class="badge bg-success">Active</span>`;
-    
+
     // Show stop button, hide start button
     document.getElementById('start-ai').style.display = 'none';
     document.getElementById('stop-ai').style.display = 'inline-block';
-    
+
     // Make API call to start AI
     fetch('/start-ai', {
         method: 'POST'
@@ -527,12 +527,12 @@ function startAI() {
                     ${data.message}
                 </div>
             `;
-            
+
             // Play audio if available
             if (data.speech_url) {
                 playAudio(data.speech_url);
             }
-            
+
             // Start self-learning visualization
             window.selfLearningEnabled = true;
             updateSelfLearningStatus('AI Assistant activated', true);
@@ -547,11 +547,11 @@ function stopAI() {
     // Update AI status
     const aiStatus = document.getElementById('ai-status');
     aiStatus.innerHTML = `<span class="badge bg-secondary">Inactive</span>`;
-    
+
     // Show start button, hide stop button
     document.getElementById('start-ai').style.display = 'inline-block';
     document.getElementById('stop-ai').style.display = 'none';
-    
+
     // Make API call to stop AI
     fetch('/stop-ai', {
         method: 'POST'
@@ -567,7 +567,7 @@ function stopAI() {
                     ${data.message}
                 </div>
             `;
-            
+
             // Pause self-learning visualization
             window.selfLearningEnabled = false;
             updateSelfLearningStatus('AI Assistant deactivated', false);
@@ -580,7 +580,7 @@ function stopAI() {
 
 function playAudio(url) {
     console.log('Playing audio from:', url);
-    
+
     // Create a visible audio element to ensure it works across browsers
     let audioContainer = document.getElementById('audio-container');
     if (!audioContainer) {
@@ -594,25 +594,25 @@ function playAudio(url) {
         audioContainer.style.overflow = 'hidden';
         document.body.appendChild(audioContainer);
     }
-    
+
     // Clear previous audio if any
     audioContainer.innerHTML = '';
-    
+
     // Create the audio element with controls
     const audioPlayer = document.createElement('audio');
     audioPlayer.controls = false; // Set to true for debugging
     audioPlayer.src = url;
     audioPlayer.style.width = '1px';
     audioPlayer.style.height = '1px';
-    
+
     // Add to DOM
     audioContainer.appendChild(audioPlayer);
-    
+
     // Add error handling
     audioPlayer.onerror = function(error) {
         console.error('Error playing audio:', error);
     };
-    
+
     // Play the audio
     setTimeout(() => {
         try {
@@ -620,7 +620,7 @@ function playAudio(url) {
                 .then(() => console.log('Audio playback started successfully'))
                 .catch(error => {
                     console.error('Error playing audio:', error);
-                    
+
                     // If autoplay fails, show controls and try again
                     audioPlayer.controls = true;
                     audioPlayer.style.width = '300px';
@@ -680,17 +680,17 @@ function addSelfLearningPanel() {
             </div>
         </div>
     `;
-    
+
     // Find the right position to insert the panel
     const container = document.querySelector('.container-fluid');
     if (container) {
         const lastRow = container.querySelector('.row:last-child');
         container.insertBefore(row, lastRow.nextSibling);
     }
-    
+
     // Initialize optimization bars
     initOptimizationBars();
-    
+
     // Set up learning toggle
     const learningToggle = document.getElementById('enable-learning');
     if (learningToggle) {
@@ -724,25 +724,25 @@ function addVoiceProfileSelector() {
             ${voiceProfiles[0].description}
         </div>
     `;
-    
+
     // Add the selector to the communication card
     const communicationCard = document.querySelector('.card:nth-child(1)');
     if (communicationCard) {
         const cardBody = communicationCard.querySelector('.card-body');
         cardBody.appendChild(voiceSelector);
-        
+
         // Set up voice profile change handler
         const voiceProfileSelect = document.getElementById('voice-profile');
         if (voiceProfileSelect) {
             voiceProfileSelect.addEventListener('change', function() {
                 currentVoiceProfile = this.value;
-                
+
                 // Update description
                 const selectedProfile = voiceProfiles.find(p => p.id === currentVoiceProfile);
                 if (selectedProfile) {
                     document.getElementById('voice-description').textContent = selectedProfile.description;
                 }
-                
+
                 updateSelfLearningStatus(`Voice profile changed to: ${selectedProfile.name}`, true);
             });
         }
@@ -764,13 +764,13 @@ function addMessageHistoryPanel() {
             <div class="text-muted text-center py-3">No messages yet</div>
         </div>
     `;
-    
+
     // Add the panel to the communication card
     const communicationCard = document.querySelector('.col-md-6:nth-child(2) .card:nth-child(1)');
     if (communicationCard) {
         const cardBody = communicationCard.querySelector('.card-body');
         cardBody.appendChild(historyPanel);
-        
+
         // Setup clear history button
         const clearBtn = document.getElementById('clear-history');
         if (clearBtn) {
@@ -790,12 +790,12 @@ function addToMessageHistory(type, content) {
         content: content,
         timestamp: new Date()
     });
-    
+
     // Keep only the last 10 messages
     if (messageHistory.length > 10) {
         messageHistory.shift();
     }
-    
+
     // Update the display
     updateMessageHistory();
 }
@@ -803,17 +803,17 @@ function addToMessageHistory(type, content) {
 function updateMessageHistory() {
     const container = document.getElementById('message-history-container');
     if (!container) return;
-    
+
     if (messageHistory.length === 0) {
         container.innerHTML = '<div class="text-muted text-center py-3">No messages yet</div>';
         return;
     }
-    
+
     // Create HTML for messages
     const messagesHtml = messageHistory.map(msg => {
         let iconClass = 'fas fa-comment';
         let msgClass = '';
-        
+
         switch (msg.type) {
             case 'user':
                 iconClass = 'fas fa-user';
@@ -828,7 +828,7 @@ function updateMessageHistory() {
                 msgClass = 'gesture-message';
                 break;
         }
-        
+
         return `
             <div class="history-message ${msgClass}">
                 <div class="message-icon">
@@ -841,9 +841,9 @@ function updateMessageHistory() {
             </div>
         `;
     }).join('');
-    
+
     container.innerHTML = messagesHtml;
-    
+
     // Scroll to bottom
     container.scrollTop = container.scrollHeight;
 }
@@ -851,12 +851,12 @@ function updateMessageHistory() {
 function initOptimizationBars() {
     const container = document.getElementById('optimization-bars');
     if (!container) return;
-    
+
     // Create optimization bars for each area
     optimizationAreas.forEach((area, index) => {
         const progress = Math.random() * 0.5 + 0.3; // Random progress between 30% and 80%
         const barId = `opt-bar-${index}`;
-        
+
         const barHtml = `
             <div class="optimization-item">
                 <div class="d-flex justify-content-between">
@@ -864,12 +864,12 @@ function initOptimizationBars() {
                     <small id="${barId}-value">${Math.round(progress * 100)}%</small>
                 </div>
                 <div class="progress">
-                    <div id="${barId}" class="progress-bar bg-info" role="progressbar" 
+                    <div id="${barId}" class="progress-bar bg-info" role="progressbar"
                          style="width: ${progress * 100}%"></div>
                 </div>
             </div>
         `;
-        
+
         container.innerHTML += barHtml;
     });
 }
@@ -877,7 +877,7 @@ function initOptimizationBars() {
 function updateSelfLearningStatus(message, enabled) {
     const container = document.getElementById('learning-status-container');
     if (!container) return;
-    
+
     // Add new status message
     const statusLine = document.createElement('div');
     statusLine.className = 'status-line';
@@ -885,17 +885,17 @@ function updateSelfLearningStatus(message, enabled) {
         <span class="timestamp">[${formatTimestamp(new Date())}]</span>
         <span class="status-message ${enabled ? '' : 'status-disabled'}">${message}</span>
     `;
-    
+
     container.appendChild(statusLine);
-    
+
     // Keep only the last 10 status messages
     while (container.children.length > 10) {
         container.removeChild(container.firstChild);
     }
-    
+
     // Scroll to bottom
     container.scrollTop = container.scrollHeight;
-    
+
     // Update a random optimization bar
     if (enabled) {
         updateRandomOptimizationBar();
@@ -906,18 +906,18 @@ function updateRandomOptimizationBar() {
     // Pick a random optimization area
     const index = Math.floor(Math.random() * optimizationAreas.length);
     const barId = `opt-bar-${index}`;
-    
+
     const bar = document.getElementById(barId);
     const barValue = document.getElementById(`${barId}-value`);
-    
+
     if (bar && barValue) {
         // Get current width and increase it slightly
         let currentWidth = parseFloat(bar.style.width);
         if (isNaN(currentWidth)) currentWidth = 50;
-        
+
         // Increment by a small amount
         let newWidth = Math.min(currentWidth + Math.random() * 5, 100);
-        
+
         // Animate the change
         bar.style.width = `${newWidth}%`;
         barValue.textContent = `${Math.round(newWidth)}%`;
@@ -939,10 +939,10 @@ function playBeepSound(type) {
             return;
         }
     }
-    
+
     // Different parameters for different sound types
     let frequency = 0, duration = 0, waveType = 'sine', volume = 0.2;
-    
+
     switch(type) {
         case 'start':
             // Rising beep
@@ -967,22 +967,22 @@ function playBeepSound(type) {
             frequency = 660;
             duration = 0.1;
     }
-    
+
     // Create oscillator and gain node
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
-    
+
     // Configure oscillator
     oscillator.type = waveType;
     oscillator.frequency.value = frequency;
-    
+
     // Configure gain (volume)
     gainNode.gain.value = volume;
-    
+
     // Connect nodes
     oscillator.connect(gainNode);
     gainNode.connect(audioContext.destination);
-    
+
     // Schedule automatic stop
     oscillator.start();
     oscillator.stop(audioContext.currentTime + duration);
@@ -990,7 +990,7 @@ function playBeepSound(type) {
 
 function animationLoop(timestamp) {
     // Update matrix effect if desired
-    
+
     // Schedule next frame
     requestAnimationFrame(animationLoop);
 }
@@ -1101,7 +1101,7 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-image: 
+    background-image:
         linear-gradient(rgba(0, 30, 60, 0.05) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0, 30, 60, 0.05) 1px, transparent 1px);
     background-size: 20px 20px;

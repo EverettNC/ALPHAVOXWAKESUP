@@ -8,9 +8,11 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 # Setup logging
 logging.basicConfig(level=logging.DEBUG)
 
+
 # Initialize SQLAlchemy base class
 class Base(DeclarativeBase):
     pass
+
 
 # Initialize database
 db = SQLAlchemy(model_class=Base)
@@ -29,13 +31,12 @@ if database_url.startswith("postgres://"):
 # Set database configuration
 app.config["SQLALCHEMY_DATABASE_URI"] = database_url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
-    "pool_recycle": 300,
-    "pool_pre_ping": True
-}
+app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {"pool_recycle": 300, "pool_pre_ping": True}
 
 # Log database connection (hide credentials)
-logging.info(f"Connecting to database: {database_url.split('@')[0].split('://')[-1]}@[hidden]")
+logging.info(
+    f"Connecting to database: {database_url.split('@')[0].split('://')[-1]}@[hidden]"
+)
 
 # Initialize database with app
 db.init_app(app)
@@ -43,4 +44,5 @@ db.init_app(app)
 # Create database tables within app context
 with app.app_context():
     import models  # Import models here to avoid circular imports
+
     db.create_all()

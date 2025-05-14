@@ -1,6 +1,6 @@
 # AlphaVox v7
 
-**AlphaVox** is a neurodiverse-inclusive, AI-powered speech-generation and behavioral interface platform.  
+**AlphaVox** is a neurodiverse-inclusive, AI-powered speech-generation and behavioral interface platform.
 This is the official `v7` release, rebuilt clean with Python 3.10 and full AI module integration.
 
 ## 🔧 Features
@@ -28,5 +28,5 @@ AlphaVox helps non-verbal users feel **heard, loved, and whole** — without nee
 
 ## 🛡️ Founder
 
-This version was built and maintained by Everett Christman.  
+This version was built and maintained by Everett Christman.
 All commits in this repo are timestamped and attributed to preserve authorship and IP.

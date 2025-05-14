@@ -566,11 +566,11 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             // Add active class to clicked button
             this.classList.add('active');
-            
+
             // Update chart data based on period
             const period = this.getAttribute('data-period');
             let labels, data;
-            
+
             if (period === 'week') {
                 labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
                 data = [12, 19, 8, 15, 10, 13, 17];
@@ -581,14 +581,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
                 data = [120, 145, 160, 175, 182, 190, 185, 178, 193, 205, 198, 210];
             }
-            
+
             // Update chart
             communicationChart.data.labels = labels;
             communicationChart.data.datasets[0].data = data;
             communicationChart.update();
         });
     });
-    
+
     // Interaction history filter
     document.querySelectorAll('[data-filter]').forEach(button => {
         button.addEventListener('click', function() {
@@ -598,10 +598,10 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             // Add active class to clicked button
             this.classList.add('active');
-            
+
             const filter = this.getAttribute('data-filter');
             const rows = document.querySelectorAll('#history-table-body tr[data-type]');
-            
+
             rows.forEach(row => {
                 if (filter === 'all' || row.getAttribute('data-type') === filter) {
                     row.style.display = '';
@@ -611,12 +611,12 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
-    
+
     // Note saving
     document.getElementById('save-note-btn').addEventListener('click', function() {
         const noteContent = document.getElementById('note-content').value;
         const noteTags = document.getElementById('note-tags').value;
-        
+
         if (noteContent) {
             // In a real application, this would send data to the server
             fetch('/caregiver/add-note', {
@@ -648,7 +648,7 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Please enter note content');
         }
     });
-    
+
     // Export data
     document.getElementById('export-data-btn').addEventListener('click', function() {
         const format = document.getElementById('export-format').value;
@@ -657,15 +657,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const includeAnalytics = document.getElementById('export-analytics').checked;
         const includeNotes = document.getElementById('export-notes').checked;
         const includeSuggestions = document.getElementById('export-suggestions').checked;
-        
+
         // In a real application, this would trigger a download
         alert(`Data would be exported in ${format} format for ${dateRange} date range.
 Includes: ${includeInteractions ? 'Interactions, ' : ''}${includeAnalytics ? 'Analytics, ' : ''}${includeNotes ? 'Notes, ' : ''}${includeSuggestions ? 'Suggestions' : ''}`);
-        
+
         const modal = bootstrap.Modal.getInstance(document.getElementById('exportDataModal'));
         modal.hide();
     });
-    
+
     // Share data
     document.getElementById('share-data-btn').addEventListener('click', function() {
         const email = document.getElementById('provider-email').value;
@@ -674,7 +674,7 @@ Includes: ${includeInteractions ? 'Interactions, ' : ''}${includeAnalytics ? 'An
         const includeInteractions = document.getElementById('share-interactions').checked;
         const includeAnalytics = document.getElementById('share-analytics').checked;
         const includeNotes = document.getElementById('share-notes').checked;
-        
+
         if (email) {
             // In a real application, this would send a sharing request to the server
             fetch('/caregiver/share-data', {
@@ -709,7 +709,7 @@ Includes: ${includeInteractions ? 'Interactions, ' : ''}${includeAnalytics ? 'An
             alert('Please enter a provider email');
         }
     });
-    
+
     // Load more history (would fetch from server in a real application)
     document.getElementById('load-more-history').addEventListener('click', function() {
         alert('In a real application, this would load more history data from the server.');

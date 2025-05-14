@@ -11,7 +11,7 @@
         color: #c8d7f5;
         font-family: 'Roboto', 'Segoe UI', sans-serif;
     }
-    
+
     /* Typography */
     .futuristic-header, .cyber-title, .cyber-subtitle {
         font-family: 'Orbitron', 'Arial', sans-serif;
@@ -19,7 +19,7 @@
         color: #fff;
         text-shadow: 0 0 5px rgba(100, 150, 255, 0.5);
     }
-    
+
     /* Card Styles */
     .futuristic-card {
         background: linear-gradient(135deg, rgba(20, 40, 80, 0.8) 0%, rgba(10, 20, 45, 0.8) 100%);
@@ -31,17 +31,17 @@
         overflow: hidden;
         position: relative;
         clip-path: polygon(
-            0 10px, 
-            10px 0, 
-            calc(100% - 10px) 0, 
-            100% 10px, 
-            100% calc(100% - 10px), 
-            calc(100% - 10px) 100%, 
-            10px 100%, 
+            0 10px,
+            10px 0,
+            calc(100% - 10px) 0,
+            100% 10px,
+            100% calc(100% - 10px),
+            calc(100% - 10px) 100%,
+            10px 100%,
             0 calc(100% - 10px)
         );
     }
-    
+
     .futuristic-card::before {
         content: '';
         position: absolute;
@@ -52,7 +52,7 @@
         border: 1px solid rgba(100, 150, 255, 0.3);
         pointer-events: none;
     }
-    
+
     .futuristic-card::after {
         content: '';
         position: absolute;
@@ -63,14 +63,14 @@
         background: linear-gradient(135deg, rgba(100, 150, 255, 0.1) 0%, rgba(0, 50, 150, 0.05) 100%);
         pointer-events: none;
     }
-    
+
     /* Cyber Header */
     .cyber-header {
         position: relative;
         padding: 1.5rem 0;
         overflow: hidden;
     }
-    
+
     .cyber-lines {
         position: absolute;
         top: 0;
@@ -80,7 +80,7 @@
         background: linear-gradient(90deg, transparent, #00a8ff, transparent);
         opacity: 0.7;
     }
-    
+
     .cyber-lines::after {
         content: '';
         position: absolute;
@@ -90,7 +90,7 @@
         height: 15px;
         background-image: linear-gradient(90deg, transparent, #00a8ff 20%, #00a8ff 80%, transparent);
     }
-    
+
     .cyber-glitch {
         position: relative;
         display: inline-block;
@@ -98,7 +98,7 @@
         text-align: center;
         width: 100%;
     }
-    
+
     .cyber-title {
         font-size: 3rem;
         font-weight: 800;
@@ -108,17 +108,17 @@
         position: relative;
         display: inline-block;
         letter-spacing: 5px;
-        text-shadow: 
+        text-shadow:
             0 0 10px rgba(0, 168, 255, 0.8),
             0 0 20px rgba(0, 168, 255, 0.4),
             0 0 30px rgba(0, 168, 255, 0.2);
     }
-    
+
     .cyber-title span {
         position: relative;
         display: inline-block;
     }
-    
+
     .cyber-title span::before,
     .cyber-title span::after {
         content: attr(data-text);
@@ -127,7 +127,7 @@
         left: 0;
         opacity: 0.8;
     }
-    
+
     .cyber-title span::before {
         animation: glitch-effect 3s infinite;
         color: #00fffc;
@@ -135,7 +135,7 @@
         transform: translate(-0.04em, -0.04em);
         opacity: 0.8;
     }
-    
+
     .cyber-title span::after {
         animation: glitch-effect 2s infinite reverse;
         color: #ff00c1;
@@ -143,7 +143,7 @@
         transform: translate(0.04em, 0.04em);
         opacity: 0.8;
     }
-    
+
     @keyframes glitch-effect {
         0% {
             transform: translate(0);
@@ -164,7 +164,7 @@
             transform: translate(0);
         }
     }
-    
+
     .cyber-subtitle {
         font-size: 1.2rem;
         letter-spacing: 4px;
@@ -173,21 +173,21 @@
         margin-top: 0.5rem;
         opacity: 0.9;
     }
-    
+
     .cyber-dots {
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
         height: 5px;
-        background-image: 
+        background-image:
             radial-gradient(circle, #00a8ff 1px, transparent 1px),
             radial-gradient(circle, #00a8ff 1px, transparent 1px);
         background-size: 20px 20px;
         background-position: 0 0, 10px 10px;
         opacity: 0.5;
     }
-    
+
     /* Status Bar */
     .system-status-bar {
         display: flex;
@@ -198,46 +198,46 @@
         box-shadow: 0 2px 10px rgba(0, 50, 200, 0.2);
         border-radius: 4px;
     }
-    
+
     .status-segment {
         display: flex;
         align-items: center;
         padding: 0 15px;
         border-right: 1px solid rgba(100, 150, 255, 0.2);
     }
-    
+
     .status-segment:last-child {
         border-right: none;
     }
-    
+
     .status-segment i {
         color: #00a8ff;
         margin-right: 8px;
         width: 20px;
         text-align: center;
     }
-    
+
     .status-label {
         font-size: 0.75rem;
         color: #8cddff;
         margin-right: 8px;
         letter-spacing: 1px;
     }
-    
+
     .status-value {
         font-family: 'Share Tech Mono', monospace;
         font-size: 0.85rem;
         color: #fff;
     }
-    
+
     .status-value.online {
         color: #0f0;
     }
-    
+
     .status-value.offline {
         color: #f00;
     }
-    
+
     /* Card Header Bar */
     .cyber-bar {
         display: flex;
@@ -248,12 +248,12 @@
         border: none;
         border-bottom: 1px solid rgba(100, 150, 255, 0.2);
     }
-    
+
     .cyber-bar-left, .cyber-bar-right {
         display: flex;
         align-items: center;
     }
-    
+
     .cyber-indicator {
         width: 12px;
         height: 12px;
@@ -262,16 +262,16 @@
         box-shadow: 0 0 10px rgba(0, 247, 255, 0.8);
         margin-right: 12px;
     }
-    
+
     .cyber-indicator.blink {
         animation: blink 2s infinite;
     }
-    
+
     @keyframes blink {
         0%, 100% { opacity: 1; }
         50% { opacity: 0.3; }
     }
-    
+
     .cyber-tag {
         font-family: 'Share Tech Mono', monospace;
         font-size: 0.8rem;
@@ -282,7 +282,7 @@
         border: 1px solid rgba(100, 150, 255, 0.3);
         margin-right: 12px;
     }
-    
+
     .cyber-badge {
         font-family: 'Share Tech Mono', monospace;
         font-size: 0.75rem;
@@ -293,13 +293,13 @@
         font-weight: bold;
         letter-spacing: 1px;
     }
-    
+
     /* Cyber Buttons */
     .cyber-buttons {
         display: flex;
         gap: 10px;
     }
-    
+
     .cyber-btn {
         position: relative;
         padding: 0.6rem 1.2rem;
@@ -316,15 +316,15 @@
         transition: all 0.3s ease;
         box-shadow: inset 0 0 0 1px rgba(100, 150, 255, 0.5);
         clip-path: polygon(
-            0 10px, 
-            10px 0, 
-            100% 0, 
-            100% calc(100% - 10px), 
-            calc(100% - 10px) 100%, 
+            0 10px,
+            10px 0,
+            100% 0,
+            100% calc(100% - 10px),
+            calc(100% - 10px) 100%,
             0 100%
         );
     }
-    
+
     .cyber-btn::before {
         content: '';
         position: absolute;
@@ -334,7 +334,7 @@
         height: 100%;
         z-index: -2;
     }
-    
+
     .cyber-btn-glitch {
         position: absolute;
         top: 0;
@@ -343,31 +343,31 @@
         height: 100%;
         z-index: -1;
     }
-    
+
     .cyber-btn:hover {
         transform: translateY(-2px);
     }
-    
+
     .cyber-btn:active {
         transform: translateY(1px);
     }
-    
+
     .cyber-btn.cyber-btn-success {
         color: #0f0;
         box-shadow: inset 0 0 0 1px rgba(0, 255, 60, 0.5);
     }
-    
+
     .cyber-btn.cyber-btn-success:hover {
         background: rgba(0, 255, 60, 0.1);
-        box-shadow: 
+        box-shadow:
             inset 0 0 0 1px rgba(0, 255, 60, 0.5),
             0 0 10px rgba(0, 255, 60, 0.3);
     }
-    
+
     .cyber-btn.cyber-btn-success::before {
         background: linear-gradient(45deg, rgba(0, 255, 60, 0.2), transparent);
     }
-    
+
     .cyber-btn.cyber-btn-success .cyber-btn-glitch::before {
         content: '';
         position: absolute;
@@ -378,7 +378,7 @@
         background: rgba(0, 255, 60, 0.5);
         clip-path: polygon(0 0, 100% 0, 100% 2px, 0 2px);
     }
-    
+
     .cyber-btn.cyber-btn-success .cyber-btn-glitch::after {
         content: '';
         position: absolute;
@@ -389,23 +389,23 @@
         background: rgba(0, 255, 60, 0.5);
         clip-path: polygon(0 calc(100% - 2px), 100% calc(100% - 2px), 100% 100%, 0 100%);
     }
-    
+
     .cyber-btn.cyber-btn-danger {
         color: #f00;
         box-shadow: inset 0 0 0 1px rgba(255, 0, 60, 0.5);
     }
-    
+
     .cyber-btn.cyber-btn-danger:hover {
         background: rgba(255, 0, 60, 0.1);
-        box-shadow: 
+        box-shadow:
             inset 0 0 0 1px rgba(255, 0, 60, 0.5),
             0 0 10px rgba(255, 0, 60, 0.3);
     }
-    
+
     .cyber-btn.cyber-btn-danger::before {
         background: linear-gradient(45deg, rgba(255, 0, 60, 0.2), transparent);
     }
-    
+
     .cyber-btn.cyber-btn-danger .cyber-btn-glitch::before {
         content: '';
         position: absolute;
@@ -416,7 +416,7 @@
         background: rgba(255, 0, 60, 0.5);
         clip-path: polygon(0 0, 100% 0, 100% 2px, 0 2px);
     }
-    
+
     .cyber-btn.cyber-btn-danger .cyber-btn-glitch::after {
         content: '';
         position: absolute;
@@ -427,7 +427,7 @@
         background: rgba(255, 0, 60, 0.5);
         clip-path: polygon(0 calc(100% - 2px), 100% calc(100% - 2px), 100% 100%, 0 100%);
     }
-    
+
     /* Hexagon Decorations */
     .hexagon-decoration {
         position: absolute;
@@ -437,12 +437,12 @@
         opacity: 0.15;
         pointer-events: none;
     }
-    
+
     .hexagon-decoration.small {
         width: 100px;
         height: 100px;
     }
-    
+
     .hexagon-decoration::before,
     .hexagon-decoration::after {
         content: '';
@@ -450,38 +450,38 @@
         width: 100%;
         height: 100%;
         background: conic-gradient(
-            from 0deg, 
-            #00f7ff, 
-            #0088ff, 
-            #0022ff, 
-            #0088ff, 
+            from 0deg,
+            #00f7ff,
+            #0088ff,
+            #0022ff,
+            #0088ff,
             #00f7ff
         );
         clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
         animation: rotateHex 20s linear infinite;
     }
-    
+
     .hexagon-decoration::after {
         transform: scale(0.9);
         animation-duration: 15s;
         animation-direction: reverse;
     }
-    
+
     .hexagon-decoration.top-right {
         top: -30px;
         right: -30px;
     }
-    
+
     .hexagon-decoration.bottom-left {
         bottom: -30px;
         left: -30px;
     }
-    
+
     @keyframes rotateHex {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
     }
-    
+
     /* Grid Overlay */
     .grid-overlay {
         position: absolute;
@@ -489,14 +489,14 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: 
+        background-image:
             linear-gradient(rgba(100, 150, 255, 0.05) 1px, transparent 1px),
             linear-gradient(90deg, rgba(100, 150, 255, 0.05) 1px, transparent 1px);
         background-size: 20px 20px;
         z-index: 0;
         pointer-events: none;
     }
-    
+
     /* Neural Interface */
     .neural-interface {
         position: relative;
@@ -506,7 +506,7 @@
         overflow: hidden;
         padding: 3px;
     }
-    
+
     .interface-header, .interface-footer {
         display: flex;
         justify-content: space-between;
@@ -515,32 +515,32 @@
         font-family: 'Share Tech Mono', monospace;
         font-size: 0.8rem;
     }
-    
+
     .interface-header {
         border-bottom: 1px solid rgba(100, 150, 255, 0.2);
         margin-bottom: 3px;
     }
-    
+
     .interface-footer {
         border-top: 1px solid rgba(100, 150, 255, 0.2);
         margin-top: 3px;
     }
-    
+
     .segment {
         display: flex;
         align-items: center;
     }
-    
+
     .label {
         color: #8cddff;
         margin-right: 5px;
         font-size: 0.7rem;
     }
-    
+
     .value {
         color: #fff;
     }
-    
+
     .corner-decoration {
         position: absolute;
         width: 15px;
@@ -548,35 +548,35 @@
         border: 2px solid #00a8ff;
         z-index: 1;
     }
-    
+
     .corner-decoration.top-left {
         top: 5px;
         left: 5px;
         border-right: none;
         border-bottom: none;
     }
-    
+
     .corner-decoration.top-right {
         top: 5px;
         right: 5px;
         border-left: none;
         border-bottom: none;
     }
-    
+
     .corner-decoration.bottom-left {
         bottom: 5px;
         left: 5px;
         border-right: none;
         border-top: none;
     }
-    
+
     .corner-decoration.bottom-right {
         bottom: 5px;
         right: 5px;
         border-left: none;
         border-top: none;
     }
-    
+
     /* Video Container Elements */
     .video-container {
         position: relative;
@@ -585,7 +585,7 @@
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         background: #000;
     }
-    
+
     .corner-brackets {
         position: absolute;
         width: 20px;
@@ -595,67 +595,67 @@
         z-index: 2;
         pointer-events: none;
     }
-    
+
     .corner-brackets.top-left {
         top: 5px;
         left: 5px;
         border-right: none;
         border-bottom: none;
     }
-    
+
     .corner-brackets.top-right {
         top: 5px;
         right: 5px;
         border-left: none;
         border-bottom: none;
     }
-    
+
     .corner-brackets.bottom-left {
         bottom: 5px;
         left: 5px;
         border-right: none;
         border-top: none;
     }
-    
+
     .corner-brackets.bottom-right {
         bottom: 5px;
         right: 5px;
         border-left: none;
         border-top: none;
     }
-    
+
     .tech-overlay {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: 
+        background-image:
             repeating-linear-gradient(
-                0deg, 
-                rgba(0, 247, 255, 0.03) 0px, 
-                rgba(0, 247, 255, 0.03) 1px, 
-                transparent 1px, 
+                0deg,
+                rgba(0, 247, 255, 0.03) 0px,
+                rgba(0, 247, 255, 0.03) 1px,
+                transparent 1px,
                 transparent 2px
             );
         z-index: 1;
         pointer-events: none;
     }
-    
+
     .neural-grid {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: 
+        background-image:
             linear-gradient(rgba(0, 247, 255, 0.05) 1px, transparent 1px),
             linear-gradient(90deg, rgba(0, 247, 255, 0.05) 1px, transparent 1px);
         background-size: 30px 30px;
         z-index: 1;
         pointer-events: none;
     }
-    
+
     .video-overlay {
         position: absolute;
         top: 0;
@@ -666,7 +666,7 @@
         z-index: 1;
         pointer-events: none;
     }
-    
+
     .scanning-line {
         position: absolute;
         background: linear-gradient(to right, transparent, #00f7ff, transparent);
@@ -676,7 +676,7 @@
         pointer-events: none;
         transition: opacity 0.5s ease;
     }
-    
+
     .scanning-line.horizontal {
         top: 0;
         left: 0;
@@ -684,7 +684,7 @@
         height: 2px;
         animation: scanHorizontal 3s linear infinite;
     }
-    
+
     .scanning-line.vertical {
         top: 0;
         left: 0;
@@ -692,21 +692,21 @@
         height: 100%;
         animation: scanVertical 4s linear infinite;
     }
-    
+
     .tracking-active .scanning-line {
         opacity: 1;
     }
-    
+
     @keyframes scanHorizontal {
         0% { top: 0; }
         100% { top: 100%; }
     }
-    
+
     @keyframes scanVertical {
         0% { left: 0; }
         100% { left: 100%; }
     }
-    
+
     /* Data Overlay on Video */
     .data-overlay {
         position: absolute;
@@ -717,7 +717,7 @@
         z-index: 3;
         pointer-events: none;
     }
-    
+
     .data-point {
         position: absolute;
         font-family: 'Share Tech Mono', monospace;
@@ -730,42 +730,42 @@
         border-radius: 2px;
         max-width: 150px;
     }
-    
+
     .data-point.top-left {
         top: 10px;
         left: 10px;
     }
-    
+
     .data-point.top-right {
         top: 10px;
         right: 10px;
     }
-    
+
     .data-point.bottom-left {
         bottom: 10px;
         left: 10px;
     }
-    
+
     .data-point.bottom-right {
         bottom: 10px;
         right: 10px;
     }
-    
+
     .data-label {
         font-size: 0.65rem;
         opacity: 0.8;
     }
-    
+
     .data-value {
         font-size: 0.7rem;
         font-weight: bold;
     }
-    
+
     /* Recording Indicator */
     .segment.recording {
         color: #f00;
     }
-    
+
     .rec-indicator {
         display: inline-block;
         width: 8px;
@@ -775,17 +775,17 @@
         margin-right: 5px;
         animation: blink 1s infinite;
     }
-    
+
     .rec-label {
         font-weight: bold;
     }
-    
+
     .timer {
         font-family: 'Share Tech Mono', monospace;
         color: #fff;
         letter-spacing: 1px;
     }
-    
+
     /* Cyber Alert */
     .cyber-alert {
         display: flex;
@@ -797,7 +797,7 @@
         overflow: hidden;
         margin-bottom: 0;
     }
-    
+
     .cyber-alert::before {
         content: '';
         position: absolute;
@@ -807,17 +807,17 @@
         height: 100%;
         background: #00a8ff;
     }
-    
+
     .cyber-alert-icon {
         margin-right: 12px;
         font-size: 1.3rem;
         color: #00a8ff;
     }
-    
+
     .cyber-alert-content {
         flex: 1;
     }
-    
+
     .cyber-alert-title {
         font-family: 'Share Tech Mono', monospace;
         font-size: 0.9rem;
@@ -825,12 +825,12 @@
         margin-bottom: 5px;
         letter-spacing: 1px;
     }
-    
+
     .cyber-alert-message {
         color: #fff;
         font-size: 0.9rem;
     }
-    
+
     .cyber-alert-lines {
         position: absolute;
         bottom: 0;
@@ -839,7 +839,7 @@
         height: 2px;
         background: linear-gradient(90deg, #00a8ff, transparent);
     }
-    
+
     /* Control Panel */
     .advanced-controls {
         background: rgba(10, 25, 40, 0.7);
@@ -849,7 +849,7 @@
         position: relative;
         z-index: 1;
     }
-    
+
     .control-panel-header {
         display: flex;
         justify-content: space-between;
@@ -858,25 +858,25 @@
         padding-bottom: 10px;
         border-bottom: 1px solid rgba(0, 247, 255, 0.2);
     }
-    
+
     .control-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
         margin-bottom: 15px;
     }
-    
+
     .control-group {
         position: relative;
     }
-    
+
     .cyber-label {
         display: block;
         margin-bottom: 5px;
         font-size: 0.85rem;
         color: #8cddff;
     }
-    
+
     .cyber-select {
         width: 100%;
         background-color: rgba(10, 25, 40, 0.9);
@@ -890,13 +890,13 @@
         position: relative;
         z-index: 1;
     }
-    
+
     .cyber-select:focus {
         outline: none;
         border-color: #00f7ff;
         box-shadow: 0 0 0 1px #00f7ff;
     }
-    
+
     .cyber-select-decoration {
         position: absolute;
         top: calc(50% + 10px);
@@ -909,27 +909,27 @@
         pointer-events: none;
         z-index: 2;
     }
-    
+
     /* System Gauges */
     .system-gauges {
         display: flex;
         justify-content: space-between;
         margin-top: 20px;
     }
-    
+
     .gauge-container {
         flex: 1;
         text-align: center;
         padding: 0 10px;
     }
-    
+
     .gauge-label {
         font-family: 'Share Tech Mono', monospace;
         font-size: 0.75rem;
         color: #8cddff;
         margin-bottom: 5px;
     }
-    
+
     .gauge {
         height: 6px;
         background: rgba(10, 25, 40, 0.5);
@@ -937,20 +937,20 @@
         overflow: hidden;
         margin-bottom: 5px;
     }
-    
+
     .gauge-value {
         height: 100%;
         background: linear-gradient(90deg, #00a8ff, #00f7ff);
         border-radius: 3px;
         transition: width 0.5s ease;
     }
-    
+
     .gauge-reading {
         font-family: 'Share Tech Mono', monospace;
         font-size: 0.75rem;
         color: #fff;
     }
-    
+
     /* Cyber Tabs */
     .cyber-tabs {
         display: flex;
@@ -960,7 +960,7 @@
         border-radius: 4px;
         margin-bottom: 15px;
     }
-    
+
     .cyber-tab {
         flex: 1;
         padding: 8px 12px;
@@ -974,16 +974,16 @@
         transition: all 0.3s ease;
         position: relative;
     }
-    
+
     .cyber-tab:hover {
         background: rgba(0, 50, 100, 0.5);
     }
-    
+
     .cyber-tab.active {
         background: rgba(0, 100, 200, 0.3);
         color: #fff;
     }
-    
+
     .cyber-tab.active::after {
         content: '';
         position: absolute;
@@ -993,26 +993,26 @@
         height: 2px;
         background: #00f7ff;
     }
-    
+
     .cyber-tab-content {
         position: relative;
         min-height: 200px;
     }
-    
+
     .cyber-tab-pane {
         display: none;
         animation: fadeIn 0.3s forwards;
     }
-    
+
     .cyber-tab-pane.active {
         display: block;
     }
-    
+
     @keyframes fadeIn {
         from { opacity: 0; }
         to { opacity: 1; }
     }
-    
+
     /* Empty States */
     .cyber-empty-state {
         display: flex;
@@ -1022,7 +1022,7 @@
         padding: 30px;
         text-align: center;
     }
-    
+
     .cyber-hexagon {
         position: relative;
         width: 70px;
@@ -1035,7 +1035,7 @@
         color: #00f7ff;
         clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
     }
-    
+
     .cyber-hexagon::before {
         content: '';
         position: absolute;
@@ -1047,19 +1047,19 @@
         clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
         z-index: -1;
     }
-    
+
     .cyber-text {
         font-family: 'Share Tech Mono', monospace;
         color: #8cddff;
         margin-bottom: 10px;
     }
-    
+
     /* Typing Animation */
     .typing-indicator {
         display: flex;
         justify-content: center;
     }
-    
+
     .typing-indicator span {
         display: inline-block;
         width: 5px;
@@ -1069,26 +1069,26 @@
         margin: 0 2px;
         animation: typing 1.5s infinite;
     }
-    
+
     .typing-indicator span:nth-child(2) {
         animation-delay: 0.2s;
     }
-    
+
     .typing-indicator span:nth-child(3) {
         animation-delay: 0.4s;
     }
-    
+
     @keyframes typing {
         0%, 60%, 100% { transform: translateY(0); }
         30% { transform: translateY(-5px); }
     }
-    
+
     /* Scanning Dots */
     .scanning-dots {
         display: flex;
         justify-content: center;
     }
-    
+
     .scanning-dots span {
         display: inline-block;
         width: 5px;
@@ -1098,37 +1098,37 @@
         margin: 0 2px;
         animation: scanning 2s infinite linear;
     }
-    
+
     .scanning-dots span:nth-child(1) {
         animation-delay: 0s;
     }
-    
+
     .scanning-dots span:nth-child(2) {
         animation-delay: 0.66s;
     }
-    
+
     .scanning-dots span:nth-child(3) {
         animation-delay: 1.33s;
     }
-    
+
     @keyframes scanning {
         0% { transform: scale(0.5); opacity: 0.3; }
         50% { transform: scale(1); opacity: 1; }
         100% { transform: scale(0.5); opacity: 0.3; }
     }
-    
+
     /* Timeline */
     .cyber-timeline {
         padding: 10px 0;
     }
-    
+
     .timeline-event {
         display: flex;
         align-items: flex-start;
         margin-bottom: 15px;
         position: relative;
     }
-    
+
     .event-time {
         font-family: 'Share Tech Mono', monospace;
         font-size: 0.75rem;
@@ -1137,7 +1137,7 @@
         text-align: right;
         padding-right: 10px;
     }
-    
+
     .event-line {
         position: relative;
         width: 20px;
@@ -1145,7 +1145,7 @@
         justify-content: center;
         align-items: center;
     }
-    
+
     .event-line::before {
         content: '';
         position: absolute;
@@ -1155,7 +1155,7 @@
         width: 1px;
         background: rgba(0, 247, 255, 0.3);
     }
-    
+
     .event-line::after {
         content: '';
         width: 8px;
@@ -1165,51 +1165,51 @@
         position: relative;
         z-index: 1;
     }
-    
+
     .event-content {
         flex: 1;
         padding-left: 10px;
     }
-    
+
     .event-title {
         font-family: 'Share Tech Mono', monospace;
         font-size: 0.85rem;
         color: #fff;
         margin-bottom: 2px;
     }
-    
+
     .event-description {
         font-size: 0.8rem;
         color: #8cddff;
     }
-    
+
     /* Card Footer */
     .cyber-footer {
         background: rgba(10, 20, 40, 0.7);
         border-top: 1px solid rgba(0, 247, 255, 0.2);
         padding: 10px 15px;
     }
-    
+
     .cyber-stats {
         display: flex;
         justify-content: space-between;
     }
-    
+
     .stat-item {
         font-family: 'Share Tech Mono', monospace;
     }
-    
+
     .stat-label {
         font-size: 0.7rem;
         color: #8cddff;
         margin-bottom: 2px;
     }
-    
+
     .stat-value {
         font-size: 0.8rem;
         color: #fff;
     }
-    
+
     /* Cyber Loader */
     .cyber-loader {
         display: flex;
@@ -1217,7 +1217,7 @@
         align-items: center;
         justify-content: center;
     }
-    
+
     .cyber-loader-brain {
         position: relative;
         width: 70px;
@@ -1232,24 +1232,24 @@
         animation: pulse 2s infinite;
         z-index: 2;
     }
-    
+
     .cyber-loader-ring {
         position: absolute;
         display: flex;
         justify-content: center;
         align-items: center;
     }
-    
+
     .cyber-loader-ring.outer {
         width: 100px;
         height: 100px;
     }
-    
+
     .cyber-loader-ring.inner {
         width: 70px;
         height: 70px;
     }
-    
+
     .cyber-loader-ring div {
         position: absolute;
         width: 100%;
@@ -1258,37 +1258,37 @@
         border-radius: 50%;
         animation: loaderRing 2s linear infinite;
     }
-    
+
     .cyber-loader-ring.outer div {
         border-top-color: rgba(0, 168, 255, 0.7);
     }
-    
+
     .cyber-loader-ring.inner div {
         border-bottom-color: rgba(0, 247, 255, 0.7);
         animation-direction: reverse;
     }
-    
+
     .cyber-loader-ring div:nth-child(1) {
         animation-delay: 0s;
     }
-    
+
     .cyber-loader-ring div:nth-child(2) {
         animation-delay: -0.3s;
     }
-    
+
     .cyber-loader-ring div:nth-child(3) {
         animation-delay: -0.6s;
     }
-    
+
     .cyber-loader-ring div:nth-child(4) {
         animation-delay: -0.9s;
     }
-    
+
     @keyframes loaderRing {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
     }
-    
+
     .cyber-loader-text {
         font-family: 'Share Tech Mono', monospace;
         font-size: 0.9rem;
@@ -1296,7 +1296,7 @@
         margin-top: 10px;
         letter-spacing: 1px;
     }
-    
+
     /* Pattern Card */
     .data-card {
         background: rgba(10, 25, 40, 0.7);
@@ -1308,24 +1308,24 @@
         opacity: 0;
         animation: slideIn 0.5s forwards;
     }
-    
+
     @keyframes slideIn {
         to {
             transform: translateY(0);
             opacity: 1;
         }
     }
-    
+
     .data-card:nth-child(1) { animation-delay: 0.1s; }
     .data-card:nth-child(2) { animation-delay: 0.2s; }
     .data-card:nth-child(3) { animation-delay: 0.3s; }
     .data-card:nth-child(4) { animation-delay: 0.4s; }
-    
+
     /* Metrics Container */
     .metrics-container {
         padding: 10px;
     }
-    
+
     .cyber-graph {
         background: rgba(10, 25, 40, 0.5);
         border: 1px solid rgba(0, 247, 255, 0.2);
@@ -1333,14 +1333,14 @@
         padding: 10px;
         margin-bottom: 15px;
     }
-    
+
     .graph-header {
         font-family: 'Share Tech Mono', monospace;
         font-size: 0.8rem;
         color: #8cddff;
         margin-bottom: 10px;
     }
-    
+
     .graph-placeholder {
         height: 100px;
         background: linear-gradient(180deg, rgba(0, 168, 255, 0.3) 0%, rgba(0, 247, 255, 0.1) 100%);
@@ -1348,7 +1348,7 @@
         position: relative;
         overflow: hidden;
     }
-    
+
     .graph-placeholder::before {
         content: '';
         position: absolute;
@@ -1356,20 +1356,20 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: 
+        background-image:
             linear-gradient(90deg, transparent, transparent),
             linear-gradient(90deg, rgba(0, 247, 255, 0.3) 1px, transparent 1px),
             linear-gradient(rgba(0, 247, 255, 0.3) 1px, transparent 1px);
         background-size: 100% 100%, 20px 20px, 20px 20px;
         background-position: 0 0, 0 0, 0 0;
     }
-    
+
     .metrics-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
     }
-    
+
     .metric-box {
         background: rgba(10, 25, 40, 0.5);
         border: 1px solid rgba(0, 247, 255, 0.2);
@@ -1377,30 +1377,30 @@
         padding: 10px;
         text-align: center;
     }
-    
+
     .metric-value {
         font-family: 'Share Tech Mono', monospace;
         font-size: 1.2rem;
         color: #00f7ff;
         margin-bottom: 5px;
     }
-    
+
     .metric-label {
         font-size: 0.75rem;
         color: #8cddff;
     }
-    
+
     /* Z-index management */
     .z-index-1 { z-index: 1; }
     .z-index-2 { z-index: 2; }
     .z-index-3 { z-index: 3; }
-    
+
     /* Hologram effect */
     .hologram-effect {
         position: relative;
         overflow: hidden;
     }
-    
+
     .hologram-effect::before {
         content: '';
         position: absolute;
@@ -1418,17 +1418,17 @@
         pointer-events: none;
         z-index: 1;
     }
-    
+
     /* Media queries for responsive design */
     @media (max-width: 992px) {
         .control-grid {
             grid-template-columns: 1fr;
         }
-        
+
         .system-status-bar {
             flex-wrap: wrap;
         }
-        
+
         .status-segment {
             width: 50%;
             margin-bottom: 10px;
@@ -1436,12 +1436,12 @@
             border-bottom: 1px solid rgba(100, 150, 255, 0.2);
         }
     }
-    
+
     @media (max-width: 768px) {
         .cyber-title {
             font-size: 2rem;
         }
-        
+
         .cyber-subtitle {
             font-size: 1rem;
         }
@@ -1454,13 +1454,13 @@
         <div class="cyber-lines"></div>
         <div class="cyber-glitch">
             <h1 class="cyber-title text-center mb-0">
-                <span data-text="ALPHAVOX">ALPHAVOX</span> 
+                <span data-text="ALPHAVOX">ALPHAVOX</span>
                 <small class="cyber-subtitle d-block">Neural Behavior Analysis System</small>
             </h1>
         </div>
         <div class="cyber-dots"></div>
     </div>
-    
+
     <!-- Status Bar -->
     <div class="system-status-bar mb-4">
         <div class="status-segment">
@@ -1497,7 +1497,7 @@
             <div class="card futuristic-card mb-4">
                 <div class="hexagon-decoration top-right"></div>
                 <div class="hexagon-decoration bottom-left"></div>
-                
+
                 <div class="card-header cyber-bar">
                     <div class="cyber-bar-left">
                         <div class="cyber-indicator blink"></div>
@@ -1519,18 +1519,18 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="card-body position-relative">
                     <!-- Grid overlay pattern for futuristic effect -->
                     <div class="grid-overlay"></div>
-                    
+
                     <!-- Main video feed interface -->
                     <div class="neural-interface mb-4">
                         <div class="corner-decoration top-left"></div>
                         <div class="corner-decoration top-right"></div>
                         <div class="corner-decoration bottom-left"></div>
                         <div class="corner-decoration bottom-right"></div>
-                        
+
                         <div class="interface-header">
                             <div class="segment">
                                 <span class="label">FEED</span>
@@ -1549,7 +1549,7 @@
                                 <span class="value">ENABLED</span>
                             </div>
                         </div>
-                        
+
                         <div class="video-container hologram-effect">
                             <div class="position-relative">
                                 <!-- Scanner elements -->
@@ -1557,14 +1557,14 @@
                                 <div class="corner-brackets top-right"></div>
                                 <div class="corner-brackets bottom-left"></div>
                                 <div class="corner-brackets bottom-right"></div>
-                                
+
                                 <!-- Technical overlay elements -->
                                 <div class="tech-overlay"></div>
                                 <div class="video-overlay"></div>
                                 <div class="scanning-line horizontal"></div>
                                 <div class="scanning-line vertical"></div>
                                 <div class="neural-grid"></div>
-                                
+
                                 <!-- Loading indicator -->
                                 <div id="loading-indicator" class="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-dark bg-opacity-75 z-index-1">
                                     <div class="cyber-loader">
@@ -1580,11 +1580,11 @@
                                         <div class="cyber-loader-text">INITIALIZING NEURAL SCAN</div>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Video elements -->
                                 <video id="videoElement" autoplay class="w-100 d-none"></video>
                                 <canvas id="videoCanvas" class="w-100 rounded"></canvas>
-                                
+
                                 <!-- Live data display overlay -->
                                 <div class="data-overlay">
                                     <div class="data-point top-left">
@@ -1606,7 +1606,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="interface-footer">
                             <div class="segment recording">
                                 <span class="rec-indicator"></span>
@@ -1617,7 +1617,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Status and Control Section -->
                     <div class="status-section mb-4">
                         <div class="alert cyber-alert" id="trackingStatus">
@@ -1631,7 +1631,7 @@
                             <div class="cyber-alert-lines"></div>
                         </div>
                     </div>
-                    
+
                     <!-- Advanced Controls Panel -->
                     <div class="advanced-controls">
                         <div class="control-panel-header">
@@ -1640,7 +1640,7 @@
                             </h4>
                             <div class="cyber-badge">ADVANCED</div>
                         </div>
-                        
+
                         <div class="control-grid">
                             <div class="control-group">
                                 <label class="cyber-label">
@@ -1655,7 +1655,7 @@
                                 </select>
                                 <div class="cyber-select-decoration"></div>
                             </div>
-                            
+
                             <div class="control-group">
                                 <label class="cyber-label">
                                     <i class="fas fa-tachometer-alt me-1"></i> Sensitivity Threshold
@@ -1668,7 +1668,7 @@
                                 </select>
                                 <div class="cyber-select-decoration"></div>
                             </div>
-                            
+
                             <div class="control-group">
                                 <label class="cyber-label">
                                     <i class="fas fa-brain me-1"></i> Neural Model
@@ -1680,7 +1680,7 @@
                                 </select>
                                 <div class="cyber-select-decoration"></div>
                             </div>
-                            
+
                             <div class="control-group">
                                 <label class="cyber-label">
                                     <i class="fas fa-clock me-1"></i> Analysis Frequency
@@ -1693,7 +1693,7 @@
                                 <div class="cyber-select-decoration"></div>
                             </div>
                         </div>
-                        
+
                         <div class="system-gauges">
                             <div class="gauge-container">
                                 <div class="gauge-label">CPU LOAD</div>
@@ -1702,7 +1702,7 @@
                                 </div>
                                 <div class="gauge-reading">45%</div>
                             </div>
-                            
+
                             <div class="gauge-container">
                                 <div class="gauge-label">MEMORY</div>
                                 <div class="gauge">
@@ -1710,7 +1710,7 @@
                                 </div>
                                 <div class="gauge-reading">37%</div>
                             </div>
-                            
+
                             <div class="gauge-container">
                                 <div class="gauge-label">NEURAL LOAD</div>
                                 <div class="gauge">
@@ -1723,13 +1723,13 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Analysis Results and Data Visualization -->
         <div class="col-lg-4">
             <!-- System Analysis Results -->
             <div class="card futuristic-card mb-4">
                 <div class="hexagon-decoration top-right small"></div>
-                
+
                 <div class="card-header cyber-bar">
                     <div class="cyber-bar-left">
                         <div class="cyber-indicator"></div>
@@ -1741,7 +1741,7 @@
                         <div class="cyber-tag">REALTIME</div>
                     </div>
                 </div>
-                
+
                 <div class="card-body">
                     <!-- Tabs for different analysis views -->
                     <div class="cyber-tabs mb-3">
@@ -1755,7 +1755,7 @@
                             <i class="fas fa-clock me-2"></i> TIMELINE
                         </button>
                     </div>
-                    
+
                     <!-- Tab content containers -->
                     <div class="cyber-tab-content">
                         <!-- Live Analysis Tab -->
@@ -1772,7 +1772,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Metrics Tab -->
                         <div class="cyber-tab-pane" id="metrics">
                             <div class="cyber-empty-state">
@@ -1806,7 +1806,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Timeline Tab -->
                         <div class="cyber-tab-pane" id="timeline">
                             <div class="cyber-empty-state">
@@ -1847,11 +1847,11 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Observed Patterns Card -->
             <div class="card futuristic-card">
                 <div class="hexagon-decoration bottom-left small"></div>
-                
+
                 <div class="card-header cyber-bar">
                     <div class="cyber-bar-left">
                         <div class="cyber-indicator"></div>
@@ -1863,7 +1863,7 @@
                         <div class="cyber-badge" id="pattern-count">0</div>
                     </div>
                 </div>
-                
+
                 <div class="card-body">
                     <div id="patternsList">
                         <div class="cyber-empty-state" id="empty-patterns">
@@ -1878,7 +1878,7 @@
                         <div id="patterns-container"></div>
                     </div>
                 </div>
-                
+
                 <div class="card-footer cyber-footer">
                     <div class="cyber-stats">
                         <div class="stat-item">
@@ -1909,43 +1909,43 @@
         const patternsContainer = document.getElementById('patterns-container');
         const emptyPatterns = document.getElementById('empty-patterns');
         const videoContainer = document.querySelector('.video-container');
-        
+
         let isTracking = false;
         let stream = null;
         let animationFrame = null;
         let processingFrame = false;
-        
+
         // Add sound effects
         const startSound = new Audio('/static/sounds/start.mp3');
         const stopSound = new Audio('/static/sounds/stop.mp3');
         const scanSound = new Audio('/static/sounds/scan.mp3');
         const detectionSound = new Audio('/static/sounds/detection.mp3');
-        
+
         // Attempt to preload sounds silently
         try {
             startSound.volume = 0.01;
             stopSound.volume = 0.01;
             scanSound.volume = 0.01;
             detectionSound.volume = 0.01;
-            
+
             startSound.play().then(() => {
                 startSound.pause();
                 startSound.currentTime = 0;
                 startSound.volume = 0.3;
             }).catch(() => {});
-            
+
             stopSound.play().then(() => {
                 stopSound.pause();
                 stopSound.currentTime = 0;
                 stopSound.volume = 0.3;
             }).catch(() => {});
-            
+
             scanSound.play().then(() => {
                 scanSound.pause();
                 scanSound.currentTime = 0;
                 scanSound.volume = 0.2;
             }).catch(() => {});
-            
+
             detectionSound.play().then(() => {
                 detectionSound.pause();
                 detectionSound.currentTime = 0;
@@ -1954,7 +1954,7 @@
         } catch (e) {
             console.log('Sound preloading not supported');
         }
-        
+
         // Check if webcam is supported
         function checkWebcamSupport() {
             if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
@@ -1966,7 +1966,7 @@
             }
             return true;
         }
-        
+
         // Start webcam capture
         async function startWebcam() {
             try {
@@ -1974,45 +1974,45 @@
                     video: true,
                     audio: false
                 });
-                
+
                 videoElement.srcObject = stream;
-                
+
                 // Set canvas size based on video dimensions
                 videoElement.onloadedmetadata = function() {
                     videoCanvas.width = videoElement.videoWidth;
                     videoCanvas.height = videoElement.videoHeight;
                     videoElement.classList.remove('d-none');
                     loadingIndicator.classList.add('d-none');
-                    
+
                     // Add active tracking effects
                     videoContainer.classList.add('tracking-active');
-                    
+
                     // Start processing frames
                     startProcessingFrames();
-                    
+
                     // Play scan sound (looped)
                     try {
                         scanSound.loop = true;
                         scanSound.play().catch(() => {});
                     } catch (e) {}
                 };
-                
+
                 return true;
             } catch (error) {
                 console.error('Error accessing webcam:', error);
-                
+
                 trackingStatus.classList.remove('alert-futuristic-info');
                 trackingStatus.classList.add('alert-futuristic-warning');
                 trackingStatus.innerHTML = '<i class="fas fa-exclamation-triangle me-2"></i> Could not access webcam. Please check permissions and try again.';
-                
+
                 loadingIndicator.classList.add('d-none');
                 stopButton.disabled = true;
                 startButton.disabled = false;
-                
+
                 return false;
             }
         }
-        
+
         // Stop webcam capture
         function stopWebcam() {
             // Stop scan sound
@@ -2020,26 +2020,26 @@
                 scanSound.pause();
                 scanSound.currentTime = 0;
             } catch (e) {}
-            
+
             // Remove active tracking effects
             videoContainer.classList.remove('tracking-active');
-            
+
             if (stream) {
                 stream.getTracks().forEach(track => track.stop());
                 stream = null;
             }
-            
+
             if (animationFrame) {
                 cancelAnimationFrame(animationFrame);
                 animationFrame = null;
             }
-            
+
             videoElement.classList.add('d-none');
             ctx.clearRect(0, 0, videoCanvas.width, videoCanvas.height);
-            
+
             return true;
         }
-        
+
         // Play animation when detection happens
         function playDetectionAnimation() {
             // Add a flash effect to the video container
@@ -2054,7 +2054,7 @@
             flash.style.zIndex = '10';
             flash.style.borderRadius = '10px';
             flash.style.animation = 'flash 0.5s forwards';
-            
+
             // Add keyframes for the flash animation
             const style = document.createElement('style');
             style.innerHTML = `
@@ -2065,58 +2065,58 @@
                 }
             `;
             document.head.appendChild(style);
-            
+
             // Add the flash element to the video container
             videoContainer.appendChild(flash);
-            
+
             // Remove the flash element after animation
             setTimeout(() => {
                 flash.remove();
             }, 500);
-            
+
             // Play detection sound
             try {
                 detectionSound.currentTime = 0;
                 detectionSound.play().catch(() => {});
             } catch (e) {}
         }
-        
+
         // Start behavior tracking
         async function startTracking() {
             // Play start sound
             try {
                 startSound.play().catch(() => {});
             } catch (e) {}
-            
+
             loadingIndicator.classList.remove('d-none');
             startButton.disabled = true;
-            
+
             if (!checkWebcamSupport()) {
                 return;
             }
-            
+
             try {
                 // Call API to start tracking
                 const response = await fetch('/api/behavior/start', {
                     method: 'POST'
                 });
-                
+
                 const data = await response.json();
-                
+
                 if (data.status === 'success') {
                     trackingStatus.classList.remove('alert-futuristic-info', 'alert-futuristic-danger', 'alert-futuristic-warning');
                     trackingStatus.classList.add('alert-futuristic-success');
                     trackingStatus.innerHTML = '<i class="fas fa-check-circle me-2"></i> Behavior tracking active. Observing patterns...';
-                    
+
                     isTracking = true;
                     stopButton.disabled = false;
-                    
+
                     // Typed animation effect
                     const typedElement = document.createElement('div');
                     typedElement.className = 'neon-text mt-2';
                     typedElement.innerHTML = 'Initializing pattern recognition algorithms...';
                     trackingStatus.appendChild(typedElement);
-                    
+
                     // Start webcam with slight delay for effect
                     setTimeout(async () => {
                         if (!await startWebcam()) {
@@ -2124,7 +2124,7 @@
                             await fetch('/api/behavior/stop', { method: 'POST' });
                             return;
                         }
-                        
+
                         // Start loading observations
                         loadObservations();
                     }, 500);
@@ -2144,35 +2144,35 @@
                 startButton.disabled = false;
             }
         }
-        
+
         // Stop behavior tracking
         async function stopTracking() {
             // Play stop sound
             try {
                 stopSound.play().catch(() => {});
             } catch (e) {}
-            
+
             stopButton.disabled = true;
-            
+
             try {
                 // Call API to stop tracking
                 const response = await fetch('/api/behavior/stop', {
                     method: 'POST'
                 });
-                
+
                 const data = await response.json();
-                
+
                 if (data.status === 'success') {
                     trackingStatus.classList.remove('alert-futuristic-success', 'alert-futuristic-danger', 'alert-futuristic-warning');
                     trackingStatus.classList.add('alert-futuristic-info');
                     trackingStatus.innerHTML = '<i class="fas fa-info-circle me-2"></i> Behavior tracking deactivated.';
-                    
+
                     isTracking = false;
                     startButton.disabled = false;
-                    
+
                     // Stop webcam
                     stopWebcam();
-                    
+
                     // Clear analysis results with fade out effect
                     analysisResults.style.opacity = '0';
                     setTimeout(() => {
@@ -2198,28 +2198,28 @@
                 stopButton.disabled = false;
             }
         }
-        
+
         // Load observed patterns
         async function loadObservations() {
             try {
                 const response = await fetch('/api/behavior/observations');
                 const data = await response.json();
-                
+
                 if (data.status === 'success') {
                     if (data.observations && data.observations.length > 0) {
                         emptyPatterns.classList.add('d-none');
                         patternsContainer.innerHTML = '';
-                        
+
                         // Add patterns with staggered animation
                         data.observations.forEach((observation, index) => {
                             const card = document.createElement('div');
                             card.className = 'data-card mb-3';
                             card.style.animationDelay = `${0.1 * index}s`;
-                            
+
                             let confidenceClass = 'text-warning';
                             if (observation.confidence >= 0.8) confidenceClass = 'text-success';
                             else if (observation.confidence < 0.4) confidenceClass = 'text-danger';
-                            
+
                             card.innerHTML = `
                                 <div class="card-body">
                                     <h5 class="card-title">${observation.pattern_name}</h5>
@@ -2231,7 +2231,7 @@
                                     <small class="text-muted">Observed: ${new Date(observation.timestamp).toLocaleString()}</small>
                                 </div>
                             `;
-                            
+
                             patternsContainer.appendChild(card);
                         });
                     } else {
@@ -2243,27 +2243,27 @@
                 console.error('Error loading observations:', error);
             }
         }
-        
+
         // Process video frames
         function startProcessingFrames() {
             if (!isTracking || !stream) return;
-            
+
             const processFrame = async () => {
                 if (!isTracking || processingFrame) {
                     animationFrame = requestAnimationFrame(processFrame);
                     return;
                 }
-                
+
                 processingFrame = true;
-                
+
                 try {
                     // Draw video frame to canvas
                     ctx.drawImage(videoElement, 0, 0, videoCanvas.width, videoCanvas.height);
-                    
+
                     // Get raw image data for processing
                     const imageData = videoCanvas.toDataURL('image/jpeg', 0.8);
                     const base64Data = imageData.split(',')[1];
-                    
+
                     // Send frame for processing
                     const response = await fetch('/api/behavior/process', {
                         method: 'POST',
@@ -2274,9 +2274,9 @@
                             frame: base64Data
                         })
                     });
-                    
+
                     const data = await response.json();
-                    
+
                     if (data.status === 'success') {
                         // Display annotated frame
                         if (data.annotated_frame) {
@@ -2286,18 +2286,18 @@
                             };
                             img.src = 'data:image/jpeg;base64,' + data.annotated_frame;
                         }
-                        
+
                         // Update analysis results
                         if (data.results) {
                             // Check if we've detected new patterns
-                            const hasNewPatterns = data.results.patterns_detected && 
+                            const hasNewPatterns = data.results.patterns_detected &&
                                 data.results.patterns_detected.length > 0;
-                            
+
                             // Play detection animation if new patterns found
                             if (hasNewPatterns) {
                                 playDetectionAnimation();
                             }
-                            
+
                             updateAnalysisResults(data.results);
                         }
                     }
@@ -2305,31 +2305,31 @@
                     console.error('Error processing frame:', error);
                 } finally {
                     processingFrame = false;
-                    
+
                     // Request next frame
                     if (isTracking) {
                         animationFrame = requestAnimationFrame(processFrame);
                     }
                 }
             };
-            
+
             // Start frame processing loop
             animationFrame = requestAnimationFrame(processFrame);
         }
-        
+
         // Update analysis results display
         function updateAnalysisResults(results) {
             let html = '';
-            
+
             if (results.eye_tracking) {
                 html += `
                     <div class="data-card mb-3">
                         <div class="card-body">
                             <h5 class="mb-2"><i class="fas fa-eye me-2"></i> Eye Tracking</h5>
                             <div class="progress mb-2">
-                                <div class="progress-bar" role="progressbar" 
-                                    style="width: ${Math.round(results.eye_tracking.confidence * 100)}%" 
-                                    aria-valuenow="${Math.round(results.eye_tracking.confidence * 100)}" 
+                                <div class="progress-bar" role="progressbar"
+                                    style="width: ${Math.round(results.eye_tracking.confidence * 100)}%"
+                                    aria-valuenow="${Math.round(results.eye_tracking.confidence * 100)}"
                                     aria-valuemin="0" aria-valuemax="100">
                                     ${Math.round(results.eye_tracking.confidence * 100)}%
                                 </div>
@@ -2339,16 +2339,16 @@
                     </div>
                 `;
             }
-            
+
             if (results.facial_expressions) {
                 html += `
                     <div class="data-card mb-3">
                         <div class="card-body">
                             <h5 class="mb-2"><i class="fas fa-smile me-2"></i> Facial Expressions</h5>
                             <div class="progress mb-2">
-                                <div class="progress-bar" role="progressbar" 
-                                    style="width: ${Math.round(results.facial_expressions.confidence * 100)}%" 
-                                    aria-valuenow="${Math.round(results.facial_expressions.confidence * 100)}" 
+                                <div class="progress-bar" role="progressbar"
+                                    style="width: ${Math.round(results.facial_expressions.confidence * 100)}%"
+                                    aria-valuenow="${Math.round(results.facial_expressions.confidence * 100)}"
                                     aria-valuemin="0" aria-valuemax="100">
                                     ${Math.round(results.facial_expressions.confidence * 100)}%
                                 </div>
@@ -2358,16 +2358,16 @@
                     </div>
                 `;
             }
-            
+
             if (results.repetitive_movements) {
                 html += `
                     <div class="data-card mb-3">
                         <div class="card-body">
                             <h5 class="mb-2"><i class="fas fa-sync me-2"></i> Repetitive Movements</h5>
                             <div class="progress mb-2">
-                                <div class="progress-bar" role="progressbar" 
-                                    style="width: ${Math.round(results.repetitive_movements.confidence * 100)}%" 
-                                    aria-valuenow="${Math.round(results.repetitive_movements.confidence * 100)}" 
+                                <div class="progress-bar" role="progressbar"
+                                    style="width: ${Math.round(results.repetitive_movements.confidence * 100)}%"
+                                    aria-valuenow="${Math.round(results.repetitive_movements.confidence * 100)}"
                                     aria-valuemin="0" aria-valuemax="100">
                                     ${Math.round(results.repetitive_movements.confidence * 100)}%
                                 </div>
@@ -2377,16 +2377,16 @@
                     </div>
                 `;
             }
-            
+
             if (results.body_posture) {
                 html += `
                     <div class="data-card mb-3">
                         <div class="card-body">
                             <h5 class="mb-2"><i class="fas fa-male me-2"></i> Body Posture</h5>
                             <div class="progress mb-2">
-                                <div class="progress-bar" role="progressbar" 
-                                    style="width: ${Math.round(results.body_posture.confidence * 100)}%" 
-                                    aria-valuenow="${Math.round(results.body_posture.confidence * 100)}" 
+                                <div class="progress-bar" role="progressbar"
+                                    style="width: ${Math.round(results.body_posture.confidence * 100)}%"
+                                    aria-valuenow="${Math.round(results.body_posture.confidence * 100)}"
                                     aria-valuemin="0" aria-valuemax="100">
                                     ${Math.round(results.body_posture.confidence * 100)}%
                                 </div>
@@ -2396,7 +2396,7 @@
                     </div>
                 `;
             }
-            
+
             if (results.patterns_detected && results.patterns_detected.length > 0) {
                 html += `
                     <div class="data-card mb-3">
@@ -2404,7 +2404,7 @@
                             <h5 class="mb-2"><i class="fas fa-lightbulb me-2"></i> Detected Patterns</h5>
                             <div class="list-group bg-transparent">
                 `;
-                
+
                 results.patterns_detected.forEach(pattern => {
                     html += `
                         <div class="list-group-item d-flex justify-content-between align-items-center bg-futuristic-dark text-light border-0 mb-2 rounded">
@@ -2413,17 +2413,17 @@
                         </div>
                     `;
                 });
-                
+
                 html += `
                             </div>
                         </div>
                     </div>
                 `;
-                
+
                 // Refresh observations list if new patterns detected
                 loadObservations();
             }
-            
+
             if (html === '') {
                 html = `
                     <div class="text-center py-4">
@@ -2432,7 +2432,7 @@
                     </div>
                 `;
             }
-            
+
             // Smoothly update the content
             analysisResults.style.opacity = '0';
             setTimeout(() => {
@@ -2440,11 +2440,11 @@
                 analysisResults.style.opacity = '1';
             }, 300);
         }
-        
+
         // Create directory for sound files
         function createSoundDirectory() {
             const soundsDir = '/static/sounds';
-            
+
             // Check if directory exists
             fetch(soundsDir)
                 .then(response => {
@@ -2457,11 +2457,11 @@
                     console.log('Error checking sounds directory');
                 });
         }
-        
+
         // Event listeners
         startButton.addEventListener('click', startTracking);
         stopButton.addEventListener('click', stopTracking);
-        
+
         // Initialize
         createSoundDirectory();
         loadObservations();

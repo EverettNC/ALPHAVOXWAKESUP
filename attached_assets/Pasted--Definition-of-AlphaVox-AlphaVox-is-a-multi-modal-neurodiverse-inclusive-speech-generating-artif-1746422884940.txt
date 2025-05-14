@@ -111,5 +111,3 @@ AlphaVox is about love and agency. So:
 📎 Summary
 AlphaVox is a soul-aware interface. It doesn’t just talk — it listens, adapts, and heals.
 It combines cutting-edge AI with human-centered design, aiming to help users speak without compromise and connect without boundaries.
-
-

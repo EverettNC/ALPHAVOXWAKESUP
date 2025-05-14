@@ -10,7 +10,7 @@
             <p class="lead">Customize your communication preferences</p>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-md-8">
             <div class="card bg-dark text-white mb-4">
@@ -43,7 +43,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <h6 class="mb-3">Output Settings</h6>
                         <div class="row mb-4">
                             <div class="col-md-6">
@@ -63,7 +63,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <h6 class="mb-3">System Preferences</h6>
                         <div class="row mb-4">
                             <div class="col-md-6">
@@ -86,7 +86,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-save me-2"></i>Save Preferences
@@ -96,7 +96,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="col-md-4">
             <div class="card bg-dark text-white mb-4">
                 <div class="card-header">
@@ -106,12 +106,12 @@
                     <h4 id="user-name" class="mb-3">Loading...</h4>
                     <p class="text-muted">User ID: <span id="user-id">...</span></p>
                     <p class="text-muted">Member since: <span id="user-created">...</span></p>
-                    
+
                     <hr>
-                    
+
                     <h6>About Your Profile</h6>
                     <p class="small">
-                        Your profile contains preferences that help AlphaVox adapt to your communication style. 
+                        Your profile contains preferences that help AlphaVox adapt to your communication style.
                         These preferences are saved and will be automatically loaded each time you use the system.
                     </p>
                     <p class="small">
@@ -126,7 +126,7 @@
                     </a>
                 </div>
             </div>
-            
+
             <div class="card bg-dark text-white">
                 <div class="card-header">
                     <h5 class="mb-0">Recent Activity</h5>
@@ -156,24 +156,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const soundValue = document.getElementById('sound-sensitivity-value');
     const responseRange = document.getElementById('response-speed');
     const responseValue = document.getElementById('response-speed-value');
-    
+
     // Update display value when ranges change
     gestureRange.addEventListener('input', () => {
         gestureValue.textContent = gestureRange.value;
     });
-    
+
     eyeRange.addEventListener('input', () => {
         eyeValue.textContent = eyeRange.value;
     });
-    
+
     soundRange.addEventListener('input', () => {
         soundValue.textContent = soundRange.value;
     });
-    
+
     responseRange.addEventListener('input', () => {
         responseValue.textContent = responseRange.value;
     });
-    
+
     // Load user profile data
     function loadUserProfile() {
         fetch('/profile')
@@ -182,35 +182,35 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Update user information
                 document.getElementById('user-name').textContent = data.user.name;
                 document.getElementById('user-id').textContent = data.user.id;
-                
+
                 // Format date
                 const created = new Date(data.user.created_at);
                 document.getElementById('user-created').textContent = created.toLocaleDateString();
-                
+
                 // Update preference form values
                 const prefs = data.preferences;
-                
+
                 // Update range values
                 gestureRange.value = prefs.gesture_sensitivity;
                 gestureValue.textContent = prefs.gesture_sensitivity;
-                
+
                 eyeRange.value = prefs.eye_tracking_sensitivity;
                 eyeValue.textContent = prefs.eye_tracking_sensitivity;
-                
+
                 soundRange.value = prefs.sound_sensitivity;
                 soundValue.textContent = prefs.sound_sensitivity;
-                
+
                 responseRange.value = prefs.response_speed;
                 responseValue.textContent = prefs.response_speed;
-                
+
                 // Update selects
                 document.getElementById('voice-type').value = prefs.voice_type;
                 document.getElementById('symbol-system').value = prefs.symbol_system;
-                
+
                 // Update checkboxes
                 document.getElementById('emotion-display').checked = prefs.preferred_emotion_display;
                 document.getElementById('multimodal-processing').checked = prefs.multimodal_processing;
-                
+
                 // Load recent activity (in a real implementation)
                 loadRecentActivity();
             })
@@ -220,11 +220,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('user-name').textContent = 'Error loading profile';
             });
     }
-    
+
     // Load recent activity (placeholder in this demo)
     function loadRecentActivity() {
         const activityContainer = document.getElementById('recent-activity');
-        
+
         // In a full implementation, would fetch from server
         // This is a placeholder
         activityContainer.innerHTML = `
@@ -253,15 +253,15 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
     }
-    
+
     // Submit form handler
     document.getElementById('preferences-form').addEventListener('submit', function(e) {
         e.preventDefault();
-        
+
         // Gather form data
         const formData = new FormData(this);
         const preferences = {};
-        
+
         // Convert to appropriate types
         for (const [key, value] of formData.entries()) {
             if (key === 'preferred_emotion_display' || key === 'multimodal_processing') {
@@ -275,7 +275,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 preferences[key] = value;
             }
         }
-        
+
         // Make special conversion for checkboxes that might be unchecked
         if (!formData.has('preferred_emotion_display')) {
             preferences.preferred_emotion_display = false;
@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!formData.has('multimodal_processing')) {
             preferences.multimodal_processing = false;
         }
-        
+
         // Send to server
         fetch('/profile/update', {
             method: 'POST',
@@ -301,7 +301,7 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Error saving preferences. Please try again.');
         });
     });
-    
+
     // Load user profile on page load
     loadUserProfile();
 });

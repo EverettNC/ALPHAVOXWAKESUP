@@ -11,13 +11,18 @@ from routes.health_routes import register_health_routes
 
 # Optional imports that might not be available yet
 try:
-    from routes.adaptive_conversation_routes import adaptive_bp, register_adaptive_routes
+    from routes.adaptive_conversation_routes import (
+        adaptive_bp,
+        register_adaptive_routes,
+    )
+
     HAS_ADAPTIVE_ROUTES = True
 except ImportError:
     HAS_ADAPTIVE_ROUTES = False
 
 try:
     from routes.color_scheme_routes import color_scheme_bp
+
     HAS_COLOR_SCHEME_ROUTES = True
 except ImportError:
     HAS_COLOR_SCHEME_ROUTES = False

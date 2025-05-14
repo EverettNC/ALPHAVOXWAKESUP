@@ -44,7 +44,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row g-4" id="topics-container">
                         {% for topic in topics %}
                             <div class="col-lg-4 col-md-6 topic-item" data-difficulty="{{ topic.difficulty }}">
@@ -56,9 +56,9 @@
                                                 {{ topic.difficulty|capitalize }}
                                             </span>
                                         </div>
-                                        
+
                                         <p>{{ topic.description }}</p>
-                                        
+
                                         {% if topic.prerequisites %}
                                             <div class="mb-3">
                                                 <h6 class="text-muted mb-2">Prerequisites:</h6>
@@ -92,17 +92,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Topic filtering functionality
     const filterButtons = document.querySelectorAll('[data-filter]');
     const topicItems = document.querySelectorAll('.topic-item');
-    
+
     filterButtons.forEach(button => {
         button.addEventListener('click', function() {
             // Remove active class from all buttons
             filterButtons.forEach(btn => btn.classList.remove('active'));
-            
+
             // Add active class to clicked button
             this.classList.add('active');
-            
+
             const filter = this.getAttribute('data-filter');
-            
+
             // Show/hide topics based on filter
             topicItems.forEach(item => {
                 if (filter === 'all' || item.getAttribute('data-difficulty') === filter) {

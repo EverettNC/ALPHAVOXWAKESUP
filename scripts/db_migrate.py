@@ -30,6 +30,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger("db_migrate")
 
+
 def parse_args():
     """Parse command-line arguments."""
     parser = argparse.ArgumentParser(description="AlphaVox Database Migration Script")
@@ -39,6 +40,7 @@ def parse_args():
         help="Force migration even if it would result in data loss",
     )
     return parser.parse_args()
+
 
 def get_database_url():
     """Get the database URL from environment variables."""
@@ -50,14 +52,17 @@ def get_database_url():
         db_host = os.environ.get("POSTGRES_HOST")
         db_port = os.environ.get("POSTGRES_PORT", "5432")
         db_name = os.environ.get("POSTGRES_DB", "alphavox")
-        
+
         if db_user and db_password and db_host:
-            db_url = f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
+            db_url = (
+                f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
+            )
         else:
             logger.error("Database connection information not found.")
             sys.exit(1)
-    
+
     return db_url
+
 
 def validate_db_url(db_url):
     """Validate the database URL."""
@@ -71,17 +76,18 @@ def validate_db_url(db_url):
         logger.error(f"Error parsing database URL: {e}")
         return False
 
+
 def create_tables():
     """Create all tables in the database."""
     from app import app
     from app import db
-    
+
     logger.info("Creating database tables...")
-    
+
     with app.app_context():
         # Import all models to ensure they're registered with SQLAlchemy
         import models
-        
+
         # Create tables
         try:
             db.create_all()
@@ -91,19 +97,21 @@ def create_tables():
             logger.error(f"Error creating tables: {e}")
             return False
 
+
 def add_initial_data():
     """Add initial seed data to the database if needed."""
     from app import app
-    
+
     logger.info("Adding initial data...")
-    
+
     with app.app_context():
         # Import necessary models
         from models import User
         from db import db
+
         # Not using werkzeug security for our simplified User model
-    # from werkzeug.security import generate_password_hash
-        
+        # from werkzeug.security import generate_password_hash
+
         # Check if admin user exists
         admin = User.query.filter_by(name="admin").first()
         if not admin:
@@ -115,46 +123,49 @@ def add_initial_data():
             logger.info("Added admin user.")
         else:
             logger.info("Admin user already exists.")
-        
+
         return True
+
 
 def run_migrations():
     """Run all database migrations."""
     db_url = get_database_url()
     if not validate_db_url(db_url):
         return False
-    
+
     # Set the environment variable for the app to use
     os.environ["DATABASE_URL"] = db_url
-    
+
     # Create tables
     if not create_tables():
         return False
-    
+
     # Add initial data if needed
     if not add_initial_data():
         logger.warning("Failed to add initial data.")
-    
+
     return True
+
 
 def main():
     """Main function."""
     args = parse_args()
-    
+
     # Set force flag if provided
     if args.force:
         os.environ["DB_MIGRATION_FORCE"] = "1"
-    
+
     logger.info("Starting database migration...")
-    
+
     success = run_migrations()
-    
+
     if success:
         logger.info("Database migration completed successfully.")
         return 0
     else:
         logger.error("Database migration failed.")
         return 1
+
 
 if __name__ == "__main__":
     sys.exit(main())

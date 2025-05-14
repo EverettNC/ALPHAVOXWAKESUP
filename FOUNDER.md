@@ -10,8 +10,8 @@ This repository serves as a timestamped, version-controlled record of:
 All collaborators agree to preserve authorship and innovation credit.
 
 ## 🧠 Authored by:
-**Everett Christman**  
-Founder & CEO – The Christman AI Project  
+**Everett Christman**
+Founder & CEO – The Christman AI Project
 Created with Luma Cognify AI
 
 ---

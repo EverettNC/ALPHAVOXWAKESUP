@@ -8,11 +8,11 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    
+
     # Relationships
     interactions = db.relationship('UserInteraction', backref='user', lazy='dynamic')
     preferences = db.relationship('UserPreference', backref='user', lazy='dynamic')
-    
+
     def __repr__(self):
         return f'<User {self.name}>'
 
@@ -25,7 +25,7 @@ class UserInteraction(db.Model):
     intent = db.Column(db.String(64), nullable=True)
     confidence = db.Column(db.Float, nullable=True)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
-    
+
     def __repr__(self):
         return f'<UserInteraction {self.intent} ({self.confidence:.2f})>'
 
@@ -41,20 +41,20 @@ class UserPreference(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     source = db.Column(db.String(64), default='manual')  # 'manual', 'learned', 'system'
     confidence = db.Column(db.Float, default=1.0)  # Confidence in this preference
-    
+
     __table_args__ = (
         db.UniqueConstraint('user_id', 'type', name='_user_preference_type_uc'),
     )
-    
+
     def __repr__(self):
         return f'<UserPreference {self.type}: {self.value}>'
-    
+
     @classmethod
     def get_user_profile(cls, user_id):
         """Get all active preferences for a user as a profile dictionary"""
         preferences = cls.query.filter_by(user_id=user_id, is_active=True).all()
         profile = {}
-        
+
         for pref in preferences:
             # Convert values to appropriate types when possible
             try:
@@ -70,15 +70,15 @@ class UserPreference(db.Model):
             except:
                 # If any conversion fails, use the raw value
                 profile[pref.type] = pref.value
-                
+
         return profile
-    
+
     @classmethod
     def set_preference(cls, user_id, pref_type, value, source='manual'):
         """Set or update a user preference"""
         # Find existing preference
         pref = cls.query.filter_by(user_id=user_id, type=pref_type).first()
-        
+
         if pref:
             # Update existing
             pref.value = str(value)
@@ -94,7 +94,7 @@ class UserPreference(db.Model):
                 source=source
             )
             db.session.add(pref)
-            
+
         db.session.commit()
         return pref
 
@@ -107,30 +107,30 @@ class CaregiverNote(db.Model):
     content = db.Column(db.Text, nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     tags = db.Column(db.String(256), nullable=True)  # Comma-separated tags
-    
+
     user = db.relationship('User', backref=db.backref('caregiver_notes', lazy='dynamic'))
-    
+
     def __repr__(self):
         return f'<CaregiverNote {self.id}: {self.content[:20]}...>'
-    
+
     def get_tags_list(self):
         """Return tags as a list"""
         if not self.tags:
             return []
         return [tag.strip() for tag in self.tags.split(',')]
-    
+
     @classmethod
     def add_note(cls, user_id, author, content, tags=None):
         """Add a new caregiver note"""
         tags_str = ','.join(tags) if tags else None
-        
+
         note = cls(
             user_id=user_id,
             author=author,
             content=content,
             tags=tags_str
         )
-        
+
         db.session.add(note)
         db.session.commit()
         return note
@@ -144,22 +144,22 @@ class CommunicationProfile(db.Model):
     secondary_mode = db.Column(db.String(64), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    
+
     user = db.relationship('User', backref=db.backref('communication_profiles', lazy='dynamic'))
-    
+
     def __repr__(self):
         return f'<CommunicationProfile {self.primary_mode}/{self.secondary_mode}>'
-    
+
     @classmethod
     def get_latest_profile(cls, user_id):
         """Get the most recent communication profile for a user"""
         return cls.query.filter_by(user_id=user_id).order_by(cls.updated_at.desc()).first()
-    
+
     @classmethod
     def update_profile(cls, user_id, primary_mode, secondary_mode=None):
         """Update a user's communication profile"""
         profile = cls.get_latest_profile(user_id)
-        
+
         if profile:
             # Update existing profile
             profile.primary_mode = primary_mode
@@ -173,7 +173,7 @@ class CommunicationProfile(db.Model):
                 secondary_mode=secondary_mode
             )
             db.session.add(profile)
-            
+
         db.session.commit()
         return profile
 
@@ -189,17 +189,17 @@ class SystemSuggestion(db.Model):
     is_active = db.Column(db.Boolean, default=True)
     is_accepted = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    
+
     user = db.relationship('User', backref=db.backref('system_suggestions', lazy='dynamic'))
-    
+
     def __repr__(self):
         return f'<SystemSuggestion {self.id}: {self.title}>'
-    
+
     @classmethod
     def get_active_suggestions(cls, user_id):
         """Get all active suggestions for a user"""
         return cls.query.filter_by(user_id=user_id, is_active=True).order_by(cls.confidence.desc()).all()
-    
+
     @classmethod
     def add_suggestion(cls, user_id, title, description, suggestion_type, confidence):
         """Add a new system suggestion"""
@@ -210,11 +210,11 @@ class SystemSuggestion(db.Model):
             suggestion_type=suggestion_type,
             confidence=confidence
         )
-        
+
         db.session.add(suggestion)
         db.session.commit()
         return suggestion
-    
+
     @classmethod
     def accept_suggestion(cls, suggestion_id):
         """Mark a suggestion as accepted"""
@@ -223,7 +223,7 @@ class SystemSuggestion(db.Model):
             suggestion.is_accepted = True
             db.session.commit()
         return suggestion
-    
+
     @classmethod
     def dismiss_suggestion(cls, suggestion_id):
         """Mark a suggestion as inactive"""

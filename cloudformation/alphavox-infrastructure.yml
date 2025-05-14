@@ -9,47 +9,47 @@ Parameters:
     AllowedValues:
       - staging
       - production
-  
+
   VpcCIDR:
     Description: CIDR block for the VPC
     Type: String
     Default: 10.0.0.0/16
-  
+
   PublicSubnet1CIDR:
     Description: CIDR block for the public subnet 1
     Type: String
     Default: 10.0.1.0/24
-  
+
   PublicSubnet2CIDR:
     Description: CIDR block for the public subnet 2
     Type: String
     Default: 10.0.2.0/24
-  
+
   PrivateSubnet1CIDR:
     Description: CIDR block for the private subnet 1
     Type: String
     Default: 10.0.3.0/24
-  
+
   PrivateSubnet2CIDR:
     Description: CIDR block for the private subnet 2
     Type: String
     Default: 10.0.4.0/24
-  
+
   DBName:
     Description: The name of the database
     Type: String
     Default: alphavox
-  
+
   DBUsername:
     Description: The username for the database
     Type: String
     NoEcho: true
-  
+
   DBPassword:
     Description: The password for the database
     Type: String
     NoEcho: true
-  
+
   DBInstanceClass:
     Description: The database instance class
     Type: String
@@ -59,7 +59,7 @@ Parameters:
       - db.t3.small
       - db.t3.medium
       - db.t3.large
-  
+
   AppInstanceType:
     Description: The EC2 instance type for the application
     Type: String
@@ -69,7 +69,7 @@ Parameters:
       - t3.small
       - t3.medium
       - t3.large
-  
+
   SSLCertificateARN:
     Description: ARN of the SSL certificate for the load balancer (optional)
     Type: String
@@ -580,7 +580,7 @@ Resources:
     Properties:
       LogGroupName: !Sub /ecs/alphavox-${EnvironmentName}
       RetentionInDays: 30
-  
+
   ECSTaskDefinition:
     Type: AWS::ECS::TaskDefinition
     Properties:

@@ -18,30 +18,30 @@
 </head>
 <body>
     <h1>AlphaVox Settings</h1>
-    
+
     <form method="POST" action="/save-preference">
         {{ form.csrf_token }}
-        
+
         <div>
             <label for="preference_type">Preference Type</label>
             {{ form.preference_type(placeholder="e.g., gesture, voice, display") }}
         </div>
-        
+
         <div>
             <label for="value">Value</label>
             {{ form.value(placeholder="e.g., blink=yes, volume=high") }}
         </div>
-        
+
         <div>
             <label for="is_active">Active</label>
             {{ form.is_active() }}
         </div>
-        
+
         <button type="submit">Save Preference</button>
     </form>
-    
+
     <a href="{{ url_for('home') }}" class="back-link">Back to Home</a>
-    
+
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}

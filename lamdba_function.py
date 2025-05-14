@@ -1,6 +1,2 @@
 def lambda_handler(event, context):
-    return {
-        "statusCode": 200,
-        "body": "AlphaVox online"
-    }
-
+    return {"statusCode": 200, "body": "AlphaVox online"}

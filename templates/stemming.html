@@ -59,12 +59,12 @@
                 <div class="col-md-8 mx-auto">
                     <div class="card mb-4">
                         <h2 class="h4 mb-3">
-                            <i data-feather="file-text" class="me-2"></i> 
+                            <i data-feather="file-text" class="me-2"></i>
                             Stemming Research Platform
                         </h2>
                         <p>
                             Stemming is a natural language processing technique that reduces words to their root form (stem).
-                            This research platform implements an academic-level Porter stemming algorithm with enhancements 
+                            This research platform implements an academic-level Porter stemming algorithm with enhancements
                             for neurodivergent communication analysis.
                         </p>
                         <p>
@@ -78,10 +78,10 @@
                         <h3 class="h5 mb-3">Text Stemming Analysis</h3>
                         <div class="form-group mb-3">
                             <label for="textInput">Enter text to analyze:</label>
-                            <textarea 
-                                id="textInput" 
-                                class="form-control" 
-                                rows="5" 
+                            <textarea
+                                id="textInput"
+                                class="form-control"
+                                rows="5"
                                 placeholder="Enter text for stemming and pattern analysis..."
                                 aria-describedby="textInputHelp"
                             ></textarea>
@@ -302,9 +302,9 @@
                 // Display analysis summary
                 analysisResults.innerHTML = `
                     <p>
-                        Text analysis complete. This text contains 
-                        <strong>${analysis.statistics.total_words}</strong> total words with 
-                        <strong>${analysis.statistics.unique_words}</strong> unique words, reduced to 
+                        Text analysis complete. This text contains
+                        <strong>${analysis.statistics.total_words}</strong> total words with
+                        <strong>${analysis.statistics.unique_words}</strong> unique words, reduced to
                         <strong>${analysis.statistics.unique_stems}</strong> unique stems.
                     </p>
                 `;
@@ -340,7 +340,7 @@
                 fillerWordsDiv.innerHTML = `
                     <h6>Filler Word Analysis</h6>
                     <p>
-                        Filler words make up <strong>${(analysis.neurodivergent_patterns.filler_word_ratio * 100).toFixed(1)}%</strong> 
+                        Filler words make up <strong>${(analysis.neurodivergent_patterns.filler_word_ratio * 100).toFixed(1)}%</strong>
                         of the text.
                     </p>
                 `;

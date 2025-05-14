@@ -21,10 +21,10 @@ PASSED_CHECKS=0
 run_check() {
     local name=$1
     local command=$2
-    
+
     TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
     echo -ne "${YELLOW}[ RUNNING ]${NC} $name... "
-    
+
     # Run the command and capture output
     local output
     if output=$(eval "$command" 2>&1); then

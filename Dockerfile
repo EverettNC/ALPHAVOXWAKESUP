@@ -29,4 +29,3 @@ RUN pip install --no-cache-dir --upgrade pip \
 
 # AWS Lambda handler
 CMD ["app.handler"]
-

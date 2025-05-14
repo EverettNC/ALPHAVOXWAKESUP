@@ -13,6 +13,7 @@ from collections import deque
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("nonverbal_engine")
 
+
 class NonverbalEngine:
     """
     The NonverbalEngine is responsible for classifying gestures, eye movements,
@@ -36,23 +37,29 @@ class NonverbalEngine:
 
         # User profile (would be loaded from database in full implementation)
         self.user_profile = {
-            'gesture_sensitivity': 0.8,  # How sensitive the system is to gestures (0-1)
-            'eye_tracking_sensitivity': 0.8,  # Sensitivity for eye tracking
-            'sound_sensitivity': 0.7,  # Sensitivity for sound detection
-            'preferred_emotion_display': True,  # Whether to show emotional content
-            'response_speed': 1.0,  # Speech rate multiplier
-            'symbol_system': 'default'  # Symbol system preference (PCS, ARASAAC, etc.)
+            "gesture_sensitivity": 0.8,  # How sensitive the system is to gestures (0-1)
+            "eye_tracking_sensitivity": 0.8,  # Sensitivity for eye tracking
+            "sound_sensitivity": 0.7,  # Sensitivity for sound detection
+            "preferred_emotion_display": True,  # Whether to show emotional content
+            "response_speed": 1.0,  # Speech rate multiplier
+            "symbol_system": "default",  # Symbol system preference (PCS, ARASAAC, etc.)
         }
 
         # Data directory
-        self.data_dir = 'data/learning'
+        self.data_dir = "data/learning"
         os.makedirs(self.data_dir, exist_ok=True)
 
         # Load existing models or use defaults
-        self.gesture_map = self._load_model('gestures') or self._get_default_gesture_map()
-        self.symbol_map = self._load_model('symbols') or self._get_default_symbol_map()
-        self.eye_region_map = self._load_model('eye_regions') or self._get_default_eye_region_map()
-        self.sound_map = self._load_model('sound_patterns') or self._get_default_sound_pattern_map()
+        self.gesture_map = (
+            self._load_model("gestures") or self._get_default_gesture_map()
+        )
+        self.symbol_map = self._load_model("symbols") or self._get_default_symbol_map()
+        self.eye_region_map = (
+            self._load_model("eye_regions") or self._get_default_eye_region_map()
+        )
+        self.sound_map = (
+            self._load_model("sound_patterns") or self._get_default_sound_pattern_map()
+        )
 
         # Learning parameters
         self.learning_rate = 0.05
@@ -72,7 +79,9 @@ class NonverbalEngine:
         self.session_start = datetime.now()
         self.last_interaction = time.time()
 
-        self.logger.info("NonverbalEngine initialized with self-modification capabilities")
+        self.logger.info(
+            "NonverbalEngine initialized with self-modification capabilities"
+        )
 
     def _load_model(self, model_type: str) -> Dict:
         """Load a model from file if it exists"""
@@ -80,12 +89,16 @@ class NonverbalEngine:
 
         if os.path.exists(model_file):
             try:
-                with open(model_file, 'r') as file:
+                with open(model_file, "r") as file:
                     model = json.load(file)
-                    self.logger.info(f"Loaded {model_type} model with {len(model)} entries")
+                    self.logger.info(
+                        f"Loaded {model_type} model with {len(model)} entries"
+                    )
                     return model
             except json.JSONDecodeError:
-                self.logger.warning(f"Failed to load {model_type} model, using defaults")
+                self.logger.warning(
+                    f"Failed to load {model_type} model, using defaults"
+                )
 
         return {}
 
@@ -93,7 +106,7 @@ class NonverbalEngine:
         """Save a model to file"""
         model_file = os.path.join(self.data_dir, f"{model_type}_model.json")
 
-        with open(model_file, 'w') as file:
+        with open(model_file, "w") as file:
             json.dump(model_data, file, indent=2)
 
         self.logger.info(f"Saved {model_type} model with {len(model_data)} entries")
@@ -104,9 +117,11 @@ class NonverbalEngine:
 
         if os.path.exists(stats_file):
             try:
-                with open(stats_file, 'r') as file:
+                with open(stats_file, "r") as file:
                     stats = json.load(file)
-                    self.logger.info(f"Loaded usage stats with {sum(len(section) for section in stats.values() if isinstance(section, dict))} entries")
+                    self.logger.info(
+                        f"Loaded usage stats with {sum(len(section) for section in stats.values() if isinstance(section, dict))} entries"
+                    )
                     return stats
             except json.JSONDecodeError:
                 self.logger.warning("Failed to load usage stats, starting fresh")
@@ -118,7 +133,7 @@ class NonverbalEngine:
             "eye_regions": {},
             "sound_patterns": {},
             "multimodal": {},
-            "last_updated": datetime.now().isoformat()
+            "last_updated": datetime.now().isoformat(),
         }
 
     def _save_stats(self):
@@ -126,7 +141,7 @@ class NonverbalEngine:
         stats_file = os.path.join(self.data_dir, "usage_stats.json")
         self.usage_stats["last_updated"] = datetime.now().isoformat()
 
-        with open(stats_file, 'w') as file:
+        with open(stats_file, "w") as file:
             json.dump(self.usage_stats, file, indent=2)
 
     def start_learning(self) -> bool:
@@ -183,14 +198,19 @@ class NonverbalEngine:
 
                     # Calculate new confidence based on success rate
                     success_rate = stats.get("success", 0) / stats.get("count", 1)
-                    new_confidence = current["confidence"] * (1 - self.learning_rate) + success_rate * self.learning_rate
+                    new_confidence = (
+                        current["confidence"] * (1 - self.learning_rate)
+                        + success_rate * self.learning_rate
+                    )
 
                     # Only update if significantly different
                     if abs(new_confidence - current["confidence"]) > 0.05:
                         self.gesture_map[gesture]["confidence"] = new_confidence
                         changes_made = True
 
-                        self.logger.info(f"Updated confidence for gesture '{gesture}': {current['confidence']:.2f} -> {new_confidence:.2f}")
+                        self.logger.info(
+                            f"Updated confidence for gesture '{gesture}': {current['confidence']:.2f} -> {new_confidence:.2f}"
+                        )
 
         # Update symbol model
         for symbol, stats in self.usage_stats.get("symbols", {}).items():
@@ -202,13 +222,18 @@ class NonverbalEngine:
 
                     # Calculate new confidence
                     success_rate = stats.get("success", 0) / stats.get("count", 1)
-                    new_confidence = current["confidence"] * (1 - self.learning_rate) + success_rate * self.learning_rate
+                    new_confidence = (
+                        current["confidence"] * (1 - self.learning_rate)
+                        + success_rate * self.learning_rate
+                    )
 
                     if abs(new_confidence - current["confidence"]) > 0.05:
                         self.symbol_map[symbol]["confidence"] = new_confidence
                         changes_made = True
 
-                        self.logger.info(f"Updated confidence for symbol '{symbol}': {current['confidence']:.2f} -> {new_confidence:.2f}")
+                        self.logger.info(
+                            f"Updated confidence for symbol '{symbol}': {current['confidence']:.2f} -> {new_confidence:.2f}"
+                        )
 
         # Save models if changes were made
         if changes_made:
@@ -223,7 +248,9 @@ class NonverbalEngine:
 
             self._save_stats()
 
-    def record_interaction(self, input_type: str, input_data: str, result: Dict, success: bool = None):
+    def record_interaction(
+        self, input_type: str, input_data: str, result: Dict, success: bool = None
+    ):
         """
         Record an interaction for learning
 
@@ -238,10 +265,10 @@ class NonverbalEngine:
 
         # Map input type to stats section
         section_map = {
-            'gesture': 'gestures',
-            'symbol': 'symbols',
-            'eye': 'eye_regions',
-            'sound': 'sound_patterns'
+            "gesture": "gestures",
+            "symbol": "symbols",
+            "eye": "eye_regions",
+            "sound": "sound_patterns",
         }
 
         section = section_map.get(input_type)
@@ -254,7 +281,7 @@ class NonverbalEngine:
             self.usage_stats[section][input_data] = {
                 "count": 0,
                 "success": 0,
-                "last_used": None
+                "last_used": None,
             }
 
         # Update stats
@@ -265,12 +292,14 @@ class NonverbalEngine:
             self.usage_stats[section][input_data]["success"] += 1 if success else 0
 
         # Add to recent inputs for multimodal processing
-        self.recent_inputs.append({
-            "type": input_type,
-            "data": input_data,
-            "result": result,
-            "timestamp": datetime.now().isoformat()
-        })
+        self.recent_inputs.append(
+            {
+                "type": input_type,
+                "data": input_data,
+                "result": result,
+                "timestamp": datetime.now().isoformat(),
+            }
+        )
 
         # Keep only the most recent inputs
         if len(self.recent_inputs) > self.max_recent_inputs:
@@ -300,39 +329,41 @@ class NonverbalEngine:
             result = self.gesture_map[gesture_name].copy()
         else:
             result = {
-                'intent': 'unknown', 
-                'expression': 'neutral',
-                'emotion_tier': 'mild',
-                'confidence': 0.3
+                "intent": "unknown",
+                "expression": "neutral",
+                "emotion_tier": "mild",
+                "confidence": 0.3,
             }
 
         # Add some randomness to confidence to simulate real-world variation
         confidence_variation = random.uniform(-0.05, 0.05)
-        result['confidence'] = min(1.0, max(0.1, result['confidence'] + confidence_variation))
+        result["confidence"] = min(
+            1.0, max(0.1, result["confidence"] + confidence_variation)
+        )
 
         # Generate a relevant message based on the intent
         intent_messages = {
-            'affirm': "Yes, I agree.",
-            'deny': "No, I don't want that.",
-            'help': "I need help please.",
-            'greet': "Hello there!",
-            'like': "I like this.",
-            'dislike': "I don't like this.",
-            'stop': "Please stop.",
-            'unknown': "I'm trying to communicate something."
+            "affirm": "Yes, I agree.",
+            "deny": "No, I don't want that.",
+            "help": "I need help please.",
+            "greet": "Hello there!",
+            "like": "I like this.",
+            "dislike": "I don't like this.",
+            "stop": "Please stop.",
+            "unknown": "I'm trying to communicate something.",
         }
 
-        result['message'] = intent_messages.get(result['intent'], "I'm trying to communicate.")
+        result["message"] = intent_messages.get(
+            result["intent"], "I'm trying to communicate."
+        )
 
         # Add to interaction history for learning
-        self.interaction_history.append({
-            'type': 'gesture',
-            'input': gesture_name,
-            'result': result
-        })
+        self.interaction_history.append(
+            {"type": "gesture", "input": gesture_name, "result": result}
+        )
 
         # Record for adaptive learning
-        self.record_interaction('gesture', gesture_name, result)
+        self.record_interaction("gesture", gesture_name, result)
 
         return result
 
@@ -340,41 +371,41 @@ class NonverbalEngine:
         """Process eye tracking data to determine intent"""
         self.logger.debug(f"Processing eye movement: {eye_data}")
 
-        region = eye_data.get('region', 'unknown')
+        region = eye_data.get("region", "unknown")
         if region in self.eye_region_map:
             result = self.eye_region_map[region].copy()
         else:
             result = {
-                'intent': 'unknown',
-                'expression': 'neutral',
-                'emotion_tier': 'mild',
-                'confidence': 0.3
+                "intent": "unknown",
+                "expression": "neutral",
+                "emotion_tier": "mild",
+                "confidence": 0.3,
             }
 
         # Add some randomness to confidence
         confidence_variation = random.uniform(-0.05, 0.05)
-        result['confidence'] = min(1.0, max(0.1, result['confidence'] + confidence_variation))
+        result["confidence"] = min(
+            1.0, max(0.1, result["confidence"] + confidence_variation)
+        )
 
         # Generate appropriate message
         region_messages = {
-            'top_left': "Let's go back.",
-            'top_right': "Let's go forward.",
-            'bottom_left': "I want to cancel.",
-            'bottom_right': "I confirm this choice.",
-            'center': "I select this option."
+            "top_left": "Let's go back.",
+            "top_right": "Let's go forward.",
+            "bottom_left": "I want to cancel.",
+            "bottom_right": "I confirm this choice.",
+            "center": "I select this option.",
         }
 
-        result['message'] = region_messages.get(region, "I'm looking at something.")
+        result["message"] = region_messages.get(region, "I'm looking at something.")
 
         # Add to interaction history
-        self.interaction_history.append({
-            'type': 'eye',
-            'input': region,
-            'result': result
-        })
+        self.interaction_history.append(
+            {"type": "eye", "input": region, "result": result}
+        )
 
         # Record for adaptive learning
-        self.record_interaction('eye', region, result)
+        self.record_interaction("eye", region, result)
 
         return result
 
@@ -386,38 +417,40 @@ class NonverbalEngine:
             result = self.sound_map[sound_pattern].copy()
         else:
             result = {
-                'intent': 'unknown',
-                'expression': 'neutral',
-                'emotion_tier': 'mild',
-                'confidence': 0.4
+                "intent": "unknown",
+                "expression": "neutral",
+                "emotion_tier": "mild",
+                "confidence": 0.4,
             }
 
         # Add some randomness to confidence
         confidence_variation = random.uniform(-0.05, 0.05)
-        result['confidence'] = min(1.0, max(0.1, result['confidence'] + confidence_variation))
+        result["confidence"] = min(
+            1.0, max(0.1, result["confidence"] + confidence_variation)
+        )
 
         # Generate appropriate message
         sound_messages = {
-            'hum': "I'm thinking about it.",
-            'click': "I choose this option.",
-            'distress': "I need help right now.",
-            'soft': "I'm unsure about this.",
-            'loud': "I'm excited about this!",
-            'short_vowel': "I acknowledge that.",
-            'repeated_sound': "Please pay attention to this."
+            "hum": "I'm thinking about it.",
+            "click": "I choose this option.",
+            "distress": "I need help right now.",
+            "soft": "I'm unsure about this.",
+            "loud": "I'm excited about this!",
+            "short_vowel": "I acknowledge that.",
+            "repeated_sound": "Please pay attention to this.",
         }
 
-        result['message'] = sound_messages.get(sound_pattern, "I'm trying to say something.")
+        result["message"] = sound_messages.get(
+            sound_pattern, "I'm trying to say something."
+        )
 
         # Add to interaction history
-        self.interaction_history.append({
-            'type': 'sound',
-            'input': sound_pattern,
-            'result': result
-        })
+        self.interaction_history.append(
+            {"type": "sound", "input": sound_pattern, "result": result}
+        )
 
         # Record for adaptive learning
-        self.record_interaction('sound', sound_pattern, result)
+        self.record_interaction("sound", sound_pattern, result)
 
         return result
 
@@ -432,85 +465,112 @@ class NonverbalEngine:
         if gesture:
             gesture_result = self.classify_gesture(gesture)
             inputs.append(gesture_result)
-            weights.append(gesture_result['confidence'])
+            weights.append(gesture_result["confidence"])
 
         if eye_data:
             eye_result = self.process_eye_movement(eye_data)
             inputs.append(eye_result)
-            weights.append(eye_result['confidence'] * 0.8)  # Eye input weighted slightly less
+            weights.append(
+                eye_result["confidence"] * 0.8
+            )  # Eye input weighted slightly less
 
         if sound:
             sound_result = self.process_sound(sound)
             inputs.append(sound_result)
-            weights.append(sound_result['confidence'])
+            weights.append(sound_result["confidence"])
 
         # If no inputs, return default
         if not inputs:
             return {
-                'intent': 'unknown',
-                'confidence': 0.1,
-                'expression': 'neutral',
-                'emotion_tier': 'mild',
-                'message': "I'm not sure what you're trying to communicate."
+                "intent": "unknown",
+                "confidence": 0.1,
+                "expression": "neutral",
+                "emotion_tier": "mild",
+                "message": "I'm not sure what you're trying to communicate.",
             }
 
         # Determine primary intent based on confidence-weighted voting
         intent_votes = {}
         expression_votes = {}
-        emotion_tier_votes = {'mild': 0, 'moderate': 0, 'strong': 0, 'urgent': 0}
+        emotion_tier_votes = {"mild": 0, "moderate": 0, "strong": 0, "urgent": 0}
 
         for input_result, weight in zip(inputs, weights):
             # Accumulate votes for intent
-            intent = input_result['intent']
+            intent = input_result["intent"]
             if intent not in intent_votes:
                 intent_votes[intent] = 0
             intent_votes[intent] += weight
 
             # Accumulate votes for expression
-            expression = input_result.get('expression', 'neutral')
+            expression = input_result.get("expression", "neutral")
             if expression not in expression_votes:
                 expression_votes[expression] = 0
             expression_votes[expression] += weight
 
             # Accumulate votes for emotion tier
-            tier = input_result.get('emotion_tier', 'mild')
+            tier = input_result.get("emotion_tier", "mild")
             emotion_tier_votes[tier] += weight
 
         # Find the winners
         best_intent = max(intent_votes.items(), key=lambda x: x[1])[0]
-        best_expression = max(expression_votes.items(), key=lambda x: x[1])[0] if expression_votes else 'neutral'
+        best_expression = (
+            max(expression_votes.items(), key=lambda x: x[1])[0]
+            if expression_votes
+            else "neutral"
+        )
         best_emotion_tier = max(emotion_tier_votes.items(), key=lambda x: x[1])[0]
 
         # Calculate overall confidence
         total_weight = sum(weights)
-        confidence = sum(result['confidence'] * weight for result, weight in zip(inputs, weights)) / total_weight if total_weight > 0 else 0.5
+        confidence = (
+            sum(
+                result["confidence"] * weight for result, weight in zip(inputs, weights)
+            )
+            / total_weight
+            if total_weight > 0
+            else 0.5
+        )
 
         # Get a message from the best result
         for input_result in inputs:
-            if input_result.get('intent') == best_intent and 'message' in input_result:
-                best_message = input_result['message']
+            if input_result.get("intent") == best_intent and "message" in input_result:
+                best_message = input_result["message"]
                 break
         else:
             best_message = "I'm trying to communicate something."
 
         # Construct result
         result = {
-            'intent': best_intent,
-            'confidence': confidence,
-            'expression': best_expression,
-            'emotion_tier': best_emotion_tier,
-            'message': best_message,
-            'multimodal': True,
-            'inputs': [i['intent'] for i in inputs]
+            "intent": best_intent,
+            "confidence": confidence,
+            "expression": best_expression,
+            "emotion_tier": best_emotion_tier,
+            "message": best_message,
+            "multimodal": True,
+            "inputs": [i["intent"] for i in inputs],
         }
 
         # Record multimodal interaction for learning
-        input_key = '+'.join(sorted([i for i in [gesture, sound, eye_data.get('region') if eye_data else None] if i]))
+        input_key = "+".join(
+            sorted(
+                [
+                    i
+                    for i in [
+                        gesture,
+                        sound,
+                        eye_data.get("region") if eye_data else None,
+                    ]
+                    if i
+                ]
+            )
+        )
         if input_key:
-            self.record_interaction('multimodal', input_key, result)
+            self.record_interaction("multimodal", input_key, result)
 
-        self.logger.info(f"Multimodal processing result: {best_intent} "
-                      f"(confidence: {confidence:.2f})")
+        self.logger.info(
+            f"Multimodal processing result: {best_intent} "
+            f"(confidence: {confidence:.2f})"
+        )
 
         return result
 
@@ -525,9 +585,13 @@ class NonverbalEngine:
 
         # Provide a summary of what was learned
         summary = {
-            "gestures_updated": sum(1 for g in self.gesture_map if g in self.usage_stats.get("gestures", {})),
-            "symbols_updated": sum(1 for s in self.symbol_map if s in self.usage_stats.get("symbols", {})),
-            "timestamp": datetime.now().isoformat()
+            "gestures_updated": sum(
+                1 for g in self.gesture_map if g in self.usage_stats.get("gestures", {})
+            ),
+            "symbols_updated": sum(
+                1 for s in self.symbol_map if s in self.usage_stats.get("symbols", {})
+            ),
+            "timestamp": datetime.now().isoformat(),
         }
 
         return summary
@@ -545,15 +609,19 @@ class NonverbalEngine:
         """
         # Default emotional mapping
         emotion_map = {
-            'nod': {'agreement': 0.9, 'acceptance': 0.8, 'interest': 0.6},
-            'shake': {'disagreement': 0.9, 'rejection': 0.8, 'frustration': 0.5},
-            'point_up': {'urgency': 0.8, 'attention': 0.9, 'importance': 0.7},
-            'wave': {'greeting': 0.9, 'friendliness': 0.8, 'openness': 0.7},
-            'thumbs_up': {'approval': 0.9, 'satisfaction': 0.8, 'happiness': 0.7},
-            'thumbs_down': {'disapproval': 0.9, 'dissatisfaction': 0.8, 'disappointment': 0.7},
-            'open_palm': {'stopping': 0.9, 'boundary': 0.8, 'caution': 0.7},
-            'stimming': {'anxiety': 0.8, 'overwhelm': 0.7, 'self-regulation': 0.9},
-            'rapid_blink': {'distress': 0.7, 'anxiety': 0.6, 'overwhelm': 0.8}
+            "nod": {"agreement": 0.9, "acceptance": 0.8, "interest": 0.6},
+            "shake": {"disagreement": 0.9, "rejection": 0.8, "frustration": 0.5},
+            "point_up": {"urgency": 0.8, "attention": 0.9, "importance": 0.7},
+            "wave": {"greeting": 0.9, "friendliness": 0.8, "openness": 0.7},
+            "thumbs_up": {"approval": 0.9, "satisfaction": 0.8, "happiness": 0.7},
+            "thumbs_down": {
+                "disapproval": 0.9,
+                "dissatisfaction": 0.8,
+                "disappointment": 0.7,
+            },
+            "open_palm": {"stopping": 0.9, "boundary": 0.8, "caution": 0.7},
+            "stimming": {"anxiety": 0.8, "overwhelm": 0.7, "self-regulation": 0.9},
+            "rapid_blink": {"distress": 0.7, "anxiety": 0.6, "overwhelm": 0.8},
         }
 
         # Return the emotional mapping for the gesture, or an empty dict if not found
@@ -562,261 +630,262 @@ class NonverbalEngine:
     def _get_default_gesture_map(self):
         """Get default gesture mappings"""
         return {
-            'nod': {
-                'intent': 'affirm',
-                'confidence': 0.9,
-                'expression': 'positive',
-                'emotion_tier': 'moderate'
+            "nod": {
+                "intent": "affirm",
+                "confidence": 0.9,
+                "expression": "positive",
+                "emotion_tier": "moderate",
             },
-            'shake': {
-                'intent': 'deny',
-                'confidence': 0.9,
-                'expression': 'negative',
-                'emotion_tier': 'moderate'
+            "shake": {
+                "intent": "deny",
+                "confidence": 0.9,
+                "expression": "negative",
+                "emotion_tier": "moderate",
             },
-            'point_up': {
-                'intent': 'help',
-                'confidence': 0.8,
-                'expression': 'urgent',
-                'emotion_tier': 'moderate'
+            "point_up": {
+                "intent": "help",
+                "confidence": 0.8,
+                "expression": "urgent",
+                "emotion_tier": "moderate",
             },
-            'wave': {
-                'intent': 'greet',
-                'confidence': 0.8,
-                'expression': 'positive',
-                'emotion_tier': 'mild'
+            "wave": {
+                "intent": "greet",
+                "confidence": 0.8,
+                "expression": "positive",
+                "emotion_tier": "mild",
             },
-            'thumbs_up': {
-                'intent': 'like',
-                'confidence': 0.9,
-                'expression': 'positive',
-                'emotion_tier': 'strong',
-                'message': "That's great!"
+            "thumbs_up": {
+                "intent": "like",
+                "confidence": 0.9,
+                "expression": "positive",
+                "emotion_tier": "strong",
+                "message": "That's great!",
             },
-            'thumbs_down': {
-                'intent': 'dislike',
-                'confidence': 0.9,
-                'expression': 'negative',
-                'emotion_tier': 'strong'
+            "thumbs_down": {
+                "intent": "dislike",
+                "confidence": 0.9,
+                "expression": "negative",
+                "emotion_tier": "strong",
             },
-            'open_palm': {
-                'intent': 'stop',
-                'confidence': 0.8,
-                'expression': 'negative',
-                'emotion_tier': 'strong'
+            "open_palm": {
+                "intent": "stop",
+                "confidence": 0.8,
+                "expression": "negative",
+                "emotion_tier": "strong",
             },
-            'stimming': {
-                'intent': 'self_regulate',
-                'confidence': 0.7,
-                'expression': 'negative',
-                'emotion_tier': 'strong'
+            "stimming": {
+                "intent": "self_regulate",
+                "confidence": 0.7,
+                "expression": "negative",
+                "emotion_tier": "strong",
             },
-            'rapid_blink': {
-                'intent': 'overwhelmed',
-                'confidence': 0.7,
-                'expression': 'negative',
-                'emotion_tier': 'urgent'
-            }
+            "rapid_blink": {
+                "intent": "overwhelmed",
+                "confidence": 0.7,
+                "expression": "negative",
+                "emotion_tier": "urgent",
+            },
         }
 
     def _get_default_symbol_map(self):
         """Get default symbol mappings"""
         return {
-            'food': {
-                'intent': 'hungry',
-                'confidence': 0.9,
-                'expression': 'urgent',
-                'emotion_tier': 'moderate'
+            "food": {
+                "intent": "hungry",
+                "confidence": 0.9,
+                "expression": "urgent",
+                "emotion_tier": "moderate",
             },
-            'drink': {
-                'intent': 'thirsty',
-                'confidence': 0.9,
-                'expression': 'urgent',
-                'emotion_tier': 'moderate'
+            "drink": {
+                "intent": "thirsty",
+                "confidence": 0.9,
+                "expression": "urgent",
+                "emotion_tier": "moderate",
             },
-            'bathroom': {
-                'intent': 'bathroom',
-                'confidence': 0.9,
-                'expression': 'urgent',
-                'emotion_tier': 'strong'
+            "bathroom": {
+                "intent": "bathroom",
+                "confidence": 0.9,
+                "expression": "urgent",
+                "emotion_tier": "strong",
             },
-            'pain': {
-                'intent': 'pain',
-                'confidence': 0.9,
-                'expression': 'negative',
-                'emotion_tier': 'strong'
+            "pain": {
+                "intent": "pain",
+                "confidence": 0.9,
+                "expression": "negative",
+                "emotion_tier": "strong",
             },
-            'happy': {
-                'intent': 'express_joy',
-                'confidence': 0.9,
-                'expression': 'positive',
-                'emotion_tier': 'moderate'
+            "happy": {
+                "intent": "express_joy",
+                "confidence": 0.9,
+                "expression": "positive",
+                "emotion_tier": "moderate",
             },
-            'sad': {
-                'intent': 'express_sadness',
-                'confidence': 0.9,
-                'expression': 'negative',
-                'emotion_tier': 'moderate'
+            "sad": {
+                "intent": "express_sadness",
+                "confidence": 0.9,
+                "expression": "negative",
+                "emotion_tier": "moderate",
             },
-            'help': {
-                'intent': 'need_help',
-                'confidence': 0.9,
-                'expression': 'urgent',
-                'emotion_tier': 'strong'
+            "help": {
+                "intent": "need_help",
+                "confidence": 0.9,
+                "expression": "urgent",
+                "emotion_tier": "strong",
             },
-            'question': {
-                'intent': 'ask_question',
-                'confidence': 0.8,
-                'expression': 'inquisitive',
-                'emotion_tier': 'mild'
+            "question": {
+                "intent": "ask_question",
+                "confidence": 0.8,
+                "expression": "inquisitive",
+                "emotion_tier": "mild",
             },
-            'tired': {
-                'intent': 'tired',
-                'confidence': 0.8,
-                'expression': 'negative',
-                'emotion_tier': 'moderate'
+            "tired": {
+                "intent": "tired",
+                "confidence": 0.8,
+                "expression": "negative",
+                "emotion_tier": "moderate",
             },
-            'medicine': {
-                'intent': 'need_medicine',
-                'confidence': 0.9,
-                'expression': 'urgent',
-                'emotion_tier': 'strong'
+            "medicine": {
+                "intent": "need_medicine",
+                "confidence": 0.9,
+                "expression": "urgent",
+                "emotion_tier": "strong",
             },
-            'yes': {
-                'intent': 'affirm',
-                'confidence': 0.9,
-                'expression': 'positive',
-                'emotion_tier': 'moderate'
+            "yes": {
+                "intent": "affirm",
+                "confidence": 0.9,
+                "expression": "positive",
+                "emotion_tier": "moderate",
             },
-            'no': {
-                'intent': 'deny',
-                'confidence': 0.9,
-                'expression': 'negative',
-                'emotion_tier': 'moderate'
+            "no": {
+                "intent": "deny",
+                "confidence": 0.9,
+                "expression": "negative",
+                "emotion_tier": "moderate",
             },
-            'play': {
-                'intent': 'want_play',
-                'confidence': 0.8,
-                'expression': 'positive',
-                'emotion_tier': 'mild'
+            "play": {
+                "intent": "want_play",
+                "confidence": 0.8,
+                "expression": "positive",
+                "emotion_tier": "mild",
             },
-            'music': {
-                'intent': 'want_music',
-                'confidence': 0.8,
-                'expression': 'positive',
-                'emotion_tier': 'mild'
+            "music": {
+                "intent": "want_music",
+                "confidence": 0.8,
+                "expression": "positive",
+                "emotion_tier": "mild",
             },
-            'book': {
-                'intent': 'want_book',
-                'confidence': 0.8,
-                'expression': 'positive',
-                'emotion_tier': 'mild'
+            "book": {
+                "intent": "want_book",
+                "confidence": 0.8,
+                "expression": "positive",
+                "emotion_tier": "mild",
             },
-            'outside': {
-                'intent': 'want_outside',
-                'confidence': 0.8,
-                'expression': 'positive',
-                'emotion_tier': 'moderate'
-            }
+            "outside": {
+                "intent": "want_outside",
+                "confidence": 0.8,
+                "expression": "positive",
+                "emotion_tier": "moderate",
+            },
         }
 
     def _get_default_eye_region_map(self):
         """Get default eye region mappings"""
         return {
-            'top_left': {
-                'intent': 'previous',
-                'confidence': 0.7,
-                'expression': 'neutral',
-                'emotion_tier': 'mild'
+            "top_left": {
+                "intent": "previous",
+                "confidence": 0.7,
+                "expression": "neutral",
+                "emotion_tier": "mild",
             },
-            'top_right': {
-                'intent': 'next',
-                'confidence': 0.7,
-                'expression': 'neutral',
-                'emotion_tier': 'mild'
+            "top_right": {
+                "intent": "next",
+                "confidence": 0.7,
+                "expression": "neutral",
+                "emotion_tier": "mild",
             },
-            'bottom_left': {
-                'intent': 'cancel',
-                'confidence': 0.7,
-                'expression': 'negative',
-                'emotion_tier': 'moderate'
+            "bottom_left": {
+                "intent": "cancel",
+                "confidence": 0.7,
+                "expression": "negative",
+                "emotion_tier": "moderate",
             },
-            'bottom_right': {
-                'intent': 'confirm',
-                'confidence': 0.7,
-                'expression': 'positive',
-                'emotion_tier': 'moderate'
+            "bottom_right": {
+                "intent": "confirm",
+                "confidence": 0.7,
+                "expression": "positive",
+                "emotion_tier": "moderate",
             },
-            'center': {
-                'intent': 'select',
-                'confidence': 0.8,
-                'expression': 'attentive',
-                'emotion_tier': 'mild'
+            "center": {
+                "intent": "select",
+                "confidence": 0.8,
+                "expression": "attentive",
+                "emotion_tier": "mild",
             },
-            'long_stare': {
-                'intent': 'focus',
-                'confidence': 0.8,
-                'expression': 'attentive',
-                'emotion_tier': 'strong'
+            "long_stare": {
+                "intent": "focus",
+                "confidence": 0.8,
+                "expression": "attentive",
+                "emotion_tier": "strong",
             },
-            'rapid_scan': {
-                'intent': 'searching',
-                'confidence': 0.7,
-                'expression': 'inquisitive',
-                'emotion_tier': 'moderate'
-            }
+            "rapid_scan": {
+                "intent": "searching",
+                "confidence": 0.7,
+                "expression": "inquisitive",
+                "emotion_tier": "moderate",
+            },
         }
 
     def _get_default_sound_pattern_map(self):
         """Get default sound pattern mappings"""
         return {
-            'hum': {
-                'intent': 'thinking',
-                'confidence': 0.6,
-                'expression': 'neutral',
-                'emotion_tier': 'mild'
+            "hum": {
+                "intent": "thinking",
+                "confidence": 0.6,
+                "expression": "neutral",
+                "emotion_tier": "mild",
             },
-            'click': {
-                'intent': 'select',
-                'confidence': 0.7,
-                'expression': 'neutral',
-                'emotion_tier': 'mild'
+            "click": {
+                "intent": "select",
+                "confidence": 0.7,
+                "expression": "neutral",
+                "emotion_tier": "mild",
             },
-            'distress': {
-                'intent': 'help',
-                'confidence': 0.9,
-                'expression': 'negative',
-                'emotion_tier': 'urgent'
+            "distress": {
+                "intent": "help",
+                "confidence": 0.9,
+                "expression": "negative",
+                "emotion_tier": "urgent",
             },
-            'soft': {
-                'intent': 'unsure',
-                'confidence': 0.6,
-                'expression': 'neutral',
-                'emotion_tier': 'mild'
+            "soft": {
+                "intent": "unsure",
+                "confidence": 0.6,
+                "expression": "neutral",
+                "emotion_tier": "mild",
             },
-            'loud': {
-                'intent': 'excited',
-                'confidence': 0.8,
-                'expression': 'positive',
-                'emotion_tier': 'strong'
+            "loud": {
+                "intent": "excited",
+                "confidence": 0.8,
+                "expression": "positive",
+                "emotion_tier": "strong",
             },
-            'short_vowel': {
-                'intent': 'acknowledge',
-                'confidence': 0.7,
-                'expression': 'neutral',
-                'emotion_tier': 'mild'
+            "short_vowel": {
+                "intent": "acknowledge",
+                "confidence": 0.7,
+                "expression": "neutral",
+                "emotion_tier": "mild",
             },
-            'repeated_sound': {
-                'intent': 'insistent',
-                'confidence': 0.8,
-                'expression': 'urgent',
-                'emotion_tier': 'strong'
-            }
+            "repeated_sound": {
+                "intent": "insistent",
+                "confidence": 0.8,
+                "expression": "urgent",
+                "emotion_tier": "strong",
+            },
         }
 
 
 # Global singleton instance of NonverbalEngine
 _nonverbal_engine = None
+
 
 def get_nonverbal_engine() -> NonverbalEngine:
     """
@@ -844,7 +913,7 @@ if __name__ == "__main__":
     print(result)
 
     print("\nEye tracking: center")
-    result = engine.process_eye_movement({'region': 'center', 'x': 0.5, 'y': 0.5})
+    result = engine.process_eye_movement({"region": "center", "x": 0.5, "y": 0.5})
     print(result)
 
     print("\nEmotional indicators for thumbs_up:")

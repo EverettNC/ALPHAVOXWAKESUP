@@ -45,9 +45,9 @@ To make the model more relevant to nonverbal autism and neurodivergent users, co
 ### Public Datasets
 
 - **HaGRID Dataset**: Contains hand gesture images for autism-relevant gestures like pointing or stimming. Requires preprocessing to extract features.
-  
+
 - **DHG-14/28 Dataset**: Includes skeletal joint data for hand gestures, adaptable for AlphaVox's feature set.
-  
+
 - **Jester Dataset**: Video-based hand gestures useful for dynamic gestures like waving or stimming. Requires video-to-feature extraction.
 
 ### Custom Collection

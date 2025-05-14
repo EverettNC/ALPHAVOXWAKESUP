@@ -6,25 +6,25 @@
 // Initialize when the DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Initializing AlphaVox Cyber UI...');
-    
+
     // Apply cyber UI elements
     initCyberUI();
-    
+
     // Add self-learning visualization if needed
     if (document.querySelector('.add-self-learning')) {
         addSelfLearningPanel();
     }
-    
+
     // Initialize voice profile selector if needed
     if (document.querySelector('.add-voice-profile')) {
         addVoiceProfileSelector();
     }
-    
+
     // Initialize message history if needed
     if (document.querySelector('.add-message-history')) {
         addMessageHistoryPanel();
     }
-    
+
     // Start animation loop for dynamic elements
     requestAnimationFrame(animationLoop);
 });
@@ -62,17 +62,17 @@ function initCyberUI() {
         gridOverlay.className = 'cyber-grid-overlay';
         document.body.appendChild(gridOverlay);
     }
-    
+
     // Add hexagonal background if not already present
     if (!document.querySelector('.hex-bg')) {
         const hexBg = document.createElement('div');
         hexBg.className = 'hex-bg';
         document.body.appendChild(hexBg);
     }
-    
+
     // Update standard elements with cyber styling
     convertStandardElementsToCyber();
-    
+
     // Add pulsing effect to status indicators
     document.querySelectorAll('.badge').forEach(badge => {
         if (badge.classList.contains('bg-success')) {
@@ -89,7 +89,7 @@ function convertStandardElementsToCyber() {
     document.querySelectorAll('.card').forEach(card => {
         if (!card.classList.contains('cyber-card')) {
             card.classList.add('cyber-card');
-            
+
             // Add corner accents if not already present
             if (!card.querySelector('.card-corners')) {
                 const corners = document.createElement('div');
@@ -98,49 +98,49 @@ function convertStandardElementsToCyber() {
             }
         }
     });
-    
+
     // Convert all primary buttons to cyber-buttons
     document.querySelectorAll('.btn-primary').forEach(btn => {
         if (!btn.classList.contains('cyber-btn')) {
             btn.classList.add('cyber-btn');
         }
     });
-    
+
     // Convert standard inputs to cyber-inputs
     document.querySelectorAll('input.form-control').forEach(input => {
         if (!input.classList.contains('cyber-input')) {
             input.classList.add('cyber-input');
         }
     });
-    
+
     // Convert standard selects to cyber-selects
     document.querySelectorAll('select.form-select').forEach(select => {
         if (!select.classList.contains('cyber-select')) {
             select.classList.add('cyber-select');
         }
     });
-    
+
     // Convert standard progress bars to cyber-progress
     document.querySelectorAll('.progress').forEach(progress => {
         if (!progress.classList.contains('cyber-progress')) {
             progress.classList.add('cyber-progress');
         }
     });
-    
+
     // Apply cyber-text class to monospace elements
     document.querySelectorAll('code, .text-monospace').forEach(el => {
         if (!el.classList.contains('cyber-text')) {
             el.classList.add('cyber-text');
         }
     });
-    
+
     // Apply cyber-title class to card headers
     document.querySelectorAll('.card-header h5').forEach(title => {
         if (!title.classList.contains('cyber-title')) {
             title.classList.add('cyber-title');
         }
     });
-    
+
     // Convert container to cyber-container if needed
     const container = document.querySelector('.container');
     if (container && !container.classList.contains('cyber-container')) {
@@ -148,7 +148,7 @@ function convertStandardElementsToCyber() {
         container.classList.remove('container');
         container.classList.add('container-fluid');
     }
-    
+
     // Convert symbol-card elements
     document.querySelectorAll('.symbol-card').forEach(card => {
         // Add glow effect to icons inside symbol cards
@@ -210,7 +210,7 @@ function addSelfLearningPanel() {
             </div>
         </div>
     `;
-    
+
     // Find the right position to insert the panel
     const targetElement = document.querySelector('.add-self-learning');
     if (targetElement) {
@@ -223,10 +223,10 @@ function addSelfLearningPanel() {
             container.appendChild(row);
         }
     }
-    
+
     // Initialize optimization bars
     initOptimizationBars();
-    
+
     // Set up learning toggle
     const learningToggle = document.getElementById('enable-learning');
     if (learningToggle) {
@@ -238,7 +238,7 @@ function addSelfLearningPanel() {
             );
         });
     }
-    
+
     // Add initial status messages
     updateSelfLearningStatus('AlphaVox neural core online', true);
     updateSelfLearningStatus('Initializing adaptive learning systems', true);
@@ -269,24 +269,24 @@ function addVoiceProfileSelector() {
             ${voiceProfiles[0].description}
         </div>
     `;
-    
+
     // Add the selector to the target element
     const targetElement = document.querySelector('.add-voice-profile');
     if (targetElement) {
         targetElement.appendChild(voiceSelector);
-        
+
         // Set up voice profile change handler
         const voiceProfileSelect = document.getElementById('voice-profile');
         if (voiceProfileSelect) {
             voiceProfileSelect.addEventListener('change', function() {
                 currentVoiceProfile = this.value;
-                
+
                 // Update description
                 const selectedProfile = voiceProfiles.find(p => p.id === currentVoiceProfile);
                 if (selectedProfile) {
                     document.getElementById('voice-description').textContent = selectedProfile.description;
                 }
-                
+
                 // Update status
                 if (document.getElementById('learning-status-container')) {
                     updateSelfLearningStatus(`Voice profile changed to: ${selectedProfile.name}`, true);
@@ -314,12 +314,12 @@ function addMessageHistoryPanel() {
             <div class="text-muted text-center py-3">No messages yet</div>
         </div>
     `;
-    
+
     // Add the panel to the target element
     const targetElement = document.querySelector('.add-message-history');
     if (targetElement) {
         targetElement.appendChild(historyPanel);
-        
+
         // Setup clear history button
         const clearBtn = document.getElementById('clear-history');
         if (clearBtn) {
@@ -340,12 +340,12 @@ function addMessageHistoryPanel() {
 function initOptimizationBars() {
     const container = document.getElementById('optimization-bars');
     if (!container) return;
-    
+
     // Create optimization bars for each area
     optimizationAreas.forEach((area, index) => {
         const progress = Math.random() * 0.5 + 0.3; // Random progress between 30% and 80%
         const barId = `opt-bar-${index}`;
-        
+
         const barHtml = `
             <div class="optimization-item">
                 <div class="d-flex justify-content-between">
@@ -353,12 +353,12 @@ function initOptimizationBars() {
                     <small id="${barId}-value">${Math.round(progress * 100)}%</small>
                 </div>
                 <div class="progress cyber-progress">
-                    <div id="${barId}" class="progress-bar bg-info" role="progressbar" 
+                    <div id="${barId}" class="progress-bar bg-info" role="progressbar"
                          style="width: ${progress * 100}%"></div>
                 </div>
             </div>
         `;
-        
+
         container.innerHTML += barHtml;
     });
 }
@@ -369,7 +369,7 @@ function initOptimizationBars() {
 function updateSelfLearningStatus(message, enabled) {
     const container = document.getElementById('learning-status-container');
     if (!container) return;
-    
+
     // Add new status message
     const statusLine = document.createElement('div');
     statusLine.className = 'status-line';
@@ -377,17 +377,17 @@ function updateSelfLearningStatus(message, enabled) {
         <span class="timestamp">[${formatTimestamp(new Date())}]</span>
         <span class="status-message ${enabled ? '' : 'status-disabled'}">${message}</span>
     `;
-    
+
     container.appendChild(statusLine);
-    
+
     // Keep only the last 10 status messages
     while (container.children.length > 10) {
         container.removeChild(container.firstChild);
     }
-    
+
     // Scroll to bottom
     container.scrollTop = container.scrollHeight;
-    
+
     // Update a random optimization bar
     if (enabled) {
         updateRandomOptimizationBar();
@@ -401,18 +401,18 @@ function updateRandomOptimizationBar() {
     // Pick a random optimization area
     const index = Math.floor(Math.random() * optimizationAreas.length);
     const barId = `opt-bar-${index}`;
-    
+
     const bar = document.getElementById(barId);
     const barValue = document.getElementById(`${barId}-value`);
-    
+
     if (bar && barValue) {
         // Get current width and increase it slightly
         let currentWidth = parseFloat(bar.style.width);
         if (isNaN(currentWidth)) currentWidth = 50;
-        
+
         // Increment by a small amount
         let newWidth = Math.min(currentWidth + Math.random() * 5, 100);
-        
+
         // Animate the change
         bar.style.width = `${newWidth}%`;
         barValue.textContent = `${Math.round(newWidth)}%`;
@@ -429,12 +429,12 @@ function addToMessageHistory(type, content) {
         content: content,
         timestamp: new Date()
     });
-    
+
     // Keep only the last 10 messages
     if (messageHistory.length > 10) {
         messageHistory.shift();
     }
-    
+
     // Update the display
     updateMessageHistory();
 }
@@ -445,17 +445,17 @@ function addToMessageHistory(type, content) {
 function updateMessageHistory() {
     const container = document.getElementById('message-history-container');
     if (!container) return;
-    
+
     if (messageHistory.length === 0) {
         container.innerHTML = '<div class="text-muted text-center py-3">No messages yet</div>';
         return;
     }
-    
+
     // Create HTML for messages
     const messagesHtml = messageHistory.map(msg => {
         let iconClass = 'fas fa-comment';
         let msgClass = '';
-        
+
         switch (msg.type) {
             case 'user':
                 iconClass = 'fas fa-user';
@@ -474,7 +474,7 @@ function updateMessageHistory() {
                 msgClass = 'symbol-message';
                 break;
         }
-        
+
         return `
             <div class="history-message ${msgClass}">
                 <div class="message-icon">
@@ -487,9 +487,9 @@ function updateMessageHistory() {
             </div>
         `;
     }).join('');
-    
+
     container.innerHTML = messagesHtml;
-    
+
     // Scroll to bottom
     container.scrollTop = container.scrollHeight;
 }
@@ -508,7 +508,7 @@ function formatTimestamp(date) {
 function animationLoop(timestamp) {
     // Update eye tracking dot position if it exists
     updateEyeTrackingDot();
-    
+
     // Update self-learning status periodically if enabled
     if (window.selfLearningEnabled && Math.random() < 0.001) {
         const container = document.getElementById('learning-status-container');
@@ -523,12 +523,12 @@ function animationLoop(timestamp) {
                 'Improving emotional recognition',
                 'Adjusting adaptive parameters'
             ];
-            
+
             const randomMessage = messages[Math.floor(Math.random() * messages.length)];
             updateSelfLearningStatus(randomMessage, true);
         }
     }
-    
+
     // Schedule next frame
     requestAnimationFrame(animationLoop);
 }
@@ -539,18 +539,18 @@ function animationLoop(timestamp) {
 function updateEyeTrackingDot() {
     const dot = document.getElementById('eye-position-dot');
     if (!dot) return;
-    
+
     const overlay = document.getElementById('eye-tracking-overlay');
     if (!overlay) return;
-    
+
     // Simulate eye movement with sine waves
     const t = Date.now() / 1000;
     const width = overlay.clientWidth;
     const height = overlay.clientHeight;
-    
+
     const x = width * 0.5 + Math.sin(t) * width * 0.3;
     const y = height * 0.5 + Math.cos(t * 1.3) * height * 0.3;
-    
+
     dot.style.left = `${x}px`;
     dot.style.top = `${y}px`;
 }
@@ -562,7 +562,7 @@ function processTextInput(text) {
     // Show processing state
     const responseContainer = document.getElementById('response-container');
     if (!responseContainer) return;
-    
+
     responseContainer.innerHTML = `
         <div class="alert alert-info cyber-response">
             <div class="d-flex align-items-center">
@@ -578,7 +578,7 @@ function processTextInput(text) {
             </div>
         </div>
     `;
-    
+
     // Call the API
     fetch('/process-input', {
         method: 'POST',
@@ -595,15 +595,15 @@ function processTextInput(text) {
         // Add to message history
         addToMessageHistory('user', text);
         addToMessageHistory('alphavox', data.message);
-        
+
         // Update UI with response
         displayResponse(data);
-        
+
         // Play audio if available
         if (data.speech_url) {
             playAudio(data.speech_url);
         }
-        
+
         // Update self-learning status
         if (document.getElementById('learning-status-container')) {
             updateSelfLearningStatus(`Processing text input: "${text}"`, true);
@@ -627,7 +627,7 @@ function processGesture(gesture) {
     // Show processing state
     const responseContainer = document.getElementById('response-container');
     if (!responseContainer) return;
-    
+
     responseContainer.innerHTML = `
         <div class="alert alert-info cyber-response">
             <div class="d-flex align-items-center">
@@ -643,7 +643,7 @@ function processGesture(gesture) {
             </div>
         </div>
     `;
-    
+
     // Call the API
     fetch(`/speak/${gesture}`, {
         method: 'POST',
@@ -659,15 +659,15 @@ function processGesture(gesture) {
         // Add to message history
         addToMessageHistory('gesture', `<i class="fas fa-hand-paper me-2"></i> ${gesture}`);
         addToMessageHistory('alphavox', data.message);
-        
+
         // Update UI with response
         displayResponse(data);
-        
+
         // Play audio if available
         if (data.speech_url) {
             playAudio(data.speech_url);
         }
-        
+
         // Update self-learning status
         if (document.getElementById('learning-status-container')) {
             updateSelfLearningStatus(`Processing gesture: "${gesture}"`, true);
@@ -689,10 +689,10 @@ function processGesture(gesture) {
  */
 function processSymbol(symbol) {
     // Show processing state
-    const responseContainer = document.getElementById('symbol-response-container') || 
+    const responseContainer = document.getElementById('symbol-response-container') ||
                              document.getElementById('response-container');
     if (!responseContainer) return;
-    
+
     responseContainer.innerHTML = `
         <div class="alert alert-info cyber-response">
             <div class="d-flex align-items-center">
@@ -708,7 +708,7 @@ function processSymbol(symbol) {
             </div>
         </div>
     `;
-    
+
     // Call the API
     fetch(`/symbol/${symbol}`, {
         method: 'POST',
@@ -726,18 +726,18 @@ function processSymbol(symbol) {
             addToMessageHistory('symbol', `<i class="fas fa-th-large me-2"></i> ${symbol}`);
             addToMessageHistory('alphavox', data.message);
         }
-        
+
         // Update recent symbols list if it exists
         updateRecentSymbols(symbol);
-        
+
         // Update UI with response
         displayResponse(data, responseContainer);
-        
+
         // Play audio if available
         if (data.speech_url) {
             playAudio(data.speech_url);
         }
-        
+
         // Update self-learning status if panel exists
         if (document.getElementById('learning-status-container')) {
             updateSelfLearningStatus(`Processing symbol: "${symbol}"`, true);
@@ -760,10 +760,10 @@ function processSymbol(symbol) {
 function updateRecentSymbols(symbol) {
     const recentSymbols = document.getElementById('recent-symbols');
     if (!recentSymbols) return;
-    
+
     const container = recentSymbols.querySelector('.d-flex');
     if (!container) return;
-    
+
     // Symbol to icon mapping
     const symbolIcons = {
         'food': '<i class="fas fa-utensils text-warning"></i>',
@@ -783,7 +783,7 @@ function updateRecentSymbols(symbol) {
         'book': '<i class="fas fa-book text-secondary"></i>',
         'outside': '<i class="fas fa-tree text-success"></i>'
     };
-    
+
     // Create symbol element
     const symbolElement = document.createElement('div');
     symbolElement.className = 'recent-symbol';
@@ -792,15 +792,15 @@ function updateRecentSymbols(symbol) {
         ${symbolIcons[symbol] || `<i class="fas fa-square text-info"></i>`}
         <span>${symbol}</span>
     `;
-    
+
     // Add click handler
     symbolElement.addEventListener('click', function() {
         processSymbol(symbol);
     });
-    
+
     // Add to container (at the beginning)
     container.insertBefore(symbolElement, container.firstChild);
-    
+
     // Keep only the last 5 symbols
     while (container.children.length > 5) {
         container.removeChild(container.lastChild);
@@ -813,11 +813,11 @@ function updateRecentSymbols(symbol) {
 function displayResponse(data, container = null) {
     const responseContainer = container || document.getElementById('response-container');
     if (!responseContainer) return;
-    
+
     // Determine alert type based on expression
     let alertClass = 'alert-info';
     let icon = 'fas fa-comment';
-    
+
     switch (data.expression) {
         case 'positive':
             alertClass = 'alert-success';
@@ -836,7 +836,7 @@ function displayResponse(data, container = null) {
             icon = 'fas fa-question-circle';
             break;
     }
-    
+
     // Format the response
     responseContainer.innerHTML = `
         <div class="alert ${alertClass} cyber-response">
@@ -861,7 +861,7 @@ function displayResponse(data, container = null) {
  */
 function playAudio(url) {
     console.log('Playing audio from:', url);
-    
+
     // Create a visible audio element to ensure it works across browsers
     let audioContainer = document.getElementById('audio-container');
     if (!audioContainer) {
@@ -875,25 +875,25 @@ function playAudio(url) {
         audioContainer.style.overflow = 'hidden';
         document.body.appendChild(audioContainer);
     }
-    
+
     // Clear previous audio if any
     audioContainer.innerHTML = '';
-    
+
     // Create the audio element
     const audioPlayer = document.createElement('audio');
     audioPlayer.controls = false; // Set to true for debugging
     audioPlayer.src = url;
     audioPlayer.style.width = '1px';
     audioPlayer.style.height = '1px';
-    
+
     // Add to DOM
     audioContainer.appendChild(audioPlayer);
-    
+
     // Add error handling
     audioPlayer.onerror = function(error) {
         console.error('Error playing audio:', error);
     };
-    
+
     // Play the audio
     setTimeout(() => {
         try {
@@ -901,7 +901,7 @@ function playAudio(url) {
                 .then(() => console.log('Audio playback started successfully'))
                 .catch(error => {
                     console.error('Error playing audio:', error);
-                    
+
                     // If autoplay fails, show controls and try again
                     audioPlayer.controls = true;
                     audioPlayer.style.width = '300px';

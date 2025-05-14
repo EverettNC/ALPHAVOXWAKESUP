@@ -18,8 +18,8 @@ def speak(gesture):
     interaction = {"type": "gesture", "input": features}
     user_id = session.get("user_id", "anonymous")
     result = processor.process_interaction(interaction, user_id)
-    speech_url = text_to_speech(result.get("message", "Gesture not recognized"), 
-                               emotion=result.get("emotion", "neutral"), 
+    speech_url = text_to_speech(result.get("message", "Gesture not recognized"),
+                               emotion=result.get("emotion", "neutral"),
                                emotion_tier="moderate")
     return jsonify({
         "status": "success",
@@ -36,8 +36,8 @@ def process_symbol(symbol_name):
     interaction = {"type": "symbol", "input": symbol_name}
     user_id = session.get("user_id", "anonymous")
     result = processor.process_interaction(interaction, user_id)
-    speech_url = text_to_speech(result.get("message", "Symbol not recognized"), 
-                               emotion=result.get("emotion", "neutral"), 
+    speech_url = text_to_speech(result.get("message", "Symbol not recognized"),
+                               emotion=result.get("emotion", "neutral"),
                                emotion_tier="moderate")
     return jsonify({
         "status": "success",

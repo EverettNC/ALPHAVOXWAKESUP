@@ -13,26 +13,28 @@ import random
 from typing import Dict, Any, List, Optional
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, 
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
 logger = logging.getLogger(__name__)
+
 
 class ConversationBridge:
     """
     The ConversationBridge acts as an intermediary between various input analyses
     (eye tracking, nonverbal, etc.) and the generation of appropriate responses.
-    
+
     It handles:
     - Interpretation of emotional states
     - Persona-based response generation
     - Contextual understanding of gaze and other inputs
     - Academic and domain-specific response generation
     """
-    
+
     def __init__(self, persona: str = "default"):
         """
         Initialize the conversation bridge.
-        
+
         Args:
             persona: The starting persona to use for generating responses
                      (default, academic, supportive, child-friendly)
@@ -40,15 +42,15 @@ class ConversationBridge:
         self.persona = persona
         self.context_history = []
         self.session_data = {}
-        
+
         # Load response templates
         self._load_response_templates()
-        
+
         logger.info(f"Conversation Bridge initialized with persona: {persona}")
-    
+
     def _load_response_templates(self):
         """Load response templates for different emotions and personas"""
-        
+
         # Dictionary of emotional responses by persona
         self.response_templates = {
             "default": {
@@ -83,9 +85,8 @@ class ConversationBridge:
                 "perspiration": [
                     "You seem a bit stressed. Would you like to take a moment?",
                     "I notice you might be feeling anxious. Let's pause if needed.",
-                ]
+                ],
             },
-            
             "academic": {
                 "happy": [
                     "Your positive demeanor suggests an optimal state for learning.",
@@ -112,9 +113,8 @@ class ConversationBridge:
                 ],
                 "perspiration": [
                     "Physiological indicators suggest elevated stress levels. Research indicates cognitive performance follows an inverted U-curve in relation to stress.",
-                ]
+                ],
             },
-            
             "supportive": {
                 "happy": [
                     "I'm glad to see you looking happy! Your smile brightens the day.",
@@ -144,9 +144,8 @@ class ConversationBridge:
                 "perspiration": [
                     "You seem a bit stressed. Remember to breathe deeply. I'm here with you.",
                     "When things feel overwhelming, we can pause and reset together.",
-                ]
+                ],
             },
-            
             "child-friendly": {
                 "happy": [
                     "Your smile is super bright today! Like sunshine!",
@@ -173,10 +172,10 @@ class ConversationBridge:
                 ],
                 "perspiration": [
                     "Let's take a deep dragon breath together! In through the nose, out through the mouth!",
-                ]
-            }
+                ],
+            },
         }
-        
+
         # Academic domain responses
         self.academic_domains = {
             "science": {
@@ -191,7 +190,7 @@ class ConversationBridge:
                 "advanced": [
                     "Contemporary scientific epistemology acknowledges both the power and limitations of methodological naturalism while recognizing the role of paradigm shifts in scientific revolutions.",
                     "Meta-analyses and systematic reviews represent hierarchically superior evidence forms, though they remain vulnerable to publication bias and methodological heterogeneity.",
-                ]
+                ],
             },
             "mathematics": {
                 "basic": [
@@ -205,7 +204,7 @@ class ConversationBridge:
                 "advanced": [
                     "Contemporary mathematical research explores the intersections of topology, abstract algebra, and category theory to illuminate structural invariants across seemingly disparate domains.",
                     "Non-Euclidean geometries and transfinite set theory challenged fundamental assumptions, demonstrating mathematics' capacity for self-reinvention through axiomatic reexamination.",
-                ]
+                ],
             },
             "history": {
                 "basic": [
@@ -219,16 +218,16 @@ class ConversationBridge:
                 "advanced": [
                     "Postcolonial historiography challenges Eurocentric narratives through methodological innovations that center previously marginalized epistemologies and lived experiences.",
                     "The linguistic turn in historical analysis interrogates discursive formations as both reflections of and constitutive forces in power relations across temporal and spatial contexts.",
-                ]
-            }
+                ],
+            },
         }
-        
+
         logger.debug("Response templates loaded successfully")
-    
+
     def set_persona(self, persona: str) -> None:
         """
         Change the current persona.
-        
+
         Args:
             persona: The persona to switch to
                     (default, academic, supportive, child-friendly)
@@ -238,11 +237,11 @@ class ConversationBridge:
             logger.info(f"Switched to {persona} persona")
         else:
             logger.warning(f"Unknown persona '{persona}'. Staying with {self.persona}")
-    
+
     def process_analysis(self, analysis: Dict[str, Any]) -> str:
         """
         Process analysis results from various inputs and generate a response.
-        
+
         Args:
             analysis: Dictionary containing analysis results, potentially including:
                      - emotion: Detected emotion (happy, sad, fear, neutral, etc.)
@@ -251,7 +250,7 @@ class ConversationBridge:
                      - blink_detected: Whether blinking was detected
                      - perspiration: Whether perspiration was detected
                      - domain: Optional academic domain being discussed
-        
+
         Returns:
             A generated response string appropriate to the input analysis
         """
@@ -259,41 +258,43 @@ class ConversationBridge:
         self.context_history.append(analysis)
         if len(self.context_history) > 10:
             self.context_history.pop(0)
-        
+
         # If we have an academic domain, use that for response generation
         if "domain" in analysis and self.persona == "academic":
             domain = analysis.get("domain", "science")
             depth = analysis.get("depth", "intermediate")
             return self.generate_academic_response(domain, depth)
-        
+
         # Otherwise generate response based on emotion and other factors
         response = self._generate_response_from_analysis(analysis)
-        
+
         logger.debug(f"Generated response: {response}")
         return response
-    
+
     def _generate_response_from_analysis(self, analysis: Dict[str, Any]) -> str:
         """
         Generate a response based on the analysis.
-        
+
         Args:
             analysis: Dictionary containing analysis results
-        
+
         Returns:
             Generated response string
         """
         # Get the current persona's response templates
-        persona_templates = self.response_templates.get(self.persona, self.response_templates["default"])
-        
+        persona_templates = self.response_templates.get(
+            self.persona, self.response_templates["default"]
+        )
+
         # Extract key factors from analysis
         emotion = analysis.get("emotion", "neutral")
         confidence = analysis.get("emotion_confidence", 0.5)
         gaze = analysis.get("gaze_direction", "center")
         perspiration = analysis.get("perspiration", False)
-        
+
         # List of potential responses based on various factors
         potential_responses = []
-        
+
         # Add emotion-based responses if confidence is high enough
         if confidence >= 0.6:
             if emotion in persona_templates:
@@ -301,32 +302,34 @@ class ConversationBridge:
         else:
             # Lower confidence, use neutral responses
             potential_responses.extend(persona_templates["neutral"])
-        
+
         # Add gaze-direction responses
         if gaze != "center":
             gaze_key = f"gaze_{gaze}"
             if gaze_key in persona_templates:
                 potential_responses.extend(persona_templates[gaze_key])
-        
+
         # Add perspiration response if detected
         if perspiration and "perspiration" in persona_templates:
             potential_responses.extend(persona_templates["perspiration"])
-        
+
         # If we somehow have no responses, use a generic fallback
         if not potential_responses:
             return "I'm here to assist you. How can I help today?"
-        
+
         # Select a response randomly from potential responses
         return random.choice(potential_responses)
-    
-    def generate_academic_response(self, topic: str, depth: str = "intermediate") -> str:
+
+    def generate_academic_response(
+        self, topic: str, depth: str = "intermediate"
+    ) -> str:
         """
         Generate an academic response on a given topic at the specified depth.
-        
+
         Args:
             topic: The academic topic or domain
             depth: The depth of the response (basic, intermediate, advanced)
-        
+
         Returns:
             An academic response string
         """
@@ -336,7 +339,7 @@ class ConversationBridge:
             if topic.lower() in domain_key:
                 domain = domain_key
                 break
-        
+
         # If no matching domain, use the first academic domain as fallback
         if not domain:
             if topic.lower() in ["physics", "chemistry", "biology", "astronomy"]:
@@ -348,26 +351,28 @@ class ConversationBridge:
             else:
                 # Default to science for unknown topics
                 domain = "science"
-        
+
         # Validate depth parameter
         if depth not in ["basic", "intermediate", "advanced"]:
             depth = "intermediate"  # Default to intermediate
-        
+
         # Get responses for this domain and depth
-        domain_responses = self.academic_domains.get(domain, self.academic_domains["science"])
+        domain_responses = self.academic_domains.get(
+            domain, self.academic_domains["science"]
+        )
         depth_responses = domain_responses.get(depth, domain_responses["intermediate"])
-        
+
         # Return a random response from the appropriate depth
         response = random.choice(depth_responses)
-        
+
         # For custom topics not in our predefined domains, add a prefix
         if domain not in self.academic_domains and topic.lower() not in domain:
             topic_prefixes = [
                 f"Regarding {topic}, ",
                 f"On the subject of {topic}, ",
                 f"When examining {topic}, ",
-                f"In the field of {topic}, "
+                f"In the field of {topic}, ",
             ]
             response = random.choice(topic_prefixes) + response
-        
+
         return response

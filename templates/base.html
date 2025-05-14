@@ -75,7 +75,7 @@
                 <i class="fas fa-hand-paper me-2"></i>
                 Gesture Recognition
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 <span class="visually-hidden">Open Navigation Menu</span>
@@ -84,7 +84,7 @@
                 <ul class="navbar-nav">
                     {% for item in g.nav_items %}
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == item.url %}active{% endif %}" 
+                        <a class="nav-link {% if request.path == item.url %}active{% endif %}"
                            href="{{ item.url }}">
                            {{ item.text }}
                         </a>

@@ -42,7 +42,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Facts Grid -->
                     <div class="row g-4" id="facts-container">
                         {% for fact in facts %}
@@ -55,9 +55,9 @@
                                             </h5>
                                             <span class="badge bg-secondary">{{ fact.topic }}</span>
                                         </div>
-                                        
+
                                         <p>{{ fact.content|truncate(150) }}</p>
-                                        
+
                                         <div class="d-flex justify-content-between align-items-center mt-3">
                                             <small class="text-muted">Source: {{ fact.source }}</small>
                                             <a href="/learning/facts/{{ fact.id }}" class="btn btn-sm btn-outline-warning cyber-btn-sm">
@@ -68,7 +68,7 @@
                                 </div>
                             </div>
                         {% endfor %}
-                        
+
                         {% if not facts %}
                             <div class="col-12">
                                 <div class="alert alert-info">
@@ -88,11 +88,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fact filtering functionality
     const topicFilter = document.getElementById('topicFilter');
     const factItems = document.querySelectorAll('.fact-item');
-    
+
     if (topicFilter) {
         topicFilter.addEventListener('change', function() {
             const selectedTopic = this.value;
-            
+
             factItems.forEach(item => {
                 if (selectedTopic === 'all' || item.getAttribute('data-topic') === selectedTopic) {
                     item.style.display = 'block';

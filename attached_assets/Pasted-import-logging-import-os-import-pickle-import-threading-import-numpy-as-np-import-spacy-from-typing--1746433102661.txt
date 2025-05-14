@@ -11,7 +11,7 @@ from neural_learning_core import NeuralLearningCore
 from research_module import AlphaVoxResearchModule
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, 
+logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -30,7 +30,7 @@ except Exception as e:
 
 class AlphaVoxInputProcessor:
     """Processes multi-modal inputs (gestures, symbols, text, sounds) for AlphaVox with NLU."""
-    
+
     def __init__(self, model_dir: str = 'models', max_memory: int = 1000):
         """Initialize the processor with context tracking and research integration."""
         self.model_dir = model_dir
@@ -102,7 +102,7 @@ class AlphaVoxInputProcessor:
         try:
             interaction = self._validate_interaction(interaction)
             interaction['context'] = self._add_context(interaction, user_id)
-            
+
             if interaction['type'] == 'gesture':
                 interaction = self._process_gesture(interaction)
             elif interaction['type'] == 'symbol':
@@ -111,7 +111,7 @@ class AlphaVoxInputProcessor:
                 interaction = self._process_text(interaction)
             elif interaction['type'] == 'sound':
                 interaction = self._process_sound(interaction)
-            
+
             result = self.nlc.process_interaction(interaction, user_id)
             self.memory.append({
                 'user_id': user_id,
@@ -121,7 +121,7 @@ class AlphaVoxInputProcessor:
             })
             self._update_context(user_id, interaction, result)
             self.save_context()
-            
+
             logger.info(f"Processed interaction for user {user_id}: {result}")
             return result
         except Exception as e:
@@ -139,17 +139,17 @@ class AlphaVoxInputProcessor:
             if field not in interaction:
                 logger.error(f"Missing required field: {field}")
                 raise ValueError(f"Missing required field: {field}")
-        
+
         valid_types = ['gesture', 'symbol', 'text', 'sound', 'eye_tracking', 'unknown']
         if interaction['type'] not in valid_types:
             logger.warning(f"Invalid interaction type: {interaction['type']}")
             interaction['type'] = 'unknown'
-        
+
         interaction.setdefault('intent', 'unknown')
         interaction.setdefault('emotion', 'neutral')
         interaction.setdefault('confidence', 0.5)
         interaction.setdefault('input', '')
-        
+
         return interaction
 
     def _process_gesture(self, interaction: Dict[str, Any]) -> Dict[str, Any]:
@@ -159,30 +159,30 @@ class AlphaVoxInputProcessor:
             if not features or not isinstance(features, list):
                 logger.warning("Invalid gesture features")
                 return interaction
-            
+
             model_path = os.path.join(self.model_dir, 'gesture_model.pkl')
             if not os.path.exists(model_path):
                 logger.error("Gesture model not found")
                 return interaction
-            
+
             with open(model_path, 'rb') as f:
                 gesture_model = pickle.load(f)
-            
+
             X = np.array([features])
             prediction = gesture_model.predict(X)[0]
             confidence = float(np.max(gesture_model.predict_proba(X)))
-            
+
             gesture_info = self.gesture_map.get(prediction, {
                 'intent': 'unknown',
                 'message': f'Gesture {prediction} not recognized.',
                 'emotion': 'neutral'
             })
-            
+
             interaction['intent'] = gesture_info['intent']
             interaction['message'] = gesture_info['message']
             interaction['emotion'] = gesture_info['emotion']
             interaction['confidence'] = confidence
-            
+
             logger.info(f"Processed gesture: {prediction} -> {gesture_info['intent']} (confidence: {confidence:.2f})")
             return interaction
         except Exception as e:
@@ -199,12 +199,12 @@ class AlphaVoxInputProcessor:
                 'emotion': 'neutral',
                 'confidence': 0.9
             })
-            
+
             interaction['intent'] = symbol_info['intent']
             interaction['message'] = symbol_info['message']
             interaction['emotion'] = symbol_info['emotion']
             interaction['confidence'] = symbol_info.get('confidence', 0.9)
-            
+
             logger.info(f"Processed symbol: {symbol} -> {symbol_info['intent']}")
             return interaction
         except Exception as e:
@@ -219,7 +219,7 @@ class AlphaVoxInputProcessor:
             intent = 'communicate'
             emotion = 'neutral'
             confidence = 0.9
-            
+
             if any(token.text in ['help', 'need', 'please', 'urgent'] for token in doc):
                 intent = 'request_help'
                 emotion = 'urgent'
@@ -232,12 +232,12 @@ class AlphaVoxInputProcessor:
             elif any(token.text in ['question', 'ask', 'why', 'how', 'what', 'when', 'where'] for token in doc):
                 intent = 'ask_question'
                 emotion = 'inquisitive'
-            
+
             interaction['intent'] = intent
             interaction['message'] = text if intent == 'communicate' else f"I want to say: {text}"
             interaction['emotion'] = emotion
             interaction['confidence'] = confidence
-            
+
             logger.info(f"Processed text: {text} -> {intent} (confidence: {confidence:.2f})")
             return interaction
         except Exception as e:
@@ -259,12 +259,12 @@ class AlphaVoxInputProcessor:
                 'emotion': 'neutral',
                 'confidence': 0.7
             })
-            
+
             interaction['intent'] = sound_info['intent']
             interaction['message'] = sound_info['message']
             interaction['emotion'] = sound_info['emotion']
             interaction['confidence'] = sound_info.get('confidence', 0.7)
-            
+
             logger.info(f"Processed sound: {sound_pattern} -> {sound_info['intent']}")
             return interaction
         except Exception as e:
@@ -277,7 +277,7 @@ class AlphaVoxInputProcessor:
         now = datetime.now()
         context['time_of_day'] = now.strftime('%H:%M')
         context['day_of_week'] = now.strftime('%A')
-        
+
         with self.lock:
             if user_id in self.context_window:
                 prev_context = self.context_window[user_id].get('context', {})
@@ -291,7 +291,7 @@ class AlphaVoxInputProcessor:
                 context['recent_root_causes'] = [
                     rc['root_cause'] for rc in self.context_window[user_id].get('root_causes', [])[-5:]
                 ]
-        
+
         context.update(self._get_research_context())
         return context
 
@@ -319,7 +319,7 @@ class AlphaVoxInputProcessor:
                     'context': {},
                     'root_causes': deque(maxlen=50)
                 }
-            
+
             self.context_window[user_id]['interactions'].append(datetime.now())
             self.context_window[user_id]['context'] = interaction.get('context', {})
             self.context_window[user_id]['root_causes'].append({
@@ -335,7 +335,7 @@ class AlphaVoxInputProcessor:
 def main():
     """Demonstrate the AlphaVox Input Processor."""
     processor = AlphaVoxInputProcessor()
-    
+
     # Test gesture interaction
     gesture_interaction = {
         'type': 'gesture',
@@ -344,7 +344,7 @@ def main():
     }
     result = processor.process_interaction(gesture_interaction, 'user123')
     print(f"Gesture Result: {result}")
-    
+
     # Test symbol interaction
     symbol_interaction = {
         'type': 'symbol',
@@ -353,7 +353,7 @@ def main():
     }
     result = processor.process_interaction(symbol_interaction, 'user123')
     print(f"Symbol Result: {result}")
-    
+
     # Test text interaction
     text_interaction = {
         'type': 'text',
@@ -362,7 +362,7 @@ def main():
     }
     result = processor.process_interaction(text_interaction, 'user123')
     print(f"Text Result: {result}")
-    
+
     # Test sound interaction
     sound_interaction = {
         'type': 'sound',

@@ -319,10 +319,10 @@
                 console.log('Hand detected event:', event);
                 const handDetectionEvents = document.getElementById('handDetectionEvents');
                 const timestamp = new Date().toLocaleTimeString();
-                const motionAmount = event.detail.motionAmount ? 
+                const motionAmount = event.detail.motionAmount ?
                     `(Motion: ${Math.round(event.detail.motionAmount)})` : '';
 
-                handDetectionEvents.innerHTML = `${timestamp}: Hand detected! ${motionAmount}<br>` + 
+                handDetectionEvents.innerHTML = `${timestamp}: Hand detected! ${motionAmount}<br>` +
                     handDetectionEvents.innerHTML.split('<br>').slice(0, 5).join('<br>');
             });
 

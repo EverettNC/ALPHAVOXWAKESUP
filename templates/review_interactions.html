@@ -11,31 +11,31 @@
         background-color: #f8f9fa;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     }
-    
+
     .interaction-meta {
         display: flex;
         justify-content: space-between;
         margin-bottom: 10px;
         color: #6c757d;
     }
-    
+
     .interaction-text {
         font-size: 1.1rem;
         margin-bottom: 10px;
     }
-    
+
     .interaction-intent {
         background-color: #e9ecef;
         padding: 8px 12px;
         border-radius: 5px;
         margin-bottom: 15px;
     }
-    
+
     .feedback-actions {
         display: flex;
         gap: 10px;
     }
-    
+
     .no-interactions {
         text-align: center;
         padding: 30px;
@@ -43,11 +43,11 @@
         border-radius: 8px;
         color: #6c757d;
     }
-    
+
     .breadcrumb {
         margin-bottom: 20px;
     }
-    
+
     .confidence-indicator {
         display: inline-block;
         height: 8px;
@@ -58,21 +58,21 @@
         position: relative;
         top: -1px;
     }
-    
+
     .confidence-level {
         display: block;
         height: 100%;
         border-radius: 4px;
     }
-    
+
     .confidence-high {
         background-color: #28a745;
     }
-    
+
     .confidence-medium {
         background-color: #ffc107;
     }
-    
+
     .confidence-low {
         background-color: #dc3545;
     }
@@ -94,7 +94,7 @@
             <i class="fas fa-arrow-left me-2"></i> Back to Learning Hub
         </a>
     </div>
-    
+
     <div class="alert alert-info mb-4">
         <div class="d-flex">
             <div class="me-3">
@@ -106,7 +106,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-md-12">
             <div class="card mb-4">
@@ -121,20 +121,20 @@
                                     <span>{{ interaction.timestamp.strftime('%Y-%m-%d %H:%M') }}</span>
                                     <span>ID: {{ interaction.id }}</span>
                                 </div>
-                                
+
                                 <div class="interaction-text">
                                     <strong>Input:</strong> {{ interaction.text }}
                                 </div>
-                                
+
                                 <div class="interaction-intent">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div>
-                                            <strong>Recognized Intent:</strong> 
+                                            <strong>Recognized Intent:</strong>
                                             <span>{{ interaction.intent }}</span>
-                                            
+
                                             <div class="confidence-indicator">
-                                                <span class="confidence-level 
-                                                    {% if interaction.confidence > 0.7 %}confidence-high{% elif interaction.confidence > 0.4 %}confidence-medium{% else %}confidence-low{% endif %}" 
+                                                <span class="confidence-level
+                                                    {% if interaction.confidence > 0.7 %}confidence-high{% elif interaction.confidence > 0.4 %}confidence-medium{% else %}confidence-low{% endif %}"
                                                       style="width: {{ interaction.confidence * 100 }}%">
                                                 </span>
                                             </div>
@@ -144,11 +144,11 @@
                                         </span>
                                     </div>
                                 </div>
-                                
+
                                 <form action="{{ url_for('learning.add_feedback') }}" method="post" class="feedback-form">
                                     <input type="hidden" name="user_id" value="{{ user.id }}">
                                     <input type="hidden" name="interaction_id" value="{{ interaction.id }}">
-                                    
+
                                     <div class="mb-3">
                                         <label class="form-label">Was this interpretation correct?</label>
                                         <div class="feedback-actions">
@@ -158,27 +158,27 @@
                                             <button type="submit" name="feedback_type" value="partially" class="btn btn-warning">
                                                 <i class="fas fa-adjust me-2"></i> Partially Correct
                                             </button>
-                                            <button type="button" class="btn btn-danger" data-bs-toggle="collapse" 
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="collapse"
                                                     data-bs-target="#additional-feedback-{{ interaction.id }}">
                                                 <i class="fas fa-times me-2"></i> Incorrect
                                             </button>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="collapse mt-3" id="additional-feedback-{{ interaction.id }}">
                                         <div class="card card-body bg-light">
                                             <div class="mb-3">
                                                 <label for="correct-intent-{{ interaction.id }}" class="form-label">What was the correct intent?</label>
-                                                <input type="text" class="form-control" id="correct-intent-{{ interaction.id }}" 
+                                                <input type="text" class="form-control" id="correct-intent-{{ interaction.id }}"
                                                        name="correct_intent" placeholder="Enter the correct intent">
                                             </div>
-                                            
+
                                             <div class="mb-3">
                                                 <label for="notes-{{ interaction.id }}" class="form-label">Additional Notes</label>
-                                                <textarea class="form-control" id="notes-{{ interaction.id }}" name="notes" 
+                                                <textarea class="form-control" id="notes-{{ interaction.id }}" name="notes"
                                                           rows="2" placeholder="Any additional information that might help improve recognition"></textarea>
                                             </div>
-                                            
+
                                             <button type="submit" name="feedback_type" value="incorrect" class="btn btn-primary">
                                                 Submit Feedback
                                             </button>

@@ -150,4 +150,3 @@ AlphaVox is a patent-pending, modular, AI-powered communication system. Built wi
 
 You now have the full blueprint.
 Let’s build.
-

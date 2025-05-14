@@ -11,7 +11,7 @@
         padding: 20px;
         margin-bottom: 30px;
     }
-    
+
     .interaction-card {
         background: rgba(0, 0, 0, 0.3);
         border: 1px solid rgba(0, 204, 255, 0.3);
@@ -20,12 +20,12 @@
         margin-bottom: 15px;
         transition: all 0.3s ease;
     }
-    
+
     .interaction-card:hover {
         border-color: rgba(0, 204, 255, 0.8);
         box-shadow: 0 0 15px rgba(0, 204, 255, 0.3);
     }
-    
+
     .interaction-header {
         display: flex;
         justify-content: space-between;
@@ -33,12 +33,12 @@
         padding-bottom: 10px;
         margin-bottom: 10px;
     }
-    
+
     .interaction-timestamp {
         font-size: 0.8em;
         color: rgba(255, 255, 255, 0.6);
     }
-    
+
     .interaction-topic {
         font-size: 0.8em;
         color: #00ccff;
@@ -46,26 +46,26 @@
         padding: 3px 8px;
         border-radius: 12px;
     }
-    
+
     .interaction-content {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 15px;
     }
-    
+
     .interaction-input, .interaction-response {
         background: rgba(0, 0, 0, 0.2);
         border-radius: 5px;
         padding: 10px;
     }
-    
+
     .interaction-label {
         display: block;
         font-size: 0.8em;
         color: rgba(255, 255, 255, 0.7);
         margin-bottom: 5px;
     }
-    
+
     .complexity-metrics {
         display: flex;
         justify-content: space-between;
@@ -74,12 +74,12 @@
         border-top: 1px solid rgba(255, 255, 255, 0.1);
         font-size: 0.8em;
     }
-    
+
     .complexity-metric {
         display: flex;
         align-items: center;
     }
-    
+
     .complexity-value {
         display: inline-block;
         background: rgba(0, 204, 255, 0.2);
@@ -88,13 +88,13 @@
         border-radius: 10px;
         margin-left: 5px;
     }
-    
+
     .topics-container {
         background: rgba(0, 0, 0, 0.3);
         border-radius: 8px;
         padding: 15px;
     }
-    
+
     .topic-complexity {
         display: flex;
         justify-content: space-between;
@@ -102,11 +102,11 @@
         padding: 8px 0;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-    
+
     .topic-name {
         flex: 1;
     }
-    
+
     .complexity-bar {
         flex: 2;
         height: 10px;
@@ -115,42 +115,42 @@
         overflow: hidden;
         margin: 0 15px;
     }
-    
+
     .complexity-fill {
         height: 100%;
         background: linear-gradient(to right, #0066ff, #00ccff);
         border-radius: 5px;
     }
-    
+
     .complexity-number {
         width: 30px;
         text-align: right;
         font-size: 0.9em;
     }
-    
+
     .no-interactions {
         text-align: center;
         padding: 40px 0;
         color: rgba(255, 255, 255, 0.7);
     }
-    
+
     .no-interactions i {
         font-size: 3em;
         color: rgba(0, 204, 255, 0.3);
         display: block;
         margin-bottom: 15px;
     }
-    
+
     /* Subtle animations */
     @keyframes fadeIn {
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
     }
-    
+
     .interaction-card {
         animation: fadeIn 0.3s ease-out forwards;
     }
-    
+
     .interaction-card:nth-child(1) { animation-delay: 0.1s; }
     .interaction-card:nth-child(2) { animation-delay: 0.2s; }
     .interaction-card:nth-child(3) { animation-delay: 0.3s; }
@@ -164,8 +164,8 @@
     <div class="row">
         <div class="col-12">
             <h1 class="text-center mb-4">
-                <span class="text-primary">Conversation</span> 
-                <span class="text-info">History</span> 
+                <span class="text-primary">Conversation</span>
+                <span class="text-info">History</span>
                 <span class="text-light">& Complexity</span>
             </h1>
             <p class="text-center text-muted mb-5">
@@ -173,13 +173,13 @@
             </p>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-lg-8">
             <!-- Interaction History -->
             <div class="history-container">
                 <h3>Recent Interactions</h3>
-                
+
                 {% if interactions %}
                     {% for interaction in interactions|reverse %}
                     <div class="interaction-card">
@@ -193,7 +193,7 @@
                             </div>
                             {% endif %}
                         </div>
-                        
+
                         <div class="interaction-content">
                             <div class="interaction-input">
                                 <span class="interaction-label">Your Input:</span>
@@ -204,7 +204,7 @@
                                 {{ interaction.response }}
                             </div>
                         </div>
-                        
+
                         <div class="complexity-metrics">
                             <div class="complexity-metric">
                                 <span>Input Complexity:</span>
@@ -231,7 +231,7 @@
                 {% endif %}
             </div>
         </div>
-        
+
         <div class="col-lg-4">
             <!-- Topic Complexity Sidebar -->
             <div class="history-container">
@@ -239,7 +239,7 @@
                 <p class="text-muted small">
                     AlphaVox adapts its complexity based on topics you discuss. Here's your current complexity profile.
                 </p>
-                
+
                 <div class="topics-container mt-4">
                     {% if topic_complexities %}
                         {% for topic, complexity in topic_complexities.items() %}
@@ -256,7 +256,7 @@
                     {% endif %}
                 </div>
             </div>
-            
+
             <!-- Links and Navigation -->
             <div class="text-center mt-4">
                 <a href="{{ url_for('adaptive_conversation.adaptive_dashboard') }}" class="btn btn-outline-info mb-3">

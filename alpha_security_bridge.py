@@ -1,7 +1,4 @@
-ALPHA SECURITY BRIDGE
-
-
-
+## ALPHA SECURITY BRIDGE
 
 import json
 import boto3
@@ -12,10 +9,13 @@ import paho.mqtt.publish as publish
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+
 def lambda_handler(event, context):
     try:
         user_profile = event.get("user_profile")
-        intent = event.get("intent")  # e.g. "lock_doors", "enable_cameras", "disable_alarm"
+        intent = event.get(
+            "intent"
+        )  # e.g. "lock_doors", "enable_cameras", "disable_alarm"
         system = event.get("system")  # e.g. "ring", "arlo", "nest"
 
         if not user_profile or not intent:
@@ -29,13 +29,11 @@ def lambda_handler(event, context):
             return {"status": "escalated", "message": "Caregiver notified"}
 
         # Direct system control logic (example via MQTT)
-        payload = {
-            "command": intent,
-            "user_id": user_profile["id"],
-            "system": system
-        }
+        payload = {"command": intent, "user_id": user_profile["id"], "system": system}
 
-        publish.single("alphavox/security", json.dumps(payload), hostname="mqtt.yourdomain.com")
+        publish.single(
+            "alphavox/security", json.dumps(payload), hostname="mqtt.yourdomain.com"
+        )
 
         logger.info(f"Sent {intent} to {system} for user {user_profile['id']}")
         return {"status": "success", "message": f"{intent} executed"}
@@ -44,7 +42,9 @@ def lambda_handler(event, context):
         logger.error(f"Lambda error: {str(e)}")
         return {"status": "error", "message": str(e)}
 
+
 def notify_caregiver(user_profile, intent):
     # Placeholder: send email, push notification, or log alert
-    print(f"ALERT: User {user_profile['id']} attempted '{intent}' but requires supervision.")
-
+    print(
+        f"ALERT: User {user_profile['id']} attempted '{intent}' but requires supervision."
+    )

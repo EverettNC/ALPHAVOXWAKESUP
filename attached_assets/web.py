@@ -3,6 +3,7 @@ import os
 from gtts import gTTS
 from typing import Dict
 from dotenv import load_dotenv
+
 load_dotenv()
 
 from ai.emotion import analyze_emotion
@@ -17,20 +18,25 @@ from ai.memory import load_memory, save_memory
 from ai.conversation import generate_response
 from ai.predictor import predict_next_action
 
+
 @app.route("/about")
 def about():
     return render_template("about.html")
+
 
 @app.route("/home", methods=["GET", "POST"])
 def home():
     user_id = "user123"  # future: replace with real session/user id
     memory = load_memory()
-    user_data = memory["users"].get(user_id, {
-        "gesture_history": {},
-        "topics_learned": [],
-        "voice_prefs": {},
-        "recent_conversations": []
-    })
+    user_data = memory["users"].get(
+        user_id,
+        {
+            "gesture_history": {},
+            "topics_learned": [],
+            "voice_prefs": {},
+            "recent_conversations": [],
+        },
+    )
 
     output = ""
     suggestion = ""
@@ -41,20 +47,25 @@ def home():
         response = generate_response(output)
         # Score gesture consistency
         user_data.setdefault("gesture_score", {})
-        user_data["gesture_score"][gesture] = user_data["gesture_score"].get(gesture, 0) + 1
+        user_data["gesture_score"][gesture] = (
+            user_data["gesture_score"].get(gesture, 0) + 1
+        )
 
         # Unlock "learning moments" after 3 repeats
         if user_data["gesture_score"][gesture] == 3:
-            suggestion = f"You're getting great with '{gesture}' — want to try something new?"
+            suggestion = (
+                f"You're getting great with '{gesture}' — want to try something new?"
+            )
 
         # Log gesture usage
-        user_data["gesture_history"][gesture] = user_data["gesture_history"].get(gesture, 0) + 1
+        user_data["gesture_history"][gesture] = (
+            user_data["gesture_history"].get(gesture, 0) + 1
+        )
 
         # Add conversation memory
-        user_data["recent_conversations"].append({
-            "input": gesture,
-            "response": response
-        })
+        user_data["recent_conversations"].append(
+            {"input": gesture, "response": response}
+        )
 
         suggestion = predict_next_action(user_data)
         speak_text(response)
@@ -63,6 +74,7 @@ def home():
     save_memory(memory)
 
     return render_template("index.html", output=output, suggestion=suggestion)
+
 
 app = Flask(__name__, template_folder="templates")
 print(f"Template folder path: {app.template_folder}")  # Debug print
@@ -73,31 +85,35 @@ gestures = dict(
     blink_twice="Yes",
     look_left="No",
     hand_wave="Goodbye",
-    head_tilt="I need help"
+    head_tilt="I need help",
 )
+
 
 # Function to convert text to speech and play it
 def speak_text(text: str) -> None:
     try:
-        tts = gTTS(text=text, lang='en')
+        tts = gTTS(text=text, lang="en")
         audio_path = os.path.join(os.path.dirname(__file__), "temp_output.mp3")
         tts.save(audio_path)
         os.system(f"mpg123 {audio_path}")  # Use mpg123 for Linux (Replit)
     except Exception as e:
         print(f"Speech error: {e}")
 
+
 # Redirect root to the start page
 @app.route("/")
 def root():
-    return redirect(url_for('start'))
+    return redirect(url_for("start"))
+
 
 # Welcome page to start a session
 @app.route("/start", methods=["GET", "POST"])
 def start():
     if request.method == "POST":
         name = request.form.get("name")
-        return redirect(url_for('home', name=name))
+        return redirect(url_for("home", name=name))
     return render_template("start.html")
+
 
 # Home page where users enter gestures
 @app.route("/home", methods=["GET", "POST"])
@@ -109,6 +125,7 @@ def home():
         speak_text(output)  # Speak the output
     return render_template("index.html", output=output)
 
+
 # Page to add new gestures
 @app.route("/customize", methods=["POST"])
 def customize():
@@ -118,6 +135,7 @@ def customize():
     output = f"Added: {new_gesture} -> {meaning}"
     speak_text(output)  # Speak the output
     return render_template("index.html", output=output)
+
 
 # Add a route to download the audio file
 @app.route("/download_audio")

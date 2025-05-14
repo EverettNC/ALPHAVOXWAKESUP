@@ -10,7 +10,7 @@
     --surface-color: #1e1e1e;
     --text-color: #ffffff;
     --accent-color: #90e0ef;
-    
+
     /* Derived colors */
     --primary-color-light: color-mix(in srgb, var(--primary-color) 80%, white);
     --primary-color-dark: color-mix(in srgb, var(--primary-color) 80%, black);
@@ -35,7 +35,7 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-image: 
+    background-image:
         linear-gradient(rgba(0, 30, 60, 0.05) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0, 30, 60, 0.05) 1px, transparent 1px);
     background-size: 20px 20px;
@@ -58,8 +58,8 @@ body {
 
 /* Card styling */
 .cyber-card {
-    background: linear-gradient(to bottom, 
-        color-mix(in srgb, var(--surface-color) 90%, white), 
+    background: linear-gradient(to bottom,
+        color-mix(in srgb, var(--surface-color) 90%, white),
         var(--surface-color));
     border: 1px solid var(--primary-color);
     border-radius: 4px;
@@ -401,9 +401,9 @@ body {
     left: 0;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, 
-        color-mix(in srgb, var(--primary-color) 10%, transparent), 
-        var(--primary-color), 
+    background: linear-gradient(90deg,
+        color-mix(in srgb, var(--primary-color) 10%, transparent),
+        var(--primary-color),
         color-mix(in srgb, var(--primary-color) 10%, transparent));
 }
 
@@ -452,7 +452,7 @@ body {
     font-weight: 700;
     color: #fff;
     letter-spacing: 2px;
-    text-shadow: 
+    text-shadow:
         0 0 5px rgba(0, 148, 255, 0.7),
         0 0 10px rgba(0, 148, 255, 0.5),
         0 0 15px rgba(0, 148, 255, 0.3),
@@ -466,12 +466,12 @@ body {
 
 @keyframes textShine {
     0% {
-        text-shadow: 
+        text-shadow:
             0 0 5px rgba(0, 148, 255, 0.7),
             0 0 10px rgba(0, 148, 255, 0.5);
     }
     100% {
-        text-shadow: 
+        text-shadow:
             0 0 10px rgba(0, 148, 255, 0.9),
             0 0 20px rgba(0, 148, 255, 0.7),
             0 0 30px rgba(0, 148, 255, 0.5),
@@ -589,7 +589,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: 
+    background:
         radial-gradient(circle at top right, rgba(0, 204, 255, 0.05), transparent 30%),
         radial-gradient(circle at bottom left, rgba(0, 148, 255, 0.05), transparent 30%);
     z-index: -1;

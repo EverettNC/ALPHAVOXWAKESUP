@@ -43,26 +43,26 @@ show_help() {
 check_prerequisites() {
     # Check AWS CLI
     echo -e "${YELLOW}Checking prerequisites...${NC}"
-    
+
     if ! command -v aws &> /dev/null; then
         echo -e "${RED}AWS CLI is not installed. Please install it first.${NC}"
         echo "  Visit: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html"
         exit 1
     fi
-    
+
     # Check AWS credentials
     if [[ -n "$AWS_PROFILE" ]]; then
         profile_arg="--profile $AWS_PROFILE"
     else
         profile_arg=""
     fi
-    
+
     if ! aws $profile_arg sts get-caller-identity &> /dev/null; then
         echo -e "${RED}AWS credentials not found or invalid.${NC}"
         echo "  Run 'aws configure' to set up your credentials"
         exit 1
     fi
-    
+
     # Check specific prerequisites based on method
     case "$DEPLOY_METHOD" in
         eb)
@@ -77,7 +77,7 @@ check_prerequisites() {
         cloudformation)
             ;;
     esac
-    
+
     echo -e "${GREEN}Prerequisites check passed${NC}"
 }
 
@@ -86,13 +86,13 @@ build_package() {
         echo -e "${YELLOW}Skipping build as requested${NC}"
         return
     fi
-    
+
     echo -e "${YELLOW}Building deployment package...${NC}"
-    
+
     # Create a temporary directory for the package
     PACKAGE_DIR=$(mktemp -d)
     ZIP_FILE="deploy.zip"
-    
+
     # Copy necessary files
     echo "Copying files to package directory..."
     cp -r *.py $PACKAGE_DIR/
@@ -104,7 +104,7 @@ build_package() {
     cp -r scripts/ $PACKAGE_DIR/
     cp -r .ebextensions/ $PACKAGE_DIR/
     cp pyproject.toml $PACKAGE_DIR/
-    
+
     if [[ "$DEPLOY_METHOD" == "eb" ]]; then
         # Create a ZIP file for Elastic Beanstalk
         echo "Creating ZIP file for Elastic Beanstalk..."
@@ -121,10 +121,10 @@ build_package() {
         echo "Building Docker image for ECS..."
         docker build -t alphavox:latest .
     fi
-    
+
     # Clean up
     rm -rf $PACKAGE_DIR
-    
+
     echo -e "${GREEN}Build completed successfully${NC}"
     if [[ "$BUILD_ONLY" == "true" ]]; then
         echo -e "${YELLOW}Exiting as build-only was specified${NC}"
@@ -134,16 +134,16 @@ build_package() {
 
 deploy_eb() {
     echo -e "${YELLOW}Deploying to Elastic Beanstalk...${NC}"
-    
+
     # Initialize EB if needed
     if [[ ! -d .elasticbeanstalk ]]; then
         echo "Initializing Elastic Beanstalk..."
         eb init AlphaVox --region $AWS_REGION --platform "Python 3.11"
     fi
-    
+
     # Deploy to the specified environment
     ENV_NAME="alphavox-$ENVIRONMENT"
-    
+
     # Check if environment exists
     if ! eb status $ENV_NAME &> /dev/null; then
         echo "Environment $ENV_NAME does not exist. Creating it..."
@@ -152,19 +152,19 @@ deploy_eb() {
         echo "Deploying to existing environment $ENV_NAME..."
         eb deploy $ENV_NAME --region $AWS_REGION
     fi
-    
+
     # Get the Elastic Beanstalk environment URL
     ENV_URL=$(eb status $ENV_NAME | grep CNAME | awk '{print $2}')
-    
+
     echo -e "${GREEN}Deployment to Elastic Beanstalk completed successfully${NC}"
     echo -e "Application URL: ${BLUE}http://$ENV_URL${NC}"
 }
 
 deploy_cloudformation() {
     echo -e "${YELLOW}Deploying to AWS CloudFormation...${NC}"
-    
+
     STACK_NAME="alphavox-$ENVIRONMENT"
-    
+
     # Create or update CloudFormation stack
     if aws $profile_arg cloudformation describe-stacks --stack-name $STACK_NAME &> /dev/null; then
         echo "Updating existing CloudFormation stack $STACK_NAME..."
@@ -179,58 +179,58 @@ deploy_cloudformation() {
             --template-body file://packaged-template.yml \
             --capabilities CAPABILITY_IAM
     fi
-    
+
     echo "Waiting for stack operation to complete..."
     aws $profile_arg cloudformation wait stack-create-complete --stack-name $STACK_NAME || \
     aws $profile_arg cloudformation wait stack-update-complete --stack-name $STACK_NAME
-    
+
     # Get the output value from CloudFormation stack
     APP_URL=$(aws $profile_arg cloudformation describe-stacks --stack-name $STACK_NAME --query "Stacks[0].Outputs[?OutputKey=='AlphaVoxURL'].OutputValue" --output text)
-    
+
     echo -e "${GREEN}Deployment to CloudFormation completed successfully${NC}"
     echo -e "Application URL: ${BLUE}$APP_URL${NC}"
 }
 
 deploy_ecs() {
     echo -e "${YELLOW}Deploying to AWS ECS...${NC}"
-    
+
     # Get AWS account ID
     AWS_ACCOUNT_ID=$(aws $profile_arg sts get-caller-identity --query Account --output text)
-    
+
     # Set ECR repository URI
     ECR_REPO="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/alphavox"
-    
+
     # Create ECR repository if it doesn't exist
     if ! aws $profile_arg ecr describe-repositories --repository-names alphavox &> /dev/null; then
         echo "Creating ECR repository..."
         aws $profile_arg ecr create-repository --repository-name alphavox
     fi
-    
+
     # Authenticate Docker with ECR
     echo "Authenticating Docker with ECR..."
     aws $profile_arg ecr get-login-password | docker login --username AWS --password-stdin $ECR_REPO
-    
+
     # Tag and push Docker image
     echo "Tagging and pushing Docker image to ECR..."
     docker tag alphavox:latest $ECR_REPO:latest
     docker push $ECR_REPO:latest
-    
+
     # Update ECS task definition
     echo "Updating ECS task definition..."
     sed -e "s|ACCOUNT_ID|$AWS_ACCOUNT_ID|g" \
         -e "s|REGION|$AWS_REGION|g" \
         .aws/ecs-task-definition.json > updated-task-def.json
-    
+
     # Register the task definition
     TASK_DEF_ARN=$(aws $profile_arg ecs register-task-definition --cli-input-json file://updated-task-def.json --query 'taskDefinition.taskDefinitionArn' --output text)
-    
+
     # Check if ECS cluster exists
     CLUSTER_NAME="alphavox-$ENVIRONMENT"
     if ! aws $profile_arg ecs describe-clusters --clusters $CLUSTER_NAME --query 'clusters[0].status' --output text &> /dev/null; then
         echo "Creating ECS cluster $CLUSTER_NAME..."
         aws $profile_arg ecs create-cluster --cluster-name $CLUSTER_NAME
     fi
-    
+
     # Check if ECS service exists
     SERVICE_NAME="alphavox-service"
     if aws $profile_arg ecs describe-services --cluster $CLUSTER_NAME --services $SERVICE_NAME --query 'services[0].status' --output text &> /dev/null; then
@@ -250,7 +250,7 @@ deploy_ecs() {
             --launch-type FARGATE \
             --network-configuration "awsvpcConfiguration={subnets=[subnet-12345,subnet-67890],securityGroups=[sg-12345],assignPublicIp=ENABLED}"
     fi
-    
+
     echo -e "${GREEN}Deployment to ECS completed successfully${NC}"
     echo -e "Check the AWS console for service URL"
 }

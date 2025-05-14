@@ -78,129 +78,129 @@ jinja2.exceptions.TemplateNotFound: color_scheme/home.html
 LINE 3: WHERE user_preference.user_id = 'default_user' AND user_pref...
                                         ^
 
-[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
-FROM user_preference 
-WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence
+FROM user_preference
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true
  LIMIT %(param_1)s]
 [parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
 (Background on this error at: https://sqlalche.me/e/20/9h9h)
 [2025-05-09 02:45:57] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
 
-[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
-FROM user_preference 
-WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence
+FROM user_preference
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true
  LIMIT %(param_1)s]
 [parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
 (Background on this error at: https://sqlalche.me/e/20/2j85)
 [2025-05-09 02:45:57] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
 
-[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
-FROM user_preference 
-WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence
+FROM user_preference
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true
  LIMIT %(param_1)s]
 [parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
 (Background on this error at: https://sqlalche.me/e/20/2j85)
 [2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
 
-[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
-FROM user_preference 
-WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence
+FROM user_preference
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true
  LIMIT %(param_1)s]
 [parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
 (Background on this error at: https://sqlalche.me/e/20/2j85)
 [2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
 
-[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
-FROM user_preference 
-WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence
+FROM user_preference
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true
  LIMIT %(param_1)s]
 [parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
 (Background on this error at: https://sqlalche.me/e/20/2j85)
 [2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
 
-[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
-FROM user_preference 
-WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence
+FROM user_preference
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true
  LIMIT %(param_1)s]
 [parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
 (Background on this error at: https://sqlalche.me/e/20/2j85)
 [2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
 
-[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
-FROM user_preference 
-WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence
+FROM user_preference
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true
  LIMIT %(param_1)s]
 [parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
 (Background on this error at: https://sqlalche.me/e/20/2j85)
 [2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
 
-[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
-FROM user_preference 
-WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence
+FROM user_preference
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true
  LIMIT %(param_1)s]
 [parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
 (Background on this error at: https://sqlalche.me/e/20/2j85)
 [2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
 
-[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
-FROM user_preference 
-WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence
+FROM user_preference
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true
  LIMIT %(param_1)s]
 [parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
 (Background on this error at: https://sqlalche.me/e/20/2j85)
 [2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
 
-[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
-FROM user_preference 
-WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence
+FROM user_preference
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true
  LIMIT %(param_1)s]
 [parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
 (Background on this error at: https://sqlalche.me/e/20/2j85)
 [2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
 
-[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
-FROM user_preference 
-WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence
+FROM user_preference
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true
  LIMIT %(param_1)s]
 [parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
 (Background on this error at: https://sqlalche.me/e/20/2j85)
 [2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
 
-[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
-FROM user_preference 
-WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence
+FROM user_preference
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true
  LIMIT %(param_1)s]
 [parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
 (Background on this error at: https://sqlalche.me/e/20/2j85)
 [2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
 
-[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
-FROM user_preference 
-WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence
+FROM user_preference
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true
  LIMIT %(param_1)s]
 [parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
 (Background on this error at: https://sqlalche.me/e/20/2j85)
 [2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
 
-[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
-FROM user_preference 
-WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence
+FROM user_preference
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true
  LIMIT %(param_1)s]
 [parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
 (Background on this error at: https://sqlalche.me/e/20/2j85)
 [2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
 
-[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
-FROM user_preference 
-WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence
+FROM user_preference
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true
  LIMIT %(param_1)s]
 [parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
 (Background on this error at: https://sqlalche.me/e/20/2j85)
 [2025-05-09 02:45:58] [ERROR] [routes.color_scheme_routes] - Error getting user color scheme preference: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
 
-[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence 
-FROM user_preference 
-WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true 
+[SQL: SELECT user_preference.id AS user_preference_id, user_preference.user_id AS user_preference_user_id, user_preference.type AS user_preference_type, user_preference.value AS user_preference_value, user_preference.is_active AS user_preference_is_active, user_preference.created_at AS user_preference_created_at, user_preference.updated_at AS user_preference_updated_at, user_preference.source AS user_preference_source, user_preference.confidence AS user_preference_confidence
+FROM user_preference
+WHERE user_preference.user_id = %(user_id_1)s AND user_preference.type = %(type_1)s AND user_preference.is_active = true
  LIMIT %(param_1)s]
 [parameters: {'user_id_1': 'default_user', 'type_1': 'color_scheme', 'param_1': 1}]
 (Background on this error at: https://sqlalche.me/e/20/2j85)

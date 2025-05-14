@@ -9,7 +9,7 @@ from sklearn.metrics import accuracy_score, classification_report
 from research_module import AlphaVoxResearchModule
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, 
+logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -38,7 +38,7 @@ def load_real_data(data_path: str = None) -> tuple:
 def train_gesture_model(data_path: str = None):
     """Train a model to recognize body language and gestures."""
     logger.info("Training gesture recognition model...")
-    
+
     try:
         # Try loading real data
         X_real, y_real = load_real_data(data_path)
@@ -70,28 +70,28 @@ def train_gesture_model(data_path: str = None):
                 'Stimming', 'Stimming', 'Stimming', 'Stimming', 'Stimming', 'Stimming'
             ])
             logger.info("Using simulated data for gesture training")
-        
+
         # Split into training and test sets
         X_train, X_test, y_train, y_test = train_test_split(
             X_gestures, y_gestures, test_size=0.25, random_state=42
         )
-        
+
         # Train Random Forest model
         model = RandomForestClassifier(n_estimators=100, random_state=42)
         model.fit(X_train, y_train)
-        
+
         # Evaluate model
         y_pred = model.predict(X_test)
         accuracy = accuracy_score(y_test, y_pred)
         logger.info(f"Gesture model accuracy: {accuracy:.4f}")
         logger.info(f"Gesture classification report:\n{classification_report(y_test, y_pred)}")
-        
+
         # Save model
         model_path = os.path.join(MODEL_DIR, 'gesture_model.pkl')
         with open(model_path, 'wb') as f:
             pickle.dump(model, f)
         logger.info(f"Gesture model saved to {model_path}")
-        
+
         return model
     except Exception as e:
         logger.error(f"Error training gesture model: {str(e)}")

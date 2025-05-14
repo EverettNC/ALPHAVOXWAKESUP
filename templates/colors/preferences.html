@@ -6,29 +6,29 @@
 <style>
     /* Global transition for all elements */
     * {
-        transition: background-color 0.5s ease, 
-                   color 0.5s ease, 
-                   border-color 0.5s ease, 
+        transition: background-color 0.5s ease,
+                   color 0.5s ease,
+                   border-color 0.5s ease,
                    box-shadow 0.5s ease,
                    transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    
+
     /* Custom scrollbar for smoother interaction */
     ::-webkit-scrollbar {
         width: 8px;
         height: 8px;
     }
-    
+
     ::-webkit-scrollbar-track {
         background: rgba(0, 0, 0, 0.1);
         border-radius: 10px;
     }
-    
+
     ::-webkit-scrollbar-thumb {
         background: var(--primary-color);
         border-radius: 10px;
     }
-    
+
     ::-webkit-scrollbar-thumb:hover {
         background: var(--secondary-color);
     }
@@ -43,7 +43,7 @@
         overflow: hidden;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
-    
+
     .color-preview:after {
         content: '';
         position: absolute;
@@ -56,7 +56,7 @@
         opacity: 0;
         transition: opacity 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
-    
+
     .color-preview:hover:after {
         opacity: 1;
     }
@@ -95,7 +95,7 @@
         transform: translateY(-8px);
         box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     }
-    
+
     .scheme-card:active {
         transform: translateY(-2px);
         transition: all 0.1s ease;
@@ -115,12 +115,12 @@
         height: 100%;
         transition: all 0.3s ease;
     }
-    
+
     .scheme-color:first-child {
         border-top-left-radius: 8px;
         border-bottom-left-radius: 8px;
     }
-    
+
     .scheme-color:last-child {
         border-top-right-radius: 8px;
         border-bottom-right-radius: 8px;
@@ -138,7 +138,7 @@
         border-color: var(--primary-color);
         box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     }
-    
+
     .emotion-scheme-card:active {
         transform: translateY(-2px);
         transition: all 0.1s ease;
@@ -174,7 +174,7 @@
         opacity: 0.8;
         transition: opacity 0.3s ease;
     }
-    
+
     .color-value:hover {
         opacity: 1;
     }
@@ -188,7 +188,7 @@
         transform: translateZ(0);
         transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
-    
+
     .primary-element:hover {
         transform: scale(1.02);
         box-shadow: 0 4px 15px rgba(0,0,0,0.3);
@@ -203,7 +203,7 @@
         transform: translateZ(0);
         transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
-    
+
     .secondary-element:hover {
         transform: scale(1.02);
         box-shadow: 0 4px 15px rgba(0,0,0,0.3);
@@ -218,7 +218,7 @@
         transform: translateZ(0);
         transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
-    
+
     .accent-element:hover {
         transform: scale(1.02);
         box-shadow: 0 4px 15px rgba(0,0,0,0.3);
@@ -234,30 +234,30 @@
         transform: translateZ(0);
         transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
-    
+
     .text-element:hover {
         transform: scale(1.02);
         box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
-    
+
     /* Loading animation */
     @keyframes pulse {
         0% { opacity: 0.6; }
         50% { opacity: 1; }
         100% { opacity: 0.6; }
     }
-    
+
     .loading {
         animation: pulse 1.5s infinite ease-in-out;
     }
-    
+
     /* Button enhancements */
     .cyber-btn {
         transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
         position: relative;
         overflow: hidden;
     }
-    
+
     .cyber-btn:after {
         content: '';
         position: absolute;
@@ -271,11 +271,11 @@
         transform: scale(1, 1) translate(-50%);
         transform-origin: 50% 50%;
     }
-    
+
     .cyber-btn:focus:after {
         animation: ripple 1s ease-out;
     }
-    
+
     @keyframes ripple {
         0% {
             transform: scale(0, 0);
@@ -290,7 +290,7 @@
             transform: scale(40, 40);
         }
     }
-    
+
     /* Toast notifications */
     .color-toast {
         position: fixed;
@@ -304,11 +304,11 @@
         transform: translateX(150%);
         transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    
+
     .color-toast.show {
         transform: translateX(0);
     }
-    
+
     /* Button pulse animation */
     @keyframes pulse-animation {
         0% {
@@ -321,12 +321,12 @@
             box-shadow: 0 0 0 0 rgba(var(--primary-rgb, 0, 180, 216), 0);
         }
     }
-    
+
     .pulse-animation {
         animation: pulse-animation 1.5s infinite;
         position: relative;
     }
-    
+
     .pulse-animation:after {
         content: "";
         position: absolute;
@@ -338,19 +338,19 @@
         animation: pulse-animation 1.5s infinite;
         z-index: -1;
     }
-    
+
     /* Loading spinner styles */
     .loading-spinner {
         text-align: center;
         color: white;
     }
-    
+
     /* Fix for the nextElementSibling issue */
     .color-swatch-container {
         display: flex;
         align-items: center;
     }
-    
+
     /* Smooth card transitions */
     .cyber-card {
         transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1),
@@ -432,21 +432,21 @@
                             <label class="form-label">Accessibility Needs</label>
                             <div class="d-flex flex-wrap">
                                 <div class="form-check me-4 mb-2">
-                                    <input class="form-check-input accessibility-checkbox" type="checkbox" 
+                                    <input class="form-check-input accessibility-checkbox" type="checkbox"
                                            name="accessibility_needs" value="colorblind" id="colorblindCheck">
                                     <label class="form-check-label" for="colorblindCheck">
                                         Colorblind-friendly
                                     </label>
                                 </div>
                                 <div class="form-check me-4 mb-2">
-                                    <input class="form-check-input accessibility-checkbox" type="checkbox" 
+                                    <input class="form-check-input accessibility-checkbox" type="checkbox"
                                            name="accessibility_needs" value="reduced_motion" id="reducedMotionCheck">
                                     <label class="form-check-label" for="reducedMotionCheck">
                                         Reduced motion
                                     </label>
                                 </div>
                                 <div class="form-check me-4 mb-2">
-                                    <input class="form-check-input accessibility-checkbox" type="checkbox" 
+                                    <input class="form-check-input accessibility-checkbox" type="checkbox"
                                            name="accessibility_needs" value="high_legibility" id="highLegibilityCheck">
                                     <label class="form-check-label" for="highLegibilityCheck">
                                         High legibility
@@ -525,7 +525,7 @@
             <div class="cyber-card" id="previewPanel">
                 <div class="card-body">
                     <h3 class="mb-3">Live Preview</h3>
-                    
+
                     <div class="color-preview" id="colorPreview" style="background-color: {{ current_scheme.background }};">
                         <div class="p-3">
                             <div class="primary-element">
@@ -629,7 +629,7 @@
     let customGeneratedScheme = null;
     let toastQueue = [];
     let isToastVisible = false;
-    
+
     // Initialize the page with animations
     document.addEventListener('DOMContentLoaded', function() {
         // Animate cards in sequence
@@ -643,7 +643,7 @@
                 card.style.transform = 'translateY(0)';
             }, 100 + (index * 50));
         });
-        
+
         // Add hover listeners for swatches to show color value tooltip
         const swatches = document.querySelectorAll('.color-swatch');
         swatches.forEach(swatch => {
@@ -663,7 +663,7 @@
         // Show loading animation
         const previewPanel = document.getElementById('previewPanel');
         previewPanel.classList.add('loading');
-        
+
         // Add a slight delay for visual effect
         setTimeout(() => {
             // Update CSS variables for global theme
@@ -673,7 +673,7 @@
             document.documentElement.style.setProperty('--surface-color', scheme.surface);
             document.documentElement.style.setProperty('--text-color', scheme.text);
             document.documentElement.style.setProperty('--accent-color', scheme.accent);
-            
+
             // Update swatch colors with animated transition
             animateColorChange('primarySwatch', currentPreviewScheme.primary, scheme.primary);
             animateColorChange('secondarySwatch', currentPreviewScheme.secondary, scheme.secondary);
@@ -681,7 +681,7 @@
             animateColorChange('surfaceSwatch', currentPreviewScheme.surface, scheme.surface);
             animateColorChange('textSwatch', currentPreviewScheme.text, scheme.text);
             animateColorChange('accentSwatch', currentPreviewScheme.accent, scheme.accent);
-            
+
             // Update color values
             document.getElementById('primaryValue').textContent = scheme.primary;
             document.getElementById('secondaryValue').textContent = scheme.secondary;
@@ -689,36 +689,36 @@
             document.getElementById('surfaceValue').textContent = scheme.surface;
             document.getElementById('textValue').textContent = scheme.text;
             document.getElementById('accentValue').textContent = scheme.accent;
-            
+
             // Update preview background with animation
             const colorPreview = document.getElementById('colorPreview');
             colorPreview.style.transition = 'background-color 0.8s cubic-bezier(0.165, 0.84, 0.44, 1)';
             colorPreview.style.backgroundColor = scheme.background;
-            
+
             // Update current preview scheme
             currentPreviewScheme = {...scheme};
-            
+
             // Remove loading animation
             setTimeout(() => {
                 previewPanel.classList.remove('loading');
             }, 300);
         }, 200);
     }
-    
+
     // Animate color change for a swatch
     function animateColorChange(elementId, fromColor, toColor) {
         const element = document.getElementById(elementId);
         if (!element) return;
-        
+
         // Create subtle scale animation
         element.style.transform = 'scale(1.1)';
         element.style.boxShadow = '0 0 15px rgba(255, 255, 255, 0.6)';
-        
+
         // Change color
         setTimeout(() => {
             element.style.backgroundColor = toColor;
         }, 150);
-        
+
         // Revert scale animation
         setTimeout(() => {
             element.style.transform = 'scale(1)';
@@ -731,10 +731,10 @@
         // Add active state to button
         this.classList.add('active');
         this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Generating...';
-        
+
         // Get form data
         const formData = new FormData(document.getElementById('colorPreferenceForm'));
-        
+
         // Send to server to generate scheme
         fetch('/colors/generate', {
             method: 'POST',
@@ -745,20 +745,20 @@
             // Reset button state
             this.classList.remove('active');
             this.innerHTML = '<i class="fas fa-magic me-2"></i> Generate Color Scheme';
-            
+
             if (data.success && data.scheme) {
                 // Store the generated scheme
                 customGeneratedScheme = data.scheme;
-                
+
                 // Update the preview with animation
                 updatePreview(data.scheme);
-                
+
                 // Enable the apply button with animation
                 const applyBtn = document.getElementById('applyCustomBtn');
                 applyBtn.disabled = false;
                 applyBtn.classList.add('pulse-animation');
                 setTimeout(() => applyBtn.classList.remove('pulse-animation'), 1000);
-                
+
                 // Show success message
                 showToast('Custom color scheme generated successfully!');
             } else {
@@ -769,7 +769,7 @@
             // Reset button state
             this.classList.remove('active');
             this.innerHTML = '<i class="fas fa-magic me-2"></i> Generate Color Scheme';
-            
+
             console.error('Error:', error);
             showToast('Error communicating with server', 'error');
         });
@@ -781,7 +781,7 @@
             // Add active state to button
             this.classList.add('active');
             this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Applying...';
-            
+
             applyScheme('custom', null, customGeneratedScheme);
         }
     });
@@ -793,7 +793,7 @@
             document.querySelectorAll('.scheme-card').forEach(c => c.style.borderColor = 'transparent');
             this.style.borderColor = 'var(--primary-color)';
             this.style.borderWidth = '2px';
-            
+
             const schemeId = this.dataset.schemeId;
             applyScheme('predefined', schemeId);
         });
@@ -806,7 +806,7 @@
             document.querySelectorAll('.emotion-scheme-card').forEach(c => c.style.borderColor = 'transparent');
             this.style.borderColor = 'var(--primary-color)';
             this.style.borderWidth = '2px';
-            
+
             const emotionId = this.dataset.emotionId;
             applyScheme('emotion', emotionId);
         });
@@ -817,7 +817,7 @@
         // Add active state to button
         this.classList.add('active');
         this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Resetting...';
-        
+
         fetch('/colors/reset', {
             method: 'POST'
         })
@@ -825,7 +825,7 @@
         .then(data => {
             if (data.success) {
                 showToast('Color scheme reset to default');
-                
+
                 // Create smooth transition effect before reload
                 const overlayDiv = document.createElement('div');
                 overlayDiv.style.position = 'fixed';
@@ -838,7 +838,7 @@
                 overlayDiv.style.opacity = '0';
                 overlayDiv.style.transition = 'opacity 0.5s ease';
                 document.body.appendChild(overlayDiv);
-                
+
                 setTimeout(() => {
                     overlayDiv.style.opacity = '1';
                     setTimeout(() => {
@@ -849,7 +849,7 @@
                 // Reset button state
                 this.classList.remove('active');
                 this.innerHTML = '<i class="fas fa-undo me-2"></i> Reset to Default';
-                
+
                 showToast('Error resetting color scheme', 'error');
             }
         })
@@ -857,7 +857,7 @@
             // Reset button state
             this.classList.remove('active');
             this.innerHTML = '<i class="fas fa-undo me-2"></i> Reset to Default';
-            
+
             console.error('Error:', error);
             showToast('Error communicating with server', 'error');
         });
@@ -888,17 +888,17 @@
         loadingOverlay.style.zIndex = '9999';
         loadingOverlay.style.opacity = '0';
         loadingOverlay.style.transition = 'opacity 0.3s ease';
-        
+
         document.body.appendChild(loadingOverlay);
-        
+
         // Fade in the overlay
         setTimeout(() => {
             loadingOverlay.style.opacity = '1';
         }, 50);
-        
+
         const formData = new FormData();
         formData.append('scheme_type', schemeType);
-        
+
         if (schemeType === 'predefined') {
             formData.append('scheme_name', schemeId);
         } else if (schemeType === 'emotion') {
@@ -906,7 +906,7 @@
         } else if (schemeType === 'custom' && customScheme) {
             formData.append('scheme', JSON.stringify(customScheme));
         }
-        
+
         fetch('/colors/apply', {
             method: 'POST',
             body: formData
@@ -915,7 +915,7 @@
         .then(data => {
             if (data.success) {
                 showToast('Color scheme applied successfully!');
-                
+
                 // Create smooth transition effect before reload
                 setTimeout(() => {
                     // Fade out the overlay completely before reloading
@@ -930,7 +930,7 @@
                 setTimeout(() => {
                     document.body.removeChild(loadingOverlay);
                 }, 300);
-                
+
                 showToast('Error applying color scheme', 'error');
             }
         })
@@ -940,7 +940,7 @@
             setTimeout(() => {
                 document.body.removeChild(loadingOverlay);
             }, 300);
-            
+
             console.error('Error:', error);
             showToast('Error communicating with server', 'error');
         });
@@ -950,22 +950,22 @@
     function showToast(message, type = 'success') {
         // Add to queue
         toastQueue.push({ message, type });
-        
+
         // If no toast is visible, show the next one
         if (!isToastVisible) {
             processToastQueue();
         }
     }
-    
+
     function processToastQueue() {
         if (toastQueue.length === 0) {
             isToastVisible = false;
             return;
         }
-        
+
         isToastVisible = true;
         const { message, type } = toastQueue.shift();
-        
+
         // Create toast container if it doesn't exist
         let toastContainer = document.getElementById('toastContainer');
         if (!toastContainer) {
@@ -977,18 +977,18 @@
             toastContainer.style.zIndex = '9999';
             document.body.appendChild(toastContainer);
         }
-        
+
         // Create toast element
         const toast = document.createElement('div');
         toast.classList.add('color-toast', 'cyber-card');
-        
+
         // Set border color based on type
         if (type === 'error') {
             toast.style.borderLeft = '4px solid #e53e3e';
         } else {
             toast.style.borderLeft = '4px solid #38a169';
         }
-        
+
         // Set icon based on type
         let icon = '';
         if (type === 'error') {
@@ -996,7 +996,7 @@
         } else {
             icon = '<i class="fas fa-check-circle me-2" style="color: #38a169;"></i>';
         }
-        
+
         // Set content
         toast.innerHTML = `
             <div class="d-flex align-items-center">
@@ -1004,29 +1004,29 @@
                 <div>${message}</div>
             </div>
         `;
-        
+
         // Add to container
         toastContainer.appendChild(toast);
-        
+
         // Trigger animation after a small delay
         setTimeout(() => {
             toast.classList.add('show');
         }, 50);
-        
+
         // Auto-hide after 3 seconds
         setTimeout(() => {
             toast.classList.remove('show');
-            
+
             // Remove toast after animation completes
             setTimeout(() => {
                 toastContainer.removeChild(toast);
-                
+
                 // Process next toast if any
                 processToastQueue();
             }, 500);
         }, 3000);
     }
-    
+
     // Color swatch interaction enhancement
     document.addEventListener('DOMContentLoaded', function() {
         const colorSwatches = document.querySelectorAll('.color-swatch');
@@ -1041,7 +1041,7 @@
                     }
                 }
             });
-            
+
             swatch.addEventListener('mouseleave', function() {
                 const container = this.closest('.color-swatch-container');
                 if (container) {
