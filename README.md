@@ -30,3 +30,4 @@ AlphaVox helps non-verbal users feel **heard, loved, and whole** — without nee
 
 This version was built and maintained by Everett Christman.
 All commits in this repo are timestamped and attributed to preserve authorship and IP.
+
