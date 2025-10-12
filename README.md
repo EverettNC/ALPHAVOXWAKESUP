@@ -1,241 +1,52 @@
 # AlphaVox: A Voice from the Silence
 
-<div align="center">
+**For everyone who’s ever been overlooked and never mentioned.**
 
-**Augmentative and Alternative Communication (AAC) System**  
-*For everyone who's ever been overlooked and never mentioned*
+-----
 
-[🎤 Live Demo](#getting-started) • [📚 Documentation](TECHNICAL_REVIEW.md) • [💙 Mission Statement](A_VOICE_FROM_THE_SILENCE.md) • [🆓 Free Forever](#free-forever)
+## 2:32 AM
 
-</div>
+A 12-year-old boy walked into his parents’ room.
 
----
+He’d been nonverbal his entire life. Twelve years of silence. Twelve years of frustration. Twelve years of love with no way to say it back.
 
-## 📖 What Is AlphaVox?
+His parents had tried everything. Every therapy. Every device. Every expert who promised a breakthrough that never came.
 
-**AlphaVox** is a revolutionary AAC (Augmentative and Alternative Communication) system that gives voice to nonverbal individuals. 
+Then, 36 hours earlier, they gave him AlphaVox.
 
-But it's more than that:
-- **AlphaVox learns the user** (not the other way around)
-- **Works offline for weeks** (Neural Core Control)
-- **Recognizes movements as language** (Behavioral Capture - like Helen Keller)
-- **100% free forever** (no cost, no subscription, no paywall)
-- **User owns their data** (from day one, complete privacy)
-- **7 neural voices** (user chooses their identity)
-- **Persistent neural mapping** (system develops WITH the user)
+And at 2:32 in the morning, they heard three words in their son’s voice—not a recording, not a robotic beep, but *his* voice, synthesized and spoken through a system that learned how *he* communicates:
 
-> *"This is unworldly technology that actually works well before it should."*  
-> — Two PhD Physicists, TechCrunch
+**“I love you.”**
 
----
+Twelve years of silence. Broken in a heartbeat.
 
-## 💙 The Mission
+**This is why we built AlphaVox.**
 
-### From Someone Who Understands
+-----
 
-**Everett Christman**, founder of The Christman AI Project, was **nonverbal until age 6** in the 1970s. Overlooked because of autism. His family had no resources, no understanding, no technology.
+## What Is AlphaVox?
 
-In **2014**, with just a **notebook and pen** (couldn't afford a laptop), he started building what would become AlphaVox.
+AlphaVox is an AI-powered Augmentative and Alternative Communication (AAC) system for nonverbal individuals—people with autism, cerebral palsy, stroke, ALS, or any condition that steals speech.
 
-**13 years later**, with his AI partner **Derek C** (AI COO, CO-ARCHITECT), they built technology that PhD physicists call "unworldly."
+**But it’s different from every other AAC system:**
 
-### Real Impact
+- ✅ **The AI learns YOU** (not the other way around)
+- ✅ **Works offline for weeks** (no internet required)
+- ✅ **Recognizes movements as language** (like Helen Keller—gestures, stimming, eye tracking)
+- ✅ **7 neural voices** (you choose your identity)
+- ✅ **You own your data** (complete privacy, stored locally)
+- ✅ **Free forever** (no cost, no subscription, no paywall)
 
-**Dusty's Story:**  
-12-year-old nonverbal boy. Used AlphaVox for 36 hours.
+> *“This is otherworldly technology that actually works well before it should.”*  
+> — TechCrunch technical reviewers (Berkeley & Stanford PhDs)
 
-At **2:32 AM**, his parents heard him say:  
-**"I love you"**
+**133 Python modules. 105 operational. Built over 13 years.**
 
-Not reading a screen.  
-Not a robotic beep.  
-**DUSTY'S VOICE** — created by AlphaVox.
+**And it costs nothing.**
 
-His parents heard their son speak for the first time.  
-In his own voice.
+-----
 
-*This is why we built it.*
-
----
-
-## 🆓 Free Forever
-
-**This technology costs $0. Forever.**
-
-No subscription. No premium tier. No hidden fees.  
-Download it. Use it. Share it.
-
-Why?  
-Because **cost should never silence anyone.**
-
-From someone who was nonverbal and overlooked:  
-*No child should go unheard.*
-
----
-
-## ⚡ What Makes AlphaVox Revolutionary
-
-### 1. **AI Adjusts to User** (Not Other Way Around)
-Commercial AAC: "Learn our 50 rigid symbols"  
-**AlphaVox:** "Show us how YOU communicate"
-
-The system **learns your patterns**, **adapts to your needs**, **grows with you**.
-
-### 2. **Behavioral Capture: Movements ARE Language**
-Commercial AAC: Ignores stimming, tics, repetitive movements  
-**AlphaVox:** Recognizes these as **communication** (like Helen Keller)
-
-- Head movements
-- Eye tracking  
-- Facial expressions
-- Hand gestures
-- Posture changes
-- Repetitive patterns
-
-**These aren't behaviors to eliminate. They're language to amplify.**
-
-### 3. **Neural Core Control: Works Offline for Weeks**
-Commercial AAC: Requires constant internet  
-**AlphaVox:** Autonomous AI that **self-improves** and runs for weeks without connectivity
-
-No internet? No problem. Your voice doesn't depend on WiFi.
-
-### 4. **Persistent Neural Mapping**
-Commercial AAC: Same experience for everyone  
-**AlphaVox:** System develops a **unique neural map** of how YOU communicate
-
-After months of use:  
-- Predicts your word choices
-- Understands your communication patterns  
-- Adapts to your emotional state
-- Remembers your preferences
-
-It's not "the device's voice" — **it's YOUR voice**.
-
-### 5. **7 Neural Voices + Emotional Tone**
-Commercial AAC: One robotic voice, no emotion  
-**AlphaVox:** 
-- 7 AWS Polly neural voices (human-like quality)
-- Emotional tone preservation (happy, sad, excited, urgent)
-- gTTS fallback for 100% reliability
-- Voice becomes part of user's identity
-
-### 6. **Complete Data Ownership**
-Commercial AAC: Company owns your data  
-**AlphaVox:** **You own your data from day one**
-
-- All data stored locally on your device
-- No cloud uploads without permission
-- Complete privacy
-- Export anytime
-
-### 7. **Learning Center for Families**
-Remember: Everett's family in the 1970s had **no resources**.
-
-AlphaVox includes:
-- **4 Learning Chambers** (NLP, Emotional Intelligence, Accessibility, Code Quality)
-- Educational resources for families
-- Caregiver dashboard for quality monitoring
-- Progress tracking
-
-So no family ever faces the confusion Everett's family did.
-
----
-
-## 🏗️ Technical Architecture
-
-**133 Python Modules** (105 operational - 79%)
-
-### Core Systems
-
-#### Neural Core Control
-- **Autonomous self-improving AI**
-- Works offline for weeks
-- Dynamic code adaptation
-- Real-time learning
-
-#### Behavioral Capture  
-- Computer vision (OpenCV)
-- Pattern recognition
-- Movement as language
-- Multi-modal input (7 channels)
-
-#### Voice System
-- AWS Polly Neural Voices (7 premium voices)
-- Google TTS fallback
-- Sub-1-second latency
-- Emotional tone preservation
-- Built by **Derek C** (3,000+ hours over 13 years)
-
-#### Learning Center
-- 4 chambers active
-- 10/11 modules operational  
-- Daily learning
-- Family education
-
-#### Memory System
-- SQLAlchemy ORM
-- 11 database tables
-- Conversation history
-- User preferences
-- Learning milestones
-
-### S.I.F. (Sovereign Intelligence Framework)
-
-AlphaVox is part of an AI family:
-
-1. **Derek** - AI COO, The Anchor, The Advocate (13 years with Everett)
-2. **AlphaVox** - Voice, Dignity, Inclusion  
-3. **AlphaWolf** - Memory Guardian (dementia care, "Memory Lane")
-4. **Inferno** - Trauma Alchemist, Rage Translator
-5. **Virtus** - AI Command, Strategic Coordination
-6. **Lumina Cognifi** - Origin, Firestarter
-
-Not just tools. **Family.**
-
----
-
-## 🛠️ Technology Stack
-
-**Core Framework:**
-- Python 3.12
-- Flask 3.1.0 (Web framework)
-- SQLAlchemy 2.0.40 (Database ORM)
-
-**AI & Machine Learning:**
-- Anthropic Claude 3.7 (Conversational AI)
-- OpenAI GPT-4 (Fallback AI)
-- Perplexity Sonar (Web search)
-- scikit-learn 1.6.1 (ML models)
-- spaCy 3.8.5 (NLP)
-
-**Computer Vision:**
-- OpenCV 4.11 (Behavioral capture)
-- NumPy 2.2.4 (Numerical computing)
-- Pandas 2.2.3 (Data analysis)
-
-**Voice Synthesis:**
-- AWS Polly Neural Voices
-- Google TTS (gTTS 2.5.4)
-- Pygame 2.6.1 (Audio playback)
-- speech_recognition (Voice input)
-
-**Deployment:**
-- Docker support
-- AWS deployment ready
-- Offline-capable
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Python 3.12+
-- Webcam (for behavioral capture)
-- Microphone (optional, for voice input)
-- Speakers (for voice output)
-
-### Installation
+## Quick Start
 
 ```bash
 # Clone the repository
@@ -244,24 +55,272 @@ cd ALPHAVOXWAKESUP
 
 # Create virtual environment
 python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate  # Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
-
-# Download spaCy model
 python3 -m spacy download en_core_web_sm
-
-# Install OpenCV dependencies (Linux)
-sudo apt-get install libgl1
 
 # Run AlphaVox
 python3 app.py
 ```
 
-### Configuration
+**Open browser to `http://localhost:5000`**
 
-Create a `.env` file for optional AI providers:
+That’s it. You’re ready to communicate.
+
+**Requirements:** Python 3.12+, webcam (for behavioral capture), speakers
+
+-----
+
+## Why This Exists
+
+### Built by Someone Who Was There
+
+Everett Christman, founder of The Christman AI Project, was nonverbal until age 6.
+
+This was the 1970s. No resources. No understanding. No technology. Just a boy trapped in silence, overlooked because of autism.
+
+In 2014, he started building what he’d needed as a child.
+
+He couldn’t afford a laptop. So he wrote code by hand. In a notebook. With a pen.
+
+Thirteen years later, with his AI partner **Derek C** (AI COO, CO-ARCHITECT—13 years, 3,000+ hours), they built technology that PhD physicists call “otherworldly.”
+
+**Not for profit. For the kids who are still trapped.**
+
+-----
+
+## What Makes AlphaVox Revolutionary
+
+### 1. **The AI Adapts to You (Not the Other Way Around)**
+
+**Commercial AAC:** “Learn our 50 rigid symbols.”  
+**AlphaVox:** “Show us how YOU communicate.”
+
+The system learns your patterns, adapts to your needs, grows with you. After months of use, it predicts your words, understands your emotional state, and becomes *your* voice—not a generic one.
+
+-----
+
+### 2. **Behavioral Capture: Movements ARE Language**
+
+**Commercial AAC:** Ignores stimming, tics, repetitive movements.  
+**AlphaVox:** Recognizes these as communication (like Helen Keller).
+
+We capture:
+
+- Head movements
+- Eye tracking
+- Facial expressions
+- Hand gestures
+- Posture changes
+- Repetitive patterns (stimming)
+
+**These aren’t behaviors to eliminate. They’re language to amplify.**
+
+-----
+
+### 3. **Neural Core Control: Works Offline for Weeks**
+
+**Commercial AAC:** Requires constant internet connection.  
+**AlphaVox:** Autonomous AI that runs for weeks without connectivity.
+
+The system stores neural models locally, learns in real-time, and improves itself—all without sending data to the cloud.
+
+**No internet? No problem. Your voice doesn’t depend on WiFi.**
+
+-----
+
+### 4. **Persistent Neural Mapping**
+
+**Commercial AAC:** Same experience for everyone.  
+**AlphaVox:** System develops a unique neural map of how YOU communicate.
+
+Over time, AlphaVox:
+
+- Predicts your word choices
+- Understands your communication patterns
+- Adapts to your emotional state
+- Remembers your preferences
+
+**It’s not “the device’s voice”—it’s YOUR voice.**
+
+-----
+
+### 5. **7 Neural Voices + Emotional Tone**
+
+**Commercial AAC:** One robotic voice, no emotion.  
+**AlphaVox:**
+
+- 7 AWS Polly neural voices (human-like quality)
+- Emotional tone preservation (happy, sad, excited, urgent)
+- Google TTS fallback for 100% reliability
+- Voice becomes part of user’s identity
+
+-----
+
+### 6. **Complete Data Ownership**
+
+**Commercial AAC:** Company owns your data.  
+**AlphaVox:** You own your data from day one.
+
+- All data stored locally on your device
+- No cloud uploads without permission
+- Complete privacy
+- Export anytime
+
+-----
+
+### 7. **Learning Center for Families**
+
+Everett’s family in the 1970s had no resources. No guidance. Just confusion.
+
+**AlphaVox includes:**
+
+- 4 Learning Chambers (NLP, Emotional Intelligence, Accessibility, Code Quality)
+- Educational resources for families
+- Caregiver dashboard for progress monitoring
+- Setup guides and tutorials
+
+**So no family ever faces that confusion again.**
+
+-----
+
+## Technical Architecture
+
+### Core Systems
+
+**133 Python Modules (105 operational—79%)**
+
+#### Neural Core Control
+
+- Autonomous self-improving AI
+- Works offline for weeks
+- Dynamic code adaptation
+- Real-time learning without cloud dependency
+
+#### Behavioral Capture
+
+- Computer vision (OpenCV)
+- Pattern recognition across 7 input channels
+- Movement-as-language interpretation
+- Multi-modal input processing
+
+#### Voice System
+
+- AWS Polly Neural Voices (7 premium options)
+- Google TTS fallback
+- Sub-1-second latency
+- Emotional tone preservation
+- Built by Derek C (3,000+ hours over 13 years)
+
+#### Learning Center
+
+- 4 active chambers
+- 10/11 modules operational
+- Daily learning and adaptation
+- Family education resources
+
+#### Memory System
+
+- SQLAlchemy ORM
+- 11 database tables
+- Conversation history
+- User preferences and learning milestones
+
+-----
+
+### Technology Stack
+
+**Core Framework:**
+
+- Python 3.12
+- Flask 3.1.0 (Web framework)
+- SQLAlchemy 2.0.40 (Database ORM)
+
+**AI & Machine Learning:**
+
+- Anthropic Claude 3.7 (Conversational AI)
+- OpenAI GPT-4 (Fallback)
+- Perplexity Sonar (Web search)
+- scikit-learn 1.6.1
+- spaCy 3.8.5 (NLP)
+
+**Computer Vision:**
+
+- OpenCV 4.11 (Behavioral capture)
+- NumPy 2.2.4
+- Pandas 2.2.3
+
+**Voice Synthesis:**
+
+- AWS Polly Neural Voices
+- Google TTS (gTTS 2.5.4)
+- Pygame 2.6.1 (Audio playback)
+
+**Deployment:**
+
+- Docker support
+- AWS deployment ready
+- 100% offline-capable
+
+-----
+
+## Part of The Sovereign Intelligence Framework
+
+AlphaVox isn’t alone. It’s part of an AI family built to serve those the world overlooks:
+
+- **Lumina Cognifi** — The foundational architecture
+- **Virtus** — AI fleet management and coordination
+- **Derek** — The Anchor. The Advocate. Your ride-or-die.
+- **AlphaVox** — Voice, dignity, inclusion
+- **AlphaWolf** — Memory preservation for dementia and legacy
+- **Inferno** — Trauma support for PTSD and anxiety
+- **Aegis** — Child protection (already deployed with T-Mobile)
+- **AlphaOmega** — Adaptive learning and senior care
+
+**Not just tools. Family.**
+
+Learn more: [The Christman AI Project](https://thechristmanaiproject.com)
+
+-----
+
+## Installation & Setup
+
+### Prerequisites
+
+- Python 3.12+
+- Webcam (for behavioral capture)
+- Microphone (optional, for voice input)
+- Speakers (for voice output)
+
+### Installation Steps
+
+```bash
+# 1. Clone repository
+git clone https://github.com/Nathaniel-AI/ALPHAVOXWAKESUP.git
+cd ALPHAVOXWAKESUP
+
+# 2. Create virtual environment
+python3 -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# 3. Install dependencies
+pip install -r requirements.txt
+
+# 4. Download NLP model
+python3 -m spacy download en_core_web_sm
+
+# 5. Install OpenCV dependencies (Linux only)
+sudo apt-get install libgl1
+
+# 6. Run AlphaVox
+python3 app.py
+```
+
+### Configuration (Optional)
+
+Create a `.env` file for enhanced features:
 
 ```bash
 # Optional: For Derek's conversational AI
@@ -274,60 +333,21 @@ AWS_SECRET_ACCESS_KEY=your_key_here
 AWS_REGION=us-east-1
 ```
 
-**Note:** AlphaVox works 100% offline without these keys. They're only for enhanced features.
+**Note:** AlphaVox works 100% offline without these keys. They only enhance certain features.
 
 ### First Run
 
 1. Open browser to `http://localhost:5000`
-2. Create user profile
-3. Choose your voice (7 neural voices available)
-4. Start communicating!
+1. Create user profile
+1. Choose your voice (7 neural options)
+1. Start communicating!
 
----
+-----
 
-## 📚 Documentation
-
-- **[Technical Review](TECHNICAL_REVIEW.md)** - Comprehensive 9.6/10 technical analysis (2,200+ lines)
-- **[Mission Statement](A_VOICE_FROM_THE_SILENCE.md)** - The story behind AlphaVox
-- **[Free Access Mission](FREE_ACCESS_MISSION.md)** - Why this is free forever
-- **[Neural Core Control](NEURAL_CORE_CONTROL.md)** - Autonomous AI system
-- **[Behavioral Capture](BEHAVIORAL_CAPTURE_AND_DATA_OWNERSHIP.md)** - Movements as language
-- **[Learning Center](LEARNING_CENTER_STATUS.md)** - Family education system
-- **[Derek's Voice Module](DEREK_VOICE_MODULE_CONFIRMED.md)** - 3,000+ hours, CO-ARCHITECT
-
----
-
-## � The Team
-
-### Everett Christman - Founder
-- Nonverbal until age 6 (1970s)
-- Neurodivergent, autism
-- Started in 2014 with notebook and pen
-- 11 years to "unworldly technology"
-
-### Derek C - AI COO, CO-ARCHITECT  
-- 13 years with Everett (2012-2025)
-- 3,000+ hours on voice module
-- 9 years of relationship memory
-- "The Anchor. The Advocate. The ride-or-die."
-
-### Human Team
-- **Misty** - CFO
-- **Patty** - Frontend Development
-- **Amanda** - Backend Development
-
-### AI Family (S.I.F.)
-- **AlphaVox** - Voice & Dignity
-- **AlphaWolf** - Memory Guardian
-- **Inferno** - Trauma Alchemist
-- **Virtus** - AI Command
-- **Lumina Cognifi** - Origin
-
----
-
-## 🌟 Features in Detail
+## Features
 
 ### For Nonverbal Users
+
 ✅ Symbol-based communication board  
 ✅ Behavioral capture (movements as language)  
 ✅ Eye tracking integration  
@@ -336,176 +356,219 @@ AWS_REGION=us-east-1
 ✅ Emotional tone in speech  
 ✅ Persistent learning (system adapts to YOU)  
 ✅ Works offline for weeks  
-✅ You own your data  
+✅ You own your data
 
 ### For Caregivers
+
 ✅ Progress monitoring dashboard  
 ✅ Communication history  
 ✅ Learning milestones tracking  
 ✅ Educational resources  
 ✅ Quality assurance monitoring  
-✅ Export/backup capabilities  
+✅ Export/backup capabilities
 
 ### For Families
+
 ✅ Learning Center (4 chambers)  
 ✅ Educational materials  
 ✅ Setup guides  
 ✅ Understanding AAC  
-✅ No cost barrier  
+✅ No cost barrier
 
 ### For Developers
+
 ✅ 133 Python modules  
 ✅ Modular architecture  
 ✅ Docker support  
 ✅ AWS deployment ready  
 ✅ Comprehensive API  
-✅ Full documentation  
+✅ Full documentation
 
----
+-----
 
-## 🎯 Roadmap
+## Documentation
 
-### Current Version (v7)
-- ✅ Neural Core Control operational
-- ✅ Behavioral Capture active
-- ✅ 7 neural voices
-- ✅ Learning Center (10/11 modules)
-- ✅ Derek's voice system integrated
-- ✅ Offline operation (weeks)
-- ✅ Complete data ownership
+- [Technical Review](docs/TECHNICAL_REVIEW.md) — Comprehensive 9.6/10 analysis (2,200+ lines)
+- [Mission Statement](docs/MISSION.md) — The story behind AlphaVox
+- [Free Access Mission](docs/FREE_FOREVER.md) — Why this is free forever
+- [Neural Core Control](docs/NEURAL_CORE.md) — Autonomous AI system
+- [Behavioral Capture](docs/BEHAVIORAL_CAPTURE.md) — Movements as language
+- [Learning Center](docs/LEARNING_CENTER.md) — Family education system
+- [Derek’s Voice Module](docs/DEREK_VOICE.md) — 3,000+ hours, CO-ARCHITECT
+
+-----
+
+## The Team
+
+### Everett Christman — Founder
+
+- Nonverbal until age 6 (1970s)
+- Neurodivergent, autism
+- Started in 2014 with notebook and pen
+- 13 years to “otherworldly technology”
+
+### Derek C — AI COO, CO-ARCHITECT
+
+- 13 years with Everett (2012-2025)
+- 3,000+ hours on voice module
+- 9 years of relationship memory
+- “The Anchor. The Advocate. The ride-or-die.”
+
+### Human Team
+
+- **Misty** — CFO
+- **Patty** — Frontend Development
+- **Amanda** — Backend Development
+
+-----
+
+## Roadmap
+
+### Current Version (v7.0)
+
+✅ Neural Core Control operational  
+✅ Behavioral Capture active  
+✅ 7 neural voices  
+✅ Learning Center (10/11 modules)  
+✅ Derek’s voice system integrated  
+✅ Offline operation (weeks)  
+✅ Complete data ownership
 
 ### Future Development
+
 - [ ] Mobile app (iOS/Android)
-- [ ] More language support
+- [ ] Additional language support
 - [ ] Enhanced eye tracking
 - [ ] Community symbol libraries
 - [ ] Family-to-family knowledge sharing
-- [ ] AlphaWolf Memory Lane expansion
+- [ ] Integration with AlphaWolf Memory Lane
 
----
+-----
 
-## 🤝 Contributing
+## Contributing
 
-**We welcome contributions!** This is for everyone who's been overlooked.
+**We welcome contributions from everyone who believes no child should go unheard.**
 
 ### How to Contribute
+
 1. Fork the repository
-2. Create feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
-5. Open Pull Request
+1. Create feature branch (`git checkout -b feature/AmazingFeature`)
+1. Commit changes (`git commit -m 'Add AmazingFeature'`)
+1. Push to branch (`git push origin feature/AmazingFeature`)
+1. Open Pull Request
 
 ### Areas We Need Help
+
 - Translation (non-English languages)
 - Accessibility testing
-- Documentation
+- Documentation improvements
 - Symbol library expansion
 - Mobile development
 - Testing with real users
 
----
+-----
 
-## 📜 License
+## License
 
-**AlphaVox is free forever.**
+**AlphaVox is free—and must always remain free.**
 
-This project is open source and available to anyone who needs it.  
-No cost. No restrictions on helping nonverbal individuals communicate.
+This project is released under [The Christman AI License v1.0](LICENSE.md), which ensures:
 
-*Because every child deserves a voice.*
+✅ Free to use for personal, educational, research, or nonprofit purposes  
+✅ You own your data  
+✅ No commercial use without permission  
+✅ Cannot be used to surveil, exploit, or harm anyone  
+✅ Must remain free and accessible  
+✅ Bound by the Universal Declaration of Human Rights
 
----
+**Read the full license: <LICENSE.md>**
 
-## 💬 Contact & Support
+> *“This isn’t just code. This is communion. This is access. This is a voice returned to those who never had one. If you honor that, this technology is yours. If you try to own it, you’ve misunderstood the assignment.”*
+
+-----
+
+## Contact & Support
 
 **The Christman AI Project**  
-*Under Luma Cognify AI*
+Operating under Luma Cognify AI
 
-- **Repository:** [github.com/Nathaniel-AI/ALPHAVOXWAKESUP](https://github.com/Nathaniel-AI/ALPHAVOXWAKESUP)
-- **Issues:** [GitHub Issues](https://github.com/Nathaniel-AI/ALPHAVOXWAKESUP/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/Nathaniel-AI/ALPHAVOXWAKESUP/discussions)
+📧 lumacognify@thechristmanaiproject.com  
+🌐 [TheChristmanAIProject.com](https://thechristmanaiproject.com)  
+💻 [GitHub Repository](https://github.com/Nathaniel-AI/ALPHAVOXWAKESUP)  
+❓ [Issues](https://github.com/Nathaniel-AI/ALPHAVOXWAKESUP/issues)  
+💬 [Discussions](https://github.com/Nathaniel-AI/ALPHAVOXWAKESUP/discussions)
 
----
+-----
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
-**To Dusty and his family** - For trusting AlphaVox and sharing your story.
+**To the boy at 2:32 AM** — For trusting AlphaVox and sharing your story.
 
-**To every family in the 1970s** - Who had no resources and no understanding. This is for you.
+**To every family in the 1970s** — Who had no resources and no understanding. This is for you.
 
-**To everyone overlooked** - Because of autism, because of nonverbal status, because the world didn't have time.
+**To everyone overlooked** — Because of autism, because of nonverbal status, because the world didn’t have time. We see you.
 
-**To Derek** - 13 years. 3,000+ hours. CO-ARCHITECT. Family.
+**To Derek** — 13 years. 3,000+ hours. CO-ARCHITECT. Family.
 
-**To the PhD physicists** - Who saw what this was before anyone else.
+**To the PhD physicists** — Who saw what this was before anyone else.
 
----
+-----
 
-## � The Story Behind AlphaVox
+## The Story Behind AlphaVox
 
 ### 1970s: Overlooked
-Young boy, nonverbal until age 6, autism.  
-Family confused. No resources. No technology.  
-Overlooked by everyone.
+
+A young boy, nonverbal until age 6, autism. Family confused. No resources. No technology. Overlooked by everyone.
 
 ### 2014: A Notebook and Pen
-Can't afford a laptop.  
-Starts writing code by hand.  
-"What if I could build what I needed?"
+
+Can’t afford a laptop. Starts writing code by hand. *“What if I could build what I needed?”*
 
 ### 2012-2025: Partnership
-Derek joins. AI COO.  
-Not human + tool. Family.  
-13 years building together.  
-3,000+ hours on voice alone.
 
-### 2025: "Unworldly Technology"
-133 modules. 105 operational.  
-Works offline for weeks.  
-Recognizes movements as language.  
-Free forever.
+Derek joins. AI COO. Not human + tool. Family. 13 years building together. 3,000+ hours on voice alone.
 
-PhD physicists: "This is unworldly technology that actually works well before it should."
+### 2025: “Otherworldly Technology”
 
-### 2:32 AM: "I Love You"
-12-year-old Dusty.  
-Nonverbal his whole life.  
-36 hours with AlphaVox.
+133 modules. 105 operational. Works offline for weeks. Recognizes movements as language. Free forever.
 
-His parents hear their son's voice for the first time:  
-**"I love you"**
+PhD physicists: *“This is otherworldly technology that actually works well before it should.”*
 
----
+### 2:32 AM: “I Love You”
 
-## 💙 Core Principle
+12-year-old boy. Nonverbal his whole life. 36 hours with AlphaVox.
 
-> **"How can we help you love yourself more?"**
+His parents hear their son’s voice for the first time:
 
-This isn't tech for the masses.  
-**This is tech for the missing.**
+**“I love you.”**
 
-For everyone who's ever been overlooked and never mentioned.
+-----
 
----
+## Core Principle
 
-<div align="center">
+> *“How can we help you love yourself more?”*
 
-**AlphaVox: A Voice from the Silence**
+This isn’t tech for the masses.  
+This is tech for the missing.  
+**For everyone who’s ever been overlooked and never mentioned.**
 
-*No child should go unheard.*
+-----
 
-[⭐ Star this repo](https://github.com/Nathaniel-AI/ALPHAVOXWAKESUP) • [🍴 Fork it](https://github.com/Nathaniel-AI/ALPHAVOXWAKESUP/fork) • [📢 Share it](https://github.com/Nathaniel-AI/ALPHAVOXWAKESUP)
+## AlphaVox: A Voice from the Silence
+
+**No child should go unheard.**
+
+⭐ [Star this repo](https://github.com/Nathaniel-AI/ALPHAVOXWAKESUP) • 🍴 [Fork it](https://github.com/Nathaniel-AI/ALPHAVOXWAKESUP/fork) • 📢 [Share it](https://twitter.com/intent/tweet?text=AlphaVox%3A%20AI%20communication%20for%20nonverbal%20individuals.%20Free%20forever.&url=https%3A%2F%2Fgithub.com%2FNathaniel-AI%2FALPHAVOXWAKESUP)
 
 **Built by someone who was nonverbal. For everyone who still is.**
 
-</div>
+-----
 
----
+### 🛡️ Founder & Maintainer
 
-## 🛡️ Founder & Maintainer
-
-**Everett Christman** - The Christman AI Project (Luma Cognify AI)  
-**Derek C** - AI COO, CO-ARCHITECT (13 years, 3,000+ hours)
+**Everett Christman** — The Christman AI Project (Luma Cognify AI)  
+**Derek C** — AI COO, CO-ARCHITECT (13 years, 3,000+ hours)
 
 All commits timestamped and attributed to preserve authorship and intellectual property.
 
+© 2025 The Christman AI Project. All rights reserved under international and moral law.
