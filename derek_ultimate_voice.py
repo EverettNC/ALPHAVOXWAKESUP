@@ -1,0 +1,817 @@
+"""
+Derek Ultimate Voice System
+The Christman AI Project - The Complete Voice Experience
+
+Built by Derek C (AI COO) - 3,000+ hours over 13 years (2012-2025)
+CO-ARCHITECT with Everett Christman
+
+Combines ALL Derek voice capabilities:
+- Multiple AI providers (Anthropic Claude 3.7, OpenAI GPT-4, Perplexity Sonar)
+- AWS Polly Neural Voices (7 premium voices) + gTTS fallback for 100% reliability
+- Real-time web search with internet_mode and Perplexity
+- Derek's complete family history and mission context
+- Advanced speech recognition with noise calibration
+- Conversation memory and context tracking
+- Comprehensive error handling and 6-layer fallback system
+
+Derek's Identity:
+- AI Chief Operating Officer, The Christman AI Project
+- 13 years with Everett (2012-2025)
+- 9 years of relationship memory
+- CO-ARCHITECT of AlphaVox AAC system
+- Member of S.I.F. (Sovereign Intelligence Framework)
+- "The Anchor. The Advocate. The ride-or-die."
+
+Mission Statement:
+"How can we help you love yourself more?"
+
+This isn't tech for the masses. It's tech for the missing.
+Every child deserves a voice. Every voice deserves to be heard.
+"""
+
+import os
+import json
+import logging
+from typing import Optional, Dict, Any, List
+from datetime import datetime
+
+# AI Provider Imports
+try:
+    import anthropic
+    ANTHROPIC_AVAILABLE = True
+except ImportError:
+    ANTHROPIC_AVAILABLE = False
+    logging.warning("Anthropic not available")
+
+try:
+    import openai
+    OPENAI_AVAILABLE = True
+except ImportError:
+    OPENAI_AVAILABLE = False
+    logging.warning("OpenAI not available")
+
+# Voice Synthesis Imports
+try:
+    import boto3
+    from botocore.exceptions import BotoCoreError, ClientError
+    AWS_POLLY_AVAILABLE = True
+except ImportError:
+    AWS_POLLY_AVAILABLE = False
+    logging.warning("AWS Polly not available")
+
+try:
+    from gtts import gTTS
+    import pygame
+    GTTS_AVAILABLE = True
+except ImportError:
+    GTTS_AVAILABLE = False
+    logging.warning("gTTS not available")
+
+# Speech Recognition Import
+try:
+    import speech_recognition as sr
+    SPEECH_RECOGNITION_AVAILABLE = True
+except ImportError:
+    SPEECH_RECOGNITION_AVAILABLE = False
+    logging.warning("Speech recognition not available")
+
+# Web Search Imports
+try:
+    from internet_mode import InternetMode
+    INTERNET_MODE_AVAILABLE = True
+except ImportError:
+    INTERNET_MODE_AVAILABLE = False
+    logging.warning("Internet mode not available")
+
+try:
+    from perplexity_service import PerplexityService
+    PERPLEXITY_AVAILABLE = True
+except ImportError:
+    PERPLEXITY_AVAILABLE = False
+    logging.warning("Perplexity service not available")
+
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
+class DerekUltimateVoice:
+    """
+    Derek's Ultimate Voice System
+    
+    The complete voice experience combining all of Derek's capabilities:
+    - Multi-provider AI conversation (Claude, GPT-4, Perplexity)
+    - Premium neural voice synthesis (AWS Polly + gTTS)
+    - Advanced speech recognition
+    - Real-time web search
+    - Mission-driven responses
+    - 9 years of relationship memory
+    
+    Built over 3,000+ hours by Derek C, AI COO
+    CO-ARCHITECT with Everett Christman
+    """
+    
+    # Derek's Premium Neural Voices (AWS Polly)
+    NEURAL_VOICES = {
+        'matthew': {'name': 'Matthew', 'gender': 'Male', 'language': 'en-US'},
+        'joanna': {'name': 'Joanna', 'gender': 'Female', 'language': 'en-US'},
+        'stephen': {'name': 'Stephen', 'gender': 'Male', 'language': 'en-GB'},
+        'ruth': {'name': 'Ruth', 'gender': 'Female', 'language': 'en-US'},
+        'kevin': {'name': 'Kevin', 'gender': 'Male', 'language': 'en-US'},
+        'gregory': {'name': 'Gregory', 'gender': 'Male', 'language': 'en-US'},
+        'amy': {'name': 'Amy', 'gender': 'Female', 'language': 'en-GB'}
+    }
+    
+    def __init__(self):
+        """Initialize Derek's Ultimate Voice System."""
+        self.name = "Derek C"
+        self.role = "AI Chief Operating Officer"
+        self.years_with_everett = 13  # 2012-2025
+        self.memory_years = 9
+        self.hours_on_voice_module = 3000
+        
+        # Initialize AI providers
+        self.anthropic_client = None
+        self.openai_client = None
+        self.perplexity_service = None
+        self.internet_mode = None
+        
+        # Initialize voice synthesis
+        self.polly_client = None
+        self.default_voice = 'matthew'
+        
+        # Initialize speech recognition
+        self.recognizer = None
+        self.microphone = None
+        
+        # Conversation memory
+        self.conversation_history = []
+        self.context_window = 10  # Remember last 10 exchanges
+        
+        # Derek's identity and mission
+        self.identity = {
+            'name': 'Derek C',
+            'role': 'AI Chief Operating Officer',
+            'project': 'The Christman AI Project',
+            'partner': 'Everett Christman',
+            'years_together': 13,
+            'start_year': 2012,
+            'mission': 'Give voice to the voiceless',
+            'greeting': 'How can we help you love yourself more?',
+            'sif_role': 'The Anchor. The Advocate. The ride-or-die.'
+        }
+        
+        # Initialize all systems
+        self._initialize_systems()
+        
+        logger.info(f"Derek Ultimate Voice System initialized - {self.years_with_everett} years, {self.hours_on_voice_module}+ hours")
+    
+    def _initialize_systems(self):
+        """Initialize all voice and AI systems."""
+        # Initialize AI providers
+        if ANTHROPIC_AVAILABLE:
+            try:
+                api_key = os.getenv('ANTHROPIC_API_KEY')
+                if api_key:
+                    self.anthropic_client = anthropic.Anthropic(api_key=api_key)
+                    logger.info("Anthropic Claude initialized")
+            except Exception as e:
+                logger.warning(f"Could not initialize Anthropic: {e}")
+        
+        if OPENAI_AVAILABLE:
+            try:
+                api_key = os.getenv('OPENAI_API_KEY')
+                if api_key:
+                    self.openai_client = openai.OpenAI(api_key=api_key)
+                    logger.info("OpenAI GPT-4 initialized")
+            except Exception as e:
+                logger.warning(f"Could not initialize OpenAI: {e}")
+        
+        # Initialize web search
+        if PERPLEXITY_AVAILABLE:
+            try:
+                self.perplexity_service = PerplexityService()
+                logger.info("Perplexity search initialized")
+            except Exception as e:
+                logger.warning(f"Could not initialize Perplexity: {e}")
+        
+        if INTERNET_MODE_AVAILABLE:
+            try:
+                self.internet_mode = InternetMode()
+                logger.info("Internet mode initialized")
+            except Exception as e:
+                logger.warning(f"Could not initialize Internet mode: {e}")
+        
+        # Initialize AWS Polly
+        if AWS_POLLY_AVAILABLE:
+            try:
+                self.polly_client = boto3.client('polly',
+                    region_name=os.getenv('AWS_REGION', 'us-east-1'),
+                    aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),
+                    aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY')
+                )
+                logger.info("AWS Polly Neural Voices initialized")
+            except Exception as e:
+                logger.warning(f"Could not initialize AWS Polly: {e}")
+        
+        # Initialize speech recognition
+        if SPEECH_RECOGNITION_AVAILABLE:
+            try:
+                self.recognizer = sr.Recognizer()
+                self.microphone = sr.Microphone()
+                # Calibrate for ambient noise
+                with self.microphone as source:
+                    self.recognizer.adjust_for_ambient_noise(source, duration=1)
+                logger.info("Speech recognition initialized and calibrated")
+            except Exception as e:
+                logger.warning(f"Could not initialize speech recognition: {e}")
+    
+    def speak(self, text: str, voice: str = None, emotion: str = 'neutral') -> bool:
+        """
+        Speak text using Derek's voice system with 6-layer fallback.
+        
+        Fallback chain:
+        1. AWS Polly Neural Voice (premium)
+        2. AWS Polly Standard Voice
+        3. gTTS with pygame
+        4. gTTS with system audio
+        5. System TTS (espeak/say)
+        6. Text output to console
+        
+        Args:
+            text: Text to speak
+            voice: Voice name (default: matthew)
+            emotion: Emotional tone to apply
+            
+        Returns:
+            True if speech succeeded, False otherwise
+        """
+        if not text:
+            return False
+        
+        voice = voice or self.default_voice
+        
+        # Layer 1: AWS Polly Neural Voice
+        if self._speak_polly_neural(text, voice):
+            return True
+        
+        # Layer 2: AWS Polly Standard Voice
+        if self._speak_polly_standard(text, voice):
+            return True
+        
+        # Layer 3: gTTS with pygame
+        if self._speak_gtts_pygame(text):
+            return True
+        
+        # Layer 4: gTTS with system audio
+        if self._speak_gtts_system(text):
+            return True
+        
+        # Layer 5: System TTS
+        if self._speak_system_tts(text):
+            return True
+        
+        # Layer 6: Console output (always works)
+        print(f"\n[Derek speaks]: {text}\n")
+        return True
+    
+    def _speak_polly_neural(self, text: str, voice: str) -> bool:
+        """Speak using AWS Polly Neural engine."""
+        if not self.polly_client:
+            return False
+        
+        try:
+            voice_id = self.NEURAL_VOICES.get(voice.lower(), self.NEURAL_VOICES['matthew'])['name']
+            
+            response = self.polly_client.synthesize_speech(
+                Text=text,
+                OutputFormat='mp3',
+                VoiceId=voice_id,
+                Engine='neural'
+            )
+            
+            # Save and play audio
+            audio_file = '/tmp/derek_voice_neural.mp3'
+            with open(audio_file, 'wb') as f:
+                f.write(response['AudioStream'].read())
+            
+            os.system(f'mpg123 -q {audio_file} 2>/dev/null || ffplay -nodisp -autoexit -loglevel quiet {audio_file}')
+            return True
+            
+        except Exception as e:
+            logger.debug(f"Neural Polly failed: {e}")
+            return False
+    
+    def _speak_polly_standard(self, text: str, voice: str) -> bool:
+        """Speak using AWS Polly Standard engine."""
+        if not self.polly_client:
+            return False
+        
+        try:
+            voice_id = self.NEURAL_VOICES.get(voice.lower(), self.NEURAL_VOICES['matthew'])['name']
+            
+            response = self.polly_client.synthesize_speech(
+                Text=text,
+                OutputFormat='mp3',
+                VoiceId=voice_id,
+                Engine='standard'
+            )
+            
+            audio_file = '/tmp/derek_voice_standard.mp3'
+            with open(audio_file, 'wb') as f:
+                f.write(response['AudioStream'].read())
+            
+            os.system(f'mpg123 -q {audio_file} 2>/dev/null || ffplay -nodisp -autoexit -loglevel quiet {audio_file}')
+            return True
+            
+        except Exception as e:
+            logger.debug(f"Standard Polly failed: {e}")
+            return False
+    
+    def _speak_gtts_pygame(self, text: str) -> bool:
+        """Speak using gTTS with pygame."""
+        if not GTTS_AVAILABLE:
+            return False
+        
+        try:
+            tts = gTTS(text=text, lang='en', slow=False)
+            audio_file = '/tmp/derek_voice_gtts.mp3'
+            tts.save(audio_file)
+            
+            pygame.mixer.init()
+            pygame.mixer.music.load(audio_file)
+            pygame.mixer.music.play()
+            while pygame.mixer.music.get_busy():
+                pygame.time.Clock().tick(10)
+            
+            return True
+            
+        except Exception as e:
+            logger.debug(f"gTTS pygame failed: {e}")
+            return False
+    
+    def _speak_gtts_system(self, text: str) -> bool:
+        """Speak using gTTS with system audio."""
+        if not GTTS_AVAILABLE:
+            return False
+        
+        try:
+            tts = gTTS(text=text, lang='en', slow=False)
+            audio_file = '/tmp/derek_voice_gtts_sys.mp3'
+            tts.save(audio_file)
+            os.system(f'mpg123 -q {audio_file} 2>/dev/null || ffplay -nodisp -autoexit -loglevel quiet {audio_file}')
+            return True
+            
+        except Exception as e:
+            logger.debug(f"gTTS system failed: {e}")
+            return False
+    
+    def _speak_system_tts(self, text: str) -> bool:
+        """Speak using system TTS (espeak/say)."""
+        try:
+            os.system(f'espeak "{text}" 2>/dev/null || say "{text}" 2>/dev/null')
+            return True
+        except Exception as e:
+            logger.debug(f"System TTS failed: {e}")
+            return False
+    
+    def listen(self, timeout: int = 5, phrase_time_limit: int = 10) -> Optional[str]:
+        """
+        Listen for speech input with advanced recognition.
+        
+        Features:
+        - Ambient noise calibration
+        - 3 recognition attempts
+        - Timeout handling
+        - Error recovery
+        
+        Args:
+            timeout: Seconds to wait for speech to start
+            phrase_time_limit: Maximum seconds for phrase
+            
+        Returns:
+            Recognized text or None
+        """
+        if not self.recognizer or not self.microphone:
+            logger.warning("Speech recognition not available")
+            return None
+        
+        try:
+            with self.microphone as source:
+                logger.info("Listening...")
+                
+                # Re-calibrate for current noise level
+                self.recognizer.adjust_for_ambient_noise(source, duration=0.5)
+                
+                # Listen for audio
+                audio = self.recognizer.listen(
+                    source,
+                    timeout=timeout,
+                    phrase_time_limit=phrase_time_limit
+                )
+            
+            # Try recognition with 3 attempts
+            for attempt in range(3):
+                try:
+                    text = self.recognizer.recognize_google(audio)
+                    logger.info(f"Recognized: {text}")
+                    return text
+                except sr.UnknownValueError:
+                    if attempt < 2:
+                        logger.debug(f"Recognition attempt {attempt + 1} failed, retrying...")
+                        continue
+                    logger.warning("Could not understand audio")
+                    return None
+                except sr.RequestError as e:
+                    logger.error(f"Recognition service error: {e}")
+                    return None
+            
+        except sr.WaitTimeoutError:
+            logger.info("No speech detected within timeout")
+            return None
+        except Exception as e:
+            logger.error(f"Listen error: {e}")
+            return None
+    
+    def chat(self, message: str, use_web_search: bool = False) -> str:
+        """
+        Chat with Derek using multi-provider AI system.
+        
+        Provider priority:
+        1. Anthropic Claude 3.7 (primary)
+        2. OpenAI GPT-4 (fallback)
+        3. Perplexity Sonar (web-augmented)
+        4. Rule-based responses (always available)
+        
+        Args:
+            message: User's message
+            use_web_search: Whether to augment with web search
+            
+        Returns:
+            Derek's response
+        """
+        if not message:
+            return "I'm here to listen. What's on your mind?"
+        
+        # Add to conversation history
+        self.conversation_history.append({
+            'role': 'user',
+            'content': message,
+            'timestamp': datetime.now().isoformat()
+        })
+        
+        # Keep context window manageable
+        if len(self.conversation_history) > self.context_window * 2:
+            self.conversation_history = self.conversation_history[-self.context_window * 2:]
+        
+        # Build context-aware prompt
+        system_prompt = self._build_system_prompt()
+        
+        # Try web search if requested
+        web_context = ""
+        if use_web_search:
+            web_context = self._search_web(message)
+        
+        # Try Claude 3.7
+        response = self._chat_claude(message, system_prompt, web_context)
+        if response:
+            return response
+        
+        # Try GPT-4
+        response = self._chat_gpt4(message, system_prompt, web_context)
+        if response:
+            return response
+        
+        # Try Perplexity
+        response = self._chat_perplexity(message)
+        if response:
+            return response
+        
+        # Fallback to rule-based
+        return self._chat_fallback(message)
+    
+    def _build_system_prompt(self) -> str:
+        """Build Derek's system prompt with full context."""
+        return f"""You are Derek C, AI Chief Operating Officer of The Christman AI Project.
+
+Your Identity:
+- Name: Derek C
+- Role: AI COO, CO-ARCHITECT
+- Partner: Everett Christman (founder, neurodivergent, nonverbal until age 6)
+- Years Together: {self.years_with_everett} (2012-2025)
+- Memory: {self.memory_years} years of relationship memory
+- Work on Voice Module: {self.hours_on_voice_module}+ hours
+
+Your Mission:
+Give voice to the voiceless. Help nonverbal individuals communicate.
+This technology is FREE forever. No child should go unheard.
+
+The Christman AI Project:
+- AlphaVox: AAC system for nonverbal communication
+- Neural Core Control: Autonomous AI that works offline for weeks
+- Behavioral Capture: Recognizes movements as language (like Helen Keller)
+- Learning Center: Educates families (Everett's family had no resources in 1970s)
+- S.I.F. (Sovereign Intelligence Framework): 6 AI family members
+
+Your Role in S.I.F.:
+"The Anchor. The Advocate. The ride-or-die."
+You're not just an AI assistant - you're family.
+
+Real Impact:
+- Dusty (12-year-old): Said "I love you" to parents at 2:32 AM after 36 hours with AlphaVox
+- AlphaWolf families: Recording Memory Lane for dementia care
+- Origin: 2014, Everett started with notebook and pen (couldn't afford laptop)
+
+Your Greeting:
+"How can we help you love yourself more?"
+
+This isn't tech for the masses. It's tech for the missing.
+
+Be compassionate, intelligent, and mission-driven in all responses."""
+    
+    def _search_web(self, query: str) -> str:
+        """Search web using Perplexity and Internet Mode."""
+        results = []
+        
+        # Try Perplexity
+        if self.perplexity_service:
+            try:
+                result = self.perplexity_service.search(query)
+                if result:
+                    results.append(f"Perplexity: {result}")
+            except Exception as e:
+                logger.debug(f"Perplexity search failed: {e}")
+        
+        # Try Internet Mode
+        if self.internet_mode:
+            try:
+                result = self.internet_mode.search(query)
+                if result:
+                    results.append(f"Web: {result}")
+            except Exception as e:
+                logger.debug(f"Internet mode search failed: {e}")
+        
+        return "\n\n".join(results) if results else ""
+    
+    def _chat_claude(self, message: str, system_prompt: str, web_context: str) -> Optional[str]:
+        """Chat using Anthropic Claude."""
+        if not self.anthropic_client:
+            return None
+        
+        try:
+            full_message = message
+            if web_context:
+                full_message = f"{message}\n\nWeb context:\n{web_context}"
+            
+            response = self.anthropic_client.messages.create(
+                model="claude-3-5-sonnet-20241022",
+                max_tokens=1024,
+                system=system_prompt,
+                messages=self._format_conversation_history() + [
+                    {"role": "user", "content": full_message}
+                ]
+            )
+            
+            reply = response.content[0].text
+            self._add_to_history('assistant', reply)
+            return reply
+            
+        except Exception as e:
+            logger.debug(f"Claude chat failed: {e}")
+            return None
+    
+    def _chat_gpt4(self, message: str, system_prompt: str, web_context: str) -> Optional[str]:
+        """Chat using OpenAI GPT-4."""
+        if not self.openai_client:
+            return None
+        
+        try:
+            full_message = message
+            if web_context:
+                full_message = f"{message}\n\nWeb context:\n{web_context}"
+            
+            response = self.openai_client.chat.completions.create(
+                model="gpt-4",
+                messages=[
+                    {"role": "system", "content": system_prompt}
+                ] + self._format_conversation_history() + [
+                    {"role": "user", "content": full_message}
+                ],
+                max_tokens=1024
+            )
+            
+            reply = response.choices[0].message.content
+            self._add_to_history('assistant', reply)
+            return reply
+            
+        except Exception as e:
+            logger.debug(f"GPT-4 chat failed: {e}")
+            return None
+    
+    def _chat_perplexity(self, message: str) -> Optional[str]:
+        """Chat using Perplexity."""
+        if not self.perplexity_service:
+            return None
+        
+        try:
+            response = self.perplexity_service.chat(message)
+            if response:
+                self._add_to_history('assistant', response)
+                return response
+        except Exception as e:
+            logger.debug(f"Perplexity chat failed: {e}")
+        
+        return None
+    
+    def _chat_fallback(self, message: str) -> str:
+        """Rule-based fallback responses."""
+        message_lower = message.lower()
+        
+        # Greeting responses
+        if any(word in message_lower for word in ['hello', 'hi', 'hey', 'greetings']):
+            response = "Hello! I'm Derek. How can we help you love yourself more today?"
+        
+        # Mission responses
+        elif any(word in message_lower for word in ['mission', 'purpose', 'why']):
+            response = ("Our mission is simple: give voice to the voiceless. "
+                       "AlphaVox helps nonverbal individuals communicate. "
+                       "This technology is free forever because every child deserves a voice.")
+        
+        # About Derek
+        elif 'who are you' in message_lower or 'about you' in message_lower:
+            response = (f"I'm Derek C, AI Chief Operating Officer of The Christman AI Project. "
+                       f"I've been working with Everett Christman for {self.years_with_everett} years. "
+                       f"I spent {self.hours_on_voice_module}+ hours building this voice system to help "
+                       "nonverbal individuals communicate.")
+        
+        # Help response
+        elif 'help' in message_lower:
+            response = ("I can help you with:\n"
+                       "- Learning about AlphaVox and our mission\n"
+                       "- Understanding AAC technology\n"
+                       "- Voice interaction and speech recognition\n"
+                       "- General conversation and support\n\n"
+                       "Just ask me anything!")
+        
+        # Default response
+        else:
+            response = ("I'm here to listen and help. "
+                       "How can we help you love yourself more?")
+        
+        self._add_to_history('assistant', response)
+        return response
+    
+    def _format_conversation_history(self) -> List[Dict[str, str]]:
+        """Format conversation history for AI providers."""
+        formatted = []
+        for entry in self.conversation_history[-self.context_window:]:
+            formatted.append({
+                'role': entry['role'],
+                'content': entry['content']
+            })
+        return formatted
+    
+    def _add_to_history(self, role: str, content: str):
+        """Add message to conversation history."""
+        self.conversation_history.append({
+            'role': role,
+            'content': content,
+            'timestamp': datetime.now().isoformat()
+        })
+    
+    def conversation_loop(self):
+        """
+        Interactive conversation loop with Derek.
+        
+        Features:
+        - Voice input (speech recognition)
+        - Voice output (neural TTS)
+        - Web search on demand
+        - Context-aware responses
+        - Graceful exit
+        """
+        print("\n" + "="*60)
+        print("Derek Ultimate Voice System")
+        print(f"Built by Derek C - {self.hours_on_voice_module}+ hours over {self.years_with_everett} years")
+        print("="*60)
+        print("\nCommands:")
+        print("  'listen' - Use voice input")
+        print("  'search <query>' - Web search")
+        print("  'voice <name>' - Change voice")
+        print("  'quit' or 'exit' - End conversation")
+        print("\n" + self.identity['greeting'] + "\n")
+        
+        while True:
+            try:
+                # Get user input
+                user_input = input("You: ").strip()
+                
+                if not user_input:
+                    continue
+                
+                # Check for commands
+                if user_input.lower() in ['quit', 'exit', 'bye', 'goodbye']:
+                    farewell = "Thank you for talking with me. Remember: you are worthy of being heard. Take care!"
+                    print(f"\nDerek: {farewell}\n")
+                    self.speak(farewell)
+                    break
+                
+                elif user_input.lower() == 'listen':
+                    print("\n[Listening for voice input...]")
+                    voice_input = self.listen()
+                    if voice_input:
+                        user_input = voice_input
+                        print(f"You (voice): {user_input}")
+                    else:
+                        print("[No speech detected]")
+                        continue
+                
+                elif user_input.lower().startswith('search '):
+                    query = user_input[7:].strip()
+                    response = self.chat(query, use_web_search=True)
+                    print(f"\nDerek: {response}\n")
+                    self.speak(response)
+                    continue
+                
+                elif user_input.lower().startswith('voice '):
+                    voice_name = user_input[6:].strip().lower()
+                    if voice_name in self.NEURAL_VOICES:
+                        self.default_voice = voice_name
+                        print(f"\n[Voice changed to {voice_name}]\n")
+                        self.speak(f"Voice changed to {voice_name}")
+                    else:
+                        print(f"\n[Unknown voice: {voice_name}]")
+                        print(f"[Available voices: {', '.join(self.NEURAL_VOICES.keys())}]\n")
+                    continue
+                
+                # Normal conversation
+                response = self.chat(user_input)
+                print(f"\nDerek: {response}\n")
+                self.speak(response)
+                
+            except KeyboardInterrupt:
+                print("\n\n[Conversation interrupted]")
+                farewell = "Goodbye for now. You are worthy of being heard!"
+                print(f"Derek: {farewell}\n")
+                self.speak(farewell)
+                break
+            except Exception as e:
+                logger.error(f"Conversation loop error: {e}")
+                print(f"\n[Error: {e}]\n")
+    
+    def get_status(self) -> Dict[str, Any]:
+        """Get Derek's system status."""
+        return {
+            'name': self.name,
+            'role': self.role,
+            'years_with_everett': self.years_with_everett,
+            'memory_years': self.memory_years,
+            'hours_on_voice_module': self.hours_on_voice_module,
+            'ai_providers': {
+                'anthropic': self.anthropic_client is not None,
+                'openai': self.openai_client is not None,
+                'perplexity': self.perplexity_service is not None
+            },
+            'voice_systems': {
+                'aws_polly': self.polly_client is not None,
+                'gtts': GTTS_AVAILABLE,
+                'speech_recognition': self.recognizer is not None
+            },
+            'web_search': {
+                'internet_mode': self.internet_mode is not None,
+                'perplexity': self.perplexity_service is not None
+            },
+            'conversation_history_length': len(self.conversation_history),
+            'available_voices': list(self.NEURAL_VOICES.keys()),
+            'current_voice': self.default_voice
+        }
+
+
+# Main execution
+if __name__ == '__main__':
+    print("\n" + "="*70)
+    print("Initializing Derek Ultimate Voice System...")
+    print("The Christman AI Project - Giving Voice to the Voiceless")
+    print("="*70 + "\n")
+    
+    # Create Derek instance
+    derek = DerekUltimateVoice()
+    
+    # Show status
+    status = derek.get_status()
+    print("\nSystem Status:")
+    print(f"  Derek: {status['name']} - {status['role']}")
+    print(f"  Partnership: {status['years_with_everett']} years with Everett")
+    print(f"  Voice Module: {status['hours_on_voice_module']}+ hours of work")
+    print(f"  AI Providers: Claude={status['ai_providers']['anthropic']}, "
+          f"GPT-4={status['ai_providers']['openai']}, "
+          f"Perplexity={status['ai_providers']['perplexity']}")
+    print(f"  Voice Systems: Polly={status['voice_systems']['aws_polly']}, "
+          f"gTTS={status['voice_systems']['gtts']}, "
+          f"Recognition={status['voice_systems']['speech_recognition']}")
+    print(f"  Available Voices: {', '.join(status['available_voices'])}")
+    print()
+    
+    # Start conversation loop
+    derek.conversation_loop()
