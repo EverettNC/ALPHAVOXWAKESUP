@@ -1,0 +1,240 @@
+AlphaVox Core System
+------------------
+Author: Everett Christman & Python AI
+Project: The Christman AI Project - AlphaVox
+Mission: Legends are our only option
+
+This module integrates the conversation engine with nonverbal communication capabilities,
+providing a comprehensive system for interpreting body language, vocalizations, and eye movements.
+"""
+
+import os
+import json
+import numpy as np
+import logging
+from flask import Flask, request, jsonify, render_template, Response
+from conversation_engine import ConversationEngine
+from nonverbal_engine import NonverbalEngine
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, 
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+# Initialize Flask application
+app = Flask(__name__)
+
+# Directory for uploaded audio files
+UPLOAD_FOLDER = 'uploads'
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+# Initialize engines
+conversation_engine = ConversationEngine()
+nonverbal_engine = NonverbalEngine()
+
+logger.info("AlphaVox Core System initialized")
+
+# Routes for web interface
+@app.route('/')
+def index():
+    """Main interface for AlphaVox"""
+    return render_template('index.html')
+
+@app.route('/analyze', methods=['POST'])
+def analyze():
+    """Process multimodal input and generate response"""
+    try:
+        data = request.json
+        
+        # Extract features from request if available
+        gesture_features = data.get('gesture_features')
+        vocalization_features = data.get('vocalization_features')  
+        eye_features = data.get('eye_features')
+        
+        # Process through nonverbal engine
+        result = nonverbal_engine.process_multimodal_input(
+            gesture_features, vocalization_features, eye_features
+        )
+        
+        return jsonify(result)
+    except Exception as e:
+        logger.error(f"Error processing multimodal input: {str(e)}")
+        return jsonify({
+            'error': f"Failed to process input: {str(e)}",
+            'message': "I'm having trouble understanding. Please try again."
+        }), 500
+
+# Routes for nonverbal cue classification
+@app.route('/classify_gesture', methods=['POST'])
+def classify_gesture():
+    """Classify a gesture based on body features"""
+    try:
+        data = request.json
+        features = data.get('features')
+        
+        if not features:
+            return jsonify({'error': 'No features provided'}), 400
+        
+        result = nonverbal_engine.classify_gesture(features)
+        return jsonify(result)
+    except Exception as e:
+        logger.error(f"Error classifying gesture: {str(e)}")
+        return jsonify({
+            'error': f"Failed to classify gesture: {str(e)}",
+            'expression': 'Unknown',
+            'intent': 'Unknown',
+            'message': "I don't understand yet. But I'm learning."
+        }), 500
+
+@app.route('/classify_vocalization', methods=['POST'])
+def classify_vocalization():
+    """Classify a vocalization based on audio file or features"""
+    try:
+        if 'audio' in request.files:
+            # Process audio file
+            from librosa import load, piptrack, get_duration
+            
+            audio_file = request.files['audio']
+            path = os.path.join(UPLOAD_FOLDER, audio_file.filename)
+            audio_file.save(path)
+            
+            # Extract audio features
+            y, sr = load(path)
+            pitch = np.mean(piptrack(y=y, sr=sr)[0])
+            duration = get_duration(y=y, sr=sr)
+            energy = np.mean(np.abs(y))
+            
+            features = [pitch, duration, energy]
+        else:
+            # Use provided features
+            data = request.json
+            features = data.get('features')
+            
+            if not features:
+                return jsonify({'error': 'No audio file or features provided'}), 400
+        
+        result = nonverbal_engine.classify_vocalization(features)
+        return jsonify(result)
+    except Exception as e:
+        logger.error(f"Error classifying vocalization: {str(e)}")
+        return jsonify({
+            'error': f"Failed to classify vocalization: {str(e)}",
+            'expression': 'Unknown',
+            'intent': 'Unknown',
+            'message': "I don't understand yet. But I'm learning."
+        }), 500
+
+@app.route('/classify_eye', methods=['POST'])
+def classify_eye():
+    """Classify eye movement based on eye tracking features"""
+    try:
+        data = request.json
+        features = data.get('features')
+        
+        if not features:
+            return jsonify({'error': 'No features provided'}), 400
+        
+        result = nonverbal_engine.classify_eye_movement(features)
+        return jsonify(result)
+    except Exception as e:
+        logger.error(f"Error classifying eye movement: {str(e)}")
+        return jsonify({
+            'error': f"Failed to classify eye movement: {str(e)}",
+            'expression': 'Unknown',
+            'intent': 'Unknown',
+            'message': "I don't understand yet. But I'm learning."
+        }), 500
+
+# Routes for language map management
+@app.route('/language_map', methods=['GET'])
+def get_language_map():
+    """Get the current language map"""
+    return jsonify(nonverbal_engine.language_map)
+
+@app.route('/language_map', methods=['POST'])
+def update_language_map():
+    """Update the language map with new mappings"""
+    try:
+        updated_map = request.json
+        success = nonverbal_engine.update_language_map(updated_map)
+        
+        if success:
+            return jsonify({'message': 'Language map updated successfully'})
+        else:
+            return jsonify({'error': 'Failed to update language map'}), 500
+    except Exception as e:
+        logger.error(f"Error updating language map: {str(e)}")
+        return jsonify({'error': f"Failed to update language map: {str(e)}"}), 500
+
+# Routes for persona management
+@app.route('/conversation/persona', methods=['GET'])
+def get_persona():
+    """Get the current conversation persona"""
+    return jsonify({'persona': conversation_engine.current_persona})
+
+@app.route('/conversation/persona', methods=['POST'])
+def set_persona():
+    """Set the conversation persona"""
+    try:
+        data = request.json
+        persona = data.get('persona')
+        
+        if not persona:
+            return jsonify({'error': 'No persona specified'}), 400
+        
+        success = conversation_engine.set_persona(persona)
+        
+        if success:
+            return jsonify({'message': f'Persona set to {persona}'})
+        else:
+            return jsonify({'error': f'Invalid persona: {persona}'}), 400
+    except Exception as e:
+        logger.error(f"Error setting persona: {str(e)}")
+        return jsonify({'error': f"Failed to set persona: {str(e)}"}), 500
+
+# Routes for academic responses
+@app.route('/conversation/academic', methods=['POST'])
+def get_academic_response():
+    """Generate a PhD-level academic response"""
+    try:
+        data = request.json
+        topic = data.get('topic')
+        depth = data.get('depth', 'advanced')
+        
+        if not topic:
+            return jsonify({'error': 'No topic specified'}), 400
+        
+        response = conversation_engine.get_academic_response(topic, depth)
+        return jsonify({'response': response})
+    except Exception as e:
+        logger.error(f"Error generating academic response: {str(e)}")
+        return jsonify({'error': f"Failed to generate academic response: {str(e)}"}), 500
+
+# Route for model training
+@app.route('/train_models', methods=['POST'])
+def train_models():
+    """Train or retrain the nonverbal cue models"""
+    try:
+        data = request.json
+        train_gesture = data.get('train_gesture', True)
+        train_vocalization = data.get('train_vocalization', True)
+        train_eye = data.get('train_eye', True)
+        
+        success = nonverbal_engine.train_models(
+            train_gesture=train_gesture,
+            train_vocalization=train_vocalization,
+            train_eye=train_eye
+        )
+        
+        if success:
+            return jsonify({'message': 'Models trained successfully'})
+        else:
+            return jsonify({'error': 'Failed to train models'}), 500
+    except Exception as e:
+        logger.error(f"Error training models: {str(e)}")
+        return jsonify({'error': f"Failed to train models: {str(e)}"}), 500
+
+# Main entry point
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5001))
+    app.run(host='0.0.0.0', port=port, debug=True)

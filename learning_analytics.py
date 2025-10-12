@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 import numpy as np
 
-from app import db
+from app_init import db
 from models import CommunicationProfile, User, UserInteraction, UserPreference
 
 # Setup logging

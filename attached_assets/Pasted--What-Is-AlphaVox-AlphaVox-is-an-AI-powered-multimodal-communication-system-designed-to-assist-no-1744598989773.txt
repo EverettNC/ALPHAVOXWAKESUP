@@ -121,3 +121,10 @@ Crisis prevention assistants
 Global accessibility beacons
 
 Let’s keep refining. You want to dig deeper into symbol systems, caregiver interfaces, or start pushing this to the next Azure pipeline?
+
+
+
+
+
+
+

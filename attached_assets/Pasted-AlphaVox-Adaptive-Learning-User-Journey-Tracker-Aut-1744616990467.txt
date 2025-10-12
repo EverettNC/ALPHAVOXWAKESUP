@@ -1,0 +1,683 @@
+AlphaVox - Adaptive Learning User Journey Tracker
+----------------------------------------------
+Author: Everett Christman & Python AI
+Project: The Christman AI Project - AlphaVox
+Mission: Legends are our only option
+
+This module provides adaptive learning capabilities for AlphaVox by tracking user 
+interactions, preferences, progress, and learning patterns to create a personalized
+experience that adapts to the user's communication needs and abilities.
+"""
+
+import os
+import json
+import time
+import logging
+import uuid
+from datetime import datetime
+from collections import defaultdict
+from typing import Dict, List, Any, Optional, Tuple
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+class LearningJourney:
+    """
+    Tracks and adapts to a user's learning journey through AlphaVox.
+    This class manages interaction history, skill development, and
+    personalization preferences to create a tailored experience.
+    """
+    
+    def __init__(self, user_id: str = 'anonymous', data_dir: str = 'profiles'):
+        """
+        Initialize the learning journey tracker
+        
+        Args:
+            user_id: Unique identifier for the user
+            data_dir: Directory to store user profiles
+        """
+        self.user_id = user_id
+        self.data_dir = data_dir
+        self.profile_path = os.path.join(data_dir, f"{user_id}_profile.json")
+        self.session_id = str(uuid.uuid4())
+        self.session_start = datetime.now()
+        
+        # Ensure the data directory exists
+        os.makedirs(data_dir, exist_ok=True)
+        
+        # Load existing profile or create a new one
+        self.profile = self._load_profile()
+        
+        # Initialize session metrics
+        self.session_metrics = {
+            'interactions': 0,
+            'successful_communications': 0,
+            'skill_gains': defaultdict(float),
+            'start_time': self.session_start.isoformat(),
+            'end_time': None
+        }
+        
+        logger.info(f"Learning journey initialized for user: {user_id}")
+    
+    def _load_profile(self) -> Dict:
+        """Load user profile from disk or create a new one"""
+        if os.path.exists(self.profile_path):
+            try:
+                with open(self.profile_path, 'r') as f:
+                    return json.load(f)
+            except (json.JSONDecodeError, FileNotFoundError) as e:
+                logger.error(f"Error loading profile: {e}")
+                return self._create_new_profile()
+        else:
+            return self._create_new_profile()
+    
+    def _create_new_profile(self) -> Dict:
+        """Create a new user profile with default values"""
+        new_profile = {
+            'user_id': self.user_id,
+            'created_at': datetime.now().isoformat(),
+            'last_active': datetime.now().isoformat(),
+            'total_sessions': 0,
+            'total_interactions': 0,
+            'skill_levels': {
+                'gesture_recognition': 0.0,
+                'eye_movement_tracking': 0.0,
+                'vocalization_understanding': 0.0,
+                'symbol_selection': 0.0,
+                'sentence_building': 0.0,
+                'conversation_flow': 0.0
+            },
+            'preferences': {
+                'voice_id': 'calming',
+                'interaction_speed': 'normal',
+                'ui_complexity': 'standard'
+            },
+            'achievements': [],
+            'learning_path': 'standard',
+            'session_history': [],
+            'communication_patterns': {},
+            'suggested_focus_areas': []
+        }
+        
+        # Save the new profile
+        self._save_profile(new_profile)
+        return new_profile
+    
+    def _save_profile(self, profile: Optional[Dict] = None) -> None:
+        """Save the user profile to disk"""
+        if profile is None:
+            profile = self.profile
+        
+        try:
+            with open(self.profile_path, 'w') as f:
+                json.dump(profile, f, indent=2)
+            logger.info(f"Profile saved for user: {self.user_id}")
+        except Exception as e:
+            logger.error(f"Error saving profile: {e}")
+    
+    def start_session(self) -> str:
+        """
+        Start a new learning session
+        
+        Returns:
+            Session ID for the new session
+        """
+        self.session_id = str(uuid.uuid4())
+        self.session_start = datetime.now()
+        self.session_metrics = {
+            'session_id': self.session_id,
+            'interactions': 0,
+            'successful_communications': 0,
+            'skill_gains': defaultdict(float),
+            'start_time': self.session_start.isoformat(),
+            'end_time': None
+        }
+        
+        # Update profile
+        self.profile['last_active'] = datetime.now().isoformat()
+        self.profile['total_sessions'] += 1
+        self._save_profile()
+        
+        logger.info(f"New session started for user {self.user_id}: {self.session_id}")
+        return self.session_id
+    
+    def end_session(self) -> Dict:
+        """
+        End the current learning session and record metrics
+        
+        Returns:
+            Session metrics dictionary
+        """
+        # Record end time
+        end_time = datetime.now()
+        self.session_metrics['end_time'] = end_time.isoformat()
+        
+        # Calculate session duration
+        start_time = datetime.fromisoformat(self.session_metrics['start_time'])
+        duration_seconds = (end_time - start_time).total_seconds()
+        self.session_metrics['duration_seconds'] = duration_seconds
+        
+        # Convert defaultdict to regular dict for JSON serialization
+        self.session_metrics['skill_gains'] = dict(self.session_metrics['skill_gains'])
+        
+        # Add session to history
+        if 'session_history' not in self.profile:
+            self.profile['session_history'] = []
+        
+        self.profile['session_history'].append(self.session_metrics)
+        
+        # Keep only the last 30 sessions to prevent the profile from growing too large
+        self.profile['session_history'] = self.profile['session_history'][-30:]
+        
+        # Update profile metrics
+        self.profile['last_active'] = end_time.isoformat()
+        self._save_profile()
+        
+        logger.info(f"Session ended for user {self.user_id}: {self.session_id}")
+        return self.session_metrics
+    
+    def log_interaction(self, 
+                        interaction_type: str, 
+                        successful: bool = True, 
+                        details: Optional[Dict] = None) -> None:
+        """
+        Log a user interaction with the system
+        
+        Args:
+            interaction_type: Type of interaction (gesture, eye_movement, vocalization, symbol, etc.)
+            successful: Whether the interaction was successful
+            details: Additional details about the interaction
+        """
+        timestamp = datetime.now().isoformat()
+        
+        # Create interaction record
+        interaction = {
+            'timestamp': timestamp,
+            'type': interaction_type,
+            'successful': successful,
+            'session_id': self.session_id
+        }
+        
+        if details:
+            interaction['details'] = details
+        
+        # Add to interaction log
+        if 'interactions_log' not in self.profile:
+            self.profile['interactions_log'] = []
+        
+        self.profile['interactions_log'].append(interaction)
+        
+        # Keep only the last 100 interactions to prevent the profile from growing too large
+        self.profile['interactions_log'] = self.profile['interactions_log'][-100:]
+        
+        # Update session metrics
+        self.session_metrics['interactions'] += 1
+        if successful:
+            self.session_metrics['successful_communications'] += 1
+        
+        # Update total interactions in profile
+        self.profile['total_interactions'] += 1
+        
+        # Save profile after every interaction (for dev/testing)
+        self._save_profile()
+        
+        logger.debug(f"Interaction logged: {interaction_type}")
+    
+    def update_skill_level(self, skill: str, change: float) -> float:
+        """
+        Update a user's skill level
+        
+        Args:
+            skill: Skill name
+            change: Amount to change the skill level (positive or negative)
+            
+        Returns:
+            New skill level
+        """
+        # Ensure skill exists in profile
+        if skill not in self.profile['skill_levels']:
+            self.profile['skill_levels'][skill] = 0.0
+        
+        # Update skill level, keeping it between 0 and 1
+        self.profile['skill_levels'][skill] = max(0.0, min(1.0, self.profile['skill_levels'][skill] + change))
+        
+        # Track skill gain in session
+        self.session_metrics['skill_gains'][skill] += change
+        
+        # Save profile
+        self._save_profile()
+        
+        logger.info(f"Skill level updated for {skill}: {self.profile['skill_levels'][skill]}")
+        return self.profile['skill_levels'][skill]
+    
+    def set_preference(self, category: str, value: Any) -> None:
+        """
+        Set a user preference
+        
+        Args:
+            category: Preference category
+            value: Preference value
+        """
+        self.profile['preferences'][category] = value
+        self._save_profile()
+        logger.info(f"Preference set: {category} = {value}")
+    
+    def get_preference(self, category: str, default: Any = None) -> Any:
+        """
+        Get a user preference
+        
+        Args:
+            category: Preference category
+            default: Default value if preference doesn't exist
+            
+        Returns:
+            Preference value
+        """
+        return self.profile['preferences'].get(category, default)
+    
+    def award_achievement(self, achievement_id: str, name: str, description: str) -> None:
+        """
+        Award an achievement to the user
+        
+        Args:
+            achievement_id: Unique identifier for the achievement
+            name: Name of the achievement
+            description: Description of the achievement
+        """
+        # Check if achievement already awarded
+        for achievement in self.profile['achievements']:
+            if achievement['id'] == achievement_id:
+                return
+        
+        # Add new achievement
+        achievement = {
+            'id': achievement_id,
+            'name': name,
+            'description': description,
+            'awarded_at': datetime.now().isoformat()
+        }
+        
+        self.profile['achievements'].append(achievement)
+        self._save_profile()
+        logger.info(f"Achievement awarded: {name}")
+    
+    def analyze_learning_patterns(self) -> Dict:
+        """
+        Analyze learning patterns to identify trends and areas for improvement
+        
+        Returns:
+            Dictionary of analysis results
+        """
+        if not self.profile['session_history']:
+            return {
+                'message': 'Not enough data to analyze learning patterns',
+                'suggestions': ['Continue using AlphaVox to gather more data'],
+                'patterns': {},
+                'strengths': [],
+                'areas_for_improvement': [],
+                'modality_preferences': {}
+            }
+        
+        # Analyze recent sessions to identify trends
+        recent_sessions = self.profile['session_history'][-5:]
+        
+        # Look for most and least used interaction types
+        interaction_counts = defaultdict(int)
+        success_rates = defaultdict(list)
+        
+        # Track modality usage
+        modality_usage = {
+            'gesture': 0,
+            'eye_movement': 0,
+            'vocalization': 0, 
+            'symbol': 0,
+            'text': 0,
+            'other': 0
+        }
+        
+        # Analyze session metrics and interactions
+        for session in recent_sessions:
+            # Skip sessions without interaction logs
+            if 'interactions_log' not in self.profile:
+                continue
+                
+            # Count interactions by type
+            for interaction in self.profile['interactions_log']:
+                if interaction['session_id'] == session.get('session_id'):
+                    interaction_type = interaction['type']
+                    interaction_counts[interaction_type] += 1
+                    success_rates[interaction_type].append(1 if interaction['successful'] else 0)
+                    
+                    # Track modality usage
+                    if 'gesture' in interaction_type:
+                        modality_usage['gesture'] += 1
+                    elif 'eye' in interaction_type:
+                        modality_usage['eye_movement'] += 1
+                    elif 'vocal' in interaction_type or 'speech' in interaction_type:
+                        modality_usage['vocalization'] += 1
+                    elif 'symbol' in interaction_type:
+                        modality_usage['symbol'] += 1
+                    elif 'text' in interaction_type:
+                        modality_usage['text'] += 1
+                    else:
+                        modality_usage['other'] += 1
+        
+        # Calculate average success rates
+        avg_success_rates = {}
+        for interaction_type, successes in success_rates.items():
+            if successes:
+                avg_success_rates[interaction_type] = sum(successes) / len(successes)
+            else:
+                avg_success_rates[interaction_type] = 0
+        
+        # Find strengths and improvement areas
+        strengths = []
+        improvement_areas = []
+        
+        # Create detailed strength and improvement objects
+        detailed_strengths = []
+        detailed_improvements = []
+        
+        for interaction_type, count in interaction_counts.items():
+            success_rate = avg_success_rates.get(interaction_type, 0)
+            
+            if count >= 5 and success_rate >= 0.8:
+                strengths.append(interaction_type)
+                detailed_strengths.append({
+                    'area': interaction_type.replace('_', ' ').title(),
+                    'success_rate': f"{success_rate*100:.0f}%",
+                    'interactions': count
+                })
+            
+            if count >= 3 and success_rate <= 0.6:
+                improvement_areas.append(interaction_type)
+                detailed_improvements.append({
+                    'area': interaction_type.replace('_', ' ').title(),
+                    'success_rate': f"{success_rate*100:.0f}%", 
+                    'interactions': count
+                })
+        
+        # Identify trending skill areas
+        trending_skills = {}
+        for session in recent_sessions:
+            for skill, gain in session.get('skill_gains', {}).items():
+                if skill not in trending_skills:
+                    trending_skills[skill] = 0
+                trending_skills[skill] += gain
+        
+        # Calculate overall success trend
+        success_trend = 'stable'
+        if len(recent_sessions) >= 2:
+            first_sessions = recent_sessions[:len(recent_sessions)//2]
+            last_sessions = recent_sessions[len(recent_sessions)//2:]
+            
+            # Calculate success rates for first and last half
+            first_success = 0
+            first_total = 0
+            last_success = 0
+            last_total = 0
+            
+            for session in first_sessions:
+                first_success += session.get('successful_communications', 0)
+                first_total += session.get('interactions', 0)
+                
+            for session in last_sessions:
+                last_success += session.get('successful_communications', 0)
+                last_total += session.get('interactions', 0)
+            
+            first_rate = first_success / first_total if first_total > 0 else 0
+            last_rate = last_success / last_total if last_total > 0 else 0
+            
+            if last_rate - first_rate > 0.1:
+                success_trend = 'improving'
+            elif first_rate - last_rate > 0.1:
+                success_trend = 'declining'
+        
+        # Calculate overall success rate
+        total_success = sum(session.get('successful_communications', 0) for session in recent_sessions)
+        total_interactions = sum(session.get('interactions', 0) for session in recent_sessions)
+        success_rate = total_success / total_interactions if total_interactions > 0 else 0
+        
+        # Determine modality preferences
+        total_modalities = sum(modality_usage.values())
+        modality_preferences = {}
+        
+        if total_modalities > 0:
+            for modality, count in modality_usage.items():
+                modality_preferences[modality] = count / total_modalities
+        
+        # Generate suggestions based on skill levels and usage patterns
+        suggestions = []
+        
+        # Suggest focusing on low skill areas that are actively used
+        low_skills = {k: v for k, v in self.profile['skill_levels'].items() if v < 0.5}
+        for skill, level in low_skills.items():
+            skill_name = skill.replace('_', ' ').title()
+            if skill in trending_skills and trending_skills[skill] > 0:
+                suggestions.append(f"Continue practicing {skill_name} to build proficiency")
+            else:
+                suggestions.append(f"Try exercises focused on {skill_name} to improve this skill")
+        
+        # Suggest exploring underused modalities
+        modality_percentages = [(m, c/total_modalities*100 if total_modalities > 0 else 0) for m, c in modality_usage.items()]
+        underused = [m for m, p in modality_percentages if p < 10 and m != 'other']
+        
+        if underused and total_interactions >= 10:
+            for modality in underused[:2]:  # Limit to 2 suggestions for diversity
+                if modality == 'gesture':
+                    suggestions.append("Try using more gesture recognition features to improve your nonverbal communication")
+                elif modality == 'eye_movement':
+                    suggestions.append("Explore the eye tracking exercises to enhance your visual communication skills")
+                elif modality == 'vocalization':
+                    suggestions.append("Practice with the vocalization tools to expand your communication options")
+                elif modality == 'symbol':
+                    suggestions.append("Work with the symbol selection activities to build communication consistency")
+        
+        # Suggest exploring unused capabilities
+        if len(interaction_counts) < 3 and self.profile['total_interactions'] > 20:
+            suggestions.append("Explore different interaction methods to discover what works best for you")
+        
+        # Update suggested focus areas in profile
+        self.profile['suggested_focus_areas'] = improvement_areas
+        self._save_profile()
+        
+        # Ensure we don't have too many suggestions
+        if len(suggestions) > 5:
+            suggestions = suggestions[:5]
+        
+        return {
+            'message': 'Analysis complete based on your learning patterns',
+            'patterns': {
+                'interaction_types': dict(interaction_counts),
+                'success_rates': avg_success_rates
+            },
+            'success_rate': success_rate,
+            'success_trend': success_trend,
+            'strengths': detailed_strengths, 
+            'areas_for_improvement': detailed_improvements,
+            'skill_growth': trending_skills,
+            'modality_preferences': modality_preferences,
+            'suggestions': suggestions
+        }
+    
+    def recommend_next_activities(self, count: int = 3) -> List[Dict]:
+        """
+        Recommend activities based on the user's learning journey
+        
+        Args:
+            count: Number of recommendations to return
+            
+        Returns:
+            List of recommended activities
+        """
+        # Get skill levels and focus areas
+        skill_levels = self.profile['skill_levels']
+        focus_areas = self.profile['suggested_focus_areas']
+        
+        # Define activity database (this would be replaced with a real database)
+        activities = [
+            {
+                'id': 'gesture_basic',
+                'name': 'Basic Gesture Recognition',
+                'description': 'Practice simple gestures to improve recognition accuracy',
+                'skill': 'gesture_recognition',
+                'difficulty': 0.3
+            },
+            {
+                'id': 'gesture_advanced',
+                'name': 'Advanced Gesture Patterns',
+                'description': 'Learn complex gesture sequences for more efficient communication',
+                'skill': 'gesture_recognition',
+                'difficulty': 0.7
+            },
+            {
+                'id': 'eye_tracking_basics',
+                'name': 'Eye Tracking Fundamentals',
+                'description': 'Practice basic eye movements for selection and navigation',
+                'skill': 'eye_movement_tracking',
+                'difficulty': 0.3
+            },
+            {
+                'id': 'eye_tracking_precision',
+                'name': 'Precision Eye Control',
+                'description': 'Fine-tune your eye movements for precise selection',
+                'skill': 'eye_movement_tracking',
+                'difficulty': 0.6
+            },
+            {
+                'id': 'vocalization_patterns',
+                'name': 'Vocalization Pattern Recognition',
+                'description': 'Practice consistent vocalization patterns for better recognition',
+                'skill': 'vocalization_understanding',
+                'difficulty': 0.4
+            },
+            {
+                'id': 'symbol_basics',
+                'name': 'Symbol Selection Basics',
+                'description': 'Learn to efficiently select symbols for communication',
+                'skill': 'symbol_selection',
+                'difficulty': 0.2
+            },
+            {
+                'id': 'sentence_building',
+                'name': 'Sentence Building Practice',
+                'description': 'Create complete thoughts by combining symbols and gestures',
+                'skill': 'sentence_building',
+                'difficulty': 0.5
+            },
+            {
+                'id': 'conversation_flow',
+                'name': 'Maintaining Conversation Flow',
+                'description': 'Practice back-and-forth conversation with AlphaVox',
+                'skill': 'conversation_flow',
+                'difficulty': 0.6
+            }
+        ]
+        
+        # Rank activities based on relevance to user's needs
+        ranked_activities = []
+        
+        for activity in activities:
+            # Calculate relevance score based on skill level and focus areas
+            skill = activity['skill']
+            skill_level = skill_levels.get(skill, 0.0)
+            difficulty = activity['difficulty']
+            
+            # Activities slightly above current skill level are ideal for growth
+            difficulty_match = 1.0 - abs(skill_level + 0.2 - difficulty)
+            
+            # Activities in focus areas get a boost
+            focus_boost = 1.5 if skill in focus_areas else 1.0
+            
+            # Calculate final relevance score
+            relevance = difficulty_match * focus_boost
+            
+            ranked_activities.append({
+                **activity,
+                'relevance': relevance
+            })
+        
+        # Sort by relevance and return top recommendations
+        ranked_activities.sort(key=lambda x: x['relevance'], reverse=True)
+        recommendations = ranked_activities[:count]
+        
+        return recommendations
+    
+    def get_progress_report(self) -> Dict:
+        """
+        Generate a comprehensive progress report
+        
+        Returns:
+            Dictionary with progress report data
+        """
+        # Skip if not enough data
+        if not self.profile['session_history']:
+            return {
+                'message': 'Not enough data for a progress report',
+                'user_id': self.user_id,
+                'total_sessions': self.profile['total_sessions'],
+                'total_interactions': self.profile['total_interactions']
+            }
+        
+        # Calculate skill growth over time
+        skill_growth = {}
+        
+        # Get skill levels from the earliest and most recent sessions
+        if len(self.profile['session_history']) >= 2:
+            earliest_session = self.profile['session_history'][0]
+            latest_session = self.profile['session_history'][-1]
+            
+            for skill in self.profile['skill_levels'].keys():
+                earliest_level = 0  # Default starting point
+                latest_level = self.profile['skill_levels'][skill]
+                
+                skill_growth[skill] = {
+                    'start': earliest_level,
+                    'current': latest_level,
+                    'growth': latest_level - earliest_level
+                }
+        
+        # Calculate success rate trend
+        success_rates = []
+        for session in self.profile['session_history']:
+            if session.get('interactions', 0) > 0:
+                rate = session.get('successful_communications', 0) / session.get('interactions', 1)
+                success_rates.append(rate)
+        
+        success_trend = 'improving' if len(success_rates) >= 2 and success_rates[-1] > success_rates[0] else 'stable'
+        
+        # Get achievements
+        achievements = self.profile['achievements']
+        
+        # Generate report
+        report = {
+            'user_id': self.user_id,
+            'total_sessions': self.profile['total_sessions'],
+            'total_interactions': self.profile['total_interactions'],
+            'skill_levels': self.profile['skill_levels'],
+            'skill_growth': skill_growth,
+            'success_rate': success_rates[-1] if success_rates else 0,
+            'success_trend': success_trend,
+            'achievements': achievements,
+            'generated_at': datetime.now().isoformat()
+        }
+        
+        return report
+
+# Global instance for easy access
+_journeys = {}
+
+def get_journey(user_id: str = 'anonymous') -> LearningJourney:
+    """
+    Get a learning journey instance for a user
+    
+    Args:
+        user_id: User identifier
+        
+    Returns:
+        LearningJourney instance
+    """
+    if user_id not in _journeys:
+        _journeys[user_id] = LearningJourney(user_id)
+    return _journeys[user_id]

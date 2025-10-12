@@ -1,0 +1,143 @@
+AlphaVox - NLP Module Test Script
+--------------------------------
+This script tests the functionality of the advanced NLP module.
+"""
+
+import logging
+from alphavox.nlp_module import AdvancedNLPProcessor
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, 
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+def test_basic_responses():
+    """Test basic emotional responses"""
+    nlp = AdvancedNLPProcessor()
+    
+    # Test different emotion-gaze-blink combinations
+    test_cases = [
+        {'emotion': 'happy', 'gaze': 'center', 'blink': True},
+        {'emotion': 'sad', 'gaze': 'left', 'blink': True},
+        {'emotion': 'angry', 'gaze': 'right', 'blink': False},
+        {'emotion': 'fear', 'gaze': 'center', 'blink': True},
+        {'emotion': 'surprise', 'gaze': 'left', 'blink': False},
+        {'emotion': 'neutral', 'gaze': 'center', 'blink': True}
+    ]
+    
+    logger.info("Testing basic emotional responses:")
+    for i, case in enumerate(test_cases):
+        response = nlp.process_input(**case)
+        logger.info(f"Case {i+1}: {case}")
+        logger.info(f"Response: {response['response']}")
+        logger.info("-" * 50)
+
+def test_academic_responses():
+    """Test PhD-level academic responses"""
+    nlp = AdvancedNLPProcessor()
+    
+    # Test different academic domains
+    test_topics = [
+        "The empirical evidence for climate change has significant implications for policy.",
+        "Kant's categorical imperative provides a framework for ethical decision-making.",
+        "The proof of Fermat's Last Theorem represented a milestone in number theory.",
+        "Recent clinical trials suggest promising applications for CRISPR gene therapy.",
+        "Chomsky's universal grammar theory revolutionized our understanding of language acquisition.",
+        "Cognitive behavioral therapy has shown efficacy for treating various psychological disorders.",
+        "The historiographical approach to the French Revolution has evolved significantly.",
+        "Macroeconomic policy must balance inflation concerns with employment objectives."
+    ]
+    
+    logger.info("Testing PhD-level academic responses:")
+    for i, topic in enumerate(test_topics):
+        response = nlp.process_input(text=topic)
+        logger.info(f"Topic {i+1}: {topic}")
+        logger.info(f"Detected domain: {response['domain']}")
+        logger.info(f"Response: {response['response']}")
+        logger.info("-" * 50)
+
+from alphavox import alphavox
+
+alphavox.tag()  # Should print: [AlphaVox] ✅ Activated for user: default_user
+
+# Use the engine
+analysis = {
+    "emotion": "happy",
+    "gaze_direction": "center",
+    "blink_detected": True,
+    "intensity": "moderate"
+}
+response = alphavox.conversation_engine.get_response(analysis)
+print("AlphaVox says:", response)
+
+def test_perspiration_responses():
+    """Test responses with perspiration detection"""
+    nlp = AdvancedNLPProcessor()
+    
+    # Test with different perspiration levels
+    test_cases = [
+        {'emotion': 'fear', 'gaze': 'center', 'blink': True, 'perspiration': 'high'},
+        {'emotion': 'angry', 'gaze': 'left', 'blink': False, 'perspiration': 'high'},
+        {'emotion': 'happy', 'gaze': 'center', 'blink': True, 'perspiration': 'high'}
+    ]
+    
+    logger.info("Testing perspiration-enhanced responses:")
+    for i, case in enumerate(test_cases):
+        response = nlp.process_input(**case)
+        logger.info(f"Case {i+1}: {case}")
+        logger.info(f"Response: {response['response']}")
+        logger.info("-" * 50)
+
+def test_sentiment_analysis():
+    """Test sentiment analysis functionality"""
+    nlp = AdvancedNLPProcessor()
+    
+    # Test different text inputs
+    test_texts = [
+        "I'm really happy with how this project is progressing.",
+        "This is frustrating and disappointing.",
+        "The results of the experiment were interesting and unexpected.",
+        "I don't like the way this turned out, but it's a learning experience."
+    ]
+    
+    logger.info("Testing sentiment analysis:")
+    for i, text in enumerate(test_texts):
+        sentiment = nlp.analyze_sentiment(text)
+        logger.info(f"Text {i+1}: {text}")
+        logger.info(f"Sentiment: {sentiment['sentiment']} (Confidence: {sentiment['confidence']:.2f})")
+        logger.info("-" * 50)
+
+def test_phd_level_responses():
+    """Test PhD-level response generation"""
+    nlp = AdvancedNLPProcessor()
+    
+    # Test topics for PhD-level responses
+    test_topics = [
+        "Quantum computing applications in cryptography",
+        "Post-structuralist literary theory",
+        "Advanced statistical methods in epidemiology",
+        "Ethical implications of artificial intelligence"
+    ]
+    
+    logger.info("Testing PhD-level response generation:")
+    for i, topic in enumerate(test_topics):
+        response = nlp.generate_phd_level_response(topic)
+        logger.info(f"Topic {i+1}: {topic}")
+        logger.info(f"Response: {response}")
+        logger.info("-" * 50)
+
+def main():
+    """Run all tests"""
+    logger.info("Starting NLP module tests")
+    
+    # Run the tests
+    test_basic_responses()
+    test_academic_responses()
+    test_perspiration_responses()
+    test_sentiment_analysis()
+    test_phd_level_responses()
+    
+    logger.info("All NLP module tests completed")
+
+if __name__ == "__main__":
+    main()
