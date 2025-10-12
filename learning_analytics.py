@@ -1,20 +1,12 @@
-import logging
 import json
-from datetime import datetime, timedelta
-import numpy as np
+import logging
 from collections import Counter
-from app_init import db
-from models import (
-    User,
-    UserInteraction,
-    CommunicationProfile,
-    UserPreference,
-    LearningMilestone,
-    LearningTemplate,
-    LearningSession,
-    SkillLevel,
-    RecognitionFeedback,
-)
+from datetime import datetime, timedelta
+
+import numpy as np
+
+from app import db
+from models import CommunicationProfile, User, UserInteraction, UserPreference
 
 # Setup logging
 logging.basicConfig(level=logging.DEBUG)
@@ -22,8 +14,8 @@ logger = logging.getLogger("learning_analytics")
 
 
 class LearningAnalytics:
-    """
-    Analytics engine that tracks and analyzes user progress over time.
+    """Analytics engine that tracks and analyzes user progress over time.
+
     Used for the caregiver dashboard to visualize improvement.
     """
 
@@ -32,8 +24,7 @@ class LearningAnalytics:
         logger.info(f"Initializing LearningAnalytics for user {user_id}")
 
     def get_interaction_frequency(self, period="week"):
-        """
-        Get interaction frequency over time.
+        """Get interaction frequency over time.
 
         Args:
             period (str): 'week', 'month', or 'year'
@@ -126,8 +117,7 @@ class LearningAnalytics:
         return {"labels": labels, "data": data}
 
     def get_interaction_methods(self):
-        """
-        Get distribution of interaction methods.
+        """Get distribution of interaction methods.
 
         Returns:
             dict: Labels and data for charting
@@ -173,8 +163,7 @@ class LearningAnalytics:
         }
 
     def get_learning_progress(self):
-        """
-        Calculate learning progress metrics.
+        """Calculate learning progress metrics.
 
         Returns:
             dict: Progress metrics
@@ -303,8 +292,7 @@ class LearningAnalytics:
         }
 
     def get_frequent_expressions(self, limit=10):
-        """
-        Get most frequently used expressions.
+        """Get most frequently used expressions.
 
         Args:
             limit (int): Maximum number of expressions to return
@@ -345,8 +333,7 @@ class LearningAnalytics:
         return frequent_expressions
 
     def generate_system_suggestions(self):
-        """
-        Generate AI system suggestions based on user behavior patterns.
+        """Generate AI system suggestions based on user behavior patterns.
 
         Returns:
             list: System suggestions
@@ -444,8 +431,7 @@ class LearningAnalytics:
     def generate_mock_interaction(
         cls, user_id, text=None, intent=None, confidence=None
     ):
-        """
-        Generate a mock interaction for demonstration purposes.
+        """Generate a mock interaction for demonstration purposes.
 
         Args:
             user_id (int): User ID
@@ -502,8 +488,7 @@ class LearningAnalytics:
 
     @classmethod
     def generate_demo_data(cls, user_id, count=50):
-        """
-        Generate demo data for a new user.
+        """Generate demo data for a new user.
 
         Args:
             user_id (int): User ID

@@ -1,21 +1,21 @@
-"""
-AlphaVox Integrated Interpreter
+"""AlphaVox Integrated Interpreter.
 
 This module serves as the central coordinator for the AlphaVox system,
-integrating input analysis, behavioral interpretation, conversation processing,
-and multimodal fusion to create a comprehensive understanding of user needs.
+integrating input analysis, behavioral interpretation, conversation
+processing, and multimodal fusion to create a comprehensive
+understanding of user needs.
 
-The Interpreter coordinates data flow between specialized engines and performs
-high-level integration of multimodal inputs to determine the most appropriate
-system response.
+The Interpreter coordinates data flow between specialized engines and
+performs high-level integration of multimodal inputs to determine the
+most appropriate system response.
 """
 
-import logging
 import json
-import time
+import logging
 import os
+import time
 from datetime import datetime
-from typing import Dict, List, Any, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 # Initialize logger
 logging.basicConfig(level=logging.INFO)
@@ -23,14 +23,12 @@ logger = logging.getLogger(__name__)
 
 
 class Interpreter:
-    """
-    Central interpreter that coordinates between various specialized engines
+    """Central interpreter that coordinates between various specialized engines
     and modules to create a unified understanding of user inputs across
-    multiple modalities.
-    """
+    multiple modalities."""
 
     def __init__(self):
-        """Initialize the interpreter and its component engines"""
+        """Initialize the interpreter and its component engines."""
         # Import component engines
         try:
             from conversation_engine import get_conversation_engine
@@ -46,8 +44,8 @@ class Interpreter:
                 )
                 nonverbal_engine_import_success = False
 
-            from input_analyzer import get_input_analyzer
             from behavioral_interpreter import get_behavioral_interpreter
+            from input_analyzer import get_input_analyzer
 
             # Initialize component engines
             if nonverbal_engine_import_success:
@@ -112,8 +110,8 @@ class Interpreter:
         logger.info("Interpreter initialized")
 
     def process_multimodal_input(self, input_data: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Process multimodal input combining text, gestures, eye tracking, etc.
+        """Process multimodal input combining text, gestures, eye tracking,
+        etc.
 
         Args:
             input_data: Input data containing one or more modalities
@@ -272,7 +270,7 @@ class Interpreter:
         return integrated_result
 
     def _determine_behavior_type(self, input_data: Dict[str, Any]) -> str:
-        """Determine the behavior type from input data"""
+        """Determine the behavior type from input data."""
         if "text" in input_data and input_data["text"]:
             return f"text:input"
         elif "symbol" in input_data and input_data["symbol"]:
@@ -289,8 +287,7 @@ class Interpreter:
             return "unknown"
 
     def _fuse_results(self, results: Dict[str, Dict[str, Any]]) -> Dict[str, Any]:
-        """
-        Fuse results from different processing pathways
+        """Fuse results from different processing pathways.
 
         Args:
             results: Results from different processing components
@@ -345,56 +342,25 @@ class Interpreter:
 
         # Ensure required fields are present
         if "message" not in base_result:
-            # Try to get symbol from original input data
-            symbol_name = None
-            # Check if we have any interaction history to get the symbol from
-            if self.interaction_history and "input" in self.interaction_history[-1]:
-                symbol_name = self.interaction_history[-1]["input"].get("symbol")
+            # Generate message based on intent
+            intent = base_result.get("intent", "unknown")
+            expression = base_result.get("expression", "neutral")
 
-            # If this is a symbol, provide a specific message for it
-            if symbol_name:
-                # Symbol-specific messages
-                symbol_messages = {
-                    "food": "I'm hungry. I would like something to eat.",
-                    "drink": "I'm thirsty. I would like something to drink.",
-                    "bathroom": "I need to use the bathroom.",
-                    "medicine": "I need my medicine.",
-                    "happy": "I'm feeling happy!",
-                    "sad": "I'm feeling sad.",
-                    "pain": "I'm in pain or discomfort.",
-                    "tired": "I'm feeling tired.",
-                    "yes": "Yes.",
-                    "no": "No.",
-                    "help": "I need help, please.",
-                    "question": "I have a question.",
-                    "play": "I want to play.",
-                    "music": "I want to listen to music.",
-                    "book": "I want to read a book.",
-                    "outside": "I want to go outside.",
-                }
-                base_result["message"] = symbol_messages.get(
-                    symbol_name, f"I'm communicating using the {symbol_name} symbol."
-                )
-            else:
-                # Generate message based on intent for non-symbol inputs
-                intent = base_result.get("intent", "unknown")
-                expression = base_result.get("expression", "neutral")
+            # Simple intent to message mapping
+            intent_messages = {
+                "affirm": "I understand you're confirming.",
+                "deny": "I understand you're declining.",
+                "help": "I understand you need assistance.",
+                "greet": "Hello there!",
+                "like": "I see you like this.",
+                "dislike": "I understand you don't like this.",
+                "stop": "I'll stop now.",
+                "unknown": "I'm processing your input.",
+            }
 
-                # Simple intent to message mapping
-                intent_messages = {
-                    "affirm": "I understand you're confirming.",
-                    "deny": "I understand you're declining.",
-                    "help": "I understand you need assistance.",
-                    "greet": "Hello there!",
-                    "like": "I see you like this.",
-                    "dislike": "I understand you don't like this.",
-                    "stop": "I'll stop now.",
-                    "unknown": "I'm processing your input.",
-                }
-
-                base_result["message"] = intent_messages.get(
-                    intent, "I'm interpreting your communication."
-                )
+            base_result["message"] = intent_messages.get(
+                intent, "I'm interpreting your communication."
+            )
 
         # Add input modalities for reference
         base_result["input_modalities"] = list(results.keys())
@@ -402,8 +368,7 @@ class Interpreter:
         return base_result
 
     def _weighted_fusion(self, results: Dict[str, Dict[str, Any]]) -> Dict[str, Any]:
-        """
-        Perform weighted fusion of results
+        """Perform weighted fusion of results.
 
         Args:
             results: Results from different processing components
@@ -501,8 +466,7 @@ class Interpreter:
     def _highest_confidence_fusion(
         self, results: Dict[str, Dict[str, Any]]
     ) -> Dict[str, Any]:
-        """
-        Fuse results by selecting the one with highest confidence
+        """Fuse results by selecting the one with highest confidence.
 
         Args:
             results: Results from different processing components
@@ -537,8 +501,7 @@ class Interpreter:
     def _extract_emotional_indicators(
         self, results: Dict[str, Dict[str, Any]]
     ) -> Dict[str, float]:
-        """
-        Extract emotional indicators from results
+        """Extract emotional indicators from results.
 
         Args:
             results: Results from different processing components
@@ -589,8 +552,7 @@ class Interpreter:
         return emotional_indicators
 
     def update_context(self, context: Dict[str, Any]):
-        """
-        Update the current context
+        """Update the current context.
 
         Args:
             context: Context information to update
@@ -601,8 +563,7 @@ class Interpreter:
         logger.debug(f"Updated context: {context.keys()}")
 
     def get_context(self) -> Dict[str, Any]:
-        """
-        Get the current context
+        """Get the current context.
 
         Returns:
             dict: Current context
@@ -610,8 +571,7 @@ class Interpreter:
         return self.current_context
 
     def get_performance_metrics(self) -> Dict[str, Any]:
-        """
-        Get interpreter performance metrics
+        """Get interpreter performance metrics.
 
         Returns:
             dict: Performance metrics
@@ -630,8 +590,8 @@ class Interpreter:
         return metrics
 
     def predict_next_interaction(self) -> Dict[str, Any]:
-        """
-        Predict the next likely user interaction based on history and context
+        """Predict the next likely user interaction based on history and
+        context.
 
         Returns:
             dict: Prediction with confidence
@@ -682,7 +642,7 @@ class Interpreter:
         }
 
     def reset(self):
-        """Reset the interpreter state"""
+        """Reset the interpreter state."""
         self.interaction_history = []
         self.current_context = {
             "time_of_day": None,
@@ -705,7 +665,7 @@ _interpreter = None
 
 
 def get_interpreter():
-    """Get or create the interpreter singleton"""
+    """Get or create the interpreter singleton."""
     global _interpreter
     if _interpreter is None:
         _interpreter = Interpreter()
