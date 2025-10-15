@@ -1,7 +1,7 @@
 """
 Configuration Module
 --------------------
-Central configuration management for Derek's system.
+Central configuration management for alphavox's system.
 """
 
 import os
@@ -15,7 +15,7 @@ load_dotenv()
 
 
 class Settings:
-    """Configuration settings for Derek"""
+    """Configuration settings for alphavox"""
     
     # Project paths
     PROJECT_ROOT = Path(__file__).parent
@@ -36,18 +36,18 @@ class Settings:
     AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
     AWS_REGION = os.getenv("AWS_REGION", "us-east-1")
     
-    # Derek Configuration
-    DEREK_MODE = os.getenv("DEREK_MODE", "engineer")
-    DEREK_VOICE = os.getenv("DEREK_VOICE", "matthew")
+    # alphavox Configuration
+    alphavox_MODE = os.getenv("alphavox_MODE", "engineer")
+    alphavox_VOICE = os.getenv("alphavox_VOICE", "matthew")
     ENABLE_WEB_SEARCH = os.getenv("ENABLE_WEB_SEARCH", "true").lower() == "true"
     ENABLE_INTERNET_MODE = os.getenv("ENABLE_INTERNET_MODE", "false").lower() == "true"
     
     # Database
-    DATABASE_PATH = str(MEMORY_DIR / "derek.db")
+    DATABASE_PATH = str(MEMORY_DIR / "alphavox.db")
     
     # Logging
     LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
-    LOG_FILE = str(LOGS_DIR / "derek.log")
+    LOG_FILE = str(LOGS_DIR / "alphavox.log")
     
     # AI Model Configuration
     DEFAULT_AI_PROVIDER = os.getenv("DEFAULT_AI_PROVIDER", "anthropic")
@@ -72,7 +72,7 @@ class Settings:
     
     # GitHub Integration
     GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-    GITHUB_REPO = os.getenv("GITHUB_REPO", "Nathaniel-AI/DerekC")
+    GITHUB_REPO = os.getenv("GITHUB_REPO", "Nathaniel-AI/alphavoxC")
     GITHUB_SYNC_ENABLED = os.getenv("GITHUB_SYNC_ENABLED", "false").lower() == "true"
     
     @classmethod

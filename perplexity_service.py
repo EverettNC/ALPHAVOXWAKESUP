@@ -120,7 +120,7 @@ class PerplexityService:
             return {"error": f"Unexpected error: {str(e)}"}
 
     # -----------------------------------------------------------
-    # Helper Methods for Derek / Your System
+    # Helper Methods for alphavox / Your System
     # -----------------------------------------------------------
     def get_educational_content(self, topic: str) -> Dict[str, Any]:
         prompt = (

@@ -1,8 +1,8 @@
 """
-Derek's Knowledge-First Reasoning Engine
+alphavox's Knowledge-First Reasoning Engine
 The Christman AI Project
 
-Enables Derek to:
+Enables alphavox to:
 - Use his learned knowledge BEFORE external APIs
 - Build confidence in his own knowledge
 - Reduce API costs by 90%+
@@ -20,13 +20,13 @@ import re
 
 class KnowledgeEngine:
     """
-    Derek's knowledge-first reasoning system
+    alphavox's knowledge-first reasoning system
     Queries learned knowledge before resorting to external APIs
     """
     
     def __init__(
         self,
-        knowledge_dir: str = "derek_knowledge",
+        knowledge_dir: str = "alphavox_knowledge",
         memory_mesh=None,
         local_reasoning=None
     ):
@@ -35,7 +35,7 @@ class KnowledgeEngine:
         
         Args:
             knowledge_dir: Directory containing learned knowledge
-            memory_mesh: Reference to Derek's memory system
+            memory_mesh: Reference to alphavox's memory system
             local_reasoning: Reference to local AI reasoning engine
         """
         self.knowledge_dir = Path(knowledge_dir)
@@ -79,10 +79,10 @@ class KnowledgeEngine:
         if require_external:
             return self._use_external_api(question, context, reason="forced")
         
-        # Step 2: Search Derek's learned knowledge
+        # Step 2: Search alphavox's learned knowledge
         knowledge_result = self._search_learned_knowledge(question)
         
-        # Step 3: Check Derek's memory for relevant experiences
+        # Step 3: Check alphavox's memory for relevant experiences
         memory_result = self._search_memory(question) if self.memory_mesh else None
         
         # Step 4: Combine knowledge and memory
@@ -117,7 +117,7 @@ class KnowledgeEngine:
     
     def _search_learned_knowledge(self, question: str) -> Dict[str, Any]:
         """
-        Search Derek's learned knowledge base
+        Search alphavox's learned knowledge base
         
         Args:
             question: User's question
@@ -197,7 +197,7 @@ class KnowledgeEngine:
     
     def _search_memory(self, question: str) -> Optional[Dict[str, Any]]:
         """
-        Search Derek's memory mesh for relevant experiences
+        Search alphavox's memory mesh for relevant experiences
         
         Args:
             question: User's question
@@ -256,7 +256,7 @@ class KnowledgeEngine:
         context: Optional[str] = None
     ) -> Dict[str, Any]:
         """
-        Generate response using Derek's knowledge and local AI
+        Generate response using alphavox's knowledge and local AI
         
         Args:
             question: User's question
@@ -286,7 +286,7 @@ class KnowledgeEngine:
         
         # Use local reasoning if available
         if self.local_reasoning and self.local_reasoning.ollama_available:
-            system_prompt = f"""You are Derek, an AI with specialized knowledge.
+            system_prompt = f"""You are alphavox, an AI with specialized knowledge.
 
 Your learned knowledge:
 {knowledge_context}
@@ -444,7 +444,7 @@ Focus on being helpful, compassionate, and evidence-based."""
         stats = self.get_statistics()
         
         print("\n" + "=" * 60)
-        print("📊 DEREK'S KNOWLEDGE REASONING STATISTICS")
+        print("📊 alphavox'S KNOWLEDGE REASONING STATISTICS")
         print("=" * 60)
         print(f"\nTotal Queries: {stats['total_queries']}")
         print(f"Answered Locally: {stats['queries_answered_locally']} ({stats['local_answer_rate']})")
@@ -456,7 +456,7 @@ Focus on being helpful, compassionate, and evidence-based."""
 
 # Test function
 if __name__ == "__main__":
-    print("Testing Derek's Knowledge Engine...\n")
+    print("Testing alphavox's Knowledge Engine...\n")
     
     engine = KnowledgeEngine()
     

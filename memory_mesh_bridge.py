@@ -1,6 +1,6 @@
 """
-Memory Mesh Bridge - Adapter for Derek Ultimate Voice
-Allows seamless integration of MemoryMesh with existing Derek code
+Memory Mesh Bridge - Adapter for alphavox Ultimate Voice
+Allows seamless integration of MemoryMesh with existing alphavox code
 """
 
 from memory_mesh import MemoryMesh
@@ -9,11 +9,11 @@ from typing import Any, Dict, List
 
 class MemoryMeshBridge:
     """
-    Bridge adapter to make MemoryMesh compatible with existing Derek code
+    Bridge adapter to make MemoryMesh compatible with existing alphavox code
     Provides the same interface as old MemoryManager but with MemoryMesh power
     """
     
-    def __init__(self, memory_dir="./derek_memory"):
+    def __init__(self, memory_dir="./alphavox_memory"):
         """Initialize MemoryMesh with bridge interface"""
         self.mesh = MemoryMesh(memory_dir=memory_dir)
         self.memory_file = self.mesh.memory_dir / "persistent_memory.json"
@@ -74,7 +74,7 @@ class MemoryMeshBridge:
         if not results:
             return ""
         
-        # Format results for Derek's consumption
+        # Format results for alphavox's consumption
         formatted = []
         for mem in results:
             content = mem["content"]
@@ -84,7 +84,7 @@ class MemoryMeshBridge:
         return " | ".join(formatted)
     
     def get_memory_stats(self) -> Dict[str, Any]:
-        """Get statistics about Derek's memory"""
+        """Get statistics about alphavox's memory"""
         stats = self.mesh.get_stats()
         
         # Add bridge-specific stats
@@ -112,7 +112,7 @@ class MemoryMeshBridge:
     def get_working_context(self) -> str:
         """
         Get current working memory as context string
-        Useful for providing Derek immediate conversation context
+        Useful for providing alphavox immediate conversation context
         """
         working = self.mesh.get_working_memory()
         if not working:

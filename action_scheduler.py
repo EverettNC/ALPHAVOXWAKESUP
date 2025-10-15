@@ -1,4 +1,4 @@
-"""Action scheduling utilities for Derek autonomy."""
+"""Action scheduling utilities for alphavox autonomy."""
 
 from __future__ import annotations
 

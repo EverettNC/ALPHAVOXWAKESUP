@@ -237,7 +237,7 @@ class WebCrawler:
             for url in TOPIC_SOURCES.get(topic, []):
                 try:
                     r = requests.get(
-                        url, headers={"User-Agent": "DerekBot/1.0"}, timeout=10
+                        url, headers={"User-Agent": "alphavoxBot/1.0"}, timeout=10
                     )
                     if r.status_code != 200:
                         continue

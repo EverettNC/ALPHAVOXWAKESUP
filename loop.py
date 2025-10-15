@@ -1,5 +1,5 @@
 """
-Event loop handler for Derek Dashboard
+Event loop handler for alphavox Dashboard
 Manages continuous processes and background tasks
 """
 
@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 class EventLoop:
     """
-    Manages background processes and event handling for Derek Dashboard
+    Manages background processes and event handling for alphavox Dashboard
     """
 
     def __init__(self):

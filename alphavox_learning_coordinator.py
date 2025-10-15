@@ -1,4 +1,4 @@
-"""Derek's master learning coordinator."""
+"""alphavox's master learning coordinator."""
 
 import logging
 import time
@@ -11,17 +11,17 @@ from self_modifying_code import get_self_modifying_code_engine
 logger = logging.getLogger(__name__)
 
 
-class DerekLearningCoordinator:
-    """Coordinates Derek's learning, analysis, and code improvement systems."""
+class alphavoxLearningCoordinator:
+    """Coordinates alphavox's learning, analysis, and code improvement systems."""
 
     def __init__(self) -> None:
         self.self_improvement = get_self_improvement_engine()
         self.advanced_learning = AdvancedLearningSystem()
         self.code_modifier = get_self_modifying_code_engine()
-        logger.info("Derek Learning Coordinator initialized")
+        logger.info("alphavox Learning Coordinator initialized")
 
     def start_all_systems(self) -> None:
-        """Start the engines Derek uses for continuous learning."""
+        """Start the engines alphavox uses for continuous learning."""
         try:
             self.self_improvement.start_learning()
         except Exception as exc:  # pragma: no cover - defensive logging
@@ -31,10 +31,10 @@ class DerekLearningCoordinator:
         except Exception as exc:  # pragma: no cover
             logger.error("Code modifier auto-mode failed to start: %s", exc)
         else:
-            logger.info("All Derek learning systems active")
+            logger.info("All alphavox learning systems active")
 
     def daily_learning_cycle(self) -> None:
-        """Run Derek's daily learning workflow."""
+        """Run alphavox's daily learning workflow."""
         current_time = time.time()
 
         for (
@@ -85,12 +85,12 @@ class DerekLearningCoordinator:
             logger.info("Daily learning cycle complete")
 
 
-derek_coordinator = DerekLearningCoordinator()
+alphavox_coordinator = alphavoxLearningCoordinator()
 
 
-def start_derek_learning() -> None:
-    """Initialize Derek's learning systems."""
-    derek_coordinator.start_all_systems()
+def start_alphavox_learning() -> None:
+    """Initialize alphavox's learning systems."""
+    alphavox_coordinator.start_all_systems()
 
 # ==============================================================================
 # © 2025 Everett Nathaniel Christman & Misty Gail Christman

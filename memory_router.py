@@ -8,7 +8,7 @@ import os
 GITHUB_API = "https://api.github.com"
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 OWNER = "everettc"
-REPO = "derek-dashboard"
+REPO = "alphavox-dashboard"
 
 router = APIRouter()
 

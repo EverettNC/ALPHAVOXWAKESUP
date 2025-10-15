@@ -290,7 +290,7 @@ afternoon. Consider scheduling important conversations
 Used AAC to tell me 'too loud, need quiet.' Amazing 
 that we could understand what was wrong!"
 
-Derek's Response:
+alphavox's Response:
 This is exactly what AlphaVox is for - giving your loved 
 one the words when they need them most. We've noted that 
 mornings after noise stress are challenging. Tomorrow, we'll 
@@ -649,12 +649,12 @@ We went outside and played for 30 minutes.
 Emotion:
 She was smiling the whole time. This is huge progress!
 
-Question for Derek:
+Question for alphavox:
 Should we practice 3-word phrases more? How do we build 
 on this success?
 ```
 
-**Derek's AI Response:**
+**alphavox's AI Response:**
 ```
 That's wonderful progress! 🎉
 
@@ -700,7 +700,7 @@ You're doing an amazing job supporting her communication! 💙
 ║  • Video: Celebrating communication wins   ║
 ║  • Tip: Building on success moments       ║
 ║                                            ║
-║  💡 Derek's Suggestion:                   ║
+║  💡 alphavox's Suggestion:                   ║
 ║  Sarah communicates best 2-5 PM. Try      ║
 ║  important conversations during this time. ║
 ║                                            ║

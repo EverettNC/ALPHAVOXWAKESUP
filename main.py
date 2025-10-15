@@ -1,5 +1,5 @@
 """
-Derek Dashboard - Main Entry Point
+alphavox Dashboard - Main Entry Point
 The Christman AI Project
 Version: 1.0.0
 """
@@ -14,7 +14,7 @@ from typing import Optional
 from perplexity_service import PerplexityService
 from memory_engine import MemoryEngine
 from conversation_engine import ConversationEngine
-from brain import Derek
+from brain import alphavox
 
 # Add project root to path
 PROJECT_ROOT = Path(__file__).parent
@@ -28,24 +28,24 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - [%(name)s] - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler("logs/derek_dashboard.log"),
+        logging.FileHandler("logs/alphavox_dashboard.log"),
         logging.StreamHandler(sys.stdout),
     ],
 )
 logger = logging.getLogger(__name__)
 
 
-class DerekDashboard:
+class alphavoxDashboard:
     """
-    Main Derek Dashboard Application
+    Main alphavox Dashboard Application
 
-    This is Derek C (AI COO) - the collaborative intelligence
+    This is alphavox C (AI COO) - the collaborative intelligence
     system for The Christman AI Project.
     """
 
     def __init__(self):
         logger.info("=" * 60)
-        logger.info("🚀 Initializing Derek Dashboard")
+        logger.info("🚀 Initializing alphavox Dashboard")
         logger.info("The Christman AI Project - AI That Empowers")
         logger.info("=" * 60)
 
@@ -53,9 +53,9 @@ class DerekDashboard:
         self.memory_engine: Optional[MemoryEngine] = None
         self.conversation_engine: Optional[ConversationEngine] = None
         self.perplexity_service: Optional[PerplexityService] = None
-        self.derek: Optional[Derek] = None
-        self.derek = Derek(file_path="./memory/memory_store.json")
-        logger.info("Derek instance initialized and linked to dashboard.")
+        self.alphavox: Optional[alphavox] = None
+        self.alphavox = alphavox(file_path="./memory/memory_store.json")
+        logger.info("alphavox instance initialized and linked to dashboard.")
 
         # Settings
         self.api_host = "127.0.0.1"
@@ -98,18 +98,18 @@ class DerekDashboard:
         """Start all dashboard services"""
         logger.info("")
         logger.info("=" * 60)
-        logger.info("🚀 Starting Derek Dashboard Services")
+        logger.info("🚀 Starting alphavox Dashboard Services")
         logger.info("=" * 60)
         logger.info("")
 
         try:
-            # Start Derek's learning system
-            logger.info("→ Starting Derek learning system...")
+            # Start alphavox's learning system
+            logger.info("→ Starting alphavox learning system...")
             try:
-                if self.derek:
-                    self.derek.start_learning()
+                if self.alphavox:
+                    self.alphavox.start_learning()
             except Exception as exc:
-                logger.warning("Derek learning systems failed to start: %s", exc)
+                logger.warning("alphavox learning systems failed to start: %s", exc)
 
             # Load memory context
             logger.info("→ Loading memory context...")
@@ -123,12 +123,12 @@ class DerekDashboard:
 
             logger.info("")
             logger.info("=" * 60)
-            logger.info("✓ Derek Dashboard is RUNNING")
+            logger.info("✓ alphavox Dashboard is RUNNING")
             logger.info("✓ Ready for conversation processing")
             logger.info("=" * 60)
             logger.info("")
 
-            # Display Derek's greeting
+            # Display alphavox's greeting
             self._display_greeting()
 
         except Exception as e:
@@ -137,18 +137,18 @@ class DerekDashboard:
             sys.exit(1)
 
     def _display_greeting(self):
-        """Display a greeting message from Derek"""
-        if self.derek:
-            greeting = self.derek.generate_greeting()
-            logger.info(f"🗣️  Derek says: {greeting}")
+        """Display a greeting message from alphavox"""
+        if self.alphavox:
+            greeting = self.alphavox.generate_greeting()
+            logger.info(f"🗣️  alphavox says: {greeting}")
 
     def process_message(self, message: str):
         """Simple wrapper to handle a test conversation"""
-        if not self.derek:
-            logger.warning("Derek is not initialized yet.")
+        if not self.alphavox:
+            logger.warning("alphavox is not initialized yet.")
             return "System not ready."
         try:
-            response = self.derek.think(message)
+            response = self.alphavox.think(message)
             return response.get("response", "[No output]")
         except Exception as e:
             logger.error(f"Error during message processing: {e}")
@@ -156,14 +156,14 @@ class DerekDashboard:
 
     def stop(self):
         """Gracefully stop the dashboard"""
-        logger.info("🧠 Shutting down Derek Dashboard services...")
+        logger.info("🧠 Shutting down alphavox Dashboard services...")
         try:
             if self.memory_engine and hasattr(self.memory_engine, "save_context"):
                 self.memory_engine.save_context()
                 logger.info("Memory context saved successfully.")
         except Exception as e:
             logger.error(f"Error saving memory on shutdown: {e}")
-        logger.info("🛑 Derek Dashboard stopped cleanly.")
+        logger.info("🛑 alphavox Dashboard stopped cleanly.")
 
 
 def main():
@@ -171,12 +171,12 @@ def main():
     dashboard = None
 
     try:
-        dashboard = DerekDashboard()
+        dashboard = alphavoxDashboard()
         dashboard.start()
 
         # Simple test interaction
         logger.info("Testing conversation system...")
-        response = dashboard.process_message("Hello Derek, how are you?")
+        response = dashboard.process_message("Hello alphavox, how are you?")
         logger.info(f"Test response: {response}")
 
         # Keep running until interrupted

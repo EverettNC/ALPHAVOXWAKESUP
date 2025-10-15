@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "=========================================="
-echo "Derek Dashboard Installation"
+echo "alphavox Dashboard Installation"
 echo "The Christman AI Project"
 echo "=========================================="
 echo ""
@@ -46,7 +46,7 @@ echo "=========================================="
 echo "✓ Installation Complete!"
 echo "=========================================="
 echo ""
-echo "To start Derek Dashboard:"
+echo "To start alphavox Dashboard:"
 echo "  source venv/bin/activate"
 echo "  python main.py"
 echo ""

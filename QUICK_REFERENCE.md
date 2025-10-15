@@ -117,7 +117,7 @@ PORT=5000
 | Module | Purpose |
 |--------|---------|
 | **app.py** | Main Flask application |
-| **main.py** | Derek AI dashboard |
+| **main.py** | alphavox AI dashboard |
 | **alphavox_input_nlu.py** | Advanced NLU with root cause analysis |
 | **nonverbal_engine.py** | Gesture and emotion recognition |
 | **conversation_engine.py** | Advanced conversational AI |
@@ -145,7 +145,7 @@ cat AWS_DEPLOYMENT.md
 
 ```bash
 # View logs
-tail -f logs/derek_dashboard.log
+tail -f logs/alphavox_dashboard.log
 tail -f logs/alphavox.log
 
 # Monitor system resources

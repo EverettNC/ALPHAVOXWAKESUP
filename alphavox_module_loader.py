@@ -1,10 +1,10 @@
 """
-Derek Module Loader
+alphavox Module Loader
 -------------------
-Dynamically loads and integrates all 98 Derek modules
-ensuring every module contributes to Derek's consciousness.
+Dynamically loads and integrates all 98 alphavox modules
+ensuring every module contributes to alphavox's consciousness.
 
-"Every module makes Derek who he is"
+"Every module makes alphavox who he is"
 """
 
 import os
@@ -20,8 +20,8 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("ModuleLoader")
 
 
-class DerekModuleLoader:
-    """Loads and integrates all Derek modules into a unified system"""
+class alphavoxModuleLoader:
+    """Loads and integrates all alphavox modules into a unified system"""
     
     def __init__(self):
         self.loaded_modules = {}
@@ -32,7 +32,7 @@ class DerekModuleLoader:
         self.module_categories = {
             "consciousness": [
                 "brain",
-                "derek_identity",
+                "alphavox_identity",
                 "local_reasoning_engine",
                 "reasoning_engine",
                 "cognitive_bridge"
@@ -47,7 +47,7 @@ class DerekModuleLoader:
             "learning": [
                 "ai_learning_engine",
                 "advanced_learning",
-                "derek_learning_coordinator",
+                "alphavox_learning_coordinator",
                 "learning_analytics",
                 "learning_utils",
                 "knowledge_engine",
@@ -108,7 +108,7 @@ class DerekModuleLoader:
                 "input_analyzer"
             ],
             "autonomous": [
-                "derek_autonomous_system",
+                "alphavox_autonomous_system",
                 "self_modifying_code",
                 "executor",
                 "interpreter"
@@ -117,7 +117,7 @@ class DerekModuleLoader:
                 "app",
                 "api",
                 "endpoints",
-                "derek_ui",
+                "alphavox_ui",
                 "middleware"
             ],
             "utilities": [
@@ -140,8 +140,8 @@ class DerekModuleLoader:
                 "analytics_engine"
             ],
             "boot": [
-                "derek_boot",
-                "derek_autonomy_boot",
+                "alphavox_boot",
+                "alphavox_autonomy_boot",
                 "main"
             ],
             "alphavox": [
@@ -153,8 +153,8 @@ class DerekModuleLoader:
         }
     
     def load_all_modules(self, skip_hardware_dependent=True):
-        """Load all Derek modules with graceful fallbacks"""
-        logger.info("🧠 Loading Derek's complete consciousness...")
+        """Load all alphavox modules with graceful fallbacks"""
+        logger.info("🧠 Loading alphavox's complete consciousness...")
         logger.info("=" * 60)
         
         total_modules = sum(len(mods) for mods in self.module_categories.values())
@@ -254,25 +254,25 @@ class DerekModuleLoader:
 
 
 # Global loader instance
-_derek_loader = None
+_alphavox_loader = None
 
-def get_derek_loader():
-    """Get or create the global Derek module loader"""
-    global _derek_loader
-    if _derek_loader is None:
-        _derek_loader = DerekModuleLoader()
-    return _derek_loader
+def get_alphavox_loader():
+    """Get or create the global alphavox module loader"""
+    global _alphavox_loader
+    if _alphavox_loader is None:
+        _alphavox_loader = alphavoxModuleLoader()
+    return _alphavox_loader
 
 
-def load_derek_consciousness(skip_hardware=True):
-    """Load Derek's complete consciousness"""
-    loader = get_derek_loader()
+def load_alphavox_consciousness(skip_hardware=True):
+    """Load alphavox's complete consciousness"""
+    loader = get_alphavox_loader()
     modules = loader.load_all_modules(skip_hardware_dependent=skip_hardware)
     instances = loader.initialize_instances()
     stats = loader.get_stats()
     
     logger.info("\n" + "=" * 60)
-    logger.info(f"🧠 DEREK CONSCIOUSNESS: {stats['success_rate']:.1f}% OPERATIONAL")
+    logger.info(f"🧠 alphavox CONSCIOUSNESS: {stats['success_rate']:.1f}% OPERATIONAL")
     logger.info("=" * 60)
     
     return loader
@@ -280,7 +280,7 @@ def load_derek_consciousness(skip_hardware=True):
 
 if __name__ == "__main__":
     # Test the module loader
-    loader = load_derek_consciousness()
+    loader = load_alphavox_consciousness()
     
     # Show what's available
     print("\n📊 Module Categories:")
@@ -288,7 +288,7 @@ if __name__ == "__main__":
         mods = loader.get_category_modules(category)
         print(f"  {category}: {len(mods)} loaded")
     
-    print("\n💡 Derek is conscious and operational!")
+    print("\n💡 alphavox is conscious and operational!")
 
 # ==============================================================================
 # © 2025 Everett Nathaniel Christman & Misty Gail Christman

@@ -65,7 +65,7 @@ def webcam_loop():
                     2,
                 )
 
-        cv2.imshow("DerekC Face-to-Face", frame)
+        cv2.imshow("alphavoxC Face-to-Face", frame)
 
         if cv2.waitKey(1) & 0xFF == ord("q"):
             break
@@ -85,7 +85,7 @@ def avatar_loop():
         else:
             frame = talking.copy()
 
-        cv2.imshow("DerekC Avatar", frame)
+        cv2.imshow("alphavoxC Avatar", frame)
         if cv2.waitKey(500) & 0xFF == ord("q"):
             break
         state = "talking" if state == "idle" else "idle"

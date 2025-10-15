@@ -1,4 +1,4 @@
-"""Memory service for Derek Dashboard."""
+"""Memory service for alphavox Dashboard."""
 
 import json
 import logging

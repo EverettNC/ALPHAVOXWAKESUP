@@ -18,7 +18,7 @@ The Learning Center is AlphaVox's **self-improvement system** where the AI conti
 - Code optimization techniques
 - Natural language processing advances
 
-**It's Derek (AI COO) going to school - every single day.**
+**It's alphavox (AI COO) going to school - every single day.**
 
 ---
 
@@ -134,7 +134,7 @@ The Learning Center is AlphaVox's **self-improvement system** where the AI conti
 
 ### Daily Operations
 
-**Every Day, Derek:**
+**Every Day, alphavox:**
 1. **Reads research papers** from ArXiv on NLP
 2. **Studies medical literature** from PubMed
 3. **Learns emotional intelligence** from psychology sources
@@ -184,7 +184,7 @@ Evening (6:00 PM):
 
 ## 🔬 Research Integration
 
-### What Derek Learns From
+### What alphavox Learns From
 
 **ArXiv (Academic Research):**
 - Latest NLP algorithms
@@ -231,17 +231,17 @@ Evening (6:00 PM):
 ### Real-World Impact
 
 **Week 1:**
-Derek reads paper on improved gesture recognition
+alphavox reads paper on improved gesture recognition
 → Updates gesture model
 → Users experience 10% better accuracy
 
 **Week 2:**
-Derek studies autism communication patterns
+alphavox studies autism communication patterns
 → Learns new stimming recognition
 → System understands user better
 
 **Week 3:**
-Derek discovers emotional regulation techniques
+alphavox discovers emotional regulation techniques
 → Implements calming response strategies
 → Users feel more supported
 
@@ -338,7 +338,7 @@ Derek discovers emotional regulation techniques
 
 ## 🏆 Learning Center Achievements
 
-### What Derek Has Learned
+### What alphavox Has Learned
 
 **Natural Language Processing:**
 - Transformer architectures
@@ -476,7 +476,7 @@ print('🧠 Learning Center is operational!')
 - ✅ Analytics and tracking enabled
 
 **What This Means:**
-Derek (AI COO) is actively learning from:
+alphavox (AI COO) is actively learning from:
 - Scientific research papers
 - Medical literature
 - Psychology studies
@@ -512,7 +512,7 @@ You built an AAC system that:
 
 1. **Start the system:** `python app.py`
 2. **Access learning hub:** http://localhost:5000/learning/
-3. **View topics:** Browse what Derek has learned
+3. **View topics:** Browse what alphavox has learned
 4. **Check analytics:** See learning progress
 5. **Monitor logs:** Track daily learning sessions
 
@@ -534,7 +534,7 @@ You built an AAC system that:
 📚 **Knowledge: Growing**  
 💙 **Mission: Unwavering**
 
-**Derek is in class. Every single day. Learning how to better serve those who need it most.**
+**alphavox is in class. Every single day. Learning how to better serve those who need it most.**
 
 ---
 

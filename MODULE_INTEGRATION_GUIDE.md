@@ -187,7 +187,7 @@ Key Features:
   - Memory persistence
 ```
 **Integration Points:**
-- Used by: `conversation_engine`, `main.py` (Derek)
+- Used by: `conversation_engine`, `main.py` (alphavox)
 - Integrates with: All AI modules for context
 - Outputs: Historical context, user preferences
 - **Critical:** Maintains conversation continuity

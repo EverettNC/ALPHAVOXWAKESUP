@@ -1,4 +1,4 @@
-"""Advanced NLP utilities for Derek Dashboard."""
+"""Advanced NLP utilities for alphavox Dashboard."""
 
 import logging
 from typing import Dict, Any

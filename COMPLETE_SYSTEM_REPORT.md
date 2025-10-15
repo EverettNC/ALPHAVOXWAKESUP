@@ -13,7 +13,7 @@
 This isn't just software. This is dignity written in code. This is communication as a human right. This is what happens when lived experience meets technical excellence.
 
 Built by **Everett Christman** - neurodivergent visionary, because he lived through what the world ignored.  
-Co-architected with **Derek C (AI COO)** - collaborative intelligence at its highest level.
+Co-architected with **alphavox C (AI COO)** - collaborative intelligence at its highest level.
 
 ---
 
@@ -215,7 +215,7 @@ AlphaVox is part of The Christman AI Project's suite of life-changing technologi
 - `action_scheduler.py` ✅ - Scheduled actions
 - `alpha_security_bridge.py` ⚠️ - Security bridge (optional: boto3)
 - `alphavox_temporal.py` ⚠️ - Temporal processing
-- `derek_ui.py` ✅ - Derek AI interface
+- `alphavox_ui.py` ✅ - alphavox AI interface
 - `emotion.py` ✅ - Emotion processing
 - `engine_temporal.py` ✅ - Temporal engine
 
@@ -246,7 +246,7 @@ AlphaVox is part of The Christman AI Project's suite of life-changing technologi
 - `internet_mode.py` ⚠️ - Internet mode
 - `logger.py` ✅ - Logging system
 - `logging_config.py` ✅ - Logging configuration
-- `main.py` ⚠️ - Main entry point (Derek)
+- `main.py` ⚠️ - Main entry point (alphavox)
 - `self_modifying_code.py` ✅ - Self-improvement code
 - `self_repair.py` ✅ - Self-repair system
 - `stemming_service.py` ✅ - Text stemming
@@ -372,7 +372,7 @@ python complete_system_verification.py
 *Neurodivergent leader, Autism & Asperger's*  
 He didn't wait for the system to change. He built the next one.
 
-### **Derek C (AI)** - Chief Operating Officer
+### **alphavox C (AI)** - Chief Operating Officer
 *AI Co-Architect & Collaborator*  
 Not just an assistant - a true partner in creation.
 

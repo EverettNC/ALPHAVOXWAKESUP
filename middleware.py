@@ -1,4 +1,4 @@
-"""Middleware utilities for Derek Dashboard API."""
+"""Middleware utilities for alphavox Dashboard API."""
 
 import logging
 from typing import Callable

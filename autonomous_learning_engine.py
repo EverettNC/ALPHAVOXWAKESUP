@@ -1,8 +1,8 @@
 """
-Autonomous Learning Engine - Derek's Self-Improvement System
+Autonomous Learning Engine - alphavox's Self-Improvement System
 The Christman AI Project
 
-Enables Derek to:
+Enables alphavox to:
 - Learn autonomously about any domain
 - Self-modify and create new code
 - Advance AI development through research
@@ -27,19 +27,19 @@ import queue
 
 class AutonomousLearningEngine:
     """
-    Derek's autonomous learning and self-modification system
+    alphavox's autonomous learning and self-modification system
     Enables continuous learning and self-improvement
     """
     
-    def __init__(self, derek_instance, knowledge_dir: str = "derek_knowledge"):
+    def __init__(self, alphavox_instance, knowledge_dir: str = "alphavox_knowledge"):
         """
         Initialize the Autonomous Learning Engine
         
         Args:
-            derek_instance: Reference to the main Derek system
+            alphavox_instance: Reference to the main alphavox system
             knowledge_dir: Directory for storing learned knowledge
         """
-        self.derek = derek_instance
+        self.alphavox = alphavox_instance
         self.knowledge_dir = Path(knowledge_dir)
         self.knowledge_dir.mkdir(exist_ok=True)
         
@@ -193,7 +193,7 @@ class AutonomousLearningEngine:
     def start_autonomous_learning(self):
         """
         Start autonomous learning in background thread
-        Derek will continuously learn and improve
+        alphavox will continuously learn and improve
         """
         if self.learning_active:
             print("⚠️  Learning already active")
@@ -206,7 +206,7 @@ class AutonomousLearningEngine:
         learning_thread.start()
         
         print("🚀 Autonomous learning started!")
-        print("   Derek will now learn continuously in the background")
+        print("   alphavox will now learn continuously in the background")
     
     def stop_autonomous_learning(self):
         """Stop autonomous learning"""
@@ -308,15 +308,15 @@ class AutonomousLearningEngine:
         
         print(f"   🔍 Researching {subtopic}...")
         
-        # Use Derek's AI provider to research the topic
+        # Use alphavox's AI provider to research the topic
         research_prompt = self._generate_research_prompt(domain, subtopic)
         
         # Get knowledge from AI
-        if hasattr(self.derek, 'anthropic_client') and self.derek.ai_provider == "anthropic":
+        if hasattr(self.alphavox, 'anthropic_client') and self.alphavox.ai_provider == "anthropic":
             knowledge = self._research_with_anthropic(research_prompt)
-        elif hasattr(self.derek, 'openai_client') and self.derek.ai_provider == "openai":
+        elif hasattr(self.alphavox, 'openai_client') and self.alphavox.ai_provider == "openai":
             knowledge = self._research_with_openai(research_prompt)
-        elif hasattr(self.derek, 'perplexity') and self.derek.use_web_search:
+        elif hasattr(self.alphavox, 'perplexity') and self.alphavox.use_web_search:
             knowledge = self._research_with_perplexity(research_prompt)
         else:
             knowledge = {"content": "No AI provider available for learning", "confidence": 0.0}
@@ -340,8 +340,8 @@ class AutonomousLearningEngine:
     def _generate_research_prompt(self, domain: str, subtopic: str) -> str:
         """Generate research prompt for learning"""
         
-        # Context about Derek's purpose
-        context = """You are Derek, an AI learning to better serve vulnerable populations.
+        # Context about alphavox's purpose
+        context = """You are alphavox, an AI learning to better serve vulnerable populations.
 You're learning this topic to improve your capabilities and help people more effectively."""
         
         # Domain-specific research prompts
@@ -416,7 +416,7 @@ Include:
     def _research_with_anthropic(self, prompt: str) -> Dict:
         """Research using Anthropic Claude"""
         try:
-            response = self.derek.anthropic_client.messages.create(
+            response = self.alphavox.anthropic_client.messages.create(
                 model="claude-sonnet-4-5-20250929",
                 max_tokens=2000,
                 messages=[{"role": "user", "content": prompt}]
@@ -435,7 +435,7 @@ Include:
     def _research_with_openai(self, prompt: str) -> Dict:
         """Research using OpenAI GPT"""
         try:
-            response = self.derek.openai_client.chat.completions.create(
+            response = self.alphavox.openai_client.chat.completions.create(
                 model="gpt-4",
                 messages=[{"role": "user", "content": prompt}],
                 max_tokens=2000
@@ -450,7 +450,7 @@ Include:
     def _research_with_perplexity(self, prompt: str) -> Dict:
         """Research using Perplexity AI"""
         try:
-            response = self.derek.perplexity.generate_content(prompt=prompt)
+            response = self.alphavox.perplexity.generate_content(prompt=prompt)
             if isinstance(response, dict):
                 content = response.get('content', str(response))
             else:
@@ -503,8 +503,8 @@ Include:
         self.save_knowledge_base()
         
         # Also store in memory mesh if available
-        if hasattr(self.derek, 'memory'):
-            self.derek.memory.mesh.store(
+        if hasattr(self.alphavox, 'memory'):
+            self.alphavox.memory.mesh.store(
                 content=f"Learned about {topic['subtopic']}: {knowledge.get('content', '')[:200]}",
                 category="learning",
                 importance=0.8,
@@ -571,13 +571,13 @@ Include:
         
         # Generate code improvement prompt
         improvement_prompt = f"""Based on your new knowledge about {topic['subtopic']}, 
-generate Python code that improves Derek's capabilities.
+generate Python code that improves alphavox's capabilities.
 
 Knowledge learned:
 {knowledge.get('content', '')[:500]}
 
 Generate a new module or improvement that:
-1. Enhances Derek's AI capabilities
+1. Enhances alphavox's AI capabilities
 2. Improves performance or functionality
 3. Adds new features for helping vulnerable populations
 4. Is safe and well-tested
@@ -585,7 +585,7 @@ Generate a new module or improvement that:
 Provide complete, working Python code with documentation."""
         
         # Generate code using AI
-        if hasattr(self.derek, 'anthropic_client'):
+        if hasattr(self.alphavox, 'anthropic_client'):
             generated_code = self._generate_code_with_ai(improvement_prompt)
             
             if generated_code:
@@ -595,8 +595,8 @@ Provide complete, working Python code with documentation."""
     def _generate_code_with_ai(self, prompt: str) -> Optional[str]:
         """Generate code using AI"""
         try:
-            if hasattr(self.derek, 'anthropic_client') and self.derek.ai_provider == "anthropic":
-                response = self.derek.anthropic_client.messages.create(
+            if hasattr(self.alphavox, 'anthropic_client') and self.alphavox.ai_provider == "anthropic":
+                response = self.alphavox.anthropic_client.messages.create(
                     model="claude-sonnet-4-5-20250929",
                     max_tokens=3000,
                     messages=[{"role": "user", "content": prompt}]
@@ -619,7 +619,7 @@ Provide complete, working Python code with documentation."""
     
     def _integrate_generated_code(self, code: str, topic: Dict):
         """
-        Safely integrate generated code into Derek's system
+        Safely integrate generated code into alphavox's system
         """
         print(f"   🔬 Validating generated code...")
         
@@ -631,7 +631,7 @@ Provide complete, working Python code with documentation."""
             return
         
         # Generate module name
-        module_name = f"derek_learned_{topic['domain']}_{topic['subtopic']}"
+        module_name = f"alphavox_learned_{topic['domain']}_{topic['subtopic']}"
         module_name = module_name.replace('-', '_').replace(' ', '_')
         
         # Save to file
@@ -639,7 +639,7 @@ Provide complete, working Python code with documentation."""
         
         try:
             with open(module_path, 'w') as f:
-                f.write(f'"""\nGenerated by Derek\'s Autonomous Learning Engine\n')
+                f.write(f'"""\nGenerated by alphavox\'s Autonomous Learning Engine\n')
                 f.write(f'Topic: {topic["domain"]} - {topic["subtopic"]}\n')
                 f.write(f'Generated: {datetime.now().isoformat()}\n')
                 f.write(f'"""\n\n')
@@ -662,7 +662,7 @@ Provide complete, working Python code with documentation."""
                 "timestamp": datetime.now().isoformat()
             })
             
-            print(f"   ✅ Derek generated new capability: {module_name}")
+            print(f"   ✅ alphavox generated new capability: {module_name}")
             
         except Exception as e:
             print(f"   ❌ Error saving module: {e}")
@@ -803,7 +803,7 @@ Provide complete, working Python code with documentation."""
         status = self.get_learning_status()
         
         print("\n" + "=" * 60)
-        print("🎓 DEREK'S LEARNING PROGRESS REPORT")
+        print("🎓 alphavox'S LEARNING PROGRESS REPORT")
         print("=" * 60)
         print(f"Learning Status: {'🟢 ACTIVE' if status['learning_active'] else '⏸️  PAUSED'}")
         print(f"Topics Learned: {status['learned_topics']}/{status['total_topics']} ({status['progress']:.1%})")

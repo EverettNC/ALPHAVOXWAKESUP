@@ -1,8 +1,8 @@
 """
-Derek's Local Reasoning Engine - Self-Sufficiency System
+alphavox's Local Reasoning Engine - Self-Sufficiency System
 The Christman AI Project
 
-Enables Derek to:
+Enables alphavox to:
 - Run local AI models (LLaMA, Mistral, Qwen, DeepSeek)
 - Reason using his own knowledge base
 - Reduce API dependency by 90%+
@@ -22,20 +22,20 @@ import time
 
 class LocalReasoningEngine:
     """
-    Derek's local AI reasoning system
+    alphavox's local AI reasoning system
     Provides self-hosted intelligence to reduce external API dependency
     """
     
-    def __init__(self, knowledge_dir: str = "derek_knowledge", derek_instance=None):
+    def __init__(self, knowledge_dir: str = "alphavox_knowledge", alphavox_instance=None):
         """
         Initialize the Local Reasoning Engine
         
         Args:
-            knowledge_dir: Directory containing Derek's learned knowledge
-            derek_instance: Reference to main Derek system
+            knowledge_dir: Directory containing alphavox's learned knowledge
+            alphavox_instance: Reference to main alphavox system
         """
         self.knowledge_dir = Path(knowledge_dir)
-        self.derek = derek_instance
+        self.alphavox = alphavox_instance
         
         # Ollama API endpoint (local)
         self.ollama_url = "http://localhost:11434"
@@ -251,7 +251,7 @@ class LocalReasoningEngine:
         domain: Optional[str] = None
     ) -> Dict[str, Any]:
         """
-        Query using Derek's learned knowledge base first
+        Query using alphavox's learned knowledge base first
         
         Args:
             question: User's question
@@ -260,7 +260,7 @@ class LocalReasoningEngine:
         Returns:
             dict: Response with confidence score and source
         """
-        # Search Derek's knowledge base
+        # Search alphavox's knowledge base
         relevant_knowledge = self._search_knowledge_base(question, domain)
         
         if relevant_knowledge:
@@ -270,7 +270,7 @@ class LocalReasoningEngine:
                 for k in relevant_knowledge[:5]
             ])
             
-            system_prompt = f"""You are Derek, an AI assistant with specialized knowledge.
+            system_prompt = f"""You are alphavox, an AI assistant with specialized knowledge.
 Use the following knowledge to answer the question:
 
 {knowledge_context}
@@ -321,7 +321,7 @@ Provide a helpful, accurate response based on this knowledge."""
         domain: Optional[str] = None
     ) -> List[Dict[str, Any]]:
         """
-        Search Derek's learned knowledge for relevant information
+        Search alphavox's learned knowledge for relevant information
         
         Args:
             query: Search query
@@ -464,7 +464,7 @@ Provide a helpful, accurate response based on this knowledge."""
     def print_status(self):
         """Print detailed system status"""
         print("\n" + "=" * 60)
-        print("🧠 DEREK'S LOCAL REASONING ENGINE")
+        print("🧠 alphavox'S LOCAL REASONING ENGINE")
         print("=" * 60)
         
         status = self.get_system_status()
@@ -487,14 +487,14 @@ Provide a helpful, accurate response based on this knowledge."""
             print(f"\n💡 To enable local AI:")
             print(f"  1. Install Ollama: https://ollama.ai")
             print(f"  2. Run: ollama pull llama3.1:8b")
-            print(f"  3. Restart Derek")
+            print(f"  3. Restart alphavox")
         
         print("=" * 60 + "\n")
 
 
 # Quick test function
 if __name__ == "__main__":
-    print("Testing Derek's Local Reasoning Engine...\n")
+    print("Testing alphavox's Local Reasoning Engine...\n")
     
     engine = LocalReasoningEngine()
     engine.print_status()
@@ -503,7 +503,7 @@ if __name__ == "__main__":
         print("\n🧪 Testing local model query...")
         response = engine.query_local_model(
             prompt="What is autism?",
-            system_prompt="You are Derek, an expert on neurodivergency and autism."
+            system_prompt="You are alphavox, an expert on neurodivergency and autism."
         )
         if response:
             print(f"\nResponse: {response[:200]}...")

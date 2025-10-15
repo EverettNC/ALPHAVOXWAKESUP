@@ -4,7 +4,7 @@ import os
 import sys
 import sounddevice as sd
 
-print("\n🧪 Derek Voice Diagnostic Starting\n")
+print("\n🧪 alphavox Voice Diagnostic Starting\n")
 
 # Check VOSK model path
 

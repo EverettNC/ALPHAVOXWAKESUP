@@ -1,4 +1,4 @@
-"""Learning services for Derek Dashboard."""
+"""Learning services for alphavox Dashboard."""
 
 import logging
 from typing import Dict, Any

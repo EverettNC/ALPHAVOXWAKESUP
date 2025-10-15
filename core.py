@@ -1,7 +1,7 @@
 """
 Core Module
 -----------
-Core utilities and shared functionality for Derek's modules.
+Core utilities and shared functionality for alphavox's modules.
 """
 
 import os
@@ -16,7 +16,7 @@ logger = logging.getLogger("core")
 
 # Memory hook functions
 def remember(key: str, value: Any, category: str = "general"):
-    """Store information in Derek's memory"""
+    """Store information in alphavox's memory"""
     try:
         from memory_engine import MemoryEngine
         memory = MemoryEngine()
@@ -27,7 +27,7 @@ def remember(key: str, value: Any, category: str = "general"):
 
 
 def recall(key: str, default: Any = None) -> Any:
-    """Retrieve information from Derek's memory"""
+    """Retrieve information from alphavox's memory"""
     try:
         from memory_engine import MemoryEngine
         memory = MemoryEngine()

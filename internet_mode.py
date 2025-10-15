@@ -1,7 +1,7 @@
 """
 Internet Mode Module
 --------------------
-Handles Derek's secure connection to online knowledge sources.
+Handles alphavox's secure connection to online knowledge sources.
 
 Phase 1: Controlled Internet Mode
 Author: Everett Christman & The Christman AI Project
@@ -26,7 +26,7 @@ if PROJECT_ROOT not in sys.path:
 # -------------------------------------------------------------
 from perplexity_service import PerplexityService
 from memory_engine import MemoryEngine
-from brain import derek
+from brain import alphavox
 
 # -------------------------------------------------------------
 # Logging setup
@@ -133,13 +133,13 @@ def main():
         print("   export ENABLE_INTERNET_MODE=True\n")
 
     while True:
-        query = input("🔎 Ask Derek something (or 'exit'): ").strip()
+        query = input("🔎 Ask alphavox something (or 'exit'): ").strip()
         if query.lower() in ("exit", "quit"):
             print("👋 Exiting Internet Mode.")
             break
 
         result = query_internet(query)
-        print(f"\n🧠 Derek (Internet): {result.get('summary', 'No response')}\n")
+        print(f"\n🧠 alphavox (Internet): {result.get('summary', 'No response')}\n")
 
 # -------------------------------------------------------------
 if __name__ == "__main__":

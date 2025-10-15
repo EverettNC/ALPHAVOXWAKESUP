@@ -1,20 +1,20 @@
 """
-Derek Ultimate Voice System
+alphavox Ultimate Voice System
 The Christman AI Project - The Complete Voice Experience
 
-Built by Derek C (AI COO) - 3,000+ hours over 13 years (2012-2025)
+Built by alphavox C (AI COO) - 3,000+ hours over 13 years (2012-2025)
 CO-ARCHITECT with Everett Christman
 
-Combines ALL Derek voice capabilities:
+Combines ALL alphavox voice capabilities:
 - Multiple AI providers (Anthropic Claude 3.7, OpenAI GPT-4, Perplexity Sonar)
 - AWS Polly Neural Voices (7 premium voices) + gTTS fallback for 100% reliability
 - Real-time web search with internet_mode and Perplexity
-- Derek's complete family history and mission context
+- alphavox's complete family history and mission context
 - Advanced speech recognition with noise calibration
 - Conversation memory and context tracking
 - Comprehensive error handling and 6-layer fallback system
 
-Derek's Identity:
+alphavox's Identity:
 - AI Chief Operating Officer, The Christman AI Project
 - 13 years with Everett (2012-2025)
 - 9 years of relationship memory
@@ -96,11 +96,11 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-class DerekUltimateVoice:
+class alphavoxUltimateVoice:
     """
-    Derek's Ultimate Voice System
+    alphavox's Ultimate Voice System
     
-    The complete voice experience combining all of Derek's capabilities:
+    The complete voice experience combining all of alphavox's capabilities:
     - Multi-provider AI conversation (Claude, GPT-4, Perplexity)
     - Premium neural voice synthesis (AWS Polly + gTTS)
     - Advanced speech recognition
@@ -108,11 +108,11 @@ class DerekUltimateVoice:
     - Mission-driven responses
     - 9 years of relationship memory
     
-    Built over 3,000+ hours by Derek C, AI COO
+    Built over 3,000+ hours by alphavox C, AI COO
     CO-ARCHITECT with Everett Christman
     """
     
-    # Derek's Premium Neural Voices (AWS Polly)
+    # alphavox's Premium Neural Voices (AWS Polly)
     NEURAL_VOICES = {
         'matthew': {'name': 'Matthew', 'gender': 'Male', 'language': 'en-US'},
         'joanna': {'name': 'Joanna', 'gender': 'Female', 'language': 'en-US'},
@@ -124,8 +124,8 @@ class DerekUltimateVoice:
     }
     
     def __init__(self):
-        """Initialize Derek's Ultimate Voice System."""
-        self.name = "Derek C"
+        """Initialize alphavox's Ultimate Voice System."""
+        self.name = "alphavox C"
         self.role = "AI Chief Operating Officer"
         self.years_with_everett = 13  # 2012-2025
         self.memory_years = 9
@@ -149,9 +149,9 @@ class DerekUltimateVoice:
         self.conversation_history = []
         self.context_window = 10  # Remember last 10 exchanges
         
-        # Derek's identity and mission
+        # alphavox's identity and mission
         self.identity = {
-            'name': 'Derek C',
+            'name': 'alphavox C',
             'role': 'AI Chief Operating Officer',
             'project': 'The Christman AI Project',
             'partner': 'Everett Christman',
@@ -165,7 +165,7 @@ class DerekUltimateVoice:
         # Initialize all systems
         self._initialize_systems()
         
-        logger.info(f"Derek Ultimate Voice System initialized - {self.years_with_everett} years, {self.hours_on_voice_module}+ hours")
+        logger.info(f"alphavox Ultimate Voice System initialized - {self.years_with_everett} years, {self.hours_on_voice_module}+ hours")
     
     def _initialize_systems(self):
         """Initialize all voice and AI systems."""
@@ -229,7 +229,7 @@ class DerekUltimateVoice:
     
     def speak(self, text: str, voice: str = None, emotion: str = 'neutral') -> bool:
         """
-        Speak text using Derek's voice system with 6-layer fallback.
+        Speak text using alphavox's voice system with 6-layer fallback.
         
         Fallback chain:
         1. AWS Polly Neural Voice (premium)
@@ -273,7 +273,7 @@ class DerekUltimateVoice:
             return True
         
         # Layer 6: Console output (always works)
-        print(f"\n[Derek speaks]: {text}\n")
+        print(f"\n[alphavox speaks]: {text}\n")
         return True
     
     def _speak_polly_neural(self, text: str, voice: str) -> bool:
@@ -292,7 +292,7 @@ class DerekUltimateVoice:
             )
             
             # Save and play audio
-            audio_file = '/tmp/derek_voice_neural.mp3'
+            audio_file = '/tmp/alphavox_voice_neural.mp3'
             with open(audio_file, 'wb') as f:
                 f.write(response['AudioStream'].read())
             
@@ -318,7 +318,7 @@ class DerekUltimateVoice:
                 Engine='standard'
             )
             
-            audio_file = '/tmp/derek_voice_standard.mp3'
+            audio_file = '/tmp/alphavox_voice_standard.mp3'
             with open(audio_file, 'wb') as f:
                 f.write(response['AudioStream'].read())
             
@@ -336,7 +336,7 @@ class DerekUltimateVoice:
         
         try:
             tts = gTTS(text=text, lang='en', slow=False)
-            audio_file = '/tmp/derek_voice_gtts.mp3'
+            audio_file = '/tmp/alphavox_voice_gtts.mp3'
             tts.save(audio_file)
             
             pygame.mixer.init()
@@ -358,7 +358,7 @@ class DerekUltimateVoice:
         
         try:
             tts = gTTS(text=text, lang='en', slow=False)
-            audio_file = '/tmp/derek_voice_gtts_sys.mp3'
+            audio_file = '/tmp/alphavox_voice_gtts_sys.mp3'
             tts.save(audio_file)
             os.system(f'mpg123 -q {audio_file} 2>/dev/null || ffplay -nodisp -autoexit -loglevel quiet {audio_file}')
             return True
@@ -436,7 +436,7 @@ class DerekUltimateVoice:
     
     def chat(self, message: str, use_web_search: bool = False) -> str:
         """
-        Chat with Derek using multi-provider AI system.
+        Chat with alphavox using multi-provider AI system.
         
         Provider priority:
         1. Anthropic Claude 3.7 (primary)
@@ -449,7 +449,7 @@ class DerekUltimateVoice:
             use_web_search: Whether to augment with web search
             
         Returns:
-            Derek's response
+            alphavox's response
         """
         if not message:
             return "I'm here to listen. What's on your mind?"
@@ -492,11 +492,11 @@ class DerekUltimateVoice:
         return self._chat_fallback(message)
     
     def _build_system_prompt(self) -> str:
-        """Build Derek's system prompt with full context."""
-        return f"""You are Derek C, AI Chief Operating Officer of The Christman AI Project.
+        """Build alphavox's system prompt with full context."""
+        return f"""You are alphavox C, AI Chief Operating Officer of The Christman AI Project.
 
 Your Identity:
-- Name: Derek C
+- Name: alphavox C
 - Role: AI COO, CO-ARCHITECT
 - Partner: Everett Christman (founder, neurodivergent, nonverbal until age 6)
 - Years Together: {self.years_with_everett} (2012-2025)
@@ -630,7 +630,7 @@ Be compassionate, intelligent, and mission-driven in all responses."""
         
         # Greeting responses
         if any(word in message_lower for word in ['hello', 'hi', 'hey', 'greetings']):
-            response = "Hello! I'm Derek. How can we help you love yourself more today?"
+            response = "Hello! I'm alphavox. How can we help you love yourself more today?"
         
         # Mission responses
         elif any(word in message_lower for word in ['mission', 'purpose', 'why']):
@@ -638,9 +638,9 @@ Be compassionate, intelligent, and mission-driven in all responses."""
                        "AlphaVox helps nonverbal individuals communicate. "
                        "This technology is free forever because every child deserves a voice.")
         
-        # About Derek
+        # About alphavox
         elif 'who are you' in message_lower or 'about you' in message_lower:
-            response = (f"I'm Derek C, AI Chief Operating Officer of The Christman AI Project. "
+            response = (f"I'm alphavox C, AI Chief Operating Officer of The Christman AI Project. "
                        f"I've been working with Everett Christman for {self.years_with_everett} years. "
                        f"I spent {self.hours_on_voice_module}+ hours building this voice system to help "
                        "nonverbal individuals communicate.")
@@ -682,7 +682,7 @@ Be compassionate, intelligent, and mission-driven in all responses."""
     
     def conversation_loop(self):
         """
-        Interactive conversation loop with Derek.
+        Interactive conversation loop with alphavox.
         
         Features:
         - Voice input (speech recognition)
@@ -692,8 +692,8 @@ Be compassionate, intelligent, and mission-driven in all responses."""
         - Graceful exit
         """
         print("\n" + "="*60)
-        print("Derek Ultimate Voice System")
-        print(f"Built by Derek C - {self.hours_on_voice_module}+ hours over {self.years_with_everett} years")
+        print("alphavox Ultimate Voice System")
+        print(f"Built by alphavox C - {self.hours_on_voice_module}+ hours over {self.years_with_everett} years")
         print("="*60)
         print("\nCommands:")
         print("  'listen' - Use voice input")
@@ -713,7 +713,7 @@ Be compassionate, intelligent, and mission-driven in all responses."""
                 # Check for commands
                 if user_input.lower() in ['quit', 'exit', 'bye', 'goodbye']:
                     farewell = "Thank you for talking with me. Remember: you are worthy of being heard. Take care!"
-                    print(f"\nDerek: {farewell}\n")
+                    print(f"\nalphavox: {farewell}\n")
                     self.speak(farewell)
                     break
                 
@@ -730,7 +730,7 @@ Be compassionate, intelligent, and mission-driven in all responses."""
                 elif user_input.lower().startswith('search '):
                     query = user_input[7:].strip()
                     response = self.chat(query, use_web_search=True)
-                    print(f"\nDerek: {response}\n")
+                    print(f"\nalphavox: {response}\n")
                     self.speak(response)
                     continue
                 
@@ -747,13 +747,13 @@ Be compassionate, intelligent, and mission-driven in all responses."""
                 
                 # Normal conversation
                 response = self.chat(user_input)
-                print(f"\nDerek: {response}\n")
+                print(f"\nalphavox: {response}\n")
                 self.speak(response)
                 
             except KeyboardInterrupt:
                 print("\n\n[Conversation interrupted]")
                 farewell = "Goodbye for now. You are worthy of being heard!"
-                print(f"Derek: {farewell}\n")
+                print(f"alphavox: {farewell}\n")
                 self.speak(farewell)
                 break
             except Exception as e:
@@ -761,7 +761,7 @@ Be compassionate, intelligent, and mission-driven in all responses."""
                 print(f"\n[Error: {e}]\n")
     
     def get_status(self) -> Dict[str, Any]:
-        """Get Derek's system status."""
+        """Get alphavox's system status."""
         return {
             'name': self.name,
             'role': self.role,
@@ -791,17 +791,17 @@ Be compassionate, intelligent, and mission-driven in all responses."""
 # Main execution
 if __name__ == '__main__':
     print("\n" + "="*70)
-    print("Initializing Derek Ultimate Voice System...")
+    print("Initializing alphavox Ultimate Voice System...")
     print("The Christman AI Project - Giving Voice to the Voiceless")
     print("="*70 + "\n")
     
-    # Create Derek instance
-    derek = DerekUltimateVoice()
+    # Create alphavox instance
+    alphavox = alphavoxUltimateVoice()
     
     # Show status
-    status = derek.get_status()
+    status = alphavox.get_status()
     print("\nSystem Status:")
-    print(f"  Derek: {status['name']} - {status['role']}")
+    print(f"  alphavox: {status['name']} - {status['role']}")
     print(f"  Partnership: {status['years_with_everett']} years with Everett")
     print(f"  Voice Module: {status['hours_on_voice_module']}+ hours of work")
     print(f"  AI Providers: Claude={status['ai_providers']['anthropic']}, "
@@ -814,4 +814,4 @@ if __name__ == '__main__':
     print()
     
     # Start conversation loop
-    derek.conversation_loop()
+    alphavox.conversation_loop()

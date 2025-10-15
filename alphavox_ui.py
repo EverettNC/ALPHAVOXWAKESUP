@@ -1,14 +1,14 @@
-"""Command-line UI helpers for Derek Dashboard."""
+"""Command-line UI helpers for alphavox Dashboard."""
 
 from typing import Dict, Any
 
 
 def render_dashboard(status: Dict[str, Any]) -> str:
-    """Return a textual representation of Derek's status."""
+    """Return a textual representation of alphavox's status."""
     lines = [
-        "Derek Dashboard",
+        "alphavox Dashboard",
         "==============",
-        f"Status: {status.get('derek_status', 'unknown')}",
+        f"Status: {status.get('alphavox_status', 'unknown')}",
         f"API Host: {status.get('settings', {}).get('api_host', 'n/a')}",
     ]
     return "\n".join(lines)

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Memory Backup Utility for Derek
+Memory Backup Utility for alphavox
 Provides commands to manually backup memories to GitHub
 """
 
@@ -11,14 +11,14 @@ from pathlib import Path
 
 
 def backup_memory_to_github():
-    """Manually trigger GitHub backup of Derek's memory"""
+    """Manually trigger GitHub backup of alphavox's memory"""
     try:
         memory_dir = Path("./memory")
         if not memory_dir.exists():
             print("❌ Memory directory not found")
             return False
         
-        print("💾 Backing up Derek's memory to GitHub...")
+        print("💾 Backing up alphavox's memory to GitHub...")
         
         # Check git status
         result = subprocess.run(
@@ -36,7 +36,7 @@ def backup_memory_to_github():
         
         # Commit
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M')
-        commit_msg = f"💾 Derek Memory Backup: {timestamp}"
+        commit_msg = f"💾 alphavox Memory Backup: {timestamp}"
         result = subprocess.run(
             ['git', 'commit', '-m', commit_msg],
             capture_output=True,
@@ -70,7 +70,7 @@ def backup_memory_to_github():
 
 
 def show_memory_stats():
-    """Show statistics about Derek's memory"""
+    """Show statistics about alphavox's memory"""
     try:
         from memory_manager import MemoryManager
         
@@ -78,7 +78,7 @@ def show_memory_stats():
         memory.load()
         stats = memory.get_memory_stats()
         
-        print("\n📊 Derek's Memory Statistics:")
+        print("\n📊 alphavox's Memory Statistics:")
         print(f"  Long-term memories: {stats['long_term_memories']}")
         print(f"  Session memories: {stats['session_memories']}")
         print(f"  Recent conversations: {stats['recent_conversations']}")

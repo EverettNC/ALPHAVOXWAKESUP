@@ -290,7 +290,7 @@ All notable changes to AlphaVox will be documented in this file.
 ## [7.0.0] - 2025-10-15
 ### Added
 - Multi-provider AI architecture
-- Derek voice integration
+- alphavox voice integration
 ...
 ```
 
