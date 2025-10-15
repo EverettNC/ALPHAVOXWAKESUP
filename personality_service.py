@@ -3,7 +3,7 @@
 import logging
 from typing import Dict, Any
 
-from config.settings import Settings
+from config import Settings
 
 logger = logging.getLogger(__name__)
 
