@@ -158,7 +158,6 @@ class alphavoxModuleLoader:
             "ui": [
                 "caregiver_interface",
                 "caregiver_dashboard",
-                "derek_ui",
                 "personality_service",
                 "color_scheme_generator",
             ],
@@ -198,7 +197,6 @@ class alphavoxModuleLoader:
             "integration": [
                 "face_to_face",
                 "alphavox_module_loader",
-                "derek_module_loader",
             ],
             
             # Level 21: Middleware & Web Framework
