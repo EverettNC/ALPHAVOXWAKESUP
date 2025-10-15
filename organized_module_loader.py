@@ -173,7 +173,6 @@ class AlphaVoxModuleManager:
                 "modules": [
                     "caregiver_interface",
                     "caregiver_dashboard",
-                    "derek_ui",
                     "personality_service",
                     "color_scheme_generator",
                 ],
@@ -221,7 +220,6 @@ class AlphaVoxModuleManager:
                 "modules": [
                     "face_to_face",
                     "alphavox_module_loader",
-                    "derek_module_loader",
                 ],
                 "dependencies": ["core", "config", "data", "nlp", "audio", "vision", "behavior", "interpretation", "conversation"]
             }
