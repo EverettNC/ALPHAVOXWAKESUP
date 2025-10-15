@@ -36,7 +36,7 @@ from eye_tracking_service import EyeTrackingService
 from sound_recognition_service import SoundRecognitionService
 from learning_analytics import LearningAnalytics
 from behavior_capture import get_behavior_capture
-from color_scheme_routes import color_scheme_bp
+from color_scheme_routes import color_scheme_bp, get_current_scheme as get_scheme_func
 
 app.register_blueprint(color_scheme_bp)
 
@@ -81,9 +81,13 @@ INTERACTIONS_FILE = "data/user_interactions.json"
 
 # Make functions available to templates
 # Define or import the get_current_scheme function
-def get_current_scheme():
-    # Example implementation (replace with actual logic)
-    return "default_scheme"
+def get_current_scheme(user_id=None):
+    """
+    Get the current color scheme for a user.
+    This function is made available to templates.
+    Delegates to the proper implementation in color_scheme_routes.
+    """
+    return get_scheme_func(user_id)
 
 
 app.jinja_env.globals.update(get_current_scheme=get_current_scheme)
