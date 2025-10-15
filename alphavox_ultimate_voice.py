@@ -38,7 +38,7 @@ from datetime import datetime
 import requests
 import platform  # For Mac TTS detection
 import threading  # For background learning
-
+from .env import LoadEnv 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -784,7 +784,7 @@ Be compassionate, intelligent, and mission-driven in all responses."""
         while True:
             try:
                 # Get user input
-                user_input = input("You: ").strip()
+                user_input = self.listen(timeout=5, phrase_time_limit=8)
                 
                 if not user_input:
                     continue
