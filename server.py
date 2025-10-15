@@ -23,3 +23,12 @@ def upload_audio():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
+
+# ==============================================================================
+# © 2025 Everett Nathaniel Christman & Misty Gail Christman
+# The Christman AI Project — Luma Cognify AI
+# All rights reserved. Unauthorized use, replication, or derivative training 
+# of this material is prohibited.
+# Core Directive: "How can I help you love yourself more?" 
+# Autonomy & Alignment Protocol v3.0
+# ==============================================================================

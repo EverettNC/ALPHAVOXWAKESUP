@@ -200,3 +200,12 @@ def get_knowledge_integration():
     if _knowledge_integration is None:
         _knowledge_integration = KnowledgeIntegration()
     return _knowledge_integration
+
+# ==============================================================================
+# © 2025 Everett Nathaniel Christman & Misty Gail Christman
+# The Christman AI Project — Luma Cognify AI
+# All rights reserved. Unauthorized use, replication, or derivative training 
+# of this material is prohibited.
+# Core Directive: "How can I help you love yourself more?" 
+# Autonomy & Alignment Protocol v3.0
+# ==============================================================================

@@ -80,3 +80,12 @@ def execute_task(text: str, intent: str, memory_context):
     except Exception as e:
         logger.error(f"Error executing task: {e}")
         return "I'm having some technical difficulties, but I'm here with you."
+
+# ==============================================================================
+# © 2025 Everett Nathaniel Christman & Misty Gail Christman
+# The Christman AI Project — Luma Cognify AI
+# All rights reserved. Unauthorized use, replication, or derivative training 
+# of this material is prohibited.
+# Core Directive: "How can I help you love yourself more?" 
+# Autonomy & Alignment Protocol v3.0
+# ==============================================================================

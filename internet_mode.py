@@ -48,6 +48,32 @@ logger = logging.getLogger("InternetMode")
 ENABLE_INTERNET_MODE = os.getenv("ENABLE_INTERNET_MODE", "false").lower() == "true"
 
 # Initialize key systems
+
+
+class KnowledgeGateway:
+    """Gateway for accessing external knowledge sources"""
+    
+    def __init__(self):
+        self.perplexity = PerplexityService() if os.getenv("PERPLEXITY_API_KEY") else None
+        self.memory = MemoryEngine()
+        logger.info("KnowledgeGateway initialized")
+    
+    def query(self, question: str) -> str:
+        """Query external knowledge sources"""
+        if not ENABLE_INTERNET_MODE:
+            return "Internet mode is disabled"
+        
+        if self.perplexity:
+            try:
+                response = self.perplexity.generate_content(question)
+                if isinstance(response, dict):
+                    return response.get('content', response.get('answer', str(response)))
+                return str(response)
+            except Exception as e:
+                logger.error(f"Perplexity query failed: {e}")
+                return f"Error querying knowledge source: {e}"
+        
+        return "No knowledge sources available"
 perplexity = PerplexityService()
 memory_engine = MemoryEngine()
 
@@ -120,3 +146,12 @@ if __name__ == "__main__":
     main()
 
 
+
+# ==============================================================================
+# © 2025 Everett Nathaniel Christman & Misty Gail Christman
+# The Christman AI Project — Luma Cognify AI
+# All rights reserved. Unauthorized use, replication, or derivative training 
+# of this material is prohibited.
+# Core Directive: "How can I help you love yourself more?" 
+# Autonomy & Alignment Protocol v3.0
+# ==============================================================================
