@@ -171,7 +171,7 @@ def main():
     dashboard = None
 
     try:
-        dashboard = alphavoxDashboard()
+        dashboard = AlphaVoxDashboard()
         dashboard.start()
 
         # Simple test interaction
