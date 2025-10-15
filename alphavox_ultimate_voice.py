@@ -100,6 +100,14 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
+def _check_connectivity():
+    """Check if internet connection is available."""
+    try:
+        return requests.head('https://www.google.com', timeout=3).ok
+    except Exception:
+        return False
+
+
 class alphavoxUltimateVoice:
     """
     alphavox's Ultimate Voice System
@@ -173,6 +181,10 @@ class alphavoxUltimateVoice:
     
     def _initialize_systems(self):
         """Initialize all voice and AI systems."""
+        # Check internet connectivity
+        if not _check_connectivity():
+            logger.warning("Offline mode: Web search disabled")
+        
         # Initialize AI providers
         if ANTHROPIC_AVAILABLE:
             try:
