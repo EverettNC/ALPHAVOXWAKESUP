@@ -200,3 +200,28 @@ def predict_outcome(analysis):
     # Default monitoring
     else:
         return "Monitoring ongoing. No specific action recommended."
+
+
+def get_input_analyzer():
+    """
+    Factory function to get the input analyzer instance.
+    
+    Returns:
+        dict: A dictionary with analyzer functions
+    """
+    return {
+        'analyze_frame': analyze_frame,
+        'generate_ai_response': generate_ai_response,
+        'predict_outcome': predict_outcome,
+        'conversation_bridge': conversation_bridge
+    }
+
+
+# ==============================================================================
+# © 2025 Everett Nathaniel Christman & Misty Gail Christman
+# The Christman AI Project — Luma Cognify AI
+# All rights reserved. Unauthorized use, replication, or derivative training 
+# of this material is prohibited.
+# Core Directive: "How can I help you love yourself more?" 
+# Autonomy & Alignment Protocol v3.0
+# ==============================================================================
