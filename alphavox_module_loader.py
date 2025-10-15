@@ -28,167 +28,242 @@ class alphavoxModuleLoader:
         self.failed_modules = {}
         self.module_instances = {}
         
-        # Core module categories
+        # Core module categories - ALL 136+ modules in proper loading order
         self.module_categories = {
-            "consciousness": [
-                "brain",
-                "alphavox_identity",
-                "local_reasoning_engine",
-                "reasoning_engine",
-                "cognitive_bridge"
+            # Level 1: Core Foundation (no dependencies)
+            "core_utilities": [
+                "logger",
+                "logging_config",
+                "helpers",
+                "json_guardian",
+                "clients",
             ],
+            
+            # Level 2: Database & Models
+            "database": [
+                "db",
+                "models",
+                "app_init",
+            ],
+            
+            # Level 3: Memory System
             "memory": [
                 "memory_engine",
                 "memory_manager",
                 "memory_router",
-                "memory_hook",
-                "memory"
+                "memory_service",
+                "memory",
             ],
-            "learning": [
-                "ai_learning_engine",
-                "advanced_learning",
-                "alphavox_learning_coordinator",
-                "learning_analytics",
-                "learning_utils",
+            
+            # Level 4: Knowledge & Learning Foundation
+            "knowledge": [
                 "knowledge_engine",
-                "knowledge_integration"
+                "knowledge_integration",
+                "learning_service",
+                "learning_utils",
             ],
-            "emotion": [
-                "tone_manager",
-                "emotion",
-                "behavioral_interpreter",
-                "behaviors_interpreter",
-                "behavior_capturer",
-                "adaptive_conversation",
-                "emotion_tagging"
+            
+            # Level 5: NLP & Language Processing
+            "nlp": [
+                "advanced_nlp_service",
+                "nlu_core",
+                "alphavox_input_nlu",
+                "nlp_module",
+                "nlp_integration",
+                "intent_engine",
+                "language_service",
             ],
-            "temporal": [
-                "engine_temporal",
-                "alphavox_temporal",
-                "audio_pattern_service"
-            ],
-            "vision": [
-                "vision_engine",
-                "facial_gesture_service",
-                "real_eye_tracking",
-                "eye_tracking_api"
-            ],
-            "speech": [
+            
+            # Level 6: Audio & Speech (hardware-dependent)
+            "audio": [
+                "audio_processor",
+                "audio_pattern_service",
                 "advanced_tts_service",
                 "alphavox_speech_module",
                 "enhanced_speech_recognition",
                 "real_speech_recognition",
-                "audio_processor",
-                "voice_analysis_service"
             ],
+            
+            # Level 7: Vision & Eye Tracking (hardware-dependent)
+            "vision": [
+                "eye_tracking_service",
+                "eye_tracking_api",
+                "real_eye_tracking",
+                "facial_gesture_service",
+                "vision_engine",
+            ],
+            
+            # Level 8: Gesture & Nonverbal
             "gesture": [
                 "gesture_manager",
                 "gesture_dictionary",
-                "nonverbal_expertiser"
+                "nonverbal_engine",
+                "nonverbal_expertiser",
             ],
+            
+            # Level 9: Emotion & Behavior
+            "emotion": [
+                "emotion",
+                "behavior_capture",
+                "behavioral_interpreter",
+                "tone_manager",
+            ],
+            
+            # Level 10: Input Analysis & Interpretation
+            "interpretation": [
+                "input_analyzer",
+                "interpreter",
+                "cognitive_bridge",
+            ],
+            
+            # Level 11: Conversation Engine
             "conversation": [
                 "conversation_engine",
                 "conversation_bridge",
-                "conversation_loop"
+                "conversation_integration",
+                "conversation_loop",
+                "complete_conversation_handler",
+                "adaptive_conversation",
             ],
-            "language": [
-                "language_service",
-                "nlp_module",
-                "nlp_integration",
-                "nlu_core"
+            
+            # Level 12: Learning & AI
+            "learning": [
+                "learning_journey",
+                "learning_analytics",
+                "ai_learning_engine",
+                "advanced_learning",
+                "neural_learning_core",
             ],
-            "internet": [
+            
+            # Level 13: Research & Internet
+            "research": [
+                "research_module",
+                "literature_crawler",
+                "learn_arxiv",
+                "learn_pubmed",
+                "perplexity_service",
                 "internet_mode",
                 "Python_Internet_access",
-                "perplexity_service"
             ],
-            "reasoning": [
-                "intent_engine",
-                "reflective_planner",
-                "input_analyzer"
-            ],
-            "autonomous": [
-                "alphavox_autonomous_system",
-                "self_modifying_code",
-                "executor",
-                "interpreter"
-            ],
-            "web": [
-                "app",
-                "api",
-                "endpoints",
-                "alphavox_ui",
-                "middleware"
-            ],
-            "utilities": [
-                "helpers",
-                "logger",
-                "json_guardian",
-                "boot_guardian",
-                "db"
-            ],
-            "scheduling": [
+            
+            # Level 14: Temporal & Scheduling
+            "temporal": [
+                "alphavox_temporal",
+                "engine_temporal",
                 "action_scheduler",
-                "dispatcher",
-                "loop"
+                "executor",
             ],
-            "integrations": [
-                "github_integration",
-                "moldbit"
+            
+            # Level 15: User Interface Components
+            "ui": [
+                "caregiver_interface",
+                "caregiver_dashboard",
+                "derek_ui",
+                "personality_service",
+                "color_scheme_generator",
             ],
+            
+            # Level 16: Routes & Endpoints
+            "routes": [
+                "learning_routes",
+                "memory_router",
+                "color_scheme_routes",
+                "app_routes",
+                "endpoints",
+                "route",
+                "router",
+                "routes",
+            ],
+            
+            # Level 17: Analytics & Monitoring
             "analytics": [
-                "analytics_engine"
+                "analytics_engine",
+                "performance_optimizer",
+                "learning_analytics",
             ],
-            "boot": [
-                "alphavox_boot",
-                "alphavox_autonomy_boot",
-                "main"
+            
+            # Level 18: Security & System
+            "security": [
+                "security_module",
+                "alpha_security_bridge",
             ],
-            "alphavox": [
-                "alpha_interface"
+            
+            # Level 19: Self-Modification
+            "self_modification": [
+                "self_modifying_code",
+                "self_repair",
             ],
-            "interaction": [
-                "face_to_face"
-            ]
+            
+            # Level 20: Integration & Advanced Features
+            "integration": [
+                "face_to_face",
+                "alphavox_module_loader",
+                "derek_module_loader",
+            ],
+            
+            # Level 21: Middleware & Web Framework
+            "web_framework": [
+                "middleware",
+                "server",
+            ],
         }
     
     def load_all_modules(self, skip_hardware_dependent=True):
         """Load all alphavox modules with graceful fallbacks"""
-        logger.info("🧠 Loading alphavox's complete consciousness...")
-        logger.info("=" * 60)
+        logger.info("🧠 Loading AlphaVox's complete system (136+ modules)...")
+        logger.info("=" * 80)
         
         total_modules = sum(len(mods) for mods in self.module_categories.values())
         loaded_count = 0
         skipped_count = 0
         
-        # Modules that require hardware (camera/microphone) - can't run in cloud
+        # Modules that require hardware (camera/microphone) - optional
         hardware_dependent = [
+            # Vision modules (need camera, OpenCV, mediapipe)
             "vision_engine", "facial_gesture_service", "real_eye_tracking",
-            "behavior_capturer", "face_to_face",  # Require: OpenGL, camera, display
+            "eye_tracking_service", "eye_tracking_api",
+            # Audio modules (need microphone, PortAudio, sounddevice)
             "alphavox_temporal", "audio_pattern_service", 
             "alphavox_speech_module", "real_speech_recognition", 
-            "audio_processor"  # Require: PortAudio, microphone
+            "audio_processor",
+            # Face-to-face (needs webcam, display, OpenGL)
+            "face_to_face",
         ]
         
-        # Load modules by category
+        # Load modules by category IN ORDER (respects dependencies)
         for category, module_list in self.module_categories.items():
-            logger.info(f"\n📦 Loading {category}...")
+            logger.info(f"\n📦 {category}...")
+            category_loaded = 0
+            
             for module_name in module_list:
                 # Skip hardware-dependent modules if requested
                 if skip_hardware_dependent and module_name in hardware_dependent:
-                    logger.info(f"  ⏭️  {module_name} (hardware-dependent)")
+                    logger.info(f"  ⏭️  {module_name} (hardware-dependent, skipped)")
                     skipped_count += 1
                     continue
                 
                 # Attempt to load module
                 if self._load_module(module_name):
                     loaded_count += 1
+                    category_loaded += 1
+            
+            logger.info(f"   → {category_loaded}/{len(module_list)} loaded")
         
-        logger.info(f"\n📊 Module Loading Summary:")
-        logger.info(f"  Total: {total_modules}")
-        logger.info(f"  Loaded: {loaded_count}")
-        logger.info(f"  Skipped: {skipped_count}")
-        logger.info(f"  Failed: {len(self.failed_modules)}")
+        logger.info(f"\n" + "=" * 80)
+        logger.info(f"📊 ALPHAVOX MODULE LOADING SUMMARY")
+        logger.info(f"=" * 80)
+        logger.info(f"  Total modules: {total_modules}")
+        logger.info(f"  ✅ Loaded: {loaded_count} ({loaded_count/total_modules*100:.1f}%)")
+        logger.info(f"  ⏭️  Skipped (hardware): {skipped_count}")
+        logger.info(f"  ❌ Failed (missing deps): {len(self.failed_modules)}")
+        logger.info(f"=" * 80)
+        
+        if self.failed_modules:
+            logger.info(f"\n⚠️  Optional modules not loaded (need pip install):")
+            for mod, err in list(self.failed_modules.items())[:10]:
+                logger.info(f"  - {mod}: {str(err)[:60]}")
+            if len(self.failed_modules) > 10:
+                logger.info(f"  ... and {len(self.failed_modules) - 10} more")
         
         return self.loaded_modules
     
