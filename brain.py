@@ -92,12 +92,12 @@ root_dir = os.path.dirname(os.path.abspath(__file__))
 if root_dir not in sys.path:
     sys.path.append(root_dir)
 
-try:
-    from ai_learning_engine import learn_from_text
+#try:
+ #   from ai_learning_engine import learn_from_text
 
-    logger.info("✅ ai_learning_engine imported successfully")
-except Exception as e:
-    logger.warning(f"⚠️ Failed to import ai_learning_engine: {e}")
+  #  logger.info("✅ ai_learning_engine imported successfully")
+#except Exception as e:
+ #   logger.warning(f"⚠️ Failed to import ai_learning_engine: {e}")
 
     def learn_from_text(text):
         logger.info("Learning module unavailable, skipping text ingestion")
