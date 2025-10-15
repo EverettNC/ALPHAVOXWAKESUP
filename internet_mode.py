@@ -47,11 +47,61 @@ logger = logging.getLogger("InternetMode")
 # -------------------------------------------------------------
 ENABLE_INTERNET_MODE = os.getenv("ENABLE_INTERNET_MODE", "false").lower() == "true"
 
-# Initialize key systems
+# Initialize key systems (global for legacy, but prefer instance)
+perplexity = PerplexityService() if os.getenv("PERPLEXITY_API_KEY") else None
+memory_engine = MemoryEngine()
+
+
+class InternetMode:
+    """Main class for InternetMode - Secure web search integration for alphavox."""
+    
+    def __init__(self):
+        """Initialize InternetMode with Perplexity and memory engine."""
+        self.perplexity = PerplexityService() if os.getenv("PERPLEXITY_API_KEY") else None
+        self.memory = MemoryEngine()
+        self.enabled = ENABLE_INTERNET_MODE
+        logger.info(f"InternetMode initialized - Enabled: {self.enabled}")
+    
+    def search(self, query: str) -> str:
+        """Perform internet search via Perplexity, log, and save to memory."""
+        if not self.enabled:
+            logger.warning("Internet Mode is disabled — returning local fallback.")
+            return "Internet Mode is currently disabled."
+        
+        if not self.perplexity:
+            return "No knowledge sources available (check PERPLEXITY_API_KEY)."
+        
+        try:
+            logger.info(f"🌐 Querying Perplexity for: {query}")
+            result = self.perplexity.generate_content(query)
+            summary = result.get("content", "") if isinstance(result, dict) else str(result)
+            self._log_search(query, summary)
+            self.memory.save({
+                "query": query,
+                "summary": summary,
+                "status": "success",
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+            })
+            return summary
+        except Exception as e:
+            logger.error(f"❌ Internet query failed: {e}")
+            return f"Error querying knowledge source: {e}"
+    
+    def _log_search(self, query: str, summary: str):
+        """Log internet search interactions to JSONL."""
+        log_entry = {
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "query": query,
+            "summary": summary,
+        }
+        log_path = "logs/internet_activity/internet_log.jsonl"
+        with open(log_path, "a") as f:
+            f.write(json.dumps(log_entry) + "\n")
+        logger.info(f"✅ Logged: {query}")
 
 
 class KnowledgeGateway:
-    """Gateway for accessing external knowledge sources"""
+    """Gateway for accessing external knowledge sources (legacy/alt interface)."""
     
     def __init__(self):
         self.perplexity = PerplexityService() if os.getenv("PERPLEXITY_API_KEY") else None
@@ -59,7 +109,7 @@ class KnowledgeGateway:
         logger.info("KnowledgeGateway initialized")
     
     def query(self, question: str) -> str:
-        """Query external knowledge sources"""
+        """Query external knowledge sources (uses InternetMode under hood)."""
         if not ENABLE_INTERNET_MODE:
             return "Internet mode is disabled"
         
@@ -74,45 +124,33 @@ class KnowledgeGateway:
                 return f"Error querying knowledge source: {e}"
         
         return "No knowledge sources available"
-perplexity = PerplexityService()
-memory_engine = MemoryEngine()
+
 
 # -------------------------------------------------------------
-# Query the Internet
+# Query the Internet (legacy function - redirect to class)
 # -------------------------------------------------------------
 def query_internet(query: str) -> Dict[str, Any]:
+    """Legacy function - Use InternetMode.search() for new code."""
     if not ENABLE_INTERNET_MODE:
         logger.warning("Internet Mode is disabled — returning local fallback.")
         return {"response": "Internet Mode is currently disabled."}
-    try:
-        logger.info(f"🌐 Querying Perplexity for: {query}")
-        result = perplexity.generate_content(query)
-        summary = result.get("content", "")
-        _log_search(query, summary)
-        memory_engine.save({
-            "query": query,
-            "summary": summary,
-            "status": "success",
-            "timestamp": datetime.now(timezone.utc).isoformat(),
-        })
-        return {
-            "query": query,
-            "summary": summary,
-            "status": "success",
-            "timestamp": datetime.now(timezone.utc).isoformat(),
-        }
-    except Exception as e:
-        logger.error(f"❌ Internet query failed: {e}")
-        return {"error": str(e), "status": "failed"}
-
-
+    
+    # Instantiate for legacy use
+    mode = InternetMode()
+    summary = mode.search(query)
+    return {
+        "query": query,
+        "summary": summary,
+        "status": "success",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
 
 
 # -------------------------------------------------------------
-# Logging Helper
+# Logging Helper (moved to class, but keep for legacy)
 # -------------------------------------------------------------
 def _log_search(query: str, summary: str):
-    """Log internet search interactions."""
+    """Log internet search interactions (legacy)."""
     log_entry = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "query": query,
@@ -123,6 +161,7 @@ def _log_search(query: str, summary: str):
         f.write(json.dumps(log_entry) + "\n")
     logger.info(f"✅ Logged: {query}")
 
+
 # -------------------------------------------------------------
 # Interactive Test
 # -------------------------------------------------------------
@@ -132,19 +171,22 @@ def main():
         print("💡 To enable, run this first in your terminal:")
         print("   export ENABLE_INTERNET_MODE=True\n")
 
+    # Use class for test
+    mode = InternetMode()
+    
     while True:
         query = input("🔎 Ask alphavox something (or 'exit'): ").strip()
         if query.lower() in ("exit", "quit"):
             print("👋 Exiting Internet Mode.")
             break
 
-        result = query_internet(query)
-        print(f"\n🧠 alphavox (Internet): {result.get('summary', 'No response')}\n")
+        result = mode.search(query)
+        print(f"\n🧠 alphavox (Internet): {result}\n")
+
 
 # -------------------------------------------------------------
 if __name__ == "__main__":
     main()
-
 
 
 # ==============================================================================
