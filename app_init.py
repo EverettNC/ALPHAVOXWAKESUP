@@ -5,6 +5,14 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
 from werkzeug.middleware.proxy_fix import ProxyFix
 
+# Load environment variables from .env file
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+    logging.info("Loaded environment variables from .env file")
+except ImportError:
+    logging.warning("python-dotenv not installed - using system environment variables only")
+
 # Setup logging
 logging.basicConfig(level=logging.DEBUG)
 
