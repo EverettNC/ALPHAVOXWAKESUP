@@ -183,8 +183,14 @@ class alphavoxUltimateVoice:
             try:
                 api_key = os.getenv('OPENAI_API_KEY')
                 if api_key:
+                    # OpenAI client v1.0+ doesn't use proxies parameter
                     self.openai_client = openai.OpenAI(api_key=api_key)
                     logger.info("OpenAI GPT-4 initialized")
+            except TypeError as e:
+                if 'proxies' in str(e):
+                    logger.warning("OpenAI library version mismatch - please upgrade: pip install --upgrade openai>=1.0.0")
+                else:
+                    logger.warning(f"Could not initialize OpenAI: {e}")
             except Exception as e:
                 logger.warning(f"Could not initialize OpenAI: {e}")
         
