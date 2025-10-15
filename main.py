@@ -35,9 +35,9 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-class alphavoxDashboard:
+class AlphaVoxDashboard:
     """
-    Main alphavox Dashboard Application
+    Main AlphaVox Dashboard Application
 
     This is alphavox C (AI COO) - the collaborative intelligence
     system for The Christman AI Project.
@@ -54,7 +54,7 @@ class alphavoxDashboard:
         self.conversation_engine: Optional[ConversationEngine] = None
         self.perplexity_service: Optional[PerplexityService] = None
         self.alphavox: Optional[alphavox] = None
-        self.alphavox = alphavox(file_path="./memory/memory_store.json")
+        self.alphavox = alphavox.AlphaVox(file_path="./memory/memory_store.json")
         logger.info("alphavox instance initialized and linked to dashboard.")
 
         # Settings
