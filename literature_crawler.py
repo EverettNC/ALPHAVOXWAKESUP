@@ -19,7 +19,26 @@ import pandas as pd
 from typing import List, Dict, Any, Optional, Tuple
 
 # Import knowledge engine components
-from knowledge_engine import FactManager, NONVERBAL_TOPICS
+from knowledge_engine import FactManager
+
+# Define topics if not available from knowledge_engine
+NONVERBAL_TOPICS = [
+    "nonverbal communication",
+    "eye contact interpretation",
+    "facial expression analysis",
+    "body language cues",
+    "paralinguistic features",
+    "gesture recognition systems",
+    "communication disorders",
+    "augmentative and alternative communication",
+    "therapeutic communication techniques",
+    "assistive technology tools",
+    "speech therapy approaches",
+    "neurodivergent communication styles",
+    "autism spectrum communication",
+    "developmental communication milestones",
+    "multimodal interaction design"
+]
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)

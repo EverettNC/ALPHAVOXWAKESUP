@@ -2,11 +2,10 @@
 
 import json
 import logging
+import os
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
-
-from config.settings import Settings
 
 logger = logging.getLogger(__name__)
 
@@ -25,8 +24,13 @@ class MemoryService:
     """Persists and retrieves conversational memory."""
 
     def __init__(self, memory_file: Optional[Path] = None):
-        self.settings = Settings()
-        self.memory_file = memory_file or (self.settings.DATA_DIR / "memory_store.json")
+        # Default to data/memory_store.json if no file specified
+        if memory_file is None:
+            data_dir = Path(os.getenv("DATA_DIR", "./data"))
+            data_dir.mkdir(parents=True, exist_ok=True)
+            memory_file = data_dir / "memory_store.json"
+        
+        self.memory_file = memory_file
         self._memory: List[Dict[str, Any]] = []
 
     def load_context(self) -> None:

@@ -1,8 +1,19 @@
 from flask import Flask, request, jsonify
-from speech_recognition_engine import get_speech_recognition_engine
 
 app = Flask(__name__)
-engine = get_speech_recognition_engine(simulate=False)
+
+
+class MockSpeechEngine:
+    """Mock speech recognition engine for when real engine isn't available"""
+    def recognize_from_bytes(self, audio_bytes):
+        return "Speech recognition not available", 0.0, {"mock": True}
+
+
+try:
+    from speech_recognition_engine import get_speech_recognition_engine
+    engine = get_speech_recognition_engine(simulate=False)
+except ImportError:
+    engine = MockSpeechEngine()
 
 
 @app.route("/upload", methods=["POST"])

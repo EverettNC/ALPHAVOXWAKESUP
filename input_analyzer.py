@@ -5,7 +5,6 @@ import os
 from flask import jsonify, request, session
 
 from conversation_bridge import ConversationBridge
-from interpreter import analyze_frame
 
 # Configure logger
 logger = logging.getLogger(__name__)
@@ -13,6 +12,22 @@ logger = logging.getLogger(__name__)
 # Global conversation bridge instance
 # Default to "default" persona, but can be changed through settings
 conversation_bridge = ConversationBridge(persona="default")
+
+
+def analyze_frame(frame_data):
+    """
+    Placeholder for frame analysis (video/image processing).
+    This is an optional feature that requires OpenCV/mediapipe.
+    Returns basic analysis structure.
+    """
+    return {
+        "analysis": {
+            "type": "frame",
+            "data": frame_data,
+            "processed": False,
+            "note": "Frame analysis requires video processing modules"
+        }
+    }
 
 
 def register_eye_tracking_api(app, csrf):
