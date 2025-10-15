@@ -34,7 +34,15 @@ import json
 import logging
 from typing import Optional, Dict, Any, List
 from datetime import datetime
-
+import requests
+def _check_connectivity(self):
+    try: return requests.head('https://www.google.com', timeout=3).ok
+    except: return False
+# In _initialize_systems():
+if not self._check_connectivity():
+    logger.warning("Offline mode: Web search disabled")
+else:
+    # Existing try/excepts
 # AI Provider Imports
 try:
     import anthropic
