@@ -282,9 +282,14 @@ class alphavox:
 
 
 # -------------------------------------------------------------
-# Global alphavox instance (fixed)
+# Global alphavox instance
 # -------------------------------------------------------------
-alphavox = alphavox(file_path="./memory/memory_store.json")
+# Create the global instance - this is what other modules import
+alphavox_instance = alphavox(file_path="./memory/memory_store.json")
+
+# For backward compatibility, also export as 'alphavox'
+# But we use alphavox_instance internally to avoid confusion
+alphavox = alphavox_instance
 
 # ==============================================================================
 # © 2025 Everett Nathaniel Christman & Misty Gail Christman
