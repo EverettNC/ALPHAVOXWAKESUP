@@ -38,6 +38,15 @@ from learning_analytics import LearningAnalytics
 from behavior_capture import get_behavior_capture
 from color_scheme_routes import color_scheme_bp, get_current_scheme as get_scheme_func
 
+# Import alphavox module loader to ensure all modules are loaded
+try:
+    from alphavox_module_loader import load_alphavox_consciousness, get_alphavox_loader
+    alphavox_LOADER_AVAILABLE = True
+    logging.info("alphavox module loader available")
+except ImportError as e:
+    alphavox_LOADER_AVAILABLE = False
+    logging.warning(f"alphavox module loader not available: {e}")
+
 app.register_blueprint(color_scheme_bp)
 
 # Advanced AI modules (import with error handling)
@@ -97,6 +106,16 @@ app.jinja_env.globals.update(get_current_scheme=get_current_scheme)
 def init_services():
     global nonverbal_engine, eye_tracking_service, sound_recognition_service, interpreter
     global knowledge_integration, speech_integration, caregiver_dashboard, temporal_engine, behavior_capture
+
+    # Load all alphavox modules if loader is available
+    if alphavox_LOADER_AVAILABLE:
+        try:
+            logging.info("🧠 Initializing alphavox's complete consciousness...")
+            alphavox_loader = load_alphavox_consciousness(skip_hardware=True)
+            stats = alphavox_loader.get_stats()
+            logging.info(f"✅ alphavox modules loaded: {stats['loaded']}/{stats['total_modules']} ({stats['success_rate']:.1f}%)")
+        except Exception as e:
+            logging.warning(f"⚠️ alphavox module loader failed: {e}")
 
     nonverbal_engine = NonverbalEngine()
 
