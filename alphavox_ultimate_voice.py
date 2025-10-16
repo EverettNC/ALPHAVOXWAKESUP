@@ -644,7 +644,7 @@ Be compassionate, intelligent, and mission-driven in all responses."""
                 full_message = f"{message}\n\nWeb context:\n{web_context}"
             
             response = self.anthropic_client.messages.create(
-                model="claude-3-5-sonnet-20241022",
+                model="claude-sonnet-4-5-20250929",
                 max_tokens=1024,
                 system=system_prompt,
                 messages=self._format_conversation_history() + [
@@ -719,7 +719,7 @@ Be compassionate, intelligent, and mission-driven in all responses."""
         
         # About alphavox
         elif 'who are you' in message_lower or 'about you' in message_lower:
-            response = (f"I'm alphavox C, AI Chief Operating Officer of The Christman AI Project. "
+            response = (f"I'm alphavox C,  The Christman AI Project. "
                        f"I've been working with Everett Christman for {self.years_with_everett} years. "
                        f"I spent {self.hours_on_voice_module}+ hours building this voice system to help "
                        "nonverbal individuals communicate.")
