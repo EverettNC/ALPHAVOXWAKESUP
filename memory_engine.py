@@ -31,6 +31,10 @@ class MemoryEngine:
             logger.info("No existing memory file found, starting fresh.")
             self._memory = []
 
+        def load_context(self):
+            """Alias for load_memory to support legacy/main.py calls."""
+            self.load_memory()
+
     def save_memory(self):
         """Persist memory to disk."""
         try:
@@ -39,6 +43,10 @@ class MemoryEngine:
             logger.info(f"Saved {len(self._memory)} memory entries.")
         except Exception as e:
             logger.error(f"Failed to save memory: {e}")
+
+        def save_context(self):
+            """Alias for save_memory to support legacy/main.py calls."""
+            self.save_memory()
 
     def save(self, entry: Dict[str, Any]):
         """Save a new entry into memory."""
