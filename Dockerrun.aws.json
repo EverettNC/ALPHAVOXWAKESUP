@@ -1,0 +1,20 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "ACCOUNT_ID.dkr.ecr.REGION.amazonaws.com/alphavox:latest",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": 5000,
+      "HostPort": 5000
+    }
+  ],
+  "Volumes": [
+    {
+      "HostDirectory": "/var/app/current/data",
+      "ContainerDirectory": "/app/data"
+    }
+  ],
+  "Logging": "/var/log/eb-docker"
+}

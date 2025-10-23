@@ -1,0 +1,137 @@
+AlphaVox - Conversation Bridge Test Script
+----------------------------------------
+This script tests the integration of the conversation bridge with eye tracking analysis,
+verifying that multi-modal inputs are properly mapped to responses.
+"""
+
+import logging
+import json
+from alphavox.conversation_bridge import ConversationBridge
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, 
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+def test_eye_tracking_integration():
+    """Test the conversation bridge with simulated eye tracking data"""
+    bridge = ConversationBridge()
+    
+    # Simulated eye tracking analysis results
+    test_analyses = [
+        {
+            # Happy with high confidence
+            "emotion": "happy",
+            "emotion_confidence": 0.85,
+            "gaze_direction": "center",
+            "blink_detected": True,
+            "perspiration": False
+        },
+        {
+            # Sad with perspiration
+            "emotion": "sad",
+            "emotion_confidence": 0.65,
+            "gaze_direction": "center",
+            "blink_detected": True,
+            "perspiration": True
+        },
+        {
+            # Fear looking right
+            "emotion": "fear",
+            "emotion_confidence": 0.75,
+            "gaze_direction": "right", 
+            "blink_detected": True,
+            "perspiration": False
+        },
+        {
+            # Neutral with academic domain
+            "emotion": "neutral",
+            "emotion_confidence": 0.90,
+            "gaze_direction": "center",
+            "blink_detected": True,
+            "domain": "science"
+        }
+    ]
+    
+    logger.info("Testing conversation bridge with eye tracking data:")
+    
+    for i, analysis in enumerate(test_analyses):
+        response = bridge.process_analysis(analysis)
+        
+        logger.info(f"Test {i+1}:")
+        logger.info(f"Analysis: {json.dumps(analysis)}")
+        logger.info(f"Response: {response}")
+        logger.info("-" * 80)
+
+def test_persona_switching():
+    """Test switching between different personas"""
+    bridge = ConversationBridge()
+    
+    # Standard analysis to test with different personas
+    analysis = {
+        "emotion": "neutral",
+        "gaze_direction": "center",
+        "blink_detected": True
+    }
+    
+    logger.info("Testing persona switching:")
+    
+    # Test with default persona
+    response_default = bridge.process_analysis(analysis)
+    logger.info(f"Default persona response: {response_default}")
+    
+    # Switch to academic persona
+    bridge.set_persona("academic")
+    response_academic = bridge.process_analysis(analysis)
+    logger.info(f"Academic persona response: {response_academic}")
+    
+    # Switch to supportive persona
+    bridge.set_persona("supportive")
+    response_supportive = bridge.process_analysis(analysis)
+    logger.info(f"Supportive persona response: {response_supportive}")
+    
+    # Switch to child-friendly persona
+    bridge.set_persona("child-friendly")
+    response_child = bridge.process_analysis(analysis)
+    logger.info(f"Child-friendly persona response: {response_child}")
+    
+    logger.info("-" * 80)
+
+def test_academic_responses():
+    """Test academic response generation"""
+    bridge = ConversationBridge(persona="academic")
+    
+    # Test topics
+    topics = [
+        "quantum computing",
+        "ethical implications of artificial intelligence",
+        "climate change mitigation strategies"
+    ]
+    
+    # Test depths
+    depths = ["basic", "intermediate", "advanced"]
+    
+    logger.info("Testing academic response generation:")
+    
+    for topic in topics:
+        logger.info(f"Topic: {topic}")
+        
+        for depth in depths:
+            response = bridge.generate_academic_response(topic, depth)
+            logger.info(f"  {depth.capitalize()} response: {response}")
+        
+        logger.info("-" * 80)
+
+def main():
+    """Run all conversation bridge tests"""
+    logger.info("Starting Conversation Bridge tests")
+    
+    # Run the tests
+    test_eye_tracking_integration()
+    test_persona_switching()
+    test_academic_responses()
+    
+    logger.info("All Conversation Bridge tests completed")
+
+if __name__ == "__main__":
+    main()%  

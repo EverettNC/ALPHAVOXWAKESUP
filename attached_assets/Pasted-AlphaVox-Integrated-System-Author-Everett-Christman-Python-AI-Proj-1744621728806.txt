@@ -1,0 +1,388 @@
+AlphaVox - Integrated System
+--------------------------
+Author: Everett Christman & Python (AI)
+Project: The Christman AI Project - AlphaVox
+Mission: Legends are our only option
+
+This module integrates all AlphaVox subsystems into a unified platform:
+1. Original AlphaVox (app.py)
+2. Integrated AlphaVox Core (alphavox_core.py)
+3. Enhanced Temporal AlphaVox (alphavox_temporal.py)
+4. Behavioral Interpreter (behavioral_interpreter.py)
+5. Speech Therapy Module (speech_therapy.py)
+6. Play Activities Module (play_activities.py)
+
+This creates a comprehensive communication support platform combining AI-driven
+nonverbal cue recognition with evidence-based speech therapy techniques.
+"""
+
+import os
+import logging
+import json
+from typing import Dict, Any, Optional
+import socket
+import time
+
+from dotenv import load_dotenv
+from flask import Flask, render_template, jsonify, request, session, redirect, url_for, send_file
+from werkzeug.utils import secure_filename
+import gtts
+from io import BytesIO
+
+# Load environment variables from .env files
+load_dotenv()
+
+# Create data directories
+os.makedirs('data', exist_ok=True)
+os.makedirs('profiles', exist_ok=True)
+os.makedirs('lstm_models', exist_ok=True)
+os.makedirs('temp_audio', exist_ok=True)
+
+# Import subsystems
+from nonverbal_engine import NonverbalEngine
+from conversation_engine import ConversationEngine
+from behavioral_interpreter import BehavioralInterpreter
+import speech_therapy
+import play_activities
+
+# Import TensorFlow-dependent modules conditionally
+try:
+    from temporal_nonverbal_engine import TemporalNonverbalEngine
+    TEMPORAL_ENGINE_AVAILABLE = True
+except ImportError as e:
+    print(f"Temporal engine not available: {e}")
+    TEMPORAL_ENGINE_AVAILABLE = False
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, 
+                   format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+# Create Flask application
+app = Flask(__name__, static_folder='static', template_folder='templates')
+app.secret_key = os.environ.get('SECRET_KEY', 'alphavox-integrated-secret-key')
+
+# Initialize engines
+if TEMPORAL_ENGINE_AVAILABLE:
+    temporal_engine = TemporalNonverbalEngine()
+else:
+    temporal_engine = None
+nonverbal_engine = NonverbalEngine()
+conversation_engine = ConversationEngine()
+behavioral_interpreter = BehavioralInterpreter()
+
+# Session data
+session_data = {}
+
+@app.route('/')
+def index():
+    """Main landing page"""
+    return render_template('index.html')
+
+@app.route('/behavioral')
+def behavioral():
+    """Behavioral interpreter interface"""
+    return render_template('behavioral.html')
+
+@app.route('/temporal')
+def temporal():
+    """Redirect to temporal AlphaVox system"""
+    return render_template('temporal.html')
+
+@app.route('/core')
+def core():
+    """Redirect to core AlphaVox system"""
+    return render_template('core.html')
+
+@app.route('/original')
+def original():
+    """Redirect to original AlphaVox system or display error page if not available"""
+    try:
+        # Check if port 5000 (original system) is actually listening
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(0.5)
+        result = s.connect_ex((request.host.split(':')[0], 5000))
+        s.close()
+        
+        if result == 0:  # Port is open
+            # Redirect to the original system
+            return redirect(f"http://{request.host.split(':')[0]}:5000/")
+        else:  # Port is closed
+            # Original system not running, show error page
+            logger.error("Original AlphaVox system (port 5000) is not running")
+            return render_template('error.html', 
+                                  error="Original AlphaVox system is not currently running",
+                                  suggestion="This instance is running the integrated version. Please start the original system separately if needed.")
+    except Exception as e:
+        logger.error(f"Error checking if original AlphaVox is running: {str(e)}")
+        return render_template('error.html',
+                             error="Unable to determine if original AlphaVox system is running",
+                             suggestion="There was an error checking the status of the original system. Please try again later.")
+
+@app.route('/therapy')
+def therapy():
+    """Main speech therapy interface"""
+    return redirect(url_for('speech_therapy.index'))
+
+@app.route('/play')
+def play():
+    """Play activities interface"""
+    return redirect(url_for('play_activities.index'))
+
+@app.route('/api/interpret_signal', methods=['POST'])
+def interpret_signal():
+    """API endpoint to interpret a behavioral signal"""
+    data = request.json
+    signal_type = data.get('type')
+    expression = data.get('expression')
+    intensity = data.get('intensity', 0.5)
+    context = data.get('context', {})
+    
+    # Create signal data
+    signal_data = {
+        'type': signal_type,
+        'expression': expression,
+        'intensity': intensity,
+        'timestamp': time.time(),
+        'context': context
+    }
+    
+    # Add to behavioral interpreter
+    behavioral_interpreter.add_signal(signal_data)
+    
+    # Return current interpretation
+    return jsonify(behavioral_interpreter.get_comprehensive_interpretation())
+
+@app.route('/api/get_insights', methods=['POST'])
+def get_insights():
+    """API endpoint to get behavioral insights"""
+    data = request.json
+    user_id = data.get('user_id', session.get('user_id', 'default'))
+    time_period = data.get('time_period', 'all')  # 'all', 'today', 'week', 'month'
+    
+    # This would normally retrieve insights from a database
+    # For demo purposes, return the current interpretation
+    interpretation = behavioral_interpreter.get_comprehensive_interpretation()
+    
+    return jsonify({
+        'user_id': user_id,
+        'time_period': time_period,
+        'interpretation': interpretation,
+        'patterns': {
+            'common_expressions': ['Hand Wave', 'Long Gaze', 'Thumbs Up'],
+            'preferred_signals': ['Hand Wave', 'Gaze Right'],
+            'challenging_signals': ['Complex Gestures']
+        },
+        'recommendations': [
+            'Consider practicing more complex gestures',
+            'Your eye tracking signals are very consistent',
+            'Try incorporating more varied expressions'
+        ]
+    })
+
+@app.route('/api/speak', methods=['POST'])
+def speak():
+    """
+    Convert text to speech and return audio file
+    
+    Expected input:
+    {
+        "text": "Text to speak"
+    }
+    """
+    data = request.json
+    text = data.get('text', '')
+    
+    if not text:
+        return jsonify({'error': 'No text provided'}), 400
+    
+    try:
+        # Create a temporary file-like object to store the audio
+        audio_fp = BytesIO()
+        
+        # Use gTTS to convert text to speech
+        tts = gtts.gTTS(text=text, lang='en', slow=False)
+        tts.write_to_fp(audio_fp)
+        audio_fp.seek(0)
+        
+        # Generate a timestamp for unique filename
+        timestamp = int(time.time())
+        filename = f"speech_{timestamp}.mp3"
+        
+        # Save the audio file (optional, for debugging)
+        with open(os.path.join('temp_audio', filename), 'wb') as f:
+            f.write(audio_fp.read())
+        audio_fp.seek(0)
+        
+        # Return the audio file
+        return send_file(
+            audio_fp,
+            mimetype='audio/mpeg',
+            as_attachment=True,
+            download_name=filename
+        )
+    
+    except Exception as e:
+        logger.error(f"Error in text-to-speech: {str(e)}")
+        return jsonify({'error': f'Text-to-speech error: {str(e)}'}), 500
+
+@app.route('/api/get_personas', methods=['GET'])
+def get_personas():
+    """Get available conversation personas"""
+    return jsonify({
+        'personas': list(conversation_engine.personas.keys()),
+        'current_persona': conversation_engine.persona
+    })
+
+@app.route('/api/set_persona', methods=['POST'])
+def set_persona():
+    """Set the conversation persona"""
+    data = request.json
+    persona = data.get('persona')
+    
+    if persona in conversation_engine.personas:
+        conversation_engine.persona = persona
+        conversation_engine.current_persona = conversation_engine.personas[persona]
+        return jsonify({'success': True, 'persona': persona})
+    else:
+        return jsonify({'error': 'Invalid persona'}), 400
+
+@app.route('/api/clear_session', methods=['POST'])
+def clear_session():
+    """Clear the current session history"""
+    session_id = request.json.get('session_id', session.get('session_id'))
+    
+    # Clear behavioral interpreter history
+    behavioral_interpreter.clear_signal_history()
+    
+    # Clear temporal engine buffers if available
+    if temporal_engine is not None and hasattr(temporal_engine, 'clear_buffers'):
+        temporal_engine.clear_buffers()
+    
+    return jsonify({'success': True})
+
+@app.route('/api/analyze_nonverbal', methods=['POST'])
+def analyze_nonverbal():
+    """Analyze nonverbal input using the nonverbal engine"""
+    data = request.json
+    inputs = {
+        'gesture': data.get('gesture'),
+        'vocalization': data.get('vocalization'),
+        'eye': data.get('eye')
+    }
+    
+    # Filter out None values
+    inputs = {k: v for k, v in inputs.items() if v is not None}
+    
+    # If no inputs, return error
+    if not inputs:
+        return jsonify({'error': 'No input provided'}), 400
+    
+    # Process with nonverbal engine
+    result = nonverbal_engine.process_multimodal_input(inputs)
+    
+    return jsonify(result)
+
+@app.route('/api/analyze_temporal', methods=['POST'])
+def analyze_temporal():
+    """Analyze temporal nonverbal input using the temporal engine"""
+    if not TEMPORAL_ENGINE_AVAILABLE:
+        return jsonify({'error': 'Temporal engine not available'}), 503
+        
+    data = request.json
+    gesture_features = data.get('gesture_features')
+    eye_features = data.get('eye_features')
+    emotion_features = data.get('emotion_features')
+    
+    # Process with temporal engine
+    result = temporal_engine.process_multimodal_sequence(
+        gesture_features=gesture_features,
+        eye_features=eye_features,
+        emotion_features=emotion_features
+    )
+    
+    return jsonify(result)
+
+@app.route('/api/conversation', methods=['POST'])
+def conversation():
+    """Generate conversation response"""
+    data = request.json
+    text_input = data.get('text')
+    emotion = data.get('emotion', 'neutral')
+    gaze = data.get('gaze', 'center')
+    blinking = data.get('blinking', True)
+    intensity = data.get('intensity')
+    
+    # Generate response using conversation engine
+    response = conversation_engine.generate_response(
+        emotion=emotion,
+        gaze=gaze,
+        blinking=blinking,
+        intensity=intensity,
+        text_input=text_input
+    )
+    
+    return jsonify({'response': response})
+
+@app.route('/test_interface')
+def test_interface():
+    """Test interface for all components"""
+    return render_template('test_interface.html')
+
+@app.route('/dashboard')
+def dashboard():
+    """Administrative dashboard"""
+    return render_template('dashboard.html')
+
+@app.route('/settings')
+def settings():
+    """Settings page"""
+    current_settings = {
+        'nonverbal_engine': {
+            'gesture_confidence_threshold': nonverbal_engine.gesture_confidence_threshold,
+            'vocalization_confidence_threshold': nonverbal_engine.vocalization_confidence_threshold,
+            'eye_confidence_threshold': nonverbal_engine.eye_confidence_threshold
+        },
+        'conversation_engine': {
+            'persona': conversation_engine.persona
+        }
+    }
+    
+    # Add temporal engine settings if available
+    if temporal_engine is not None and hasattr(temporal_engine, 'sequence_length'):
+        current_settings['temporal_engine'] = {
+            'sequence_length': temporal_engine.sequence_length,
+            'available': True
+        }
+    else:
+        current_settings['temporal_engine'] = {
+            'available': False
+        }
+    
+    return render_template('settings.html', settings=current_settings)
+
+# Register blueprint modules
+speech_therapy.init_app(app)
+play_activities.init_app(app)
+
+# Error handlers
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('error.html', 
+                          error="Page Not Found",
+                          suggestion="The page you're looking for doesn't exist. Please check the URL and try again."), 404
+
+@app.errorhandler(500)
+def server_error(e):
+    return render_template('error.html', 
+                          error="Server Error",
+                          suggestion="An internal server error occurred. Please try again later."), 500
+
+def run_app(host='0.0.0.0', port=5001, debug=True):
+    """Run the Flask application"""
+    app.run(host=host, port=port, debug=debug)
+
+if __name__ == '__main__':
+    # Run the application
+    port = int(os.environ.get('PORT', 5001))
+   

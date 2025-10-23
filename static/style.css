@@ -1,0 +1,180 @@
+/* AlphaVox - Main Stylesheet */
+
+/* Global styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    background-color: var(--bs-dark-bg-subtle);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Header & Footer styles */
+.header {
+    padding: 1rem 0;
+    background-color: var(--bs-primary);
+    color: white;
+}
+
+.footer {
+    margin-top: 2rem;
+    padding: 1rem 0;
+    background-color: var(--bs-gray-900);
+    color: white;
+    text-align: center;
+}
+
+/* Index page styles */
+.welcome-container {
+    max-width: 700px;
+    margin: 3rem auto;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #222; /* Ensure the background is dark for light text */
+    color: #fff; /* Light text for better visibility */
+}
+
+.welcome-title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #fff; /* Ensure title is visible and readable */
+}
+
+.welcome-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: var(--bs-secondary);
+}
+
+/* Home page styles */
+.main-interface {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1.5rem 0;
+}
+
+.video-container {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--bs-dark);
+}
+
+.video-feed {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.gesture-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.gesture-button {
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.gesture-button:hover {
+    transform: translateY(-3px);
+}
+
+.gesture-button i {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.response-container {
+    min-height: 100px;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: var(--bs-dark);
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+.input-form {
+    margin-bottom: 2rem;
+}
+
+/* Improve contrast for initialization button */
+.btn.neural-btn {
+    background-color: #004080;
+    color: #fff;
+    border: 2px solid #004080;
+}
+
+.btn.neural-btn:hover {
+    background-color: #0056b3;
+    border: 2px solid #0056b3;
+}
+
+/* Media queries */
+@media (min-width: 768px) {
+    .main-interface {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .video-container {
+        flex: 1;
+    }
+
+    .controls-container {
+        flex: 1;
+    }
+}
+
+/* Utility classes */
+.text-center {
+    text-align: center;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.mb-5 {
+    margin-bottom: 2rem;
+}
+
+/* Eye-tracking visualization */
+.eye-tracking-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.eye-position-dot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgba(255, 0, 0, 0.7);
+    transform: translate(-50%, -50%);
+    transition: all 0.2s ease;
+}
+
+/* Animation for feedback messages */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback-message {
+    animation: fadeIn 0.3s ease-out;
+}

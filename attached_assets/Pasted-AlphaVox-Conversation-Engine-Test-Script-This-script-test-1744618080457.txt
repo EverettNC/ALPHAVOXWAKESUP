@@ -1,0 +1,212 @@
+AlphaVox - Conversation Engine Test Script
+----------------------------------------
+This script tests the functionality of the conversation engine with various
+multi-modal inputs and personas.
+"""
+
+import logging
+import time
+from conversation_engine import ConversationEngine
+from alphavox import alphavox
+
+alphavox.tag()  # Should print: [AlphaVox] ✅ Activated for user: default_user
+
+# Use the engine
+analysis = {
+    "emotion": "happy",
+    "gaze_direction": "center",
+    "blink_detected": True,
+    "intensity": "moderate"
+}
+response = alphavox.conversation_engine.get_response(analysis)
+print("AlphaVox says:", response)
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, 
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+def test_basic_responses():
+    """Test basic emotional responses with default persona"""
+    engine = ConversationEngine()
+    
+    # Test different emotion-gaze-blink-intensity combinations
+    test_cases = [
+        {'emotion': 'happy', 'gaze_direction': 'center', 'blink_detected': True, 'intensity': 'moderate'},
+        {'emotion': 'sad', 'gaze_direction': 'left', 'blink_detected': True, 'intensity': 'low'},
+        {'emotion': 'angry', 'gaze_direction': 'right', 'blink_detected': False, 'intensity': 'high'},
+        {'emotion': 'fear', 'gaze_direction': 'center', 'blink_detected': True, 'intensity': 'moderate'},
+        {'emotion': 'surprise', 'gaze_direction': 'left', 'blink_detected': False, 'intensity': 'high'},
+        {'emotion': 'neutral', 'gaze_direction': 'center', 'blink_detected': True}
+    ]
+    
+    logger.info("Testing basic emotional responses with default persona:")
+    for i, case in enumerate(test_cases):
+        response = engine.get_response(case)
+        logger.info(f"Case {i+1}: {case}")
+        logger.info(f"Response: {response}")
+        logger.info("-" * 50)
+
+def test_personas():
+    """Test different personas with the same inputs"""
+    
+    # Test different personas
+    personas = ["default", "academic", "clinical", "supportive", "child-friendly"]
+    
+    # Sample analysis
+    analysis = {
+        'emotion': 'sad', 
+        'gaze_direction': 'center', 
+        'blink_detected': True, 
+        'intensity': 'moderate'
+    }
+    
+    logger.info("Testing different personas with the same inputs:")
+    
+    for persona in personas:
+        engine = ConversationEngine(persona=persona)
+        response = engine.get_response(analysis)
+        
+        logger.info(f"Persona: {persona}")
+        logger.info(f"Analysis: {analysis}")
+        logger.info(f"Response: {response}")
+        logger.info("-" * 50)
+
+def test_repeat_handling():
+    """Test handling of repeated inputs"""
+    engine = ConversationEngine()
+    
+    # Sample analysis that will be repeated
+    analysis = {
+        'emotion': 'neutral', 
+        'gaze_direction': 'center', 
+        'blink_detected': True
+    }
+    
+    logger.info("Testing handling of repeated inputs:")
+    
+    # First response
+    response1 = engine.get_response(analysis)
+    logger.info(f"First response: {response1}")
+    
+    # Second response (should be the same as the first if input is identical)
+    response2 = engine.get_response(analysis)
+    logger.info(f"Second response: {response2}")
+    
+    # Third response (might be different if repeat handling is triggered)
+    response3 = engine.get_response(analysis)
+    logger.info(f"Third response: {response3}")
+    
+    # Fourth response (should trigger repeat handling)
+    response4 = engine.get_response(analysis)
+    logger.info(f"Fourth response: {response4}")
+    
+    logger.info("-" * 50)
+
+def test_academic_responses():
+    """Test academic persona responses"""
+    engine = ConversationEngine(persona="academic")
+    
+    # Test with explicit academic domain
+    academic_test_cases = [
+        {
+            'emotion': 'neutral', 
+            'gaze_direction': 'center', 
+            'blink_detected': True,
+            'domain': 'philosophy'
+        },
+        {
+            'emotion': 'happy', 
+            'gaze_direction': 'center', 
+            'blink_detected': True,
+            'intensity': 'moderate',
+            'domain': 'science'
+        },
+        {
+            'emotion': 'surprise', 
+            'gaze_direction': 'center', 
+            'blink_detected': True,
+            'intensity': 'moderate',
+            'domain': 'mathematics'
+        }
+    ]
+    
+    logger.info("Testing academic persona responses:")
+    
+    for i, case in enumerate(academic_test_cases):
+        response = engine.get_response(case)
+        logger.info(f"Case {i+1}: {case}")
+        logger.info(f"Response: {response}")
+        logger.info("-" * 50)
+    
+    # Test academic topic response method
+    topics = [
+        "quantum physics",
+        "epistemological frameworks in philosophy",
+        "machine learning algorithms"
+    ]
+    
+    logger.info("Testing academic topic responses:")
+    
+    for i, topic in enumerate(topics):
+        for depth in ["basic", "intermediate", "advanced"]:
+            response = engine.get_academic_response(topic, depth)
+            logger.info(f"Topic {i+1}: {topic} (Depth: {depth})")
+            logger.info(f"Response: {response}")
+        logger.info("-" * 50)
+
+def test_state_persistence():
+    """Test saving and loading engine state"""
+    engine = ConversationEngine(persona="supportive")
+    
+    # Generate some responses to populate history
+    test_cases = [
+        {'emotion': 'happy', 'gaze_direction': 'center', 'blink_detected': True},
+        {'emotion': 'sad', 'gaze_direction': 'left', 'blink_detected': True},
+        {'emotion': 'neutral', 'gaze_direction': 'center', 'blink_detected': True}
+    ]
+    
+    logger.info("Testing state persistence:")
+    
+    logger.info("Generating initial responses:")
+    for case in test_cases:
+        response = engine.get_response(case)
+        logger.info(f"Case: {case}")
+        logger.info(f"Response: {response}")
+    
+    # Save engine state
+    state = engine.save_state()
+    logger.info(f"Saved engine state")
+    
+    # Create new engine and load state
+    new_engine = ConversationEngine()
+    new_engine.load_state(state)
+    logger.info(f"Loaded engine state into new engine")
+    
+    # Test that new engine has same behavior
+    test_case = {'emotion': 'neutral', 'gaze_direction': 'center', 'blink_detected': True}
+    
+    original_response = engine.get_response(test_case)
+    loaded_response = new_engine.get_response(test_case)
+    
+    logger.info(f"Original engine response: {original_response}")
+    logger.info(f"Loaded engine response: {loaded_response}")
+    logger.info(f"Responses match: {original_response == loaded_response}")
+    
+    logger.info("-" * 50)
+
+def main():
+    """Run all conversation engine tests"""
+    logger.info("Starting Conversation Engine tests")
+    
+    # Run the tests
+    test_basic_responses()
+    test_personas()
+    test_repeat_handling()
+    test_academic_responses()
+    test_state_persistence()
+    
+    logger.info("All Conversation Engine tests completed")
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,181 @@
+"""
+AlphaVox - PhD-Level Conversation Test Script
+-------------------------------------------
+This script tests the PhD-level conversation capabilities of AlphaVox's NLP system
+by simulating academic discussions across multiple domains.
+"""
+
+import logging
+import time
+from alphavox.nlp_module import AdvancedNLPProcessor
+from alphavox.nlp_integration import NLPIntegrationService
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, 
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+# Test topics for different academic domains
+ACADEMIC_TEST_TOPICS = {
+    "science": [
+        "The empirical evidence supporting dark matter theory remains controversial.",
+        "CRISPR gene editing raises profound questions about human evolution.",
+        "Quantum entanglement challenges our understanding of causality.",
+        "Climate modeling must account for complex feedback mechanisms."
+    ],
+    "philosophy": [
+        "Heidegger's concept of Dasein provides insight into human existence.",
+        "The mind-body problem remains central to philosophy of consciousness.",
+        "Epistemological frameworks shape how we understand knowledge creation.",
+        "Post-structuralism challenges traditional notions of meaning and truth."
+    ],
+    "mathematics": [
+        "The P versus NP problem has significant implications for computational complexity.",
+        "Gödel's incompleteness theorems revolutionized mathematical foundations.",
+        "Topological data analysis offers new approaches to high-dimensional data.",
+        "Category theory provides a unifying language across mathematical disciplines."
+    ],
+    "medicine": [
+        "Epigenetic factors significantly influence disease susceptibility.",
+        "The gut-brain axis represents a paradigm shift in understanding neurological disorders.",
+        "Precision medicine requires integration of multi-omic data.",
+        "Immunotherapy approaches are transforming cancer treatment protocols."
+    ],
+    "linguistics": [
+        "Computational approaches to semantics must address contextual ambiguity.",
+        "Language acquisition theories differ on the role of universal grammar.",
+        "Pragmatics explores how context shapes meaning beyond semantic content.",
+        "Historical linguistics traces the evolution of linguistic structures."
+    ],
+    "psychology": [
+        "Dual process theories distinguish between automatic and controlled cognition.",
+        "The replication crisis necessitates methodological reform in psychological research.",
+        "Embodied cognition challenges traditional information processing models.",
+        "Developmental trajectories show considerable individual variation."
+    ],
+    "history": [
+        "Historiographical approaches to colonialism have evolved significantly.",
+        "Economic determinism provides one lens for understanding historical change.",
+        "Oral histories offer alternative perspectives to traditional archival sources.",
+        "Environmental history examines the reciprocal relationship between humans and ecosystems."
+    ],
+    "economics": [
+        "Behavioral economics challenges assumptions of rational choice theory.",
+        "Macroeconomic models must account for both monetary and fiscal policy effects.",
+        "Market failures justify certain forms of regulatory intervention.",
+        "Development economics examines multidimensional determinants of economic growth."
+    ]
+}
+
+def test_phd_level_responses():
+    """Test the PhD-level response capabilities for each academic domain"""
+    logger.info("Initializing NLP processors for PhD-level conversation testing")
+    nlp_processor = AdvancedNLPProcessor()
+    nlp_integration = NLPIntegrationService(nlp_model=nlp_processor.nlp)
+    
+    logger.info("Beginning PhD-level conversation tests across academic domains")
+    
+    # Test each academic domain
+    for domain, topics in ACADEMIC_TEST_TOPICS.items():
+        logger.info(f"\n--- Testing PhD-Level Conversations: {domain.upper()} ---")
+        
+        for topic in topics:
+            # Process with basic NLP processor
+            basic_result = nlp_processor.process_input(text=topic)
+            
+            # Get PhD-level response
+            phd_response = nlp_processor.generate_phd_level_response(topic)
+            
+            # Get enhanced response through integration service
+            enhanced_response, confidence = nlp_integration.enhance_response(
+                intent="academic", 
+                confidence=0.85,
+                user_input=topic
+            )
+            
+            # Get academic analysis
+            academic_analysis = nlp_integration.analyze_text_for_academic_content(topic)
+            
+            # Log results
+            logger.info(f"Topic: {topic}")
+            logger.info(f"Detected domain: {basic_result['domain']} (Confidence: {basic_result['confidence']:.2f})")
+            logger.info(f"Academic level: {academic_analysis['academic_level']} (Complexity: {academic_analysis['complexity_score']:.2f})")
+            logger.info(f"PhD response: {phd_response}")
+            logger.info(f"Enhanced response: {enhanced_response}")
+            logger.info("-" * 80)
+            
+            # Small delay to make output more readable
+            time.sleep(0.5)
+
+def test_simplified_explanations():
+    """Test the ability to generate simplified explanations of complex topics"""
+    logger.info("\nTesting simplified academic explanations")
+    
+    nlp_integration = NLPIntegrationService()
+    
+    test_topics = [
+        "Quantum entanglement and non-locality",
+        "Kantian deontological ethics",
+        "Neuroplasticity in cognitive development",
+        "Algorithmic complexity theory",
+        "Sociolinguistic variation across communities"
+    ]
+    
+    for topic in test_topics:
+        # Get both PhD-level and simplified explanations
+        phd_explanation = nlp_integration.get_phd_level_explanation(topic, simplify=False)
+        simplified_explanation = nlp_integration.get_phd_level_explanation(topic, simplify=True)
+        
+        logger.info(f"Topic: {topic}")
+        logger.info(f"PhD explanation: {phd_explanation}")
+        logger.info(f"Simplified explanation: {simplified_explanation}")
+        logger.info("-" * 80)
+        
+        # Small delay to make output more readable
+        time.sleep(0.5)
+
+def test_academic_discussion_flow():
+    """Test a simulated academic discussion flow across multiple exchanges"""
+    logger.info("\nTesting academic discussion flow")
+    
+    nlp_processor = AdvancedNLPProcessor()
+    nlp_integration = NLPIntegrationService(nlp_model=nlp_processor.nlp)
+    
+    # Simulated discussion on cognitive science
+    discussion = [
+        "What are the key theories in embodied cognition?",
+        "How does embodied cognition relate to traditional cognitive science?",
+        "Are there experimental paradigms that specifically test embodied cognition hypotheses?",
+        "What are the implications of embodied cognition for artificial intelligence development?"
+    ]
+    
+    logger.info("Simulating academic discussion on embodied cognition:")
+    
+    for i, prompt in enumerate(discussion):
+        response = nlp_integration.enhance_response(
+            intent="academic", 
+            confidence=0.85,
+            user_input=prompt
+        )[0]
+        
+        logger.info(f"Exchange {i+1}:")
+        logger.info(f"User: {prompt}")
+        logger.info(f"AlphaVox: {response}")
+        logger.info("-" * 80)
+        
+        # Small delay to make output more readable
+        time.sleep(0.5)
+
+def main():
+    """Run all PhD-level conversation tests"""
+    logger.info("Starting PhD-level conversation capability tests\n")
+    
+    # Run the tests
+    test_phd_level_responses()
+    test_simplified_explanations()
+    test_academic_discussion_flow()
+    
+    logger.info("\nAll PhD-level conversation tests completed")
+
+if __name__ == "__main__":
+    main()

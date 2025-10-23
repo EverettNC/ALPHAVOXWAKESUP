@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaVox - Behavior Capture Test</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Base styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #000820;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .container-fluid {
+            padding: 0;
+        }
+
+        /* Cyber UI components */
+        .cyber-container {
+            background-color: rgba(10, 20, 40, 0.8);
+            border: 1px solid rgba(0, 125, 255, 0.4);
+            border-radius: 4px;
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 100, 255, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .cyber-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(0, 100, 255, 0.05), transparent);
+            pointer-events: none;
+        }
+
+        .cyber-title {
+            font-family: 'Share Tech Mono', monospace;
+            color: #00f7ff;
+            text-shadow: 0 0 10px rgba(0, 247, 255, 0.7);
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .cyber-subtitle {
+            font-family: 'Share Tech Mono', monospace;
+            color: #8cddff;
+            text-shadow: 0 0 5px rgba(140, 221, 255, 0.5);
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .cyber-badge {
+            display: inline-block;
+            background-color: rgba(250, 100, 0, 0.2);
+            color: #FFA500;
+            border: 1px solid rgba(255, 165, 0, 0.5);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+
+        .cyber-text {
+            color: #d0e0ff;
+            line-height: 1.6;
+        }
+
+        .cyber-alert {
+            display: flex;
+            background-color: rgba(0, 50, 100, 0.3);
+            border: 1px solid rgba(0, 150, 255, 0.4);
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyber-alert::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background-color: #00f7ff;
+            box-shadow: 0 0 10px rgba(0, 247, 255, 0.8);
+        }
+
+        .cyber-alert-icon {
+            flex-shrink: 0;
+            width: 24px;
+            margin-right: 15px;
+            color: #00f7ff;
+        }
+
+        .cyber-alert-content {
+            flex-grow: 1;
+        }
+
+        .cyber-alert-title {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            color: #00f7ff;
+            margin-bottom: 5px;
+        }
+
+        .cyber-alert-message {
+            color: #d0e0ff;
+        }
+
+        .cyber-alert-lines {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                transparent 5%,
+                rgba(0, 247, 255, 0.5) 5%,
+                rgba(0, 247, 255, 0.5) 10%,
+                transparent 10%,
+                transparent 15%,
+                rgba(0, 247, 255, 0.5) 15%,
+                rgba(0, 247, 255, 0.5) 20%,
+                transparent 20%,
+                transparent 80%,
+                rgba(0, 247, 255, 0.5) 80%,
+                rgba(0, 247, 255, 0.5) 85%,
+                transparent 85%,
+                transparent 90%,
+                rgba(0, 247, 255, 0.5) 90%,
+                rgba(0, 247, 255, 0.5) 95%,
+                transparent 95%,
+                transparent 100%
+            );
+        }
+
+        .cyber-btn {
+            background-color: rgba(0, 100, 200, 0.2);
+            color: #00f7ff;
+            border: 1px solid rgba(0, 247, 255, 0.4);
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-family: 'Share Tech Mono', monospace;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .cyber-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 247, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cyber-btn:hover {
+            background-color: rgba(0, 150, 255, 0.3);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(0, 247, 255, 0.4);
+        }
+
+        .cyber-btn:hover::before {
+            left: 100%;
+        }
+
+        .cyber-btn.danger {
+            background-color: rgba(200, 50, 50, 0.2);
+            color: #ff5050;
+            border: 1px solid rgba(255, 80, 80, 0.4);
+        }
+
+        .cyber-btn.danger:hover {
+            background-color: rgba(255, 80, 80, 0.3);
+            box-shadow: 0 0 15px rgba(255, 80, 80, 0.4);
+        }
+
+        .cyber-btn.danger::before {
+            background: linear-gradient(90deg, transparent, rgba(255, 80, 80, 0.2), transparent);
+        }
+
+        .cyber-select {
+            background-color: rgba(0, 30, 60, 0.7);
+            color: #00f7ff;
+            border: 1px solid rgba(0, 247, 255, 0.4);
+            padding: 8px 30px 8px 15px;
+            border-radius: 4px;
+            font-family: 'Share Tech Mono', monospace;
+            letter-spacing: 1px;
+            position: relative;
+            appearance: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .control-group {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .cyber-label {
+            font-family: 'Share Tech Mono', monospace;
+            color: #8cddff;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .cyber-select-decoration {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-20%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #00f7ff;
+            pointer-events: none;
+        }
+
+        /* Video feed area */
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            background-color: rgba(0, 20, 40, 0.8);
+            border: 1px solid rgba(0, 247, 255, 0.4);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        #videoFeed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: rgba(0, 247, 255, 0.7);
+            box-shadow: 0 0 10px rgba(0, 247, 255, 0.8);
+            opacity: 0;
+            animation: scanAnimation 3s ease-in-out infinite;
+        }
+
+        .corner-decoration {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px solid #00f7ff;
+            border-radius: 0;
+            opacity: 0.8;
+        }
+
+        .corner-top-left {
+            top: 10px;
+            left: 10px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-top-right {
+            top: 10px;
+            right: 10px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .corner-bottom-left {
+            bottom: 10px;
+            left: 10px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .corner-bottom-right {
+            bottom: 10px;
+            right: 10px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .target-reticle {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 1px solid rgba(255, 165, 0, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .target-reticle::before, .target-reticle::after {
+            content: '';
+            position: absolute;
+            background-color: rgba(255, 165, 0, 0.8);
+        }
+
+        .target-reticle::before {
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            transform: translateY(-50%);
+        }
+
+        .target-reticle::after {
+            top: 0;
+            left: 50%;
+            width: 1px;
+            height: 100%;
+            transform: translateX(-50%);
+        }
+
+        /* Data visualization area */
+        .data-visualization {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -10px;
+        }
+
+        .data-card {
+            flex: 1 0 calc(50% - 20px);
+            margin: 0 10px 20px;
+            background-color: rgba(10, 20, 40, 0.7);
+            border: 1px solid rgba(0, 247, 255, 0.3);
+            border-radius: 4px;
+            padding: 15px;
+            position: relative;
+            overflow: hidden;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .data-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #00f7ff, transparent);
+            opacity: 0.7;
+        }
+
+        .data-header {
+            position: relative;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed rgba(0, 247, 255, 0.3);
+        }
+
+        .data-title {
+            font-family: 'Share Tech Mono', monospace;
+            color: #8cddff;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        .data-title i {
+            margin-right: 8px;
+            color: #00f7ff;
+        }
+
+        .data-body {
+            flex-grow: 1;
+            position: relative;
+        }
+
+        .detection-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .detection-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 8px;
+            background-color: rgba(0, 50, 100, 0.3);
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .detection-item:hover {
+            background-color: rgba(0, 100, 200, 0.3);
+        }
+
+        .detection-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 247, 255, 0.2);
+            color: #00f7ff;
+            border-radius: 50%;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .detection-info {
+            flex-grow: 1;
+        }
+
+        .detection-name {
+            font-size: 0.9rem;
+            color: #fff;
+            margin: 0 0 3px;
+        }
+
+        .detection-meta {
+            display: flex;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .detection-time {
+            margin-right: 10px;
+        }
+
+        .detection-confidence {
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .confidence-high {
+            color: #00ff9d;
+        }
+
+        .confidence-medium {
+            color: #FFA500;
+        }
+
+        .confidence-low {
+            color: #ff5050;
+        }
+
+        .data-visualization-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Share Tech Mono', monospace;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .placeholder-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: rgba(0, 247, 255, 0.3);
+        }
+
+        /* Real-time data feedback */
+        .system-status-bar {
+            display: flex;
+            background-color: rgba(0, 20, 40, 0.8);
+            border: 1px solid rgba(0, 247, 255, 0.3);
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .status-segment {
+            flex: 1;
+            padding: 10px 15px;
+            border-right: 1px solid rgba(100, 150, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .status-segment:last-child {
+            border-right: none;
+        }
+
+        .status-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 5px;
+        }
+
+        .status-value {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.1rem;
+            color: #00f7ff;
+            text-shadow: 0 0 5px rgba(0, 247, 255, 0.5);
+        }
+
+        /* Control panel styling */
+        .control-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(0, 247, 255, 0.3);
+        }
+
+        .control-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .controls-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .system-gauges {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .gauge-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .gauge-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 5px;
+        }
+
+        .gauge {
+            width: 100%;
+            height: 6px;
+            background-color: rgba(50, 50, 50, 0.3);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 3px;
+        }
+
+        .gauge-value {
+            height: 100%;
+            background: linear-gradient(90deg, #00f7ff, #0090ff);
+            border-radius: 3px;
+            transition: width 0.8s ease;
+        }
+
+        .gauge-reading {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.75rem;
+            color: #00f7ff;
+        }
+
+        /* Animations */
+        @keyframes scanAnimation {
+            0% { top: 0; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 80, 80, 0.5); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 80, 80, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 80, 80, 0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* UI elements with glow effect */
+        .pulse-icon {
+            animation: pulsate 2s infinite;
+        }
+
+        @keyframes pulsate {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+
+        /* Voice Chat Interface */
+        .neural-voice-chat {
+            background: rgba(10, 25, 40, 0.7);
+            border: 1px solid rgba(0, 247, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .neural-voice-chat::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 100, 200, 0.05), transparent);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .voice-chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: rgba(0, 20, 40, 0.8);
+            border-bottom: 1px solid rgba(0, 247, 255, 0.2);
+        }
+
+        .voice-status {
+            display: flex;
+            align-items: center;
+        }
+
+        .voice-status-icon {
+            color: #00f7ff;
+            margin-right: 10px;
+        }
+
+        .voice-status-text {
+            font-family: 'Share Tech Mono', monospace;
+            color: #fff;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .voice-settings {
+            display: flex;
+            align-items: center;
+        }
+
+        .cyber-select.small {
+            font-size: 0.75rem;
+            padding: 5px 10px;
+        }
+
+        .voice-chat-body {
+            padding: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .voice-messages {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            padding-right: 5px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 247, 255, 0.5) rgba(10, 25, 40, 0.5);
+        }
+
+        .voice-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .voice-messages::-webkit-scrollbar-track {
+            background: rgba(10, 25, 40, 0.5);
+            border-radius: 3px;
+        }
+
+        .voice-messages::-webkit-scrollbar-thumb {
+            background: rgba(0, 247, 255, 0.5);
+            border-radius: 3px;
+        }
+
+        .system-message, .user-message {
+            display: flex;
+            margin-bottom: 12px;
+            animation: fadeIn 0.3s forwards;
+        }
+
+        .user-message {
+            flex-direction: row-reverse;
+        }
+
+        .message-icon {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+        }
+
+        .system-message .message-icon {
+            background: rgba(0, 100, 200, 0.2);
+            color: #00f7ff;
+            border: 1px solid rgba(0, 247, 255, 0.3);
+        }
+
+        .user-message .message-icon {
+            background: rgba(0, 150, 50, 0.2);
+            color: #00ff9d;
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            margin-right: 0;
+            margin-left: 10px;
+        }
+
+        .message-content {
+            background: rgba(20, 40, 70, 0.5);
+            padding: 8px 12px;
+            border-radius: 4px;
+            max-width: 80%;
+            position: relative;
+        }
+
+        .system-message .message-content {
+            border-left: 3px solid #00f7ff;
+        }
+
+        .user-message .message-content {
+            border-right: 3px solid #00ff9d;
+            text-align: right;
+        }
+
+        .message-text {
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .message-timestamp {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .voice-input-container {
+            display: flex;
+            align-items: center;
+            background: rgba(20, 40, 70, 0.5);
+            border: 1px solid rgba(0, 247, 255, 0.2);
+            border-radius: 4px;
+            padding: 5px;
+        }
+
+        .voice-actions, .voice-send {
+            flex-shrink: 0;
+        }
+
+        .voice-text-input {
+            flex-grow: 1;
+            margin: 0 10px;
+        }
+
+        .cyber-input {
+            width: 100%;
+            background: rgba(10, 20, 40, 0.8);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .cyber-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 1px #00f7ff;
+        }
+
+        .voice-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 100, 200, 0.3);
+            color: #00f7ff;
+            border: 1px solid rgba(0, 247, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .voice-btn:hover {
+            background: rgba(0, 150, 255, 0.4);
+            box-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+        }
+
+        .voice-btn.send {
+            background: rgba(0, 150, 50, 0.3);
+            color: #00ff9d;
+            border: 1px solid rgba(0, 255, 157, 0.3);
+        }
+
+        .voice-btn.send:hover {
+            background: rgba(0, 200, 100, 0.4);
+            box-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+        }
+
+        .voice-btn.active {
+            animation: pulse 1.5s infinite;
+            background: rgba(200, 50, 50, 0.4);
+            color: #ff5050;
+            border: 1px solid rgba(255, 80, 80, 0.4);
+        }
+
+        /* Self-Learning Panel */
+        .self-learning-panel {
+            background: rgba(10, 25, 40, 0.7);
+            border: 1px solid rgba(0, 247, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .self-learning-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: rgba(0, 20, 40, 0.8);
+            border-bottom: 1px solid rgba(0, 247, 255, 0.2);
+        }
+
+        .learning-status {
+            display: flex;
+            align-items: center;
+        }
+
+        .learning-status-icon {
+            color: #FFA500;
+            margin-right: 10px;
+        }
+
+        .learning-status-text {
+            font-family: 'Share Tech Mono', monospace;
+            color: #fff;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .learning-metrics {
+            display: flex;
+            gap: 15px;
+        }
+
+        .metric {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.8rem;
+        }
+
+        .metric-label {
+            color: #8cddff;
+            margin-right: 5px;
+        }
+
+        .metric-value {
+            color: #FFA500;
+        }
+
+        .self-learning-body {
+            padding: 15px;
+        }
+
+        .modification-log {
+            position: relative;
+        }
+
+        .log-title {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.85rem;
+            color: #fff;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(0, 247, 255, 0.2);
+        }
+
+        .log-entries {
+            max-height: 150px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 247, 255, 0.5) rgba(10, 25, 40, 0.5);
+        }
+
+        .log-entries::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .log-entries::-webkit-scrollbar-track {
+            background: rgba(10, 25, 40, 0.5);
+        }
+
+        .log-entries::-webkit-scrollbar-thumb {
+            background: rgba(0, 247, 255, 0.5);
+        }
+
+        .log-entry {
+            display: flex;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.8rem;
+            padding: 5px 0;
+            border-bottom: 1px dashed rgba(0, 247, 255, 0.1);
+            animation: slideIn 0.3s forwards;
+        }
+
+        .log-timestamp {
+            color: #FFA500;
+            width: 65px;
+            flex-shrink: 0;
+        }
+
+        .log-file {
+            color: #00f7ff;
+            width: 120px;
+            flex-shrink: 0;
+            margin-right: 10px;
+        }
+
+        .log-description {
+            color: #fff;
+            flex-grow: 1;
+        }
+
+        /* Media queries for responsive design */
+        @media (max-width: 992px) {
+            .control-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .system-status-bar {
+                flex-wrap: wrap;
+            }
+
+            .status-segment {
+                width: 50%;
+                margin-bottom: 10px;
+                border-right: none;
+                border-bottom: 1px solid rgba(100, 150, 255, 0.2);
+            }
+
+            .learning-metrics {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cyber-title {
+                font-size: 2rem;
+            }
+
+            .cyber-subtitle {
+                font-size: 1rem;
+            }
+
+            .voice-chat-header,
+            .self-learning-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .voice-settings,
+            .learning-metrics {
+                margin-top: 10px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 px-0">
+                <div class="cyber-header" style="background-color: rgba(0, 20, 40, 0.9); padding: 10px 20px; border-bottom: 1px solid rgba(0, 247, 255, 0.3);">
+                    <div class="container">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="logo">
+                                <h1 style="font-family: 'Share Tech Mono', monospace; color: #00f7ff; margin: 0; font-size: 1.5rem; letter-spacing: 2px;">
+                                    <i class="fas fa-brain me-2"></i> ALPHAVOX
+                                </h1>
+                            </div>
+                            <div class="system-status d-flex align-items-center">
+                                <div class="status-indicator me-3" style="display: flex; align-items: center;">
+                                    <span style="display: inline-block; width: 10px; height: 10px; background-color: #00ff9d; border-radius: 50%; margin-right: 5px;"></span>
+                                    <span style="font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: #fff;">SYSTEM ONLINE</span>
+                                </div>
+                                <a href="/" class="cyber-btn btn-sm">
+                                    <i class="fas fa-home me-1"></i> MAIN INTERFACE
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <h2 class="cyber-title">
+                        <i class="fas fa-brain me-2"></i> NEURAL BEHAVIOR ANALYSIS
+                    </h2>
+                    <p class="cyber-text">
+                        The advanced behavior capture system analyzes real-time nonverbal cues including micro-expressions, eye movements, posture, and repetitive patterns. The neural engine continuously learns from interactions to improve recognition accuracy.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8 order-lg-1 order-2">
+                    <!-- Video Capture & Analysis -->
+                    <div class="video-container mb-4">
+                        <video id="videoFeed" autoplay></video>
+                        <div class="video-overlay">
+                            <div class="scan-line"></div>
+                            <div class="corner-decoration corner-top-left"></div>
+                            <div class="corner-decoration corner-top-right"></div>
+                            <div class="corner-decoration corner-bottom-left"></div>
+                            <div class="corner-decoration corner-bottom-right"></div>
+                            <div class="target-reticle" id="eyeTargetLeft"></div>
+                            <div class="target-reticle" id="eyeTargetRight"></div>
+                        </div>
+                    </div>
+
+                    <!-- System Status Bar -->
+                    <div class="system-status-bar mb-4">
+                        <div class="status-segment">
+                            <div class="status-label">CAPTURE STATUS</div>
+                            <div class="status-value" id="captureStatus">STANDBY</div>
+                        </div>
+                        <div class="status-segment">
+                            <div class="status-label">PATTERNS DETECTED</div>
+                            <div class="status-value" id="patternCount">0</div>
+                        </div>
+                        <div class="status-segment">
+                            <div class="status-label">CONFIDENCE AVG</div>
+                            <div class="status-value" id="confidenceAvg">0%</div>
+                        </div>
+                        <div class="status-segment">
+                            <div class="status-label">PROCESS TIME</div>
+                            <div class="status-value" id="processTime">0ms</div>
+                        </div>
+                    </div>
+
+                    <!-- Data Visualization -->
+                    <div class="cyber-container">
+                        <h3 class="cyber-subtitle mb-4">
+                            <i class="fas fa-chart-line me-2"></i> BEHAVIORAL PATTERN ANALYSIS
+                        </h3>
+
+                        <div class="data-visualization">
+                            <!-- Micro-Expressions Card -->
+                            <div class="data-card">
+                                <div class="data-header">
+                                    <h4 class="data-title">
+                                        <i class="fas fa-smile"></i> MICRO-EXPRESSIONS
+                                    </h4>
+                                </div>
+                                <div class="data-body">
+                                    <ul class="detection-list" id="microExpressionsList">
+                                        <div class="data-visualization-placeholder">
+                                            <div class="d-flex flex-column align-items-center">
+                                                <i class="fas fa-smile-beam placeholder-icon"></i>
+                                                <span>NO EXPRESSIONS DETECTED YET</span>
+                                            </div>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Eye Movements Card -->
+                            <div class="data-card">
+                                <div class="data-header">
+                                    <h4 class="data-title">
+                                        <i class="fas fa-eye"></i> EYE MOVEMENT PATTERNS
+                                    </h4>
+                                </div>
+                                <div class="data-body">
+                                    <ul class="detection-list" id="eyeMovementsList">
+                                        <div class="data-visualization-placeholder">
+                                            <div class="d-flex flex-column align-items-center">
+                                                <i class="fas fa-eye placeholder-icon"></i>
+                                                <span>NO EYE PATTERNS DETECTED YET</span>
+                                            </div>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Repetitive Movements Card -->
+                            <div class="data-card">
+                                <div class="data-header">
+                                    <h4 class="data-title">
+                                        <i class="fas fa-sync"></i> REPETITIVE MOVEMENTS
+                                    </h4>
+                                </div>
+                                <div class="data-body">
+                                    <ul class="detection-list" id="repetitiveMovementsList">
+                                        <div class="data-visualization-placeholder">
+                                            <div class="d-flex flex-column align-items-center">
+                                                <i class="fas fa-sync placeholder-icon"></i>
+                                                <span>NO REPETITIVE MOVEMENTS DETECTED YET</span>
+                                            </div>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Posture Analysis Card -->
+                            <div class="data-card">
+                                <div class="data-header">
+                                    <h4 class="data-title">
+                                        <i class="fas fa-male"></i> POSTURE ANALYSIS
+                                    </h4>
+                                </div>
+                                <div class="data-body">
+                                    <ul class="detection-list" id="postureAnalysisList">
+                                        <div class="data-visualization-placeholder">
+                                            <div class="d-flex flex-column align-items-center">
+                                                <i class="fas fa-male placeholder-icon"></i>
+                                                <span>NO POSTURE PATTERNS DETECTED YET</span>
+                                            </div>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 order-lg-2 order-1 mb-4">
+                    <div class="cyber-container">
+                        <h3 class="cyber-subtitle mb-4">
+                            <i class="fas fa-sliders-h me-2"></i> NEURAL ENGINE CONTROL
+                        </h3>
+
+                        <!-- Control Buttons -->
+                        <div class="controls-section mb-4">
+                            <button id="startTracking" class="cyber-btn w-100">
+                                <i class="fas fa-play me-2"></i> START NEURAL TRACKING
+                            </button>
+                            <button id="stopTracking" class="cyber-btn danger w-100">
+                                <i class="fas fa-stop me-2"></i> STOP TRACKING
+                            </button>
+                        </div>
+
+                        <!-- Status and Control Section -->
+                        <div class="status-section mb-4">
+                            <div class="alert cyber-alert" id="trackingStatus">
+                                <div class="cyber-alert-icon">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="cyber-alert-content">
+                                    <div class="cyber-alert-title">SYSTEM READY</div>
+                                    <div class="cyber-alert-message">Initialize neural behavior tracking to begin capturing patterns.</div>
+                                </div>
+                                <div class="cyber-alert-lines"></div>
+                            </div>
+                        </div>
+
+                        <!-- Voice Chat Interface -->
+                        <div class="neural-voice-chat mb-4">
+                            <div class="voice-chat-header">
+                                <div class="voice-status">
+                                    <span class="voice-status-icon pulse-icon"><i class="fas fa-microphone-alt"></i></span>
+                                    <span class="voice-status-text">Neural Voice Interface</span>
+                                </div>
+                                <div class="voice-settings">
+                                    <select id="voiceProfile" class="cyber-select small">
+                                        <option value="calming">Calming Voice</option>
+                                        <option value="us_female">US Female</option>
+                                        <option value="us_male">US Male</option>
+                                        <option value="uk_female">UK Female</option>
+                                        <option value="friendly_male">Friendly Male</option>
+                                        <option value="formal">Formal Voice</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="voice-chat-body">
+                                <div class="voice-messages" id="voiceMessages">
+                                    <div class="system-message">
+                                        <div class="message-icon"><i class="fas fa-brain"></i></div>
+                                        <div class="message-content">
+                                            <div class="message-text">Neural voice interface active. I'm analyzing your nonverbal patterns to understand your communication needs.</div>
+                                            <div class="message-timestamp">10:42:17</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="voice-input-container">
+                                    <div class="voice-actions">
+                                        <button id="startListening" class="voice-btn">
+                                            <i class="fas fa-microphone"></i>
+                                        </button>
+                                    </div>
+                                    <div class="voice-text-input">
+                                        <input type="text" id="voiceTextInput" class="cyber-input" placeholder="Send a message or press microphone to speak...">
+                                    </div>
+                                    <div class="voice-send">
+                                        <button id="sendVoiceMessage" class="voice-btn send">
+                                            <i class="fas fa-paper-plane"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Self-Learning Status Panel -->
+                        <div class="self-learning-panel mb-4">
+                            <div class="self-learning-header">
+                                <div class="learning-status">
+                                    <span class="learning-status-icon"><i class="fas fa-sync fa-spin"></i></span>
+                                    <span class="learning-status-text">Self-Optimizing System</span>
+                                </div>
+                                <div class="learning-metrics">
+                                    <div class="metric">
+                                        <span class="metric-label">Runtime:</span>
+                                        <span class="metric-value" id="learningRuntime">03:42:17</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">Iterations:</span>
+                                        <span class="metric-value" id="learningIterations">47</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="self-learning-body">
+                                <div class="modification-log">
+                                    <div class="log-title">Recent System Modifications:</div>
+                                    <div class="log-entries" id="modificationLog">
+                                        <div class="log-entry">
+                                            <div class="log-timestamp">10:41:23</div>
+                                            <div class="log-file">app.py</div>
+                                            <div class="log-description">Optimized text_to_speech() for 23% better performance</div>
+                                        </div>
+                                        <div class="log-entry">
+                                            <div class="log-timestamp">10:40:05</div>
+                                            <div class="log-file">nonverbal_engine.py</div>
+                                            <div class="log-description">Enhanced pattern recognition with improved confidence scoring</div>
+                                        </div>
+                                        <div class="log-entry">
+                                            <div class="log-timestamp">10:38:12</div>
+                                            <div class="log-file">behavior_capture.py</div>
+                                            <div class="log-description">Added real-time filtering for micro-expression detection</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Advanced Controls Panel -->
+                        <div class="advanced-controls">
+                            <div class="control-panel-header">
+                                <h4 class="cyber-subtitle mb-0">
+                                    <i class="fas fa-sliders-h me-2"></i> Neural Engine Parameters
+                                </h4>
+                                <div class="cyber-badge">ADVANCED</div>
+                            </div>
+
+                            <div class="control-grid">
+                                <div class="control-group">
+                                    <label class="cyber-label">
+                                        <i class="fas fa-filter me-1"></i> Detection Matrix
+                                    </label>
+                                    <select id="detectionType" class="cyber-select">
+                                        <option value="all">ALL DETECTION VECTORS</option>
+                                        <option value="micro-expressions">MICRO-EXPRESSIONS</option>
+                                        <option value="eye-movements">EYE MOVEMENT PATTERNS</option>
+                                        <option value="repetitive-movements">REPETITIVE MOVEMENT SEQUENCES</option>
+                                        <option value="posture">BODY POSTURE ANALYSIS</option>
+                                    </select>
+                                    <div class="cyber-select-decoration"></div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="cyber-label">
+                                        <i class="fas fa-tachometer-alt me-1"></i> Sensitivity Threshold
+                                    </label>
+                                    <select id="sensitivityLevel" class="cyber-select">
+                                        <option value="0.3">LOW SENSITIVITY (30%)</option>
+                                        <option value="0.5">STANDARD SENSITIVITY (50%)</option>
+                                        <option value="0.7" selected>HIGH SENSITIVITY (70%)</option>
+                                        <option value="0.9">MAXIMUM SENSITIVITY (90%)</option>
+                                    </select>
+                                    <div class="cyber-select-decoration"></div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="cyber-label">
+                                        <i class="fas fa-brain me-1"></i> Neural Model
+                                    </label>
+                                    <select id="modelType" class="cyber-select">
+                                        <option value="standard" selected>STANDARD NEURAL NET</option>
+                                        <option value="advanced">ADVANCED CONVOLUTIONAL</option>
+                                        <option value="experimental">EXPERIMENTAL TRANSFORMER</option>
+                                    </select>
+                                    <div class="cyber-select-decoration"></div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="cyber-label">
+                                        <i class="fas fa-clock me-1"></i> Analysis Frequency
+                                    </label>
+                                    <select id="analysisFrequency" class="cyber-select">
+                                        <option value="1">REAL-TIME (30 FPS)</option>
+                                        <option value="2" selected>STANDARD (15 FPS)</option>
+                                        <option value="3">POWER-SAVING (5 FPS)</option>
+                                    </select>
+                                    <div class="cyber-select-decoration"></div>
+                                </div>
+                            </div>
+
+                            <div class="system-gauges">
+                                <div class="gauge-container">
+                                    <div class="gauge-label">CPU LOAD</div>
+                                    <div class="gauge">
+                                        <div class="gauge-value" style="width: 45%"></div>
+                                    </div>
+                                    <div class="gauge-reading">45%</div>
+                                </div>
+
+                                <div class="gauge-container">
+                                    <div class="gauge-label">MEMORY</div>
+                                    <div class="gauge">
+                                        <div class="gauge-value" style="width: 37%"></div>
+                                    </div>
+                                    <div class="gauge-reading">37%</div>
+                                </div>
+
+                                <div class="gauge-container">
+                                    <div class="gauge-label">NEURAL LOAD</div>
+                                    <div class="gauge">
+                                        <div class="gauge-value" style="width: 63%"></div>
+                                    </div>
+                                    <div class="gauge-reading">63%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Effects -->
+    <audio id="startSound" src="/static/sounds/start.mp3"></audio>
+    <audio id="stopSound" src="/static/sounds/stop.mp3"></audio>
+    <audio id="scanSound" src="/static/sounds/scan.mp3"></audio>
+    <audio id="detectionSound" src="/static/sounds/detection.mp3"></audio>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/behavior-voice.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const videoFeed = document.getElementById('videoFeed');
+            const startTracking = document.getElementById('startTracking');
+            const stopTracking = document.getElementById('stopTracking');
+            const trackingStatus = document.getElementById('trackingStatus');
+            const captureStatus = document.getElementById('captureStatus');
+            const patternCount = document.getElementById('patternCount');
+            const confidenceAvg = document.getElementById('confidenceAvg');
+            const processTime = document.getElementById('processTime');
+            const microExpressionsList = document.getElementById('microExpressionsList');
+            const eyeMovementsList = document.getElementById('eyeMovementsList');
+            const repetitiveMovementsList = document.getElementById('repetitiveMovementsList');
+            const postureAnalysisList = document.getElementById('postureAnalysisList');
+            const eyeTargetLeft = document.getElementById('eyeTargetLeft');
+            const eyeTargetRight = document.getElementById('eyeTargetRight');
+
+            // Audio elements
+            const startSound = document.getElementById('startSound');
+            const stopSound = document.getElementById('stopSound');
+            const scanSound = document.getElementById('scanSound');
+            const detectionSound = document.getElementById('detectionSound');
+
+            // State
+            let isTracking = false;
+            let detectionCount = 0;
+            let totalConfidence = 0;
+            let simulatedWebcam = true; // Set to false when using real webcam
+
+            // Simulated webcam data (placeholder)
+            const placeholderVideoSrc = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+
+            // Initialize UI
+            function initializeUI() {
+                // Start with disabled controls
+                stopTracking.disabled = true;
+
+                // Setup event listeners
+                startTracking.addEventListener('click', startBehaviorTracking);
+                stopTracking.addEventListener('click', stopBehaviorTracking);
+
+                // Setup simulated video or real webcam
+                if (simulatedWebcam) {
+                    // Use placeholder
+                    videoFeed.src = placeholderVideoSrc;
+                    videoFeed.style.backgroundColor = '#0a192c';
+                } else {
+                    // Try to access real webcam
+                    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                        navigator.mediaDevices.getUserMedia({ video: true })
+                            .then(function(stream) {
+                                videoFeed.srcObject = stream;
+                            })
+                            .catch(function(error) {
+                                console.error("Could not access webcam: ", error);
+                                // Fall back to simulated
+                                videoFeed.src = placeholderVideoSrc;
+                                videoFeed.style.backgroundColor = '#0a192c';
+                                simulatedWebcam = true;
+                            });
+                    } else {
+                        // WebRTC not supported
+                        videoFeed.src = placeholderVideoSrc;
+                        videoFeed.style.backgroundColor = '#0a192c';
+                        simulatedWebcam = true;
+                    }
+                }
+            }
+
+            // Start behavior tracking
+            function startBehaviorTracking() {
+                isTracking = true;
+                startTracking.disabled = true;
+                stopTracking.disabled = false;
+
+                // Update UI
+                captureStatus.textContent = "ACTIVE";
+                captureStatus.style.color = "#00ff9d";
+
+                // Update status alert
+                trackingStatus.querySelector('.cyber-alert-title').textContent = "TRACKING ACTIVE";
+                trackingStatus.querySelector('.cyber-alert-message').textContent = "Neural behavior analysis is now monitoring and processing patterns.";
+
+                // Play sound
+                startSound.play();
+
+                // Start scan effect
+                document.querySelector('.scan-line').style.opacity = "1";
+
+                // Clear existing data
+                clearDetectionLists();
+
+                // Start simulated detections
+                startSimulatedDetections();
+            }
+
+            // Stop behavior tracking
+            function stopBehaviorTracking() {
+                isTracking = false;
+                startTracking.disabled = false;
+                stopTracking.disabled = true;
+
+                // Update UI
+                captureStatus.textContent = "STANDBY";
+                captureStatus.style.color = "#00f7ff";
+
+                // Update status alert
+                trackingStatus.querySelector('.cyber-alert-title').textContent = "TRACKING STOPPED";
+                trackingStatus.querySelector('.cyber-alert-message').textContent = "Neural behavior analysis has been paused.";
+
+                // Play sound
+                stopSound.play();
+
+                // Stop scan effect
+                document.querySelector('.scan-line').style.opacity = "0";
+            }
+
+            // Clear detection lists
+            function clearDetectionLists() {
+                const lists = [microExpressionsList, eyeMovementsList, repetitiveMovementsList, postureAnalysisList];
+
+                lists.forEach(list => {
+                    list.innerHTML = `
+                        <div class="data-visualization-placeholder">
+                            <div class="d-flex flex-column align-items-center">
+                                <i class="fas fa-${list.id === 'microExpressionsList' ? 'smile-beam' :
+                                                  list.id === 'eyeMovementsList' ? 'eye' :
+                                                  list.id === 'repetitiveMovementsList' ? 'sync' : 'male'} placeholder-icon"></i>
+                                <span>NO ${list.id === 'microExpressionsList' ? 'EXPRESSIONS' :
+                                         list.id === 'eyeMovementsList' ? 'EYE PATTERNS' :
+                                         list.id === 'repetitiveMovementsList' ? 'REPETITIVE MOVEMENTS' : 'POSTURE PATTERNS'} DETECTED YET</span>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                // Reset counters
+                detectionCount = 0;
+                totalConfidence = 0;
+                patternCount.textContent = "0";
+                confidenceAvg.textContent = "0%";
+                processTime.textContent = "0ms";
+            }
+
+            // Start simulated detections
+            function startSimulatedDetections() {
+                if (!isTracking) return;
+
+                // Randomly choose which type of pattern to detect
+                const detectionTypes = [
+                    { list: microExpressionsList, name: "MICRO-EXPRESSION", icons: ['smile', 'meh', 'frown', 'surprise', 'angry'], prefix: "Facial " },
+                    { list: eyeMovementsList, name: "EYE MOVEMENT", icons: ['arrow-up', 'arrow-down', 'arrow-left', 'arrow-right', 'arrows-alt'], prefix: "Gaze " },
+                    { list: repetitiveMovementsList, name: "REPETITIVE MOVEMENT", icons: ['hand-paper', 'thumbs-up', 'hand-point-up', 'fist-raised', 'peace'], prefix: "Motion " },
+                    { list: postureAnalysisList, name: "POSTURE CHANGE", icons: ['male', 'walking', 'running', 'wheelchair', 'blind'], prefix: "Body " }
+                ];
+
+                const randomIndex = Math.floor(Math.random() * detectionTypes.length);
+                const detection = detectionTypes[randomIndex];
+
+                // Generate random data
+                const confidence = Math.floor(Math.random() * 40) + 60; // 60-99%
+                const processingTime = Math.floor(Math.random() * 30) + 10; // 10-39ms
+                const iconIndex = Math.floor(Math.random() * detection.icons.length);
+
+                // Random phrases for each type
+                const phrases = {
+                    "MICRO-EXPRESSION": ["Slight Surprise", "Subtle Joy", "Momentary Concern", "Brief Confusion", "Quick Interest"],
+                    "EYE MOVEMENT": ["Left Scan Pattern", "Right Focus Shift", "Downward Avoidance", "Upward Search", "Center Fixation"],
+                    "REPETITIVE MOVEMENT": ["Hand Tapping Sequence", "Finger Drumming", "Head Nodding Pattern", "Shoulder Rolling", "Leg Bouncing"],
+                    "POSTURE CHANGE": ["Forward Lean", "Backward Shift", "Slight Turn", "Weight Redistribution", "Shoulder Elevation"]
+                };
+
+                const phraseIndex = Math.floor(Math.random() * phrases[detection.name].length);
+                const detectionName = phrases[detection.name][phraseIndex];
+
+                // Add detection to the appropriate list
+                addDetection(
+                    detection.list,
+                    detection.icons[iconIndex],
+                    detection.prefix + detectionName,
+                    confidence
+                );
+
+                // Update counters
+                detectionCount++;
+                totalConfidence += confidence;
+                patternCount.textContent = detectionCount;
+                confidenceAvg.textContent = Math.floor(totalConfidence / detectionCount) + "%";
+                processTime.textContent = processingTime + "ms";
+
+                // Play detection sound
+                if (Math.random() > 0.7) { // Only play sound sometimes to avoid too much noise
+                    detectionSound.play();
+                }
+
+                // Update eye targets occasionally
+                if (Math.random() > 0.7) {
+                    const leftX = 20 + Math.floor(Math.random() * 30);
+                    const leftY = 30 + Math.floor(Math.random() * 20);
+                    eyeTargetLeft.style.top = leftY + "%";
+                    eyeTargetLeft.style.left = leftX + "%";
+                    eyeTargetLeft.style.opacity = "0.7";
+
+                    const rightX = 50 + Math.floor(Math.random() * 30);
+                    const rightY = 30 + Math.floor(Math.random() * 20);
+                    eyeTargetRight.style.top = rightY + "%";
+                    eyeTargetRight.style.left = rightX + "%";
+                    eyeTargetRight.style.opacity = "0.7";
+
+                    setTimeout(() => {
+                        eyeTargetLeft.style.opacity = "0";
+                        eyeTargetRight.style.opacity = "0";
+                    }, 1500);
+                }
+
+                // Schedule next detection
+                const nextDetectionTime = Math.floor(Math.random() * 3000) + 1000; // 1-4 seconds
+                setTimeout(startSimulatedDetections, nextDetectionTime);
+            }
+
+            // Add a detection to a list
+            function addDetection(list, icon, name, confidence) {
+                // Remove placeholder if present
+                const placeholder = list.querySelector('.data-visualization-placeholder');
+                if (placeholder) {
+                    list.removeChild(placeholder);
+                }
+
+                // Get confidence class
+                let confidenceClass = 'confidence-medium';
+                if (confidence >= 80) {
+                    confidenceClass = 'confidence-high';
+                } else if (confidence < 60) {
+                    confidenceClass = 'confidence-low';
+                }
+
+                // Create time string
+                const now = new Date();
+                const timeString = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
+
+                // Create detection item
+                const detectionItem = document.createElement('li');
+                detectionItem.className = 'detection-item';
+                detectionItem.innerHTML = `
+                    <div class="detection-icon">
+                        <i class="fas fa-${icon}"></i>
+                    </div>
+                    <div class="detection-info">
+                        <h5 class="detection-name">${name}</h5>
+                        <div class="detection-meta">
+                            <div class="detection-time">${timeString}</div>
+                            <div class="detection-confidence ${confidenceClass}">
+                                Confidence: ${confidence}%
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Add to list
+                list.insertBefore(detectionItem, list.firstChild);
+
+                // Limit list to 5 items
+                while (list.children.length > 5) {
+                    list.removeChild(list.lastChild);
+                }
+            }
+
+            // Initialize
+            initializeUI();
+        });
+    </script>
+</body>
+</html>

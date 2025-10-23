@@ -1,0 +1,690 @@
+"""
+AlphaVox - Advanced NLP Module
+-----------------------------
+This module provides advanced natural language processing capabilities for AlphaVox,
+enabling PhD-level conversations and sophisticated response generation based on
+multi-modal inputs including emotions, eye tracking, and user context.
+"""
+
+import logging
+import random
+import time
+from typing import Dict, Tuple, List, Optional, Any, Union
+import spacy
+from collections import defaultdict
+
+# Configure logger
+logger = logging.getLogger(__name__)
+
+class AdvancedNLPProcessor:
+    """
+    Advanced NLP processor for PhD-level conversations and multi-modal response generation
+    """
+    
+    def __init__(self, spacy_model=None):
+        """
+        Initialize the advanced NLP processor
+        
+        Args:
+            spacy_model: SpaCy model instance (will load if not provided)
+        """
+        self.nlp = spacy_model
+        if self.nlp is None:
+            try:
+                # Try to load medium model first
+                self.nlp = spacy.load("en_core_web_md")
+                logger.info("SpaCy model loaded (medium) in NLP module")
+            except Exception as e:
+                logger.warning(f"Could not load medium SpaCy model: {e}")
+                try:
+                    # Fall back to small model
+                    self.nlp = spacy.load("en_core_web_sm")
+                    logger.info("SpaCy model loaded (small) in NLP module")
+                except Exception as e:
+                    logger.error(f"Failed to load SpaCy models: {e}")
+                    raise
+        
+        # Initialize the response dictionary
+        self._init_response_dictionaries()
+        
+        # Conversation history for context-aware responses
+        self.conversation_history = []
+        
+        # Initialize academic domain knowledge
+        self._init_academic_knowledge()
+        
+        # User context tracking
+        self.user_context = {
+            "last_emotion": None,
+            "emotion_intensity": 0.5,  # Default middle intensity
+            "interaction_count": 0,
+            "preferred_topics": [],
+            "communication_style": "neutral",
+            "last_interaction_time": time.time()
+        }
+        
+        logger.info("Advanced NLP processor initialized")
+    
+    def _init_response_dictionaries(self):
+        """Initialize the response dictionaries with expanded entries"""
+        
+        # Basic emotional response matrix (emotion, gaze, blink) -> response
+        self.emotional_responses = {
+            # Happy emotions
+            ("happy", "center", True): [
+                "You seem joyful and focused. What's exciting you?",
+                "I can see you're happy. Would you like to share what's making you smile?",
+                "Your joy is evident. Is there something specific you're celebrating?"
+            ],
+            ("happy", "left", True): [
+                "You seem happy about something to your left. Is there something there you like?",
+                "I notice you're looking left with a positive expression. What caught your attention?"
+            ],
+            ("happy", "right", True): [
+                "Something to your right seems to bring you joy. What is it?",
+                "Your happy expression and rightward gaze suggest interest. What are you seeing?"
+            ],
+            ("happy", "center", False): [
+                "You appear content. Would you like to continue what we're doing?",
+                "You seem pleased with our interaction. Shall we keep going?"
+            ],
+            
+            # Sad emotions
+            ("sad", "center", True): [
+                "It's okay to feel down. I'm here with you.",
+                "I notice you seem sad. Would you like to talk about it?",
+                "Sometimes we all feel blue. Is there something on your mind?"
+            ],
+            ("sad", "left", True): [
+                "You're looking away and seem sad. Do you need some space?",
+                "I see sadness in your expression as you look left. Is something bothering you?"
+            ],
+            ("sad", "right", True): [
+                "You seem troubled by something to your right. Can I help with anything?",
+                "Your gaze and expression suggest something's concerning you. What's going on?"
+            ],
+            ("sad", "center", False): [
+                "I sense you're feeling down. Remember, it's okay to take breaks if needed.",
+                "Your expression suggests you might be feeling low. We can pause anytime."
+            ],
+            
+            # Angry emotions
+            ("angry", "center", True): [
+                "I notice you seem frustrated. What's bothering you?",
+                "You appear upset. Would you like to express what's wrong?",
+                "I can see you're angry. How can I help address what's troubling you?"
+            ],
+            ("angry", "left", True): [
+                "Would you like some quiet time?",
+                "You seem upset and looking away. Would you like to take a break?",
+                "I notice frustration in your expression. Should we pause for a moment?"
+            ],
+            ("angry", "right", True): [
+                "Something to your right seems to be causing frustration. Is there an issue?",
+                "Your expression suggests anger as you look right. Is something bothering you?"
+            ],
+            ("angry", "center", False): [
+                "I sense tension. Let's take a deep breath together.",
+                "When we're frustrated, sometimes it helps to reset. Would you like a moment?"
+            ],
+            
+            # Fearful emotions
+            ("fear", "center", True): [
+                "You seem anxious. Remember, you're safe here.",
+                "I notice signs of concern. Is something worrying you?",
+                "Your expression suggests worry. Can I help with anything?"
+            ],
+            ("fear", "left", True): [
+                "Something to your left seems concerning to you. Are you okay?",
+                "You look worried about something in that direction. What's happening?"
+            ],
+            ("fear", "right", True): [
+                "Are you scared? Let's get help.",
+                "You seem frightened by something to your right. How can I assist you?",
+                "I notice fear in your expression. Would you like to move away from what's concerning you?"
+            ],
+            ("fear", "center", False): [
+                "You appear uneasy. Would you like to try a calming exercise?",
+                "I sense anxiety in your expression. We can take things at your pace."
+            ],
+            
+            # Surprise emotions
+            ("surprise", "center", True): [
+                "You look surprised! What caught your attention?",
+                "That expression suggests something unexpected. What are you reacting to?",
+                "I see wonder in your face. What's surprising you?"
+            ],
+            ("surprise", "left", True): [
+                "Something to your left has surprised you. What is it?",
+                "Your expression shows astonishment as you look left. What did you notice?"
+            ],
+            ("surprise", "right", True): [
+                "You seem surprised by something to your right. What caught your eye?",
+                "That's an expression of surprise! What are you seeing over there?"
+            ],
+            ("surprise", "center", False): [
+                "You appear taken aback. Did something unexpected happen?",
+                "I notice a surprised reaction. Was that unexpected?"
+            ],
+            
+            # Neutral emotions
+            ("neutral", "center", True): [
+                "How are you feeling right now?",
+                "Is there something specific you'd like to discuss?",
+                "I'm here to assist with whatever you need."
+            ],
+            ("neutral", "left", True): [
+                "You're looking to the left. Is something there catching your interest?",
+                "I notice you're gazing leftward. Is there something you want to bring to attention?"
+            ],
+            ("neutral", "right", True): [
+                "Your gaze is directed to the right. Is there something there you'd like to focus on?",
+                "I see you looking right. Is there something in that direction you're interested in?"
+            ],
+            ("neutral", "center", False): [
+                "You seem contemplative. What's on your mind?",
+                "Is there a particular topic you'd like to explore today?"
+            ]
+        }
+        
+        # Academic domain-specific responses
+        self.academic_responses = {
+            "science": [
+                "That's an interesting scientific perspective. Would you like to elaborate on the methodology?",
+                "The empirical evidence you're referencing has significant implications. Shall we explore the underlying principles?",
+                "This scientific concept intersects with several disciplines. Would you like to discuss the interdisciplinary applications?",
+                "From a research standpoint, how would you evaluate the validity of these findings?",
+                "The scientific paradigm you're describing has evolved considerably. Would you like to examine its historical development?"
+            ],
+            "philosophy": [
+                "That philosophical position raises questions about epistemological frameworks. How do you reconcile that with empirical knowledge?",
+                "The ontological implications are profound. Would you like to explore how this relates to contemporary philosophical discourse?",
+                "This perspective seems to challenge conventional wisdom about consciousness and being. How do you position it within the broader philosophical tradition?",
+                "The axiological considerations here are complex. How would you address the ethical dimensions of this framework?",
+                "From a dialectical perspective, how might we synthesize these seemingly contradictory philosophical positions?"
+            ],
+            "mathematics": [
+                "This mathematical approach suggests several elegant solutions. Would you like to examine the proof in more detail?",
+                "The algorithmic complexity of this problem is fascinating. Shall we discuss optimization strategies?",
+                "From a theoretical standpoint, how does this mathematical model account for edge cases?",
+                "The topological properties you're describing have interesting applications in other fields. Would you like to explore those connections?",
+                "This theorem bridges several mathematical domains. Would you care to discuss its broader implications?"
+            ],
+            "medicine": [
+                "The clinical implications of this approach warrant careful consideration. How might this affect treatment protocols?",
+                "From a physiological perspective, what mechanisms might explain these observed outcomes?",
+                "The epidemiological data suggests several interpretations. How would you evaluate the strength of this evidence?",
+                "This therapeutic approach represents a paradigm shift in patient care. What ethical considerations should be addressed?",
+                "The pathophysiology you're describing has complex interactions with multiple systems. Would you like to explore those connections?"
+            ],
+            "linguistics": [
+                "This linguistic phenomenon crosses several syntactic boundaries. How would you analyze its morphological features?",
+                "From a semantic perspective, how does context influence the interpretation of these linguistic structures?",
+                "The pragmatic implications of this communication pattern are significant. Would you like to discuss the sociolinguistic dimensions?",
+                "This phonological system has interesting historical development. Shall we explore its diachronic evolution?",
+                "The computational modeling of these linguistic patterns presents several challenges. How might we address them?"
+            ],
+            "psychology": [
+                "This psychological framework integrates several theoretical traditions. How would you evaluate its explanatory power?",
+                "From a cognitive perspective, what processes might underlie these observed behaviors?",
+                "The neuropsychological evidence suggests interesting correlations. How might we distinguish correlation from causation here?",
+                "This developmental trajectory raises questions about the interaction of nature and nurture. What's your position on that dynamic?",
+                "The psychometric properties of this assessment tool warrant scrutiny. How would you evaluate its validity and reliability?"
+            ],
+            "history": [
+                "This historical interpretation challenges conventional narratives. How would you evaluate the primary sources?",
+                "From a historiographical perspective, how has the scholarly consensus on this event evolved over time?",
+                "The socioeconomic conditions of this period had profound political implications. Would you like to explore those connections?",
+                "This historical methodology raises questions about objectivity and perspective. How do you address those epistemological challenges?",
+                "The comparative analysis of these historical movements reveals interesting patterns. What theoretical framework best explains these similarities?"
+            ],
+            "economics": [
+                "This economic model makes several assumptions about market behavior. How robust are these assumptions under varying conditions?",
+                "From a macroeconomic perspective, what policy implications might we derive from this analysis?",
+                "The econometric evidence suggests several possible interpretations. How would you evaluate the statistical significance of these findings?",
+                "This economic theory bridges microeconomic behavior and macroeconomic outcomes. Would you like to explore that connection?",
+                "The distributional consequences of this economic policy warrant careful analysis. How would you approach that assessment?"
+            ]
+        }
+        
+        # Enhanced responses with perspiration detection
+        # Format: (emotion, gaze, blink, perspiration_level) -> responses
+        self.perspiration_enhanced_responses = {
+            # High perspiration (indicating stress or intense emotion)
+            ("any", "any", "any", "high"): [
+                "I notice signs of stress. Would you like to take a moment to breathe?",
+                "Your physiological indicators suggest intensity. Let's pause if needed.",
+                "I'm detecting signs of elevated stress. Would you like to try a calming technique?"
+            ],
+            
+            ("fear", "any", "any", "high"): [
+                "You seem quite anxious. Let's take slow breaths together.",
+                "I detect strong signs of fear. Is there something immediate I can help with?",
+                "Your body is showing significant stress signals. Would you like assistance right away?"
+            ],
+            
+            ("anger", "any", "any", "high"): [
+                "I notice intense frustration. Would stepping away briefly help?",
+                "Your body is showing signs of strong emotion. Would you like a moment to reset?",
+                "I can see this is very upsetting. How can I best support you right now?"
+            ]
+        }
+        
+        # Fallback responses when no specific match is found
+        self.fallback_responses = [
+            "I'm here to support you. How can I help right now?",
+            "I notice your expressions and movements. What would you like to communicate?",
+            "I'm attentive to your signals. Please let me know what you need.",
+            "I'm here to assist. Would you like to try a different way of expressing your needs?",
+            "Let's work together to understand what you're communicating. Can you give me another signal?"
+        ]
+    
+    def _init_academic_knowledge(self):
+        """Initialize academic domain knowledge for PhD-level conversations"""
+        
+        # Academic domain keywords to identify topics
+        self.academic_domains = {
+            "science": [
+                "hypothesis", "experiment", "theory", "data", "observation", "evidence", 
+                "research", "methodology", "empirical", "laboratory", "physics", "chemistry",
+                "biology", "geology", "astronomy", "peer review", "publication", "journal"
+            ],
+            "philosophy": [
+                "epistemology", "ontology", "metaphysics", "ethics", "logic", "aesthetics",
+                "existentialism", "phenomenology", "hermeneutics", "dialectic", "categorical imperative",
+                "utilitarianism", "pragmatism", "empiricism", "rationalism", "nihilism", "consciousness"
+            ],
+            "mathematics": [
+                "theorem", "proof", "algorithm", "equation", "function", "variable", "constant",
+                "calculus", "algebra", "geometry", "topology", "probability", "statistics",
+                "set theory", "number theory", "differential equation", "matrix", "vector"
+            ],
+            "medicine": [
+                "diagnosis", "treatment", "prognosis", "etiology", "pathology", "physiology",
+                "anatomy", "pharmacology", "epidemiology", "clinical", "patient", "symptom",
+                "disease", "condition", "therapy", "surgery", "medicine", "healthcare"
+            ],
+            "linguistics": [
+                "syntax", "semantics", "phonology", "morphology", "pragmatics", "lexicon",
+                "grammar", "phonetics", "discourse", "dialect", "language", "speech",
+                "etymology", "cognate", "translation", "bilingual", "multilingual"
+            ],
+            "psychology": [
+                "cognition", "behavior", "emotion", "perception", "memory", "learning",
+                "development", "personality", "abnormal", "clinical", "neuropsychology",
+                "cognitive", "behavioral", "psychoanalysis", "gestalt", "consciousness"
+            ],
+            "history": [
+                "civilization", "empire", "revolution", "war", "treaty", "monarchy", "democracy",
+                "artifact", "archaeology", "primary source", "secondary source", "historiography",
+                "chronology", "era", "period", "dynasty", "ancient", "medieval", "modern"
+            ],
+            "economics": [
+                "market", "supply", "demand", "inflation", "deflation", "recession", "depression",
+                "fiscal", "monetary", "microeconomics", "macroeconomics", "equilibrium", "elasticity",
+                "GDP", "unemployment", "interest rate", "econometrics", "trade", "globalization"
+            ]
+        }
+    
+    def process_input(self, 
+                     text: Optional[str] = None, 
+                     emotion: Optional[str] = None,
+                     gaze: Optional[str] = None, 
+                     blink: Optional[bool] = None,
+                     perspiration: Optional[str] = None,
+                     context: Optional[Dict] = None) -> Dict:
+        """
+        Process multi-modal input to generate appropriate response
+        
+        Args:
+            text: Optional text input
+            emotion: Detected emotion (happy, sad, angry, fear, surprise, neutral)
+            gaze: Gaze direction (left, right, center)
+            blink: Blink detection (True/False)
+            perspiration: Perspiration level (low, medium, high)
+            context: Additional context information
+            
+        Returns:
+            Dict with response information
+        """
+        # Update interaction count
+        self.user_context["interaction_count"] += 1
+        
+        # Update last interaction time
+        current_time = time.time()
+        time_since_last = current_time - self.user_context.get("last_interaction_time", current_time)
+        self.user_context["last_interaction_time"] = current_time
+        
+        # If there's text input, analyze it
+        domain = None
+        confidence = 0.0
+        intent = None
+        
+        if text:
+            # Process text with SpaCy
+            doc = self.nlp(text.lower())
+            
+            # Detect academic domain if present
+            domain, domain_confidence = self._detect_academic_domain(doc)
+            
+            # Detect intent
+            intent, intent_confidence = self._detect_intent(doc)
+            
+            # Use the higher confidence between domain and intent
+            confidence = max(domain_confidence, intent_confidence)
+            
+            # Add to conversation history
+            self.conversation_history.append({
+                "text": text,
+                "emotion": emotion,
+                "gaze": gaze,
+                "timestamp": current_time,
+                "domain": domain,
+                "intent": intent
+            })
+            
+            # Limit history size
+            if len(self.conversation_history) > 10:
+                self.conversation_history.pop(0)
+        
+        # Generate response based on available inputs
+        response = self._generate_response(text, emotion, gaze, blink, perspiration, domain)
+        
+        # Update user context with emotion if available
+        if emotion:
+            self.user_context["last_emotion"] = emotion
+        
+        # Create comprehensive result
+        result = {
+            "response": response,
+            "confidence": confidence,
+            "domain": domain,
+            "intent": intent,
+            "context": {
+                "interaction_count": self.user_context["interaction_count"],
+                "time_since_last": time_since_last,
+                "conversation_length": len(self.conversation_history)
+            }
+        }
+        
+        return result
+    
+    def _detect_academic_domain(self, doc) -> Tuple[Optional[str], float]:
+        """
+        Detect academic domain from text
+        
+        Args:
+            doc: SpaCy document
+            
+        Returns:
+            Tuple of (domain, confidence)
+        """
+        if not doc or not doc.vector_norm:
+            return None, 0.0
+        
+        # Count keywords for each domain
+        domain_scores = defaultdict(float)
+        
+        # Get all words in lowercase
+        text_words = set([token.text.lower() for token in doc])
+        
+        # Check for domain keywords
+        for domain, keywords in self.academic_domains.items():
+            for keyword in keywords:
+                if keyword in text_words:
+                    domain_scores[domain] += 1.0
+        
+        # If we found domain keywords, normalize scores
+        if domain_scores:
+            total_score = sum(domain_scores.values())
+            for domain in domain_scores:
+                domain_scores[domain] /= total_score
+            
+            # Get domain with highest score
+            best_domain = max(domain_scores.items(), key=lambda x: x[1])
+            return best_domain[0], best_domain[1]
+        
+        return None, 0.0
+    
+    def _detect_intent(self, doc) -> Tuple[Optional[str], float]:
+        """
+        Detect intent from text
+        
+        Args:
+            doc: SpaCy document
+            
+        Returns:
+            Tuple of (intent, confidence)
+        """
+        if not doc or not doc.vector_norm:
+            return None, 0.0
+        
+        # Basic intents to check
+        intents = {
+            "query": ["what", "how", "why", "when", "where", "who", "which"],
+            "request": ["can you", "could you", "would you", "please", "help"],
+            "inform": ["i think", "i believe", "in my opinion", "i know", "i understand"],
+            "acknowledge": ["i see", "understood", "ok", "okay", "got it", "thanks", "thank you"],
+            "clarify": ["what do you mean", "i don't understand", "could you explain", "clarify"]
+        }
+        
+        # Check for each intent
+        text_lower = doc.text.lower()
+        intent_scores = {}
+        
+        for intent, phrases in intents.items():
+            for phrase in phrases:
+                if phrase in text_lower:
+                    intent_scores[intent] = intent_scores.get(intent, 0) + 1
+        
+        # If we found intents, return the highest scoring one
+        if intent_scores:
+            best_intent = max(intent_scores.items(), key=lambda x: x[1])
+            # Simple normalization for confidence
+            confidence = min(best_intent[1] / 3, 1.0)  # Cap at 1.0
+            return best_intent[0], confidence
+        
+        # If no specific intent matched, return None
+        return None, 0.0
+    
+    def _generate_response(self, 
+                          text: Optional[str], 
+                          emotion: Optional[str],
+                          gaze: Optional[str], 
+                          blink: Optional[bool],
+                          perspiration: Optional[str],
+                          domain: Optional[str]) -> str:
+        """
+        Generate appropriate response based on inputs
+        
+        Args:
+            text: Optional text input
+            emotion: Detected emotion
+            gaze: Gaze direction
+            blink: Blink detection
+            perspiration: Perspiration level
+            domain: Academic domain if detected
+            
+        Returns:
+            Response text
+        """
+        # First check if we have high perspiration, which overrides other factors
+        if perspiration == "high":
+            # Look for perspiration-specific response
+            key = ("any", "any", "any", "high")
+            if emotion:
+                emotion_key = (emotion, "any", "any", "high")
+                if emotion_key in self.perspiration_enhanced_responses:
+                    return random.choice(self.perspiration_enhanced_responses[emotion_key])
+            
+            # Fallback to generic high perspiration response
+            if key in self.perspiration_enhanced_responses:
+                return random.choice(self.perspiration_enhanced_responses[key])
+        
+        # Next, if we have emotion, gaze, and blink information, try to find a matching emotional response
+        if emotion and gaze and blink is not None:
+            key = (emotion, gaze, blink)
+            if key in self.emotional_responses:
+                return random.choice(self.emotional_responses[key])
+            
+            # Try with just emotion and gaze
+            key = (emotion, gaze, True)  # Try with blink true
+            if key in self.emotional_responses:
+                return random.choice(self.emotional_responses[key])
+            
+            key = (emotion, gaze, False)  # Try with blink false
+            if key in self.emotional_responses:
+                return random.choice(self.emotional_responses[key])
+            
+            # Try with just emotion
+            key = (emotion, "center", True)  # Default gaze and blink
+            if key in self.emotional_responses:
+                return random.choice(self.emotional_responses[key])
+        
+        # If we have a detected academic domain and text input, use domain-specific responses
+        if domain and text and domain in self.academic_responses:
+            return random.choice(self.academic_responses[domain])
+        
+        # If no specific match, use fallback
+        return random.choice(self.fallback_responses)
+    
+    def analyze_sentiment(self, text: str) -> Dict:
+        """
+        Analyze sentiment and emotion in text
+        
+        Args:
+            text: Text to analyze
+            
+        Returns:
+            Dict with sentiment analysis results
+        """
+        if not text or not self.nlp:
+            return {"sentiment": "neutral", "confidence": 0.0}
+        
+        # Process text with SpaCy
+        doc = self.nlp(text.lower())
+        
+        # Simple lexicon-based sentiment analysis
+        positive_words = {"good", "great", "excellent", "wonderful", "happy", "positive", 
+                          "joy", "love", "like", "amazing", "fantastic", "brilliant"}
+        negative_words = {"bad", "terrible", "awful", "horrible", "sad", "negative", 
+                          "angry", "hate", "dislike", "poor", "disappointing", "frustrating"}
+        
+        # Count positive and negative words
+        positive_count = 0
+        negative_count = 0
+        
+        for token in doc:
+            if token.text.lower() in positive_words:
+                positive_count += 1
+            elif token.text.lower() in negative_words:
+                negative_count += 1
+        
+        # Determine sentiment based on counts
+        if positive_count > negative_count:
+            sentiment = "positive"
+            confidence = min(positive_count / (positive_count + negative_count + 0.1), 1.0)
+        elif negative_count > positive_count:
+            sentiment = "negative"
+            confidence = min(negative_count / (positive_count + negative_count + 0.1), 1.0)
+        else:
+            sentiment = "neutral"
+            confidence = 0.5
+        
+        return {
+            "sentiment": sentiment,
+            "confidence": confidence,
+            "positive_words": positive_count,
+            "negative_words": negative_count
+        }
+    
+    def generate_phd_level_response(self, topic: str, context: Dict = None) -> str:
+        """
+        Generate PhD-level response on a given topic
+        
+        Args:
+            topic: Topic to respond to
+            context: Additional context information
+            
+        Returns:
+            PhD-level response text
+        """
+        if not topic:
+            return "Could you provide a specific topic for discussion?"
+        
+        # Process topic with SpaCy
+        doc = self.nlp(topic.lower())
+        
+        # Detect academic domain
+        domain, confidence = self._detect_academic_domain(doc)
+        
+        # If we detected a domain with good confidence, use domain-specific responses
+        if domain and confidence > 0.5 and domain in self.academic_responses:
+            return random.choice(self.academic_responses[domain])
+        
+        # Fallback to generic academic response
+        generic_phd_responses = [
+            f"That's an interesting point about {topic}. From an academic perspective, we might consider examining the theoretical foundations that underpin this concept.",
+            f"The discourse surrounding {topic} has evolved significantly in recent literature. Have you encountered the latest methodological approaches?",
+            f"When analyzing {topic}, it's essential to consider both the epistemological framework and the practical implications. How would you characterize the relationship between theory and application in this context?",
+            f"The scholarly consensus on {topic} remains divided, with multiple theoretical traditions offering competing interpretations. What paradigm do you find most convincing?",
+            f"Contemporary research on {topic} suggests several promising directions for further inquiry. Would you be interested in exploring the methodological innovations in this field?"
+        ]
+        
+        return random.choice(generic_phd_responses)
+    
+    def save_conversation_context(self):
+        """Save conversation context for future reference"""
+        # Implementation for persistent storage would go here
+        pass
+    
+    def load_conversation_context(self):
+        """Load conversation context from storage"""
+        # Implementation for loading from persistent storage would go here
+        pass
+
+
+# Initialize a global instance that can be imported elsewhere
+try:
+    nlp_processor = AdvancedNLPProcessor()
+except Exception as e:
+    logger.error(f"Failed to initialize NLP processor: {e}")
+    nlp_processor = None
+
+# Enhanced version of the intent-emotion response dictionary
+# This can be used directly or accessed through the AdvancedNLPProcessor
+INTENT_NLP_RESPONSES = {
+    # Basic emotions with gaze and blink
+    ("happy", "center", True): "You seem joyful and focused. What's exciting you?",
+    ("sad", "center", True): "It's okay to feel down. I'm here with you.",
+    ("angry", "left", True): "Would you like some quiet time?",
+    ("fear", "right", True): "Are you scared? Let's get help.",
+    
+    # Expanded with intensity levels
+    ("happy_high", "center", True): "You seem extremely happy! What wonderful news are you celebrating?",
+    ("sad_high", "center", True): "I can see you're really struggling right now. Remember, it's okay to not be okay.",
+    ("angry_high", "center", True): "I can see you're very upset. Would you like to take a break to calm down?",
+    ("fear_high", "center", True): "You appear extremely anxious. Let's work through this together, step by step.",
+    
+    # Add perspiration detection
+    ("any", "any", "any", "high"): "I notice signs of stress. Would you like to take a moment to breathe?",
+    ("fear", "any", "any", "high"): "Your body is showing signs of anxiety. Let's try some deep breathing together.",
+    
+    # Academic context responses
+    ("neutral", "center", True, "science"): "Your scientific inquiry is insightful. Would you like to explore the empirical evidence further?",
+    ("neutral", "center", True, "philosophy"): "That philosophical perspective raises interesting questions about epistemology and being.",
+    ("neutral", "center", True, "mathematics"): "The mathematical approach you're describing has elegant properties worth examining.",
+    
+    # Complex emotional states
+    ("confused", "center", True): "It looks like you're trying to understand something. How can I clarify things?",
+    ("thinking", "up", False): "You seem deep in thought. Take your time to process.",
+    ("frustrated_learning", "center", True): "Learning new concepts can be challenging. Would you like me to explain differently?",
+    
+    # Combined emotional states
+    ("happy_nervous", "center", True): "You seem excited but a bit anxious too. Is this a new opportunity you're considering?",
+    ("sad_angry", "left", False): "It's natural to feel both sadness and frustration when dealing with difficult situations.",
+    
+    # Time-based responses (for repeated emotions)
+    ("sad_persistent", "center", True): "I've noticed you've been feeling down for a while. Would professional support be helpful?",
+    ("angry_persistent", "center", True): "You've been frustrated for some time now. Would it help to discuss the root causes?"
+}%                                                                                                               

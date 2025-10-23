@@ -1,0 +1,245 @@
+AlphaVox - Nonverbal Communication Expertise Module
+-------------------------------------------------
+This module provides expert knowledge about nonverbal communication,
+assistive technologies, and communication strategies for diverse needs.
+"""
+
+import nltk
+import random
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+import logging
+
+# Initialize NLTK components
+try:
+    lemmatizer = WordNetLemmatizer()
+    stop_words = set(stopwords.words('english'))
+except Exception as e:
+    logging.warning(f"NLTK resource initialization error: {e}")
+    lemmatizer = None
+    stop_words = set()
+
+# Expert knowledge base on nonverbal communication topics
+NONVERBAL_TOPICS = {
+    "gesture_types": [
+        "Emblems - Gestures with specific meanings like thumbs up or peace sign",
+        "Illustrators - Gestures that accompany speech to illustrate points",
+        "Affect displays - Facial expressions showing emotion",
+        "Regulators - Gestures that control conversation flow",
+        "Adaptors - Self-touching gestures like scratching that reveal anxiety"
+    ],
+    
+    "eye_movements": [
+        "Gaze direction can indicate attention and interest",
+        "Eye contact varies culturally but often signals engagement",
+        "Pupil dilation can reflect emotional arousal or interest",
+        "Blink rate increases during stress or cognitive load",
+        "Scanning patterns reveal information processing strategies"
+    ],
+    
+    "assistive_technologies": [
+        "Eye tracking devices allow computer control through gaze",
+        "AAC (Augmentative and Alternative Communication) systems provide voice output",
+        "Switch access devices respond to minimal movement",
+        "Brain-computer interfaces translate brain activity into commands",
+        "AI-powered interpretation systems can translate gestures to speech"
+    ],
+    
+    "communication_barriers": [
+        "Physical barriers like distance or obstacles",
+        "Linguistic barriers including different languages or vocabulary",
+        "Cultural differences in nonverbal interpretation",
+        "Perceptual barriers like sensory processing differences",
+        "Emotional barriers such as anxiety affecting expression"
+    ],
+    
+    "neurodiversity": [
+        "Different neural processing can affect nonverbal communication style",
+        "Autistic individuals may process nonverbal cues differently",
+        "ADHD can influence attention to subtle nonverbal signals",
+        "Learning disabilities may affect integration of verbal and nonverbal",
+        "Tourette's syndrome involves involuntary movements distinct from intentional gestures"
+    ]
+}
+
+# Communication strategies based on research
+COMMUNICATION_STRATEGIES = {
+    "enhancing_understanding": [
+        "Provide multiple modalities (visual, auditory, tactile) simultaneously",
+        "Establish clear routines and expectations for communication",
+        "Create structured environments with minimal distractions",
+        "Use concrete, specific language with nonverbal reinforcement",
+        "Allow extra processing time for information integration"
+    ],
+    
+    "building_rapport": [
+        "Match communication pace and style to the individual",
+        "Validate all communication attempts regardless of form",
+        "Maintain consistent, predictable responses",
+        "Observe and respect personal space preferences",
+        "Acknowledge emotional states through mirroring appropriate expressions"
+    ],
+    
+    "adapting_environment": [
+        "Reduce sensory overload through careful environmental design",
+        "Position conversation partners at comfortable angles and distances",
+        "Create visual supports to complement verbal information",
+        "Ensure adequate lighting without glare or shadows",
+        "Minimize background noise and distractions"
+    ]
+}
+
+# Evidence-based therapeutic approaches
+THERAPEUTIC_APPROACHES = {
+    "speech_therapy": [
+        "AAC implementation and training for nonverbal individuals",
+        "PECS (Picture Exchange Communication System) for visual communication",
+        "Naturalistic teaching creating meaningful communication opportunities",
+        "Social stories to teach communication norms and expectations",
+        "Video modeling demonstrating appropriate communication strategies"
+    ],
+    
+    "behavioral_interventions": [
+        "Functional communication training to replace challenging behaviors",
+        "Positive reinforcement of effective communication attempts",
+        "Shaping approximations toward target communication skills",
+        "Prompting hierarchies with systematic fading of supports",
+        "Token systems to motivate communication practice"
+    ],
+    
+    "developmental_approaches": [
+        "Floor time / DIR (Developmental Individual-difference Relationship-based) model",
+        "Social communication emotional regulation transactional support (SCERTS)",
+        "Joint attention interventions to build shared focus",
+        "Symbol and gesture incorporation into daily routines",
+        "Parent/caregiver coaching to embed strategies in natural environments"
+    ]
+}
+
+def process_query(text):
+    """
+    Process a user query about nonverbal communication and provide expert response
+    
+    Args:
+        text: User query text
+        
+    Returns:
+        Expert response about nonverbal communication
+    """
+    if not text:
+        return get_random_fact()
+    
+    # Basic text preprocessing
+    tokens = word_tokenize(text.lower()) if lemmatizer else text.lower().split()
+    if lemmatizer:
+        tokens = [lemmatizer.lemmatize(word) for word in tokens if word not in stop_words]
+    
+    # Topic detection
+    topics_detected = []
+    
+    # Check for gesture-related topics
+    gesture_keywords = ['gesture', 'hand', 'movement', 'body', 'language', 'sign', 'wave', 'point']
+    if any(keyword in tokens for keyword in gesture_keywords):
+        topics_detected.append('gesture_types')
+    
+    # Check for eye-related topics
+    eye_keywords = ['eye', 'gaze', 'look', 'blink', 'pupil', 'vision', 'watch', 'see']
+    if any(keyword in tokens for keyword in eye_keywords):
+        topics_detected.append('eye_movements')
+    
+    # Check for technology topics
+    tech_keywords = ['device', 'technology', 'app', 'system', 'computer', 'ai', 'machine', 'tool']
+    if any(keyword in tokens for keyword in tech_keywords):
+        topics_detected.append('assistive_technologies')
+    
+    # Check for barrier topics
+    barrier_keywords = ['barrier', 'problem', 'challenge', 'difficult', 'issue', 'obstacle', 'trouble']
+    if any(keyword in tokens for keyword in barrier_keywords):
+        topics_detected.append('communication_barriers')
+    
+    # Check for neurodiversity topics
+    neuro_keywords = ['autism', 'autistic', 'adhd', 'neurodivergent', 'neurodiverse', 'brain', 'neural']
+    if any(keyword in tokens for keyword in neuro_keywords):
+        topics_detected.append('neurodiversity')
+    
+    # Check for strategy topics
+    strategy_keywords = ['strategy', 'help', 'improve', 'enhance', 'better', 'approach', 'method']
+    strategy_detected = any(keyword in tokens for keyword in strategy_keywords)
+    
+    # Check for therapy topics
+    therapy_keywords = ['therapy', 'therapeutic', 'treatment', 'intervention', 'program', 'practice']
+    therapy_detected = any(keyword in tokens for keyword in therapy_keywords)
+    
+    # Generate response based on detected topics
+    if topics_detected:
+        responses = []
+        for topic in topics_detected:
+            if topic in NONVERBAL_TOPICS:
+                responses.append(random.choice(NONVERBAL_TOPICS[topic]))
+        
+        if strategy_detected:
+            strat_category = random.choice(list(COMMUNICATION_STRATEGIES.keys()))
+            responses.append(random.choice(COMMUNICATION_STRATEGIES[strat_category]))
+            
+        if therapy_detected:
+            therapy_category = random.choice(list(THERAPEUTIC_APPROACHES.keys()))
+            responses.append(random.choice(THERAPEUTIC_APPROACHES[therapy_category]))
+            
+        if responses:
+            return " ".join(responses)
+    
+    return get_random_fact()
+
+def get_random_fact():
+    """Get a random fact about nonverbal communication"""
+    all_topics = []
+    for topic_list in NONVERBAL_TOPICS.values():
+        all_topics.extend(topic_list)
+    
+    return random.choice(all_topics)
+
+def get_communication_strategy():
+    """Get a random evidence-based communication strategy"""
+    strategies = []
+    for strategy_list in COMMUNICATION_STRATEGIES.values():
+        strategies.extend(strategy_list)
+    
+    return random.choice(strategies)
+
+def get_therapeutic_approach():
+    """Get a random evidence-based therapeutic approach"""
+    approaches = []
+    for approach_list in THERAPEUTIC_APPROACHES.values():
+        approaches.extend(approach_list)
+    
+    return random.choice(approaches)
+
+def get_comprehensive_response(topic_keyword):
+    """
+    Generate a comprehensive response about a specific nonverbal communication topic
+    
+    Args:
+        topic_keyword: Keyword to focus the response on
+        
+    Returns:
+        Comprehensive response combining facts, strategies, and therapeutic approaches
+    """
+    response_parts = []
+    
+    # Add relevant facts
+    for topic, facts in NONVERBAL_TOPICS.items():
+        if topic_keyword.lower() in topic.lower():
+            response_parts.append(random.choice(facts))
+            break
+    else:
+        # If no specific topic match, add a random fact
+        response_parts.append(get_random_fact())
+    
+    # Add a communication strategy
+    response_parts.append(get_communication_strategy())
+    
+    # Add a therapeutic approach
+    response_parts.append(get_therapeutic_approach())
+    
+    return " ".join(response_parts)%  

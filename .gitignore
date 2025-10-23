@@ -1,0 +1,47 @@
+# Environment and secrets
+.env
+.env.local
+*.env
+
+# Virtual environments
+alphavox_env/
+venv/
+env/
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Runtime data
+*.log
+*.pid
+*.seed
+*.pid.lock
+audio_cache/
+derek_memory/
+data/behavior_patterns/
+
+# OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build
+dist/
+build/
+*.egg-info/
