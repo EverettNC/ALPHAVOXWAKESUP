@@ -38,7 +38,13 @@ from datetime import datetime
 import requests
 import platform  # For Mac TTS detection
 import threading  # For background learning
-from .env import LoadEnv 
+# Load environment variables
+try:
+    from env import LoadEnv
+    LoadEnv()
+except ImportError:
+    pass
+
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -869,7 +875,7 @@ Be compassionate, intelligent, and mission-driven in all responses."""
         }
 
 
-# FastAPI API Layer (for Derek's API vision)
+# FastAPI API Layer (for AlphaVox API integration)
 try:
     from fastapi import FastAPI, HTTPException
     from pydantic import BaseModel
