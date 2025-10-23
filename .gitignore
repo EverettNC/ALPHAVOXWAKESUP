@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Environment and secrets
 .env
 .env.local
@@ -45,3 +46,117 @@ htmlcov/
 dist/
 build/
 *.egg-info/
+=======
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pkl
+*.egg-info/
+.eggs/
+build/
+dist/
+pip-wheel-metadata/
+*.log
+
+# --- Virtual Environments ---
+venv/
+env/
+*.env
+.venv/
+.alphavox-env/
+ENV/
+env.bak/
+.venv.bak/
+
+# --- OS / Editor Files ---
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.bak
+*.tmp
+.vscode/
+.idea/
+*.code-workspace
+
+# --- Testing / Coverage ---
+.coverage
+.tox/
+.nox/
+htmlcov/
+.pytest_cache/
+
+# --- Jupyter ---
+.ipynb_checkpoints
+*.ipynb
+
+# --- Replit ---
+.replit
+*.replit
+*.replit_cache/
+
+# --- Environment Config ---
+.env
+.env.*
+*.secret
+secrets.json
+config.json
+settings.py
+
+# --- Database / Media Files ---
+*.db
+*.sqlite
+*.sqlite3
+*.log
+*.csv
+*.tsv
+*.mp4
+*.wav
+*.mp3
+*.avi
+*.webm
+
+# --- Frontend / Build ---
+node_modules/
+npm-debug.log
+yarn-error.log
+build/
+public/build/
+*.bundle.js
+*.map
+
+# --- Deployment ---
+*.pem
+*.key
+*.crt
+
+# --- Mac Specific ---
+.AppleDouble
+.LSOverride
+Icon?
+
+# --- Backup files ---
+*~
+*.bak
+*.tmp
+*.orig
+*.old
+
+# --- Git Hooks ---
+.pre-commit-config.yaml
+pre-commit.log
+
+# --- AlphaVox-Specific ---
+profiles/
+data/color_schemes.json
+alphavox.db
+snapshots/
+uploads/
+models/__snapshots__/
+
+# --- Ignore everything in root `downloads` ---
+/Downloads/
+>>>>>>> 751bd5c90f88cd2d65c78185d5f3b7736bd697bb
