@@ -12,7 +12,7 @@ jobs:
     
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v4    
       with:
         fetch-depth: 0
 
@@ -76,7 +76,7 @@ jobs:
         path: |
           bandit-report.json
           safety-report.json
-
+       
     - name: HIPAA Compliance Summary
       if: always()
       run: |
