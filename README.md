@@ -7,6 +7,13 @@
 ## 🏆 AWS Startup Showcase Featured
 
 The Christman AI Project is an AWS Startup Showcase featured company, validated and supported by AWS with production infrastructure backing.
+<p align="center">
+  <img src="assets/aws_showcase_1.jpeg" width="700" alt="AWS Startup Showcase featuring The Christman AI Project">
+</p>
+
+<p align="center">
+  <img src="assets/aws_showcase_2.jpeg" width="700" alt="AWS Startup Showcase presentation">
+</p>
 
 -----
 
@@ -54,7 +61,7 @@ AlphaVox is an AI-powered Augmentative and Alternative Communication (AAC) syste
 
 ## Quick Start
 
-```bash
+  bash
 # Clone the repository
 git clone https://github.com/Nathaniel-AI/ALPHAVOXWAKESUP.git
 cd ALPHAVOXWAKESUP
@@ -62,6 +69,16 @@ cd ALPHAVOXWAKESUP
 # Create virtual environment
 python3 -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
+<div align="left">
+  <h2>🧠 AlphaVox Initialization</h2>
+  <p>
+    AlphaVox begins by calibrating gestures, eye tracking, and voice synthesis — preparing the user’s unique neural signature for communication.
+  </p>
+</div>
+
+<img src="./assets/alphavox_init.jpg" align="right" width="400" style="margin-left: 20px; border-radius: 10px;" />
+
+<br clear="right"/>
 
 # Install dependencies
 pip install -r requirements.txt
@@ -69,7 +86,7 @@ python3 -m spacy download en_core_web_sm
 
 # Run AlphaVox
 python3 app.py
-```
+
 
 **Open browser to `http://localhost:5000`**
 
@@ -114,6 +131,13 @@ The system learns your patterns, adapts to your needs, grows with you. After mon
 **AlphaVox:** Recognizes these as communication (like Helen Keller).
 
 We capture:
+## 🧠 Behavioral Capture
+
+AlphaVox observes micro-expressions, gaze, and motion patterns in real time — translating nonverbal cues into adaptive language feedback, helping bridge the communication gap between thought and expression.
+
+<img src="./assets/alphavox_neural.jpg" align="right" width="400" style="margin-left: 20px; border-radius: 10px;" />
+
+<br clear="right"/>
 
 - Head movements
 - Eye tracking
@@ -219,6 +243,12 @@ Everett’s family in the 1970s had no resources. No guidance. Just confusion.
 - Sub-1-second latency
 - Emotional tone preservation
 - Built by alphavox C (3,000+ hours over 13 years)
+<img src="./assets/alphavox_symbols.jpg" align="right" width="400" style="margin-left: 20px; border-radius: 10px;" />
+
+AlphaVox’s symbol communication system builds bridges where words fall short — translating intent, emotion, and concept into expressive visual language.
+Each interaction trains the AI to anticipate needs, empowering fluid communication through symbols that evolve with the user.
+
+<br clear="right"/>
 
 #### Learning Center
 
@@ -235,6 +265,12 @@ Everett’s family in the 1970s had no resources. No guidance. Just confusion.
 - User preferences and learning milestones
 
 -----
+<img src="./assets/alphavox_dashboard.jpg" align="right" width="400" style="margin-left: 20px; border-radius: 10px;" />
+
+The Caregiver Dashboard offers real-time insight into user engagement, emotional trends, and learning curves —
+helping caregivers, clinicians, and families understand not only *what* was communicated, but *how* it was felt.
+
+<br clear="right"/>
 
 ### Technology Stack
 
@@ -302,7 +338,7 @@ Learn more: [The Christman AI Project](https://thechristmanaiproject.com)
 
 ### Installation Steps
 
-```bash
+  bash
 # 1. Clone repository
 git clone https://github.com/Nathaniel-AI/ALPHAVOXWAKESUP.git
 cd ALPHAVOXWAKESUP
@@ -322,7 +358,7 @@ sudo apt-get install libgl1
 
 # 6. Run AlphaVox
 python3 app.py
-```
+
 
 ### Configuration (Optional)
 
@@ -596,4 +632,5 @@ Everett N. Christman
 **Everett Christman** — The Christman AI Project  
 **Derek C. Junior** — Co-Architect  
 
+All commits timestamped and attributed to preserve authorship and intellectual property.
 All commits timestamped and attributed to preserve authorship and intellectual property.
