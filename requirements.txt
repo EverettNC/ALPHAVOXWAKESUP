@@ -114,7 +114,6 @@ pyflakes==3.2.0
 pygame==2.6.1
 Pygments==2.19.1
 PyJWT==2.10.1
-python==3.10
 pytest==8.1.1
 python-dateutil==2.9.0.post0
 python-dotenv==1.1.0
