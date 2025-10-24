@@ -312,7 +312,7 @@ Resources:
     Properties:
       DBName: !Ref DBName
       Engine: postgres
-      EngineVersion: 14.6
+      EngineVersion: 16.4
       MasterUsername: !Ref DBUsername
       MasterUserPassword: !Ref DBPassword
       DBInstanceClass: !Ref DBInstanceClass
