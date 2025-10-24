@@ -1,0 +1,47 @@
+#!/bin/bash
+
+topics=(
+  "Tell me what you know about neurodivergent communication styles."
+  "What are some effective therapies for nonverbal autistic children?"
+  "How does eye movement relate to emotional states in neurodivergent individuals?"
+  "What are some techniques used in AAC (Augmentative and Alternative Communication)?"
+  "Can you explain PECS (Picture Exchange Communication System)?"
+  "Describe LAMP Words for Life and how it’s used in therapy."
+  "Teach me about stimming and how to recognize it in gesture patterns."
+  "What nonverbal patterns are associated with ADHD or autism?"
+  "What should I know about emotional regulation challenges in neurodivergent users?"
+  "How does nonverbal communication vary among autistic individuals who are non-speaking versus those who are selectively mute or minimally verbal?"
+  "What patterns emerge in the use of alternative forms of expression (e.g., gestures, vocalizations, echolalia, AAC) among nonverbal autistic individuals?"
+  "How do sensory sensitivities impact the ability or willingness to communicate verbally or nonverbally?" 
+  "What roles do regulation tools (e.g., fidgeting, stimming) play in enhancing or disrupting communication attempts?"
+  "How does emotional regulation or dysregulation manifest differently in nonverbal autistic individuals during communication breakdowns?"
+  "How effective are current AAC (Augmentative and Alternative Communication) systems in supporting spontaneous communication versus scripted responses?"
+  "What are the cognitive and neurological barriers that limit the adoption of AAC devices among nonverbal individuals?"
+  "In what ways could AI or machine learning personalize communication support tools for neurodivergent users with varying cognitive profiles?"
+  "What role does predictability and routine play in the success of AI-powered communication systems for nonverbal autistic individuals?"
+  "How do nonverbal users respond to multimodal communication systems (e.g., combining eye-tracking, gestures, and sound cues)?"
+  "What are the early developmental signs of a child becoming nonverbal, and how do these compare across different neurotypes (autism, apraxia, etc.)?"
+  "What misconceptions do educators and therapists often hold about the cognitive abilities of nonverbal autistic individuals?"
+  "How can we differentiate between a communication delay and a complete communication barrier in nonverbal individuals?"
+  "How does nonverbal communication evolve over time in late-speaking autistic children versus those who remain nonverbal into adulthood?"
+  "To what extent do motor planning issues (dyspraxia) contribute to nonverbal presentation in autistic individuals?"
+  "How do cultural attitudes toward speech and disability affect the diagnosis and support of nonverbal autistic individuals?"
+  "What ethical concerns arise from forcing verbal communication through behavioral therapy rather than supporting alternative modalities?"
+  "How do nonverbal neurodivergent individuals perceive and experience consent, boundaries, and autonomy when they can't verbally advocate for themselves?"
+  "What is the long-term psychological impact of being misunderstood or underestimated due to nonverbal communication differences?"
+  "How does society's emphasis on speech as the 'gold standard' for communication marginalize nonverbal neurodivergent people?"
+  "How can caregivers and clinicians better interpret behaviors that are communicative but often misclassified as 'problem behaviors'?"
+  "What role does emotional attunement play in understanding and supporting nonverbal communication between parent and child?"
+  "How can therapists avoid the trap of assuming that verbal communication equals comprehension—and vice versa—for nonverbal individuals?"
+  "How can we design communication systems that reduce caregiver burnout while enhancing autonomy for the neurodivergent person?"
+  "What indicators should professionals use to track progress in communication development for someone who may never speak verbally?"
+)
+
+while true; do
+  topic=${topics[$RANDOM % ${#topics[@]}]}
+  curl -s -X POST http://127.0.0.1:8000/process-input \
+       -H "Content-Type: application/json" \
+       -d "{\"text\": \"$topic\"}"
+  echo -e "\n>>> Sent: $topic"
+  sleep 6
+done

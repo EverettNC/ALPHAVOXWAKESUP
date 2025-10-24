@@ -1,0 +1,217 @@
+AlphaVox - Learning Journey Tests
+---------------------------------
+Tests the functionality of the learning journey module
+"""
+
+import os
+import json
+import unittest
+from datetime import datetime
+from learning_journey import LearningJourney, get_journey
+
+class TestLearningJourney(unittest.TestCase):
+    """Test cases for the LearningJourney class"""
+    
+    def setUp(self):
+        """Set up test environment"""
+        # Use a test-specific data directory
+        self.test_dir = "test_profiles"
+        os.makedirs(self.test_dir, exist_ok=True)
+        self.test_user = "test_user"
+        self.journey = LearningJourney(user_id=self.test_user, data_dir=self.test_dir)
+    
+    def tearDown(self):
+        """Clean up test environment"""
+        # Remove test profile file
+        profile_path = os.path.join(self.test_dir, f"{self.test_user}_profile.json")
+        if os.path.exists(profile_path):
+            os.remove(profile_path)
+    
+    def test_initialization(self):
+        """Test that a journey is properly initialized"""
+        self.assertEqual(self.journey.user_id, self.test_user)
+        self.assertIsNotNone(self.journey.profile)
+        self.assertEqual(self.journey.profile['user_id'], self.test_user)
+        self.assertIn('skill_levels', self.journey.profile)
+        self.assertIn('preferences', self.journey.profile)
+    
+    def test_session_management(self):
+        """Test session start and end"""
+        # Start a session
+        session_id = self.journey.start_session()
+        self.assertIsNotNone(session_id)
+        self.assertEqual(self.journey.session_id, session_id)
+        
+        # End the session
+        metrics = self.journey.end_session()
+        self.assertIn('session_id', metrics)
+        self.assertIn('duration_seconds', metrics)
+        self.assertIn('session_history', self.journey.profile)
+        self.assertEqual(len(self.journey.profile['session_history']), 1)
+    
+    def test_interaction_logging(self):
+        """Test logging interactions"""
+        self.journey.start_session()
+        
+        # Log various interactions
+        self.journey.log_interaction('gesture_recognition', True)
+        self.journey.log_interaction('eye_movement', False)
+        self.journey.log_interaction('vocalization', True, {'intensity': 'high'})
+        
+        # Check counters were updated
+        self.assertEqual(self.journey.session_metrics['interactions'], 3)
+        self.assertEqual(self.journey.session_metrics['successful_communications'], 2)
+        
+        # End the session and check history
+        self.journey.end_session()
+        self.assertEqual(self.journey.profile['total_interactions'], 3)
+    
+    def test_skill_level_updates(self):
+        """Test updating skill levels"""
+        # Update various skills
+        self.journey.update_skill_level('gesture_recognition', 0.1)
+        self.journey.update_skill_level('eye_movement_tracking', 0.2)
+        
+        # Check levels were updated
+        self.assertAlmostEqual(self.journey.profile['skill_levels']['gesture_recognition'], 0.1)
+        self.assertAlmostEqual(self.journey.profile['skill_levels']['eye_movement_tracking'], 0.2)
+        
+        # Test that levels are capped at 0-1 range
+        self.journey.update_skill_level('gesture_recognition', 2.0)
+        self.assertAlmostEqual(self.journey.profile['skill_levels']['gesture_recognition'], 1.0)
+        
+        self.journey.update_skill_level('eye_movement_tracking', -2.0)
+        self.assertAlmostEqual(self.journey.profile['skill_levels']['eye_movement_tracking'], 0.0)
+    
+    def test_preferences(self):
+        """Test setting and getting preferences"""
+        # Set preferences
+        self.journey.set_preference('voice_id', 'friendly_male')
+        self.journey.set_preference('ui_complexity', 'advanced')
+        
+        # Get preferences
+        self.assertEqual(self.journey.get_preference('voice_id'), 'friendly_male')
+        self.assertEqual(self.journey.get_preference('ui_complexity'), 'advanced')
+        
+        # Test default return value
+        self.assertEqual(self.journey.get_preference('non_existent', 'default'), 'default')
+    
+    def test_achievements(self):
+        """Test awarding achievements"""
+        # Award an achievement
+        self.journey.award_achievement('first_login', 'First Login', 'Logged in for the first time')
+        
+        # Check it was added
+        self.assertEqual(len(self.journey.profile['achievements']), 1)
+        self.assertEqual(self.journey.profile['achievements'][0]['id'], 'first_login')
+        
+        # Award the same achievement again (should not duplicate)
+        self.journey.award_achievement('first_login', 'First Login', 'Logged in for the first time')
+        self.assertEqual(len(self.journey.profile['achievements']), 1)
+    
+    def test_learning_patterns_analysis(self):
+        """Test analyzing learning patterns"""
+        # With no data, should get a simple message
+        result = self.journey.analyze_learning_patterns()
+        self.assertIn('message', result)
+        self.assertIn('suggestions', result)
+        
+        # Add some session data
+        self.journey.start_session()
+        self.journey.log_interaction('gesture_recognition', True)
+        self.journey.log_interaction('gesture_recognition', True)
+        self.journey.log_interaction('eye_movement', False)
+        self.journey.end_session()
+        
+        # Start another session
+        self.journey.start_session()
+        self.journey.log_interaction('gesture_recognition', True)
+        self.journey.log_interaction('vocalization', True)
+        self.journey.log_interaction('symbol_selection', False)
+        self.journey.end_session()
+        
+        # Now with data, should get a more detailed analysis
+        result = self.journey.analyze_learning_patterns()
+        self.assertIn('message', result)
+        self.assertIn('suggestions', result)
+        self.assertIn('success_rate', result)
+        self.assertIn('modality_preferences', result)
+    
+    def test_activity_recommendations(self):
+        """Test activity recommendations"""
+        # Get recommendations with default skills
+        recommendations = self.journey.recommend_next_activities(3)
+        self.assertEqual(len(recommendations), 3)
+        self.assertIn('name', recommendations[0])
+        self.assertIn('description', recommendations[0])
+        self.assertIn('relevance', recommendations[0])
+        
+        # Get initial IDs and relevance scores
+        initial_ids = [rec['id'] for rec in recommendations]
+        initial_relevance = [rec['relevance'] for rec in recommendations]
+        
+        # Update some skills significantly 
+        self.journey.update_skill_level('gesture_recognition', 0.8)
+        self.journey.update_skill_level('eye_movement_tracking', 0.7)
+        new_recommendations = self.journey.recommend_next_activities(3)
+        
+        # Get new IDs and relevance scores
+        new_ids = [rec['id'] for rec in new_recommendations]
+        new_relevance = [rec['relevance'] for rec in new_recommendations]
+        
+        # At least one of these conditions should be true:
+        # 1. The order/presence of activities should change, or
+        # 2. The relevance scores should change
+        condition1 = initial_ids != new_ids
+        condition2 = initial_relevance != new_relevance
+        
+        self.assertTrue(condition1 or condition2, 
+                        "Recommendations should change after updating skills")
+    
+    def test_progress_report(self):
+        """Test generating a progress report"""
+        # With no data, should get a simple report
+        report = self.journey.get_progress_report()
+        self.assertIn('user_id', report)
+        self.assertIn('total_sessions', report)
+        
+        # Add some session data
+        self.journey.start_session()
+        self.journey.log_interaction('gesture_recognition', True)
+        self.journey.log_interaction('eye_movement', False)
+        self.journey.end_session()
+        
+        # Now with data, should get a more detailed report
+        report = self.journey.get_progress_report()
+        self.assertIn('skill_levels', report)
+        self.assertIn('success_rate', report)
+
+class TestGlobalJourneyAccess(unittest.TestCase):
+    """Test cases for the global journey access function"""
+    
+    def setUp(self):
+        """Set up test environment"""
+        self.test_dir = "test_profiles"
+        os.makedirs(self.test_dir, exist_ok=True)
+    
+    def tearDown(self):
+        """Clean up test environment"""
+        profile_path = os.path.join(self.test_dir, "global_test_user_profile.json")
+        if os.path.exists(profile_path):
+            os.remove(profile_path)
+    
+    def test_get_journey(self):
+        """Test that get_journey returns a valid journey instance"""
+        # Get a journey for a test user
+        journey = get_journey("global_test_user")
+        
+        # Should be a LearningJourney instance
+        self.assertIsInstance(journey, LearningJourney)
+        self.assertEqual(journey.user_id, "global_test_user")
+        
+        # Getting it again should return the same instance
+        journey2 = get_journey("global_test_user")
+        self.assertEqual(journey.user_id, journey2.user_id)
+
+if __name__ == '__main__':
+    unittest.main()% 

@@ -1,0 +1,122 @@
+[
+  {
+    "module": "app.py",
+    "function": "save_interaction",
+    "issue": "missing_docstring",
+    "description": "Function with multiple arguments has no docstring",
+    "severity": "low",
+    "timestamp": "2025-04-14T05:22:53.731256"
+  },
+  {
+    "module": "app.py",
+    "function": "text_to_speech",
+    "issue": "high_complexity",
+    "description": "Function has high complexity (14)",
+    "severity": "medium",
+    "timestamp": "2025-04-14T05:22:53.731256"
+  },
+  {
+    "module": "app.py",
+    "function": "export_caregiver_data",
+    "issue": "high_complexity",
+    "description": "Function has high complexity (11)",
+    "severity": "medium",
+    "timestamp": "2025-04-14T05:22:53.731256"
+  },
+  {
+    "module": "nonverbal_engine.py",
+    "function": "_update_models_from_stats",
+    "issue": "high_complexity",
+    "description": "Function has high complexity (12)",
+    "severity": "medium",
+    "timestamp": "2025-04-14T05:22:53.786012"
+  },
+  {
+    "module": "nonverbal_engine.py",
+    "function": "process_multimodal_input",
+    "issue": "high_complexity",
+    "description": "Function has high complexity (12)",
+    "severity": "medium",
+    "timestamp": "2025-04-14T05:22:53.786012"
+  },
+  {
+    "module": "app.py",
+    "function": "save_interaction",
+    "issue": "missing_docstring",
+    "description": "Function with multiple arguments has no docstring",
+    "severity": "low",
+    "timestamp": "2025-04-14T05:31:38.253063"
+  },
+  {
+    "module": "app.py",
+    "function": "text_to_speech",
+    "issue": "high_complexity",
+    "description": "Function has high complexity (14)",
+    "severity": "medium",
+    "timestamp": "2025-04-14T05:31:38.253063"
+  },
+  {
+    "module": "app.py",
+    "function": "export_caregiver_data",
+    "issue": "high_complexity",
+    "description": "Function has high complexity (11)",
+    "severity": "medium",
+    "timestamp": "2025-04-14T05:31:38.253063"
+  },
+  {
+    "module": "nonverbal_engine.py",
+    "function": "_update_models_from_stats",
+    "issue": "high_complexity",
+    "description": "Function has high complexity (12)",
+    "severity": "medium",
+    "timestamp": "2025-04-14T05:31:38.268854"
+  },
+  {
+    "module": "nonverbal_engine.py",
+    "function": "process_multimodal_input",
+    "issue": "high_complexity",
+    "description": "Function has high complexity (12)",
+    "severity": "medium",
+    "timestamp": "2025-04-14T05:31:38.268854"
+  },
+  {
+    "module": "app.py",
+    "function": "save_interaction",
+    "issue": "missing_docstring",
+    "description": "Function with multiple arguments has no docstring",
+    "severity": "low",
+    "timestamp": "2025-04-14T05:32:10.337706"
+  },
+  {
+    "module": "app.py",
+    "function": "text_to_speech",
+    "issue": "high_complexity",
+    "description": "Function has high complexity (14)",
+    "severity": "medium",
+    "timestamp": "2025-04-14T05:32:10.337706"
+  },
+  {
+    "module": "app.py",
+    "function": "export_caregiver_data",
+    "issue": "high_complexity",
+    "description": "Function has high complexity (11)",
+    "severity": "medium",
+    "timestamp": "2025-04-14T05:32:10.337706"
+  },
+  {
+    "module": "nonverbal_engine.py",
+    "function": "_update_models_from_stats",
+    "issue": "high_complexity",
+    "description": "Function has high complexity (12)",
+    "severity": "medium",
+    "timestamp": "2025-04-14T05:32:10.354171"
+  },
+  {
+    "module": "nonverbal_engine.py",
+    "function": "process_multimodal_input",
+    "issue": "high_complexity",
+    "description": "Function has high complexity (12)",
+    "severity": "medium",
+    "timestamp": "2025-04-14T05:32:10.354171"
+  }
+]

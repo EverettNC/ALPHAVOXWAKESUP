@@ -1,0 +1,285 @@
+AlphaVox - Learning Journey Routes
+----------------------------------
+This module contains routes for the learning journey features.
+"""
+
+import os
+import json
+from datetime import datetime
+from flask import Blueprint, render_template, request, redirect, url_for, jsonify, session
+from learning_journey import get_journey
+
+def register_learning_routes(app, ai_core):
+    """Register all learning routes with the Flask app"""
+    
+    # Create a blueprint for learning routes
+    learning_bp = Blueprint('learning', __name__)
+    
+    def format_datetime(timestamp):
+        """Format an ISO timestamp into a human-readable date"""
+        try:
+            dt = datetime.fromisoformat(timestamp)
+            return dt.strftime("%B %d, %Y at %I:%M %p")
+        except (ValueError, TypeError):
+            return "Unknown"
+    
+    @learning_bp.route('/learning-journey')
+    def learning_journey():
+        """Personalized learning journey tracking page"""
+        user_id = session.get('user_id', 'anonymous')
+        journey = get_journey(user_id)
+        
+        # Start a new session if none exists
+        if not hasattr(session, 'journey_session_id'):
+            session['journey_session_id'] = journey.start_session()
+        
+        # Get progress report
+        progress_report = journey.get_progress_report()
+        
+        # Add default values for fields that might not be present in the progress report
+        progress_report.setdefault('success_rate', 0.0)
+        progress_report.setdefault('success_trend', 'stable')
+        progress_report.setdefault('skill_growth', {})
+        progress_report.setdefault('skill_levels', {
+            'gesture_recognition': 0.0,
+            'eye_movement_tracking': 0.0,
+            'vocalization_understanding': 0.0,
+            'symbol_selection': 0.0,
+            'sentence_building': 0.0,
+            'conversation_flow': 0.0
+        })
+        progress_report.setdefault('achievements', [])
+        
+        # Get learning pattern analysis
+        learning_patterns = journey.analyze_learning_patterns()
+        
+        # Get recommended activities
+        recommendations = journey.recommend_next_activities(5)
+        
+        return render_template(
+            'learning_journey.html',
+            user_id=user_id,
+            progress_report=progress_report,
+            learning_patterns=learning_patterns,
+            recommendations=recommendations,
+            format_datetime=format_datetime
+        )
+    
+    @learning_bp.route('/education-hub')
+    def education_hub():
+        """Education hub with learning resources"""
+        user_id = session.get('user_id', 'anonymous')
+        journey = get_journey(user_id)
+        
+        # Load available lessons
+        lessons_path = os.path.join('data', 'lessons.json')
+        lessons = []
+        
+        if os.path.exists(lessons_path):
+            try:
+                with open(lessons_path, 'r') as f:
+                    lessons = json.load(f)
+            except json.JSONDecodeError:
+                lessons = []
+        
+        # Get user skill levels to personalize recommendations
+        skill_levels = journey.profile.get('skill_levels', {})
+        
+        # Filter lessons based on user's skill level
+        recommended_lessons = []
+        for lesson in lessons:
+            lesson_skill = lesson.get('skill', '')
+            lesson_difficulty = lesson.get('difficulty', 0.5)
+            user_skill_level = skill_levels.get(lesson_skill, 0.0)
+            
+            # Recommend lessons slightly above user's current skill level
+            if 0 <= lesson_difficulty - user_skill_level <= 0.3:
+                recommended_lessons.append(lesson)
+        
+        return render_template(
+            'education_hub.html',
+            user_id=user_id,
+            lessons=lessons,
+            recommended_lessons=recommended_lessons[:5]
+        )
+    
+    @learning_bp.route('/knowledge-center')
+    def knowledge_center():
+        """Knowledge Center showing external knowledge integration"""
+        user_id = session.get('user_id', 'anonymous')
+        journey = get_journey(user_id)
+        
+        # Get user's top skills and interests for personalized content
+        skill_levels = journey.profile.get('skill_levels', {})
+        top_skills = sorted(skill_levels.items(), key=lambda x: x[1], reverse=True)[:3]
+        
+        # Placeholder for external knowledge integration
+        external_resources = [
+            {
+                'title': 'Understanding Nonverbal Communication',
+                'source': 'Communication Research Journal',
+                'url': '#',
+                'summary': 'Research on interpreting nonverbal cues and their role in effective communication',
+                'relevance': 'gesture_recognition'
+            },
+            {
+                'title': 'Advances in Eye Tracking Technology',
+                'source': 'Assistive Technology Today',
+                'url': '#',
+                'summary': 'Recent developments in eye tracking for assistive communication',
+                'relevance': 'eye_movement_tracking'
+            },
+            {
+                'title': 'Building Communication Skills',
+                'source': 'Speech Therapy Quarterly',
+                'url': '#',
+                'summary': 'Techniques for developing effective communication skills in diverse settings',
+                'relevance': 'vocalization_understanding'
+            }
+        ]
+        
+        # Filter resources based on user's skill focus
+        relevant_resources = []
+        for resource in external_resources:
+            for skill, level in top_skills:
+                if resource['relevance'] == skill:
+                    relevant_resources.append(resource)
+                    break
+        
+        return render_template(
+            'knowledge_center.html',
+            user_id=user_id,
+            resources=external_resources,
+            relevant_resources=relevant_resources
+        )
+    
+    @learning_bp.route('/lesson/<lesson_id>')
+    def lesson(lesson_id):
+        """Display a specific lesson"""
+        user_id = session.get('user_id', 'anonymous')
+        journey = get_journey(user_id)
+        
+        # Load lesson content
+        lesson_path = os.path.join('data', 'lessons', f"{lesson_id}.json")
+        if os.path.exists(lesson_path):
+            try:
+                with open(lesson_path, 'r') as f:
+                    lesson = json.load(f)
+            except json.JSONDecodeError:
+                lesson = {'error': 'Lesson content could not be loaded'}
+        else:
+            lesson = {'error': 'Lesson not found'}
+        
+        # Log lesson access if valid
+        if 'error' not in lesson:
+            journey.log_interaction('lesson_access', True, {'lesson_id': lesson_id})
+        
+        return render_template(
+            'lesson.html',
+            user_id=user_id,
+            lesson=lesson
+        )
+    
+    # API Routes
+
+    @app.route('/book-learning')
+    def book_learning():
+    return render_template("book_learning.html")
+
+    @learning_bp.route('/api/learning-journey/progress', methods=['GET'])
+    def api_progress():
+        """API endpoint to get learning progress"""
+        user_id = session.get('user_id', 'anonymous')
+        journey = get_journey(user_id)
+        return jsonify(journey.get_progress_report())
+    
+    @learning_bp.route('/api/learning-journey/log-interaction', methods=['POST'])
+    def api_log_interaction():
+        """API endpoint to log a learning interaction"""
+        user_id = session.get('user_id', 'anonymous')
+        journey = get_journey(user_id)
+        
+        data = request.json
+        interaction_type = data.get('type')
+        successful = data.get('successful', True)
+        details = data.get('details')
+        
+        if not interaction_type:
+            return jsonify({'error': 'Missing interaction type'}), 400
+        
+        journey.log_interaction(interaction_type, successful, details)
+        return jsonify({'status': 'success'})
+    
+    @learning_bp.route('/api/learning-journey/recommendations', methods=['GET'])
+    def api_recommendations():
+        """API endpoint to get activity recommendations"""
+        user_id = session.get('user_id', 'anonymous')
+        journey = get_journey(user_id)
+        
+        count = request.args.get('count', 3, type=int)
+        recommendations = journey.recommend_next_activities(count)
+        
+        return jsonify(recommendations)
+    
+    @learning_bp.route('/api/learning-journey/update-skill', methods=['POST'])
+    def api_update_skill():
+        """API endpoint to update a skill level"""
+        user_id = session.get('user_id', 'anonymous')
+        journey = get_journey(user_id)
+        
+        data = request.json
+        skill = data.get('skill')
+        change = data.get('change', 0.0)
+        
+        if not skill:
+            return jsonify({'error': 'Missing skill name'}), 400
+        
+        new_level = journey.update_skill_level(skill, float(change))
+        return jsonify({'skill': skill, 'new_level': new_level})
+    
+    @learning_bp.route('/api/learning-journey/set-preference', methods=['POST'])
+    def api_set_preference():
+        """API endpoint to set a user preference"""
+        user_id = session.get('user_id', 'anonymous')
+        journey = get_journey(user_id)
+        
+        data = request.json
+        category = data.get('category')
+        value = data.get('value')
+        
+        if not category:
+            return jsonify({'error': 'Missing preference category'}), 400
+        
+        journey.set_preference(category, value)
+        return jsonify({'status': 'success'})
+    
+    @learning_bp.route('/api/learning-journey/award-achievement', methods=['POST'])
+    def api_award_achievement():
+        """API endpoint to award an achievement"""
+        user_id = session.get('user_id', 'anonymous')
+        journey = get_journey(user_id)
+        
+        data = request.json
+        achievement_id = data.get('id')
+        name = data.get('name')
+        description = data.get('description')
+        
+        if not all([achievement_id, name, description]):
+            return jsonify({'error': 'Missing achievement details'}), 400
+        
+        journey.award_achievement(achievement_id, name, description)
+        return jsonify({'status': 'success'})
+    
+    @learning_bp.route('/api/learning-journey/end-session', methods=['POST'])
+    def api_end_session():
+        """API endpoint to end the current session"""
+        user_id = session.get('user_id', 'anonymous')
+        journey = get_journey(user_id)
+        
+        metrics = journey.end_session()
+        session.pop('journey_session_id', None)
+        
+        return jsonify(metrics)
+    
+    # Register all routes
+    app.register_blueprint(learning_bp, url_prefix='/learning')

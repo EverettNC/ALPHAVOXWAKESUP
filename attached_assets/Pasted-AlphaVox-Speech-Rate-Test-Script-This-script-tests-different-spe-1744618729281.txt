@@ -1,0 +1,64 @@
+AlphaVox - Speech Rate Test Script
+---------------------------------
+This script tests different speech rates using the gTTS library
+and calculates MD5 hashes to verify unique outputs.
+"""
+
+import hashlib
+import os
+from gtts import gTTS
+
+def get_file_md5(filename):
+    """Calculate MD5 hash of a file."""
+    with open(filename, 'rb') as f:
+        md5 = hashlib.md5()
+        while chunk := f.read(8192):
+            md5.update(chunk)
+    return md5.hexdigest()
+
+def test_speech_rates():
+    """Test different speech rates to verify different outputs."""
+    test_text = "This is a test of different speech rates for AlphaVox's voice system."
+    
+    # Generate files with different rates using slow parameter
+    rates = {
+        'rate_0_7': {'slow': True, 'tld': 'com'},     # Simulated 0.7x
+        'rate_0_8': {'slow': True, 'tld': 'co.uk'},   # Simulated 0.8x
+        'rate_0_9': {'slow': True, 'tld': 'com.au'},  # Simulated 0.9x
+        'rate_1_0': {'slow': False, 'tld': 'com'},    # Standard 1.0x
+        'rate_1_1': {'slow': False, 'tld': 'co.uk'},  # Simulated 1.1x
+        'rate_1_2': {'slow': False, 'tld': 'ca'},     # Simulated 1.2x
+        'rate_1_3': {'slow': False, 'tld': 'co.in'}   # Simulated 1.3x
+    }
+    
+    md5_hashes = {}
+    
+    for name, params in rates.items():
+        output_file = f"{name}.mp3"
+        tts = gTTS(
+            text=test_text,
+            lang='en',
+            slow=params['slow'],
+            tld=params['tld']
+        )
+        tts.save(output_file)
+        md5_hashes[name] = get_file_md5(output_file)
+    
+    # Print results
+    print("\nSpeech Rate Test Results:")
+    print("------------------------")
+    for name, md5 in md5_hashes.items():
+        print(f"{name}: {md5}")
+    
+    # Check if all files are unique
+    unique_hashes = set(md5_hashes.values())
+    print(f"\nUnique outputs: {len(unique_hashes)} of {len(rates)}")
+    if len(unique_hashes) == len(rates):
+        print("SUCCESS: All speech rates produce unique audio outputs!")
+    else:
+        print("NOTE: Some speech rate combinations produce identical audio.")
+        
+    return md5_hashes
+
+if __name__ == "__main__":
+    test_speech_rates()%  

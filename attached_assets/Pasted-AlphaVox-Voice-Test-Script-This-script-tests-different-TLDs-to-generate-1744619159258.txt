@@ -1,0 +1,78 @@
+AlphaVox - Voice Test Script
+--------------------------
+This script tests different TLDs to generate voice variations using the gTTS library.
+It creates audio files for each TLD and compares their MD5 hashes to verify uniqueness.
+"""
+
+import hashlib
+import os
+from gtts import gTTS
+
+def get_file_md5(filename):
+    """Calculate MD5 hash of a file."""
+    with open(filename, 'rb') as f:
+        md5 = hashlib.md5()
+        while chunk := f.read(8192):
+            md5.update(chunk)
+    return md5.hexdigest()
+
+def test_voices():
+    """Test different voice regions to see if they produce different audio."""
+    test_text = "This is a sample voice from AlphaVox's voice system. How does it sound to you?"
+    
+    # Test different TLDs
+    tlds = {
+        'us': 'com',           # US English
+        'uk': 'co.uk',         # UK English
+        'au': 'com.au',        # Australian English
+        'ca': 'ca',            # Canadian English
+        'in': 'co.in',         # Indian English
+        'za': 'co.za',         # South African English
+        'ie': 'ie'             # Irish English
+    }
+    
+    md5_hashes = {}
+    
+    # Generate audio files for each TLD
+    for name, tld in tlds.items():
+        output_file = f"tld_{tld.replace('.', '_')}.mp3"
+        tts = gTTS(
+            text=test_text,
+            lang='en',
+            slow=False,
+            tld=tld
+        )
+        tts.save(output_file)
+        md5_hashes[name] = get_file_md5(output_file)
+    
+    # Print results
+    print("\nVoice Variation Test Results:")
+    print("----------------------------")
+    for name, md5 in md5_hashes.items():
+        print(f"{name} ({tlds[name]}): {md5}")
+    
+    # Check if all files are unique
+    unique_hashes = set(md5_hashes.values())
+    print(f"\nUnique voices: {len(unique_hashes)} of {len(tlds)}")
+    if len(unique_hashes) == len(tlds):
+        print("SUCCESS: All TLDs produce unique audio outputs!")
+    else:
+        print("NOTE: Some TLDs produce identical audio. This is expected for certain regions.")
+        
+    # Print which ones are identical if any
+    if len(unique_hashes) < len(tlds):
+        print("\nIdentical voice groups:")
+        grouped_hashes = {}
+        for name, md5 in md5_hashes.items():
+            if md5 not in grouped_hashes:
+                grouped_hashes[md5] = []
+            grouped_hashes[md5].append(f"{name} ({tlds[name]})")
+        
+        for group in grouped_hashes.values():
+            if len(group) > 1:
+                print(f"- {', '.join(group)}")
+    
+    return md5_hashes
+
+if __name__ == "__main__":
+    test_voices()%                                                      
