@@ -20,3 +20,14 @@ Routes package for AlphaVox
 This package contains all the route modules for the AlphaVox application.
 Each module is organized around a specific feature or functionality.
 """
+
+def register_learning_routes(app):
+    """Register learning routes with the Flask app."""
+    try:
+        from .learning_routes import learning_bp
+        app.register_blueprint(learning_bp)
+        return True
+    except Exception as e:
+        import logging
+        logging.error(f"Failed to register learning routes: {e}")
+        return False
