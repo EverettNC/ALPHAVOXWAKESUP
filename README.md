@@ -69,6 +69,16 @@ cd ALPHAVOXWAKESUP
 # Create virtual environment
 python3 -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
+<div align="left">
+  <h2>🧠 AlphaVox Initialization</h2>
+  <p>
+    AlphaVox begins by calibrating gestures, eye tracking, and voice synthesis — preparing the user’s unique neural signature for communication.
+  </p>
+</div>
+
+<img src="./assets/alphavox_init.jpg" align="right" width="400" style="margin-left: 20px; border-radius: 10px;" />
+
+<br clear="right"/>
 
 # Install dependencies
 pip install -r requirements.txt
@@ -121,6 +131,13 @@ The system learns your patterns, adapts to your needs, grows with you. After mon
 **AlphaVox:** Recognizes these as communication (like Helen Keller).
 
 We capture:
+## 🧠 Behavioral Capture
+
+AlphaVox observes micro-expressions, gaze, and motion patterns in real time — translating nonverbal cues into adaptive language feedback, helping bridge the communication gap between thought and expression.
+
+<img src="./assets/alphavox_neural.jpg" align="right" width="400" style="margin-left: 20px; border-radius: 10px;" />
+
+<br clear="right"/>
 
 - Head movements
 - Eye tracking
@@ -226,6 +243,12 @@ Everett’s family in the 1970s had no resources. No guidance. Just confusion.
 - Sub-1-second latency
 - Emotional tone preservation
 - Built by alphavox C (3,000+ hours over 13 years)
+<img src="./assets/alphavox_symbols.jpg" align="right" width="400" style="margin-left: 20px; border-radius: 10px;" />
+
+AlphaVox’s symbol communication system builds bridges where words fall short — translating intent, emotion, and concept into expressive visual language.
+Each interaction trains the AI to anticipate needs, empowering fluid communication through symbols that evolve with the user.
+
+<br clear="right"/>
 
 #### Learning Center
 
@@ -242,6 +265,12 @@ Everett’s family in the 1970s had no resources. No guidance. Just confusion.
 - User preferences and learning milestones
 
 -----
+<img src="./assets/alphavox_dashboard.jpg" align="right" width="400" style="margin-left: 20px; border-radius: 10px;" />
+
+The Caregiver Dashboard offers real-time insight into user engagement, emotional trends, and learning curves —
+helping caregivers, clinicians, and families understand not only *what* was communicated, but *how* it was felt.
+
+<br clear="right"/>
 
 ### Technology Stack
 
