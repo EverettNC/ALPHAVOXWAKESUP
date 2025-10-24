@@ -189,11 +189,22 @@ class ProductionAlphaVoxApp:
                 username = self.validator.sanitize_html(data['username'])
                 password = data['password']
                 
-                # TODO: Implement user database lookup
-                # For now, demo with hardcoded admin user
-                if username == 'admin' and password == 'AlphaVox2025!':
+                # Secure authentication using environment variables and hashing
+                admin_username = os.getenv('ADMIN_USERNAME')
+                admin_password_hash = os.getenv('ADMIN_PASSWORD_HASH')
+                
+                if not admin_username or not admin_password_hash:
+                    self.security.log_access(
+                        'system', 'AUTH_ERROR', '/auth/login',
+                        get_remote_address(), False, 'Admin credentials not configured'
+                    )
+                    return jsonify({'error': 'Authentication system not configured'}), 500
+                
+                # Verify username and password hash
+                if (username == admin_username and 
+                    self.security.verify_password(password, admin_password_hash)):
                     token = self.security.generate_jwt_token(
-                        user_id='admin',
+                        user_id=username,
                         role='administrator',
                         permissions=['read', 'write', 'admin']
                     )

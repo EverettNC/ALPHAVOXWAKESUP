@@ -1,0 +1,91 @@
+name: HIPAA Compliance & Security Scan
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  hipaa-compliance:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install security tools
+      run: |
+        pip install detect-secrets bandit safety
+        
+    - name: Run secret detection
+      run: |
+        echo "🔍 Scanning for secrets and credentials..."
+        detect-secrets scan --all-files --baseline .secrets.baseline || \
+        (echo "❌ Secrets detected! Run 'detect-secrets scan --update .secrets.baseline' to update baseline" && exit 1)
+
+    - name: Run security analysis
+      run: |
+        echo "🛡️ Running security analysis with Bandit..."
+        bandit -r . -x tests/ -f json -o bandit-report.json || true
+        bandit -r . -x tests/ -f txt
+
+    - name: Check for vulnerable dependencies
+      run: |
+        echo "📦 Checking for vulnerable dependencies..."
+        pip install -r requirements.txt
+        safety check --json --output safety-report.json || true
+        safety check
+
+    - name: HIPAA PHI/PII Detection
+      run: |
+        echo "🏥 Scanning for potential PHI/PII data..."
+        if grep -rn --include="*.py" --include="*.md" --include="*.txt" --include="*.json" \
+          -E "(ssn|social.security|patient.id|medical.record|date.of.birth|dob|phone.number|email.*@.*\\.com)" \
+          . --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=venv; then
+          echo "❌ Potential PHI/PII detected! Review files above."
+          exit 1
+        else
+          echo "✅ No obvious PHI/PII patterns detected."
+        fi
+
+    - name: Check hardcoded credentials
+      run: |
+        echo "🔐 Checking for hardcoded credentials..."
+        if grep -rn --include="*.py" --include="*.js" --include="*.ts" \
+          -E "(password\s*=\s*['\"][^'\"]+['\"]|api_key\s*=\s*['\"][^'\"]+['\"]|secret\s*=\s*['\"][^'\"]+['\"])" \
+          . --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=venv; then
+          echo "❌ Potential hardcoded credentials detected!"
+          exit 1
+        else
+          echo "✅ No hardcoded credentials detected."
+        fi
+
+    - name: Upload security reports
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: security-reports
+        path: |
+          bandit-report.json
+          safety-report.json
+
+    - name: HIPAA Compliance Summary
+      if: always()
+      run: |
+        echo "📋 HIPAA Compliance Check Summary:"
+        echo "✅ Secret scanning completed"
+        echo "✅ Security analysis completed"
+        echo "✅ Dependency vulnerability check completed"
+        echo "✅ PHI/PII detection completed"
+        echo "✅ Hardcoded credential check completed"
+        echo ""
+        echo "⚠️  Remember: Third-party audit required for full HIPAA compliance"
+        echo "📖 See HIPAA_COMPLIANCE.md for detailed requirements"
