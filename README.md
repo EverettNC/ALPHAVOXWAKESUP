@@ -14,6 +14,7 @@ The Christman AI Project is an AWS Startup Showcase featured company, validated 
 <p align="center">
   <img src="assets/aws_showcase_2.jpeg" width="700" alt="AWS Startup Showcase presentation">
 </p>
+
 -----
 
 ## 2:32 AM
@@ -60,7 +61,7 @@ AlphaVox is an AI-powered Augmentative and Alternative Communication (AAC) syste
 
 ## Quick Start
 
-```bash
+  bash
 # Clone the repository
 git clone https://github.com/Nathaniel-AI/ALPHAVOXWAKESUP.git
 cd ALPHAVOXWAKESUP
@@ -75,7 +76,7 @@ python3 -m spacy download en_core_web_sm
 
 # Run AlphaVox
 python3 app.py
-```
+
 
 **Open browser to `http://localhost:5000`**
 
@@ -308,7 +309,7 @@ Learn more: [The Christman AI Project](https://thechristmanaiproject.com)
 
 ### Installation Steps
 
-```bash
+  bash
 # 1. Clone repository
 git clone https://github.com/Nathaniel-AI/ALPHAVOXWAKESUP.git
 cd ALPHAVOXWAKESUP
@@ -328,7 +329,7 @@ sudo apt-get install libgl1
 
 # 6. Run AlphaVox
 python3 app.py
-```
+
 
 ### Configuration (Optional)
 
@@ -602,4 +603,5 @@ Everett N. Christman
 **Everett Christman** — The Christman AI Project  
 **Derek C. Junior** — Co-Architect  
 
+All commits timestamped and attributed to preserve authorship and intellectual property.
 All commits timestamped and attributed to preserve authorship and intellectual property.
