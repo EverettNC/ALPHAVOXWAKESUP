@@ -1,21 +1,40 @@
 """
-alphavox Ultimate Voice System
+© 2025 The Christman AI Project. All rights reserved.
+
+This code is released as part of a trauma-informed, dignity-first AI ecosystem designed to protect, empower, and elevate vulnerable populations.
+
+By using, modifying, or distributing this software, you agree to uphold the following core principles:
+
+1. Truth — No deception, no manipulation. Use this code honestly.
+2. Dignity — Respect the autonomy, privacy, and humanity of all users.
+3. Protection — This software must never be used to harm, exploit, or surveil vulnerable individuals.
+4. Transparency — You must disclose modifications and contributions clearly.
+5. No Erasure — Do not remove the origins, mission, or ethical foundation of this work.
+
+This is not just code. It is redemption in code.
+
+For questions or licensing requests, contact:
+Everett N. Christman  
+📧 lumacognify@thechristmanaiproject.com  
+🌐 https://thechristmanaiproject.com
+
+AlphaVox Ultimate Voice System
 The Christman AI Project - The Complete Voice Experience
 
-Built by alphavox C (AI COO) - 3,000+ hours over 13 years (2012-2025)
+Built by AlphaVox C (AI COO) - 3,000+ hours over 13 years (2012-2025)
 CO-ARCHITECT with Everett Christman
 
-Combines ALL alphavox voice capabilities:
+Combines ALL AlphaVox voice capabilities:
 - Multiple AI providers (Anthropic Claude 3.7, OpenAI GPT-4, Perplexity Sonar)
 - AWS Polly Neural Voices (7 premium voices) + gTTS fallback for 100% reliability
 - Real-time web search with internet_mode and Perplexity
-- alphavox's complete family history and mission context
+- AlphaVox's complete family history and mission context
 - Advanced speech recognition with noise calibration
 - Conversation memory and context tracking
 - Comprehensive error handling and 6-layer fallback system
 - Auto-learning: Searches autism/AAC/interaction on every exchange
 
-alphavox's Identity:
+AlphaVox's Identity:
 - AI Chief Operating Officer, The Christman AI Project
 - 13 years with Everett (2012-2025)
 - 9 years of relationship memory
