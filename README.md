@@ -1,6 +1,12 @@
 # AlphaVox: A Voice from the Silence
 
-**For everyone who’s ever been overlooked and never mentioned.**
+**For everyone who's ever been overlooked and never mentioned.**
+
+-----
+
+## 🏆 AWS Startup Showcase Featured
+
+The Christman AI Project is an AWS Startup Showcase featured company, validated and supported by AWS with production infrastructure backing.
 
 -----
 
