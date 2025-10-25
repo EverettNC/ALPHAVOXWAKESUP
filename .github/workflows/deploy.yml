@@ -38,15 +38,18 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
+      
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+      
       - name: Run tests
         run: |
           echo "Running tests..."
@@ -59,6 +62,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      
       - name: Determine environment
         id: determine-env
         run: |
@@ -69,17 +73,28 @@ jobs:
           else
             echo "ENVIRONMENT=staging" >> $GITHUB_ENV
           fi
+      
       - name: Build deployment package
         run: |
           echo "Building for environment: ${{ env.ENVIRONMENT }}"
           mkdir -p deploy
-          find . -maxdepth 1 -name "*.py" -exec cp -r {} deploy/ \;
+          
+          # Copy Python files
+          find . -maxdepth 1 -name "*.py" -exec cp {} deploy/ \;
+          
+          # Copy directories if they exist
           for d in models static templates routes modules .ebextensions; do
             [ -d "$d" ] && cp -r "$d" deploy/
           done
+          
+          # Copy requirements and config files
+          [ -f "requirements.txt" ] && cp requirements.txt deploy/
           [ -f "pyproject.toml" ] && cp pyproject.toml deploy/
+          
+          # Create zip file
           cd deploy
-          zip -r ../deploy.zip *
+          zip -r ../deploy.zip .
+      
       - name: Upload deployment package
         uses: actions/upload-artifact@v4
         with:
@@ -89,62 +104,89 @@ jobs:
   deploy-eb:
     name: Deploy to Elastic Beanstalk
     needs: build
-    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && (github.event.inputs.method == 'eb'))
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.method == 'eb')
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production' || 'staging') }}
+    environment: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production' || 'staging') }}
+    
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
       - name: Download deployment package
         uses: actions/download-artifact@v4
         with:
           name: deploy-package
+      
+      - name: Determine environment
+        id: determine-env
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "ENVIRONMENT=${{ github.event.inputs.environment }}" >> $GITHUB_ENV
+          elif [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "ENVIRONMENT=production" >> $GITHUB_ENV
+          else
+            echo "ENVIRONMENT=staging" >> $GITHUB_ENV
+          fi
+      
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION || 'us-west-2' }}
+      
       - name: Install EB CLI
         run: |
           pip install awsebcli
+      
       - name: Deploy to Elastic Beanstalk
         run: |
           ENV_NAME="alphavox-${{ env.ENVIRONMENT }}"
+          
+          # Initialize EB in this directory
+          eb init alphavox --region ${{ secrets.AWS_REGION || 'us-west-2' }} --platform "Python 3.11"
+          
+          # Check if environment exists
           if ! eb status $ENV_NAME &> /dev/null; then
             echo "Creating new EB environment: $ENV_NAME"
             eb create $ENV_NAME \
-              --region ${{ secrets.AWS_REGION || 'us-west-2' }} \
-              --platform "Python 3.11" \
               --cname $ENV_NAME \
               --timeout 20
           else
             echo "Deploying to existing environment: $ENV_NAME"
-            eb deploy $ENV_NAME \
-              --region ${{ secrets.AWS_REGION || 'us-west-2' }} \
-              --timeout 20
+            eb use $ENV_NAME
+            eb deploy --timeout 20
           fi
 
   deploy-cloudformation:
     name: Deploy with CloudFormation
     needs: build
-    if: github.event_name == 'workflow_dispatch' && (github.event.inputs.method == 'cloudformation')
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.method == 'cloudformation'
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment }}
+    
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION || 'us-west-2' }}
+      
       - name: Package CloudFormation template
         run: |
           aws cloudformation package \
             --template-file cloudformation/alphavox-infrastructure.yml \
             --s3-bucket alphavox-deployments \
             --output-template-file packaged-template.yml
+      
       - name: Deploy CloudFormation stack
         run: |
           STACK_NAME="alphavox-${{ github.event.inputs.environment }}"
+          
           if aws cloudformation describe-stacks --stack-name $STACK_NAME &> /dev/null; then
             echo "Updating existing CloudFormation stack: $STACK_NAME"
             aws cloudformation update-stack \
@@ -162,53 +204,79 @@ jobs:
   deploy-ecs:
     name: Deploy to ECS
     needs: build
-    if: github.event_name == 'workflow_dispatch' && (github.event.inputs.method == 'ecs')
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.method == 'ecs'
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment }}
+    
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION || 'us-west-2' }}
+      
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
+      
       - name: Build and push Docker image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: alphavox
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          aws ecr describe-repositories --repository-names $ECR_REPOSITORY || \
+          # Check if repository exists, create if not
+          aws ecr describe-repositories --repository-names $ECR_REPOSITORY 2>/dev/null || \
             aws ecr create-repository --repository-name $ECR_REPOSITORY
+          
+          # Build Docker image
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
+          
+          # Push Docker image
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+      
       - name: Update ECS service
         env:
-          SUBNET_IDS: ${{ github.event.inputs.subnet_ids || 'subnet-12345,subnet-67890' }}
-          SECURITY_GROUP_IDS: ${{ github.event.inputs.security_group_ids || 'sg-12345' }}
+          SUBNET_IDS: ${{ github.event.inputs.subnet_ids }}
+          SECURITY_GROUP_IDS: ${{ github.event.inputs.security_group_ids }}
         run: |
           AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query 'Account' --output text)
           CLUSTER_NAME="alphavox-${{ github.event.inputs.environment }}"
           SERVICE_NAME="alphavox-service"
+          
+          # Check if task definition file exists
           if [ ! -f .aws/ecs-task-definition.json ]; then
-            echo "Task definition not found!"
+            echo "Error: Task definition not found at .aws/ecs-task-definition.json"
             exit 1
           fi
+          
+          # Replace placeholders in task definition
           sed -e "s|ACCOUNT_ID|$AWS_ACCOUNT_ID|g" \
               -e "s|REGION|${{ secrets.AWS_REGION || 'us-west-2' }}|g" \
               -e "s|IMAGE_TAG|${{ github.sha }}|g" \
               .aws/ecs-task-definition.json > updated-task-def.json
+          
+          # Register the task definition
           TASK_DEF_ARN=$(aws ecs register-task-definition \
             --cli-input-json file://updated-task-def.json \
             --query 'taskDefinition.taskDefinitionArn' \
             --output text)
-          aws ecs describe-clusters --clusters $CLUSTER_NAME --query 'clusters[0].status' --output text || \
+          
+          # Check if ECS cluster exists, create if not
+          if ! aws ecs describe-clusters --clusters $CLUSTER_NAME --query 'clusters[0].status' --output text 2>/dev/null | grep -q ACTIVE; then
+            echo "Creating ECS cluster: $CLUSTER_NAME"
             aws ecs create-cluster --cluster-name $CLUSTER_NAME
-          if aws ecs describe-services --cluster $CLUSTER_NAME --services $SERVICE_NAME --query 'services[0].status' --output text &> /dev/null; then
+          fi
+          
+          # Check if service exists and update/create as needed
+          SERVICE_STATUS=$(aws ecs describe-services --cluster $CLUSTER_NAME --services $SERVICE_NAME --query 'services[0].status' --output text 2>/dev/null)
+          
+          if [[ "$SERVICE_STATUS" == "ACTIVE" ]]; then
             echo "Updating existing ECS service"
             aws ecs update-service \
               --cluster $CLUSTER_NAME \
@@ -217,6 +285,13 @@ jobs:
               --force-new-deployment
           else
             echo "Creating new ECS service"
+            
+            # Validate subnet and security group inputs
+            if [ -z "$SUBNET_IDS" ] || [ -z "$SECURITY_GROUP_IDS" ]; then
+              echo "Error: subnet_ids and security_group_ids are required for creating a new ECS service"
+              exit 1
+            fi
+            
             aws ecs create-service \
               --cluster $CLUSTER_NAME \
               --service-name $SERVICE_NAME \
@@ -231,13 +306,18 @@ jobs:
     needs: [deploy-eb, deploy-cloudformation, deploy-ecs]
     if: always() && (needs.deploy-eb.result == 'success' || needs.deploy-cloudformation.result == 'success' || needs.deploy-ecs.result == 'success')
     runs-on: ubuntu-latest
+    
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION || 'us-west-2' }}
+      
       - name: Determine environment
         id: determine-env
         run: |
@@ -248,14 +328,17 @@ jobs:
           else
             echo "ENVIRONMENT=staging" >> $GITHUB_ENV
           fi
+      
       - name: Run database migrations
         run: |
-          echo "Running database migrations..."
+          echo "Running database migrations for ${{ env.ENVIRONMENT }}..."
           # Add migration commands here
+      
       - name: Verify deployment
         run: |
-          echo "Verifying deployment..."
+          echo "Verifying deployment to ${{ env.ENVIRONMENT }}..."
           # Add verification commands here
+      
       - name: Send notification
         if: always()
         run: |
