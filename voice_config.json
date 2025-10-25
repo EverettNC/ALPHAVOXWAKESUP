@@ -1,0 +1,13 @@
+{
+  "default_voice": "matthew",
+  "voice_stability_mode": true,
+  "fallback_chain": {
+    "prefer_neural": true,
+    "stick_to_voice": true,
+    "avoid_switching": true
+  },
+  "aws_config": {
+    "region": "us-east-1",
+    "engine_preference": "neural"
+  }
+}
